@@ -15,7 +15,8 @@ inoremap <C-u> <Esc>viwUi
 nnoremap <C-u> viwU<Esc>
 
 " Escape Alternative
-inoremap jj <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 "TAB movement to buffers
 nnoremap <TAB> :bnext<CR>
