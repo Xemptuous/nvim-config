@@ -30,7 +30,6 @@ Plug 'p00f/nvim-ts-rainbow' -- Rainbow Brackets
 Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
 Plug 'mg979/vim-visual-multi' -- multiple cursors
 
-
 -- Autocompletion plugins:
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -45,18 +44,20 @@ vim.call('plug#end')
 
 require('onedark').setup {
 	style = 'darker',
+    -- transparent = true,
 	highlights = {
 		TSFunction = {fg = '#4fa6ed', bg = '#053963', fmt = 'underline,bold'},
 		TSMethod = {fg = '#4fa6ed', bg = '#053963', fmt = 'underline,bold'},
 		TSFunctionCall = {fg = '#4fa6ed'},
 		TSMethodCall = {fg = '#4fa6ed'},
+		-- TSConstructor = {fg = '#e55562', bg = '#571e23'},
 		TSConstructor = {fg = '#db9f44', bg = '#5c431e'},
-		Structure = {fg = '#e55561', bg = '#571e23'},
+		Structure = {fg = '#15d415'},
+		MagicMethod = {fg = '#e55561', bg = '#571e23'},
         TSBoolean = {fg = '#bf68d9'},
         TSParameter = {fg = '#cc9057'},
         TSNamespace = {fg = '#ffffff'},
         TSType = {fg = '#15d415', bg = '#084d08', fmt = "underline,bold"}, -- Class Declaration
-        -- TSType = {fg = '#db9f44', bg = '#5c431d', fmt = "underline,bold"}, -- Class Declaration
         TSTypeBuiltin = {fg = "#3b41db"},
 		TSTodo = {fg = '#000000', bg='#ffff00'},
         TSNumber = {fg = '#0be3e3'},
@@ -67,6 +68,41 @@ require('onedark').setup {
 	}
 }
 require('onedark').load()
+
+vim.opt.termguicolors = true
+vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
+
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
+    char_highlight_list = {
+        "IndentBlanklineIndent1"
+    }
+}
+
+-- Rainbow Indent!!!
+-- vim.opt.termguicolors = true
+-- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+-- vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+--
+-- require("indent_blankline").setup {
+--     space_char_blankline = " ",
+--     char_highlight_list = {
+--         "IndentBlanklineIndent1",
+--         "IndentBlanklineIndent2",
+--         "IndentBlanklineIndent3",
+--         "IndentBlanklineIndent4",
+--         "IndentBlanklineIndent5",
+--         "IndentBlanklineIndent6",
+--     },
+-- }
+--
+
+
 
 require('toggleterm').setup {}
 require('colorizer').setup()
@@ -113,6 +149,7 @@ require("nvim-treesitter.highlight").set_custom_captures {
     ["class_name"] = "TSType",
     ["class_child_ref"] = 'Structure',
     ["type_hinting"] = 'Constant',
+    ["magic_method"] = 'MagicMethod',
     ["self_attribute"] = 'TSLabel',
     ["decorator"] = 'TSOperator',
     ["type"] = "Typedef"
