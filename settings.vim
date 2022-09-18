@@ -3,6 +3,7 @@ set smartcase
 set incsearch
 
 set number " show line numbers
+set relativenumber " shows relative line numbers
 set autoindent " autoindent new lines
 set smartindent " makes indenting smart
 set smarttab " tabs will consider width
