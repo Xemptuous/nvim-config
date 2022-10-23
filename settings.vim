@@ -1,9 +1,10 @@
 set ignorecase " ignore search case-sensitivity
-set smartcase
-set incsearch
+set smartcase " if atleast 1 search pattern is uppercase, enters case-sensitive
+set incsearch " incremental serach as characters added 
+set hlsearch " highlights all found search items
 
 set number " show line numbers
-set relativenumber " shows relative line numbers
+set relativenumber " show relative line numbers
 set autoindent " autoindent new lines
 set smartindent " makes indenting smart
 set smarttab " tabs will consider width
@@ -20,8 +21,9 @@ set splitbelow " always split horizontal below
 set splitright " always split vertical right
 set laststatus=0 " always show status line
 set cursorline " highlights current line
-set clipboard=unnamedplus " copy-paste register
-set colorcolumn=80,120 " character-count helper lines
+set clipboard=unnamedplus " outer register
+
+" set colorcolumn=80 " character-count helper lines
 
 " Disable Newline Comment Continuation
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
