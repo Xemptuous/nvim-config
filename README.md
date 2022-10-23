@@ -5,15 +5,12 @@
 A helper for fuzzy-finding various things recursively 
 from cwd (and help files/buffers)
 ### Keybindings
-
-`ff` fuzzyfind
-
-`fg` live_grep
-
-`fb` buffers
-
-`fh` help_tags
-
+<pre>
+    <kbd>ff</kbd>: fuzzyfind
+    <kbd>fg</kbd>: live_grep
+    <kbd>fb</kbd>: buffers
+    <kbd>fh</kbd>: help_tags
+</pre>
 
 ## CodeWindow
 A side-bar mini window that shows a braille-reduced version
@@ -21,22 +18,23 @@ of a "minimap". Shows errors and TS highlighting, as well
 as offering navigations and current cursor positions.
 
 ### Keybindings
-`<leader>mo` Open
-  
-`<leader>mc` Close
-  
-`<leader>mf` Toggle Focus
-  
-`<leader>mm` Toggle Open/Close
+
+<pre>
+    <kbd>leader-mo</kbd>: Open
+    <kbd>leader-mc</kbd>: Close
+    <kbd>leader-mf</kbd>: Toggle Focus
+    <kbd>leader-mm</kbd>: Toggle Open/Close
+</pre>
 
 
 ## NerdTree
 A file-navigations helper to make nvim into a full-fledged IDE!
 
 ### Keybindings
-`Ctrl-t` Toggle NERDTree
-  
-`F8` Toggle Tagbar (right-side helper showing current file debug info)
+<pre>
+    <kbd>Ctrl-t</kbd>: Toggle NERDTree
+    <kbd>F8</kbd>: Toggle Tagbar (right-side helper showing current file debug info)
+</pre>
 
 ### Vim Commands
 `:NERDTreeToggle`
@@ -51,7 +49,9 @@ A built-in terminal utilizing current shell (zsh in my case)
 that can easily be toggled. 
 
 ### Keybindings
-`<A-t>` Toggle Terminal
+<pre>
+    <kbd>Alt-t</kbd>: Toggle Terminal
+</pre>
 
 ### Vim Commands
 `:ToggleTerm` (size=n)(dir=/)(direction={horizontal,vertical})
@@ -69,44 +69,56 @@ that can easily be toggled.
 
 ## LazyGit
 Makes Git super lazy and simple with a GUI
-
 ### Keybindings
-`\<leader>gg` Open LazyGit
+<pre>
+    <kbd>leader-gg</kbd>: Open LazyGit
+</pre>
+##### Global:
+<pre>
+    <kbd>P</kbd>: Push
+    <kbd>p</kbd>: Pull
+    <kbd>x</kbd>: Open Menu
+    <kbd>R</kbd>: Refresh
+    <kbd>m</kbd>: Merge/Rebase options
+</pre>
+
+##### Commit:
+<pre>
+    <kbd>c</kbd>: Checkout File
+    <kbd>d</kbd>: Discard commit's changes to specified file
+    <kbd>o</kbd>: Open File
+    <kbd>e</kbd>: Edit File
+    <kbd>space</kbd>: Toggle File included in path
+</pre>
+
+full list of keybindings: https://github.com/jesseduffield/lazygit/blob/master/docs/keybindings/Keybindings_en.md
 
 ## Vim Surround
 Super helpful commands to surround words/phrases
 
 ### Keybindings
-`cs` Change Surround - e.g., `cs"'` changes "Hello world!" to 'Hello world!'
-
-`cst` Change Surround TO - e.g., `cst"` changes 'Hello world!' to "Hello world!"
-
-`ds` Delete Surround - e.g., `ds"` changes "Hello world!" to Hello world!
-
-`ys` "You" Surround
-  
-`yst` "You" Surround TO
-  
-`ysf` "You" Surround TO(Full)
-  
-`ysiw` "You" Surround Inner-Word - e.g., `ysiw[` over Hello changes Hello world! to [Hello] world!
-
-`yss` "You" Surround Entire Line - e.g., `yssb`  changes Hello world! to (Hello world!)
-
-`S` Visual Mode(useful for HTML) - surrounds entire selection with <> tags and closes appropriately
+<pre>
+    <kbd>cs</kbd>: Change Surround - e.g., `cs"'` changes "Hello world!" to 'Hello world!'
+    <kbd>cst</kbd>: Change Surround TO - e.g., `cst"` changes 'Hello world!' to "Hello world!"
+    <kbd>ds</kbd>: Delete Surround - e.g., `ds"` changes "Hello world!" to Hello world!
+    <kbd>ys</kbd>: "You" Surround
+    <kbd>yst</kbd>: "You" Surround TO
+    <kbd>ysf</kbd>: "You" Surround TO(Full)
+    <kbd>ysiw</kbd>: "You" Surround Inner-Word - e.g., `ysiw[` over Hello changes Hello world! to [Hello] world!
+    <kbd>yss</kbd>: "You" Surround Entire Line - e.g., `yssb`  changes Hello world! to (Hello world!)
+    <kbd>S</kbd>: Visual Mode(useful for HTML) - surrounds entire selection with <> tags and closes appropriately
+</pre>
 
   
 ## Comment
 
 ### Keybindings
-`gcc` Comment w/ . supports
-  
-`gbc` Block Comment w/ . supports
-  
-`[#]gcc` Comment # of lines
-  
-`gc$, gcw, gciw, gc2j, gc4k, etc.`
-
+<pre>
+    <kbd>gcc</kbd>: Comment w/ . supports
+    <kbd>gbc</kbd>: Block Comment w/ . supports
+    <kbd>[#]gcc</kbd> Comment # of lines
+    <kbd>gc$, gcw, gciw, gc2j, gc4k, etc.</kbd>
+</pre>
 
 
 ## Visual Multi
@@ -117,21 +129,16 @@ number creation, etc.)
 
 ### Keybindings
 
-`Ctrl-n` Regex match word over cursor and select next for Visual-Multi mode
-  
-`Ctrl-up, Ctrl-down` Create cursors vertically
-  
-`Shift-left, Shift-right` Select range one character at a time
-  
-`Tab` Toggle between Normal and Extended mode (more like visual)
-  
-`n N` Get next/previous occurence
-  
-`[]` Select next/previous cursor
-  
-`q` skip current and get next occurence
-  
-`Q` remove current cursor/selection
+<pre>
+    <kbd>Ctrl-n</kbd>: Regex match word over cursor and select next for Visual-Multi mode
+    <kbd>Ctrl-up, Ctrl-down</kbd>: Create cursors vertically
+    <kbd>Shift-left, Shift-right</kbd>: Select range one character at a time
+    <kbd>Tab</kbd>: Toggle between Normal and Extended mode (more like visual)
+    <kbd>n N</kbd>: Get next/previous occurence
+    <kbd>[]</kbd>: Select next/previous cursor
+    <kbd>q</kbd>: Skip current and get next occurence
+    <kbd>Q</kbd>: Remove current cursor/selection
+</pre>
 
 full list of mappings: https://github.com/mg979/vim-visual-multi/wiki/Mappings
 
