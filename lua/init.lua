@@ -51,28 +51,22 @@ vim.call('plug#end')
 vim.opt.termguicolors = true
 
 require('onedark').setup {
-	style = 'darker',
+    style = 'darker',
     -- transparent = true,
+    code_style = {
+        comments = "italic",
+        keywords = "italic",
+    },
+    lualine = {
+        -- transparent = true
+    },
 	highlights = {
-		TSFunction = {fg = '#4fa6ed', bg = '#053963', fmt = 'underline,bold'},
-		TSMethod = {fg = '#4fa6ed', bg = '#053963', fmt = 'underline,bold'},
-		TSFunctionCall = {fg = '#4fa6ed'},
-		TSMethodCall = {fg = '#4fa6ed'},
-		-- TSConstructor = {fg = '#e55561', bg = '#571e23'},
-		TSConstructor = {fg = '#db9f44', bg = '#5c431e'},
-		Structure = {fg = '#15d415'},
-		MagicMethod = {fg = '#e55561', bg = '#571e23'},
-        TSBoolean = {fg = '#bf68d9'},
-        TSParameter = {fg = '#cc9057'}, TSNamespace = {fg = '#ffffff'},
-        TSType = {fg = '#15d415', bg = '#084d08', fmt = "underline,bold"}, -- Class Declaration
-        TSTypeBuiltin = {fg = "#3b41db"},
-		TSTodo = {fg = '#000000', bg='#ffff00'},
-        TSNumber = {fg = '#0be3e3'},
-        TSFloat = {fg = '#0be3e3'},
-        TSOperator = {fg = '#bf68d9'},
-        TSConstant = {fg = '#a0a8b7'}, -- Global Variables
-        WhichKeyFloat = { bg = "cfg.transparent"},
+        -- ["@property"] = {fg = "#abb2bf"},
+        ['@namespace'] = {fg = '#535965', fmt = 'italic'},
+        ["@parameter"] = {fg = '#cc9057'},
+        ["@keyword.operator"] = {fmt = 'bold'},
 	}
+    }
 }
 require('onedark').load()
 
