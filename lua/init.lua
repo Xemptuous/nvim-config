@@ -62,7 +62,7 @@ require('onedark').setup {
     },
 	highlights = {
         -- ["@property"] = {fg = "#abb2bf"},
-        ['@namespace'] = {fg = '#535965', fmt = 'italic'},
+        -- ['@namespace'] = {fg = '#535965', fmt = 'italic'},
         ["@parameter"] = {fg = '#cc9057'},
         ["@keyword.operator"] = {fmt = 'bold'},
 	}
@@ -71,6 +71,7 @@ require('onedark').setup {
 require('onedark').load()
 
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
 require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = false,
