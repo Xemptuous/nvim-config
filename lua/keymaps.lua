@@ -1,7 +1,8 @@
---[ Standard Keybinds --]
+--[ Standard Keybinds ]
 vim.keymap.set('n', '<CR>', [[o<Esc>]], {}) -- Enter inserts newline
 vim.keymap.set('n', '<TAB>', [[:bnext<CR>]], {}) -- TAB moves to next buffer
 vim.keymap.set('n', '<S-TAB>', [[:bprevious<CR>]], {}) -- Shift-Tab moves to prev buffer
+
     -- Escape Alternatives
 vim.keymap.set('n', '<C-c>', [[<Esc>]], {})
 vim.keymap.set('i', 'jk', [[<Esc>]], {})
@@ -13,10 +14,17 @@ vim.keymap.set('n', '<C-h>', [[<C-w>h]], {})
 vim.keymap.set('n', '<C-j>', [[<C-w>j]], {})
 vim.keymap.set('n', '<C-k>', [[<C-w>k]], {})
 vim.keymap.set('n', '<C-l>', [[<C-w>l]], {})
+
     -- Better indentation
 vim.keymap.set('v', '<', [[<gv]], {})
 vim.keymap.set('v', '>', [[>gv]], {})
 
+    -- Removing x delete clipboard paste
+vim.keymap.set('n', 'x', [[ h"_x" ]], {})
+vim.keymap.set('n', 'X', [[ h"_X" ]], {})
+
+
+--[ Plugin Keybinds ]
 
 -- NERDTree
 vim.keymap.set('n', '<C-t>', [[:NERDTreeToggle<CR>]], {})
