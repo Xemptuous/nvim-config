@@ -20,8 +20,8 @@ vim.keymap.set('v', '<', [[<gv]], {})
 vim.keymap.set('v', '>', [[>gv]], {})
 
     -- Removing x delete clipboard paste
-vim.keymap.set('n', 'x', [[ "_X" ]], {})
-vim.keymap.set('n', 'X', [[ h"_X" ]], {})
+vim.keymap.set('n', 'x', [["_x]], {})
+vim.keymap.set('n', 'X', [["_X]], {})
 
 
 --[ Plugin Keybinds ]
