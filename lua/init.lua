@@ -70,8 +70,11 @@ require('onedark').setup {
 }
 require('onedark').load()
 
+vim.cmd [[highlight CursorLineNr guifg=#4fa6ed gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
+vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed'}) -- coloring for codewindow
+
 require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = false,
