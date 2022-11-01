@@ -30,4 +30,4 @@ set laststatus=0 " always show status line
 " Disable Newline Comment Continuation
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-set cinoptions=l1,^-2,:2,(0,W2, " check :help cinoptions-values
+set cinoptions=l1,^-2,:2,(2,W2, " check :help cinoptions-values
