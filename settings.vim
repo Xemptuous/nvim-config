@@ -5,6 +5,8 @@ set hlsearch " highlights all found search items
 
 set number " show line numbers
 set relativenumber " show relative line numbers
+set cursorline " shows current line number (req for color)
+set cursorlineopt=number " only highlight number (not line)
 set autoindent " autoindent new lines
 set smartindent " makes indenting smart
 set smarttab " tabs will consider width
