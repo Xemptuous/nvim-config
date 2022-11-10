@@ -97,7 +97,24 @@ require('Comment').setup {}
 require('alpha').setup(require('alpha.themes.dashboard').config)
 require('impatient')
 require("nvim-lsp-installer").setup {}
-require("which-key").setup {}
+--require("which-key").setup {}
+require('telescope').setup {
+  pickers = {
+    find_files = {
+      mappings = {
+        i = {
+          ["<C-j>"] = "move_selection_next",
+          ["<C-k>"] = "move_selection_previous"
+        },
+        n = {
+          ["<C-j>"] = "move_selection_next",
+          ["<C-k>"] = "move_selection_previous"
+        },
+      },
+    },
+  },
+}
+
 require('lualine').setup {
 	options = { theme = 'onedark' },
 }
