@@ -4,12 +4,13 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 
 Plug 'norcalli/nvim-colorizer.lua' -- Colorizer
-Plug 'preservim/nerdtree' --NerdTree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
-Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree
+-- Plug 'preservim/nerdtree' --NerdTree
+-- Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
+Plug 'nvim-tree/nvim-tree.lua' -- File Explorer
+Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree and NvimTree
+Plug 'preservim/tagbar' --Tagbar for code
 Plug 'ryanoasis/vim-devicons' --Developer Icons
 Plug 'akinsho/toggleterm.nvim' -- Terminal Toggler
-Plug 'preservim/tagbar' --Tagbar for code (NERDTree Dependency)
 Plug 'tpope/vim-surround' --Surrounding ysw)
 Plug('navarasu/onedark.nvim', {on = 'Onedark', ['for'] = 'onedark'}) --Atom Dark Colorscheme
 Plug 'windwp/nvim-autopairs' --Auto-Pair completion
@@ -25,16 +26,18 @@ Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope and GitSigns
 Plug 'nvim-telescope/telescope.nvim' -- fzf
 Plug 'nvim-treesitter/nvim-treesitter' -- Treesitter
 Plug 'nvim-treesitter/playground' -- Treesitter playground
-Plug 'folke/which-key.nvim' --WhichKey popup suggestions
+Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
+Plug 'ptzz/lf.vim' -- LF integration
+-- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
 Plug 'p00f/nvim-ts-rainbow' -- Rainbow Brackets
 Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
-Plug 'mg979/vim-visual-multi' -- multiple cursors
+-- Plug 'mg979/vim-visual-multi' -- multiple cursors
 Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
 Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
 
 -- Git
 Plug 'lewis6991/gitsigns.nvim' -- Signs for changes to file
-Plug 'kdheepak/lazygit.nvim' -- LazyGit
+-- Plug 'kdheepak/lazygit.nvim' -- LazyGit
 
 -- Autocompletion plugins:
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -48,11 +51,19 @@ Plug "hrsh7th/cmp-nvim-lsp-signature-help"
 
 vim.call('plug#end')
 
+-- Disabling builtin explorer
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- for highlight group enabling
 vim.opt.termguicolors = true
 
+
+-- Navarasu OneDark theme
 require('onedark').setup {
-    style = 'darker',
-    -- transparent = true,
+	style = 'darker',
+    transparent = true,
+
     code_style = {
         comments = "italic",
         keywords = "italic",
@@ -63,41 +74,42 @@ require('onedark').setup {
 	highlights = {
         -- ["@property"] = {fg = "#abb2bf"},
         -- ['@namespace'] = {fg = '#535965', fmt = 'italic'},
+        -- ["@text"] = {fg = '#ff0000', fmt = 'underline'},
         ["@parameter"] = {fg = '#cc9057'},
         ["@keyword.operator"] = {fmt = 'bold'},
 	}
-    }
 }
 require('onedark').load()
 
 vim.cmd [[highlight CursorLineNr guifg=#4fa6ed gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
-vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed'}) -- coloring for codewindow
 
 require("indent_blankline").setup {
     show_current_context = true,
     show_current_context_start = false,
     use_treesitter = true,
+    use_treesitter_scope = true,
     char_highlight_list = {
         "IndentBlanklineIndent1"
     }
 }
-
-require('toggleterm').setup {
-    close_on_exit = true,
-    persist_mode = false
-}
-require('gitsigns').setup()
-require("codewindow").setup()
+vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed'}) -- coloring for codewindow
+require("codewindow").setup ({
+    -- auto_enable = false,
+    minimap_width = 15,
+    -- width_multiplier = 4,
+    -- show_cursor = false,
+})
 require("codewindow").apply_default_keybinds()
+require('toggleterm').setup {}
+require('gitsigns').setup()
 require('colorizer').setup()
 require('nvim-autopairs').setup {}
 require('Comment').setup {}
 require('alpha').setup(require('alpha.themes.dashboard').config)
 require('impatient')
-require("nvim-lsp-installer").setup {}
---require("which-key").setup {}
+-- require("which-key").setup {}
 require('telescope').setup {
   pickers = {
     find_files = {
@@ -118,6 +130,7 @@ require('telescope').setup {
 require('lualine').setup {
 	options = { theme = 'onedark' },
 }
+
 require("illuminate").configure({
 	providers = {
 		'lsp',
@@ -126,6 +139,17 @@ require("illuminate").configure({
 	delay = 100,
 	under_cursor = true
 })
+
+require("nvim-tree").setup({
+  view = {
+    mappings = {
+      list = {
+        { key = "<C-[>", action = "dir_up" },
+      },
+    },
+  },
+})
+
 require("nvim-treesitter.configs").setup {
     highlight = {
         enable = true,
