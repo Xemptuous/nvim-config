@@ -4,10 +4,8 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin')
 
 Plug 'norcalli/nvim-colorizer.lua' -- Colorizer
--- Plug 'preservim/nerdtree' --NerdTree
--- Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
 Plug 'nvim-tree/nvim-tree.lua' -- File Explorer
-Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree
+Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree and NvimTree
 Plug 'preservim/tagbar' --Tagbar for code
 Plug 'ryanoasis/vim-devicons' --Developer Icons
 Plug 'akinsho/toggleterm.nvim' -- Terminal Toggler
@@ -26,18 +24,16 @@ Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope and GitSigns
 Plug 'nvim-telescope/telescope.nvim' -- fzf
 Plug 'nvim-treesitter/nvim-treesitter' -- Treesitter
 Plug 'nvim-treesitter/playground' -- Treesitter playground
---Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
---Plug 'ptzz/lf.vim' -- LF integration
--- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
 Plug 'p00f/nvim-ts-rainbow' -- Rainbow Brackets
 Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
--- Plug 'mg979/vim-visual-multi' -- multiple cursors
---Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
 Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
+
+-- SQL
+Plug 'tpope/vim-dadbod' -- SQL interface
+Plug 'kristijanhusak/vim-dadbod-ui' -- dadbod UI 
 
 -- Git
 Plug 'lewis6991/gitsigns.nvim' -- Signs for changes to file
--- Plug 'kdheepak/lazygit.nvim' -- LazyGit
 
 -- Autocompletion plugins:
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -48,6 +44,16 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug "hrsh7th/cmp-nvim-lsp-signature-help"
+
+-- Removed/Disabled Plugins
+-- Plug 'preservim/nerdtree' --NerdTree
+-- Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
+-- Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
+-- Plug 'ptzz/lf.vim' -- LF integration
+-- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
+-- Plug 'mg979/vim-visual-multi' -- multiple cursors
+-- Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
+-- Plug 'kdheepak/lazygit.nvim' -- LazyGit
 
 vim.call('plug#end')
 
