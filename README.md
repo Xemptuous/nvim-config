@@ -4,6 +4,7 @@
 ## Telescope
 A helper for fuzzy-finding various things recursively 
 from cwd (and help files/buffers)
+
 ### Keybindings
 <pre>
     <kbd>ff</kbd>: fuzzyfind
@@ -27,43 +28,21 @@ as offering navigations and current cursor positions.
 </pre>
 
 
-## NvimTree
-A file-navigation helper to make nvim into a full-fledged IDE!
+## NerdTree
+A file-navigations helper to make nvim into a full-fledged IDE!
 
 ### Keybindings
 <pre>
-    <kbd>Ctrl-t</kbd>: Toggle NvimTree
+    <kbd>Ctrl-t</kbd>: Toggle NERDTree
     <kbd>F8</kbd>: Toggle Tagbar (right-side helper showing current file debug info)
-    <kbd>Ctrl-[</kbd>: Dir Up
-    <kbd>Ctrl-]</kbd>: Dir Down
-    <kbd>Ctrl-v</kbd>: open file in vertical split
-    <kbd>Ctrl-x</kbd>: open file in horizontal split
-    <kbd>Backspace</kbd>: close currently opened directory or parent
-    <kbd>R</kbd>: refresh the tree
-    <kbd>r</kbd>: rename a file
-    <kbd>Ctrl-r</kbd>: rename a file and omit filename on input
-    <kbd>a</kbd>: create a file; leaving trailing / will add dir
-    <kbd>d</kbd>: delete a file
-    <kbd>D</kbd>: trash a file
-    <kbd>x</kbd>: add/remove file/dir to cut clipboard
-    <kbd>c</kbd>: add/remove file/dir to copy clipboard
-    <kbd>p</kbd>: paste from clipboard
-    <kbd>y</kbd>: copy name to system clipboard
-    <kbd>Y</kbd>: copy relative path to system clipboard
-    <kbd>gy</kbd>: copy absolute path to system clipboard
-    <kbd>f</kbd>: live filter by regex
-    <kbd>F</kbd>: clear live filter
-    <kbd>W</kbd>: collapse the whole tree
-    <kbd>E</kbd>: expand the whole tree
-    <kbd>Ctrl-k</kbd>: toggle popup with file info about file under cursor
-    <kbd>.</kbd>: enter vim command mode with file under cursor
 </pre>
 
 ### Vim Commands
-
-`:NvimTreeToggle`
-`:NvimTreeFocus`
-`:NvimTreeRefresh`
+`:NERDTreeToggle`
+  
+`:NERDTreeCWD` Current directory
+  
+`:NERDTreeFind` fuzzy-finder for file/dir
 
 
 ## Toggle Term

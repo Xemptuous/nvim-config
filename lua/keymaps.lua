@@ -24,10 +24,12 @@ vim.keymap.set('n', 'x', [["_x]], {})
 vim.keymap.set('n', 'X', [["_X]], {})
 
 
+
 --[ Plugin Keybinds ]
 
--- NERDTree
-vim.keymap.set('n', '<C-t>', [[:NERDTreeToggle<CR>]], {})
+-- Nvim-Tree
+vim.keymap.set('n', '<C-t>', [[:NvimTreeToggle<CR>]], {})
+vim.keymap.set('n', '<C-n>', [[:NvimTreeFocus<CR>]], {})
 vim.keymap.set('n', '<F8>', [[:TagbarToggle<CR>]], {})
 
 -- Telescope
@@ -39,11 +41,15 @@ vim.keymap.set('n', 'fh', builtin.help_tags, {})
 
 -- ToggleTerm
 vim.keymap.set('t', '<A-t>', [[exit<CR>]])
-vim.keymap.set('n', '<A-t>', [[:ToggleTerm<CR>]])
+vim.keymap.set('t', '<A-v>', [[exit<CR>]])
+vim.keymap.set('t', '2<A-t>', [[<C-\><C-N>:ToggleTermToggleAll<CR>]])
+vim.keymap.set('n', '<A-t>', [[:ToggleTerm size=12 direction=horizontal<CR>]])
+vim.keymap.set('n', '<A-v>', [[:ToggleTerm size=40 direction=vertical<CR>]])
+vim.keymap.set('n', '2<A-t>', [[:ToggleTerm size=12 direction=horizontal<CR><C-\><C-N>:2ToggleTerm<CR>]])
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
     vim.keymap.set('t', '<esc>', [[exit<CR>]], opts)
-    vim.keymap.set('t', 'jk', [[exit<CR>]], opts)
+    -- vim.keymap.set('t', 'jk', [[exit<CR>]], opts)
     vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
     vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
     vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)

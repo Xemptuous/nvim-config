@@ -1,5 +1,6 @@
 local on_attach = require('keymaps')
 
+require("nvim-lsp-installer").setup {}
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local nvim_lsp = require('lspconfig')
@@ -81,6 +82,11 @@ function filter_diagnostics(diagnostic)
 	if string.match(diagnostic.message, '"_.+" is not accessed') then
 		return false
 	end
+
+  -- Django related fixes
+  if string.match(diagnostic.message, 'Cannot access member "objects" for type "Type[') then
+    return false
+  end
 
 	return true
 end

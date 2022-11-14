@@ -5,8 +5,8 @@ set hlsearch " highlights all found search items
 
 set number " show line numbers
 set relativenumber " show relative line numbers
-set cursorline " shows current line number (req for color)
-set cursorlineopt=number " only highlight number (not line)
+set cursorline
+set cursorlineopt=number
 set autoindent " autoindent new lines
 set smartindent " makes indenting smart
 set smarttab " tabs will consider width
@@ -30,4 +30,6 @@ set laststatus=0 " always show status line
 " Disable Newline Comment Continuation
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+
+" indent options
 set cinoptions=l1,^-2,:2,(2,W2, " check :help cinoptions-values

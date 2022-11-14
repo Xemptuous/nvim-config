@@ -7,7 +7,7 @@ Plug 'norcalli/nvim-colorizer.lua' -- Colorizer
 -- Plug 'preservim/nerdtree' --NerdTree
 -- Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
 Plug 'nvim-tree/nvim-tree.lua' -- File Explorer
-Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree and NvimTree
+Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree
 Plug 'preservim/tagbar' --Tagbar for code
 Plug 'ryanoasis/vim-devicons' --Developer Icons
 Plug 'akinsho/toggleterm.nvim' -- Terminal Toggler
@@ -26,13 +26,13 @@ Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope and GitSigns
 Plug 'nvim-telescope/telescope.nvim' -- fzf
 Plug 'nvim-treesitter/nvim-treesitter' -- Treesitter
 Plug 'nvim-treesitter/playground' -- Treesitter playground
-Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
-Plug 'ptzz/lf.vim' -- LF integration
+--Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
+--Plug 'ptzz/lf.vim' -- LF integration
 -- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
 Plug 'p00f/nvim-ts-rainbow' -- Rainbow Brackets
 Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
 -- Plug 'mg979/vim-visual-multi' -- multiple cursors
-Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
+--Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
 Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
 
 -- Git
@@ -94,13 +94,23 @@ require("indent_blankline").setup {
         "IndentBlanklineIndent1"
     }
 }
-vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed'}) -- coloring for codewindow
+vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed', bg='#151820'}) -- coloring for codewindow
+vim.api.nvim_set_hl(0, 'NormalFloat', {fg = '#4fa6ed', bg='#151820'}) -- coloring for codewindow
 require("codewindow").setup ({
-    -- auto_enable = false,
+    auto_enable = false,
     minimap_width = 15,
+    window_border = 'single',
     -- width_multiplier = 4,
     -- show_cursor = false,
 })
+
+
+vim.api.nvim_set_hl(0, 'CodewindowBorder', {fg = '#4fa6ed'})
+vim.api.nvim_set_hl(0, 'CodewindowBackground', {fg = '#4fa6ed'})
+
+
+
+
 require("codewindow").apply_default_keybinds()
 require('toggleterm').setup {}
 require('gitsigns').setup()
@@ -145,6 +155,7 @@ require("nvim-tree").setup({
     mappings = {
       list = {
         { key = "<C-[>", action = "dir_up" },
+        { key = "<C-s>", action = "split" },
       },
     },
   },
