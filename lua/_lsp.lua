@@ -84,7 +84,7 @@ function filter_diagnostics(diagnostic)
 	end
 
   -- Django related fixes
-  if string.match(diagnostic.message, 'Cannot access member "objects" for type "Type[') then
+  if string.match(diagnostic.message, 'Cannot access member "objects" for type') then
     return false
   end
 
