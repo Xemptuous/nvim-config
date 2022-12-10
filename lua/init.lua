@@ -2,7 +2,6 @@ local Plug = vim.fn['plug#']
 
 -- Plug 'vim-airline/vim-airline' --Status Bar
 vim.call('plug#begin')
-
 Plug 'norcalli/nvim-colorizer.lua' -- Colorizer
 Plug 'nvim-tree/nvim-tree.lua' -- File Explorer
 Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree and NvimTree
@@ -10,7 +9,6 @@ Plug 'preservim/tagbar' --Tagbar for code
 Plug 'ryanoasis/vim-devicons' --Developer Icons
 Plug 'akinsho/toggleterm.nvim' -- Terminal Toggler
 Plug 'tpope/vim-surround' --Surrounding ysw)
-Plug('navarasu/onedark.nvim', {on = 'Onedark', ['for'] = 'onedark'}) --Atom Dark Colorscheme
 Plug 'windwp/nvim-autopairs' --Auto-Pair completion
 Plug 'lukas-reineke/indent-blankline.nvim' -- Indentation Lines
 Plug 'numToStr/Comment.nvim' -- Commenter
@@ -27,6 +25,16 @@ Plug 'nvim-treesitter/playground' -- Treesitter playground
 Plug 'p00f/nvim-ts-rainbow' -- Rainbow Brackets
 Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
 Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
+Plug '/MTDL9/vim-log-highlighting' -- colorizing for log files
+Plug 'alvan/vim-closetag' -- autoclose html tags
+
+-- Colorschemes
+Plug('navarasu/onedark.nvim', {on = 'Onedark', ['for'] = 'onedark'})
+Plug 'EdenEast/nightfox.nvim'
+Plug 'tomasiser/vim-code-dark'
+Plug 'bluz71/vim-nightfly-colors'
+Plug 'arcticicestudio/nord-vim'
+Plug 'rakr/vim-one'
 
 -- SQL
 Plug 'tpope/vim-dadbod' -- SQL interface
@@ -52,7 +60,6 @@ Plug "hrsh7th/cmp-nvim-lsp-signature-help"
 -- Plug 'ptzz/lf.vim' -- LF integration
 -- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
 -- Plug 'mg979/vim-visual-multi' -- multiple cursors
--- Plug 'davepinto/virtual-column.nvim' -- Thinner ruler-guide
 -- Plug 'kdheepak/lazygit.nvim' -- LazyGit
 
 vim.call('plug#end')
@@ -144,7 +151,7 @@ require('telescope').setup {
 }
 
 require('lualine').setup {
-	options = { theme = 'onedark' },
+	options = { theme = 'nord' },
 }
 
 require("illuminate").configure({
@@ -174,8 +181,6 @@ require("nvim-treesitter.configs").setup {
     },
     rainbow = {
         enable = true,
-        -- colors = {},
-        -- termcolors = {},
         extended_mode = false,
         max_file_lines = nil,
     },
@@ -198,13 +203,3 @@ require("nvim-treesitter.configs").setup {
         },
     }
 }
--- require('virtual-column').init({
---    column_number = 80,
---    overlay = true,
---    vert_char = "│",
---    enabled = true,
---
---     -- do not show column on this buffers and types
---    buftype_exclude = {},
---    filetype_exclude = {},
--- })
