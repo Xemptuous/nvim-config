@@ -28,7 +28,7 @@ Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
 Plug '/MTDL9/vim-log-highlighting' -- colorizing for log files
 Plug 'alvan/vim-closetag' -- autoclose html tags
 Plug 'lambdalisue/suda.vim' -- r/w with sudo
-Plug '0oAstro/dim.lua' -- dims unused variables
+Plug 'zbirenbaum/neodim' -- dims unused variables
 -- Plug 'chentoast/marks.nvim' -- easier marks
 
 -- Colorschemes
@@ -73,7 +73,19 @@ vim.g.loaded_netrwPlugin = 1
 -- for highlight group enabling
 vim.opt.termguicolors = true
 
-require('dim').setup({})
+require('neodim').setup({
+  alpha = 0.65,
+  blend_color = "#000000",
+  update_in_insert = {
+    enable = true,
+    delay = 100,
+  },
+  hide = {
+    virtual_text = true,
+    signs = true,
+    underline = true,
+  }
+})
 -- Navarasu OneDark theme
 require('onedark').setup {
 	style = 'darker',
