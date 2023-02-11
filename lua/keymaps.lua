@@ -38,6 +38,13 @@ vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
 vim.keymap.set('n', 'fb', builtin.buffers, {})
 vim.keymap.set('n', 'fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>w', [[:lua require'telescope.builtin'.grep_string{}<CR>]])
+vim.keymap.set('n', '<leader>h', [[:lua require'telescope.builtin'.search_history{}<CR>]])
+vim.keymap.set('n', '<leader>ch', [[:lua require'telescope.builtin'.command_history{}<CR>]])
+vim.keymap.set('n', '<leader>cs', [[:lua require'telescope.builtin'.colorscheme{}<CR>]])
+vim.keymap.set('n', '<leader>o', [[:lua require'telescope.builtin'.options{}<CR>]])
+vim.keymap.set('n', '<leader>r', [[:lua require'telescope.builtin'.registers{}<CR>]])
+-- vim.keymap.set('n', '<leader>m', [[:lua require'telescope.builtin'.marks{}<CR>]])
 
 -- ToggleTerm
 vim.keymap.set('t', '<A-t>', [[exit<CR>]])
@@ -61,13 +68,12 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 vim.keymap.set('n', '<leader>gg', [[:LazyGit<CR>]], {})
 
 -- CMP
+-- LSP
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-
--- LSP
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     local bufopts = { noremap=true, silent=true, buffer=bufnr }

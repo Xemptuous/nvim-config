@@ -99,3 +99,18 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	custom_on_publish_diagnostics, {})
 
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  float = {
+    border = "single",
+    format = function(diagnostic)
+      return string.format(
+        "%s (%s) [%s]",
+        diagnostic.message,
+        diagnostic.source,
+        diagnostic.code or diagnostic.user_data.lsp.code
+      )
+    end,
+  },
+})

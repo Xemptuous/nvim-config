@@ -18,7 +18,7 @@ Plug 'lewis6991/impatient.nvim' -- Cacher for performance
 Plug 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 Plug 'williamboman/nvim-lsp-installer' -- LSP Easy Installer
 Plug 'RRethy/vim-illuminate' -- Text Highlighter
-Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope and GitSigns
+Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope, GitSigns, and Harpoon
 Plug 'nvim-telescope/telescope.nvim' -- fzf
 Plug 'nvim-treesitter/nvim-treesitter' -- Treesitter
 Plug 'nvim-treesitter/playground' -- Treesitter playground
@@ -27,6 +27,9 @@ Plug 'Vimjas/vim-python-pep8-indent' -- Python proper indentation
 Plug 'gorbit99/codewindow.nvim' -- Minimap Sidebar
 Plug '/MTDL9/vim-log-highlighting' -- colorizing for log files
 Plug 'alvan/vim-closetag' -- autoclose html tags
+Plug 'lambdalisue/suda.vim' -- r/w with sudo
+Plug '0oAstro/dim.lua' -- dims unused variables
+-- Plug 'chentoast/marks.nvim' -- easier marks
 
 -- Colorschemes
 Plug('navarasu/onedark.nvim', {on = 'Onedark', ['for'] = 'onedark'})
@@ -67,11 +70,10 @@ vim.call('plug#end')
 -- Disabling builtin explorer
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
 -- for highlight group enabling
 vim.opt.termguicolors = true
 
-
+require('dim').setup({})
 -- Navarasu OneDark theme
 require('onedark').setup {
 	style = 'darker',
@@ -121,6 +123,14 @@ require("codewindow").setup ({
 vim.api.nvim_set_hl(0, 'CodewindowBorder', {fg = '#4fa6ed'})
 vim.api.nvim_set_hl(0, 'CodewindowBackground', {fg = '#4fa6ed'})
 
+
+-- require('marks').setup {
+--   default_mappings = true,
+--   builtin_marks = { ".", "<", ">", "^"},
+--   cyclic = true,
+--   force_write_shada = false,
+--   refresh_interval= 250,
+-- }
 
 
 
