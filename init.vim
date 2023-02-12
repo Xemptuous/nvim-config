@@ -13,3 +13,5 @@ hi rainbowcol5 guifg=#ff4f4f
 hi rainbowcol6 guifg=#359ff4
 hi rainbowcol7 guifg=#bb60f7
 
+" Setting vim-dadbod-ui fonts
+let g:db_ui_use_nerd_fonts = 1
