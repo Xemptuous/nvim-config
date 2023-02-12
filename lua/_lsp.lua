@@ -1,53 +1,71 @@
-local on_attach = require('keymaps')
 
-require("nvim-lsp-installer").setup {}
+require("mason").setup()
+require("mason-lspconfig").setup()
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local nvim_lsp = require('lspconfig')
+local lsp_flags = {
+  debounce_text_changes = 150,
+}
+local on_attach = require('keymaps')
+local lsp = require('lspconfig')
+vim.lsp.set_log_level("debug")
+lsp.bashls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.clangd.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.cssls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.html.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.jdtls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {'vim'}
+      }
+    }
+  },
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.pyright.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.quick_lint_js.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.sqlls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
+lsp.vimls.setup {
+  on_attach = on_attach,
+  flags = lsp_flags,
+}
 
-nvim_lsp['bashls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['clangd'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['cssls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['html'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['pyright'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['jdtls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['quick_lint_js'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['sumneko_lua'].setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = {'vim'},
-            },
-        },
-    },
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-nvim_lsp['vimls'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+-- require("mason-lspconfig").setup_handlers {
+--   function (server_name)
+--     lsp[server_name].setup {}
+--   end,
+--
+--   -- Can provide dedicated handlers for specific servers:
+--   -- ["base-language-server"] = function()
+--   --   require("bash-language-server").setup {}
+--   -- end
+-- }
 
 -- disabling certain hint-level diagnostics
 function filter(arr, func)
@@ -114,3 +132,32 @@ vim.diagnostic.config({
     end,
   },
 })
+
+local dap = require("dap")
+require ('mason-nvim-dap').setup({
+  automatic_setup = true,
+  ensure_installed = {'cpptools', 'debugpy'}
+})
+require 'mason-nvim-dap'.setup_handlers {
+  function(source_name)
+    require('mason-nvim-dap.automatic_setup')(source_name)
+  end,
+  python = function(source_name)
+    dap.adapters.python = {
+      type = 'executable',
+      command = '/home/xempt/.virtualenvs/debugpy/bin/python3',
+      -- command = '/usr/bin/python3',
+      args = { '-m', 'debugpy.adapter' };
+      -- args = { os.getenv("HOME") .. "/.virtualenvs/debugpy/bin/python" };
+    }
+    dap.configurations.python = {
+      {
+        type = 'python',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}'
+      }
+    }
+  end
+}
+

@@ -1,7 +1,8 @@
 local Plug = vim.fn['plug#']
 
--- Plug 'vim-airline/vim-airline' --Status Bar
+
 vim.call('plug#begin')
+-- Plug 'vim-airline/vim-airline' --Status Bar
 Plug 'norcalli/nvim-colorizer.lua' -- Colorizer
 Plug 'nvim-tree/nvim-tree.lua' -- File Explorer
 Plug 'kyazdani42/nvim-web-devicons' -- icons for NERDTree and NvimTree
@@ -15,8 +16,11 @@ Plug 'numToStr/Comment.nvim' -- Commenter
 Plug 'nvim-lualine/lualine.nvim' -- Statusline
 Plug 'goolord/alpha-nvim' -- Greeter Dashboard
 Plug 'lewis6991/impatient.nvim' -- Cacher for performance
+Plug 'williamboman/mason.nvim' -- LSP, DAP, Linter, Formatter manager
+Plug 'williamboman/mason-lspconfig.nvim' -- Integrater for Mason and lspconfig
 Plug 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
-Plug 'williamboman/nvim-lsp-installer' -- LSP Easy Installer
+Plug 'mfussenegger/nvim-dap' -- DAP plugin
+Plug 'jay-babu/mason-nvim-dap.nvim' -- DAP - Mason adapter
 Plug 'RRethy/vim-illuminate' -- Text Highlighter
 Plug 'nvim-lua/plenary.nvim' -- Coroutines for Telescope, GitSigns, and Harpoon
 Plug 'nvim-telescope/telescope.nvim' -- fzf
@@ -29,10 +33,21 @@ Plug '/MTDL9/vim-log-highlighting' -- colorizing for log files
 Plug 'alvan/vim-closetag' -- autoclose html tags
 Plug 'lambdalisue/suda.vim' -- r/w with sudo
 Plug 'zbirenbaum/neodim' -- dims unused variables
+Plug 'rhysd/clever-f.vim' -- use of Ff and Tt without ;
 -- Plug 'chentoast/marks.nvim' -- easier marks
+Plug 'MunifTanjim/nui.nvim' -- component for ui
+Plug 'rcarriga/nvim-notify' -- stylized popup notifications
+Plug 'folke/noice.nvim' -- combines above 2
+Plug 'folke/which-key.nvim' --WhichKey popup suggestions
+
 
 -- Colorschemes
 Plug('navarasu/onedark.nvim', {on = 'Onedark', ['for'] = 'onedark'})
+Plug 'wadackel/vim-dogrun'
+Plug 'cocopon/iceberg.vim'
+Plug 'bluz71/vim-moonfly-colors'
+Plug 'sainnhe/edge'
+Plug 'preservim/vim-colors-pencil'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'bluz71/vim-nightfly-colors'
@@ -61,7 +76,6 @@ Plug "hrsh7th/cmp-nvim-lsp-signature-help"
 -- Plug 'tiagofumo/vim-nerdtree-syntax-highlight' -- NerdTree Coloring
 -- Plug 'voldikss/vim-floaterm' -- floating windows (lf.vim dependency)
 -- Plug 'ptzz/lf.vim' -- LF integration
--- Plug 'folke/which-key.nvim' --WhichKey popup suggestions
 -- Plug 'mg979/vim-visual-multi' -- multiple cursors
 -- Plug 'kdheepak/lazygit.nvim' -- LazyGit
 
@@ -72,6 +86,29 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- for highlight group enabling
 vim.opt.termguicolors = true
+
+-- require('notify').setup({
+--   background_colour="#000000"
+-- })
+-- require('noice').setup({
+--   lsp = {
+--     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+--     override = {
+--       ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+--       ["vim.lsp.util.stylize_markdown"] = true,
+--       ["cmp.entry.get_documentation"] = false,
+--     },
+--   },
+--   -- you can enable a preset for easier configuration
+--   presets = {
+--     bottom_search = false, -- use a classic bottom cmdline for search
+--     command_palette = true, -- position the cmdline and popupmenu together
+--     long_message_to_split = true, -- long messages will be sent to a split
+--     inc_rename = false, -- enables an input dialog for inc-rename.nvim
+--     lsp_doc_border = false, -- add a border to hover docs and signature help
+--   },
+-- })
+
 
 require('neodim').setup({
   alpha = 0.65,
@@ -89,21 +126,21 @@ require('neodim').setup({
 -- Navarasu OneDark theme
 require('onedark').setup {
 	style = 'darker',
-    transparent = true,
+  transparent = true,
 
-    code_style = {
-        comments = "italic",
-        keywords = "italic",
-    },
-    lualine = {
-        -- transparent = true
-    },
+  code_style = {
+    comments = "italic",
+    keywords = "italic",
+  },
+  lualine = {
+    transparent = false
+  },
 	highlights = {
-        -- ["@property"] = {fg = "#abb2bf"},
-        -- ['@namespace'] = {fg = '#535965', fmt = 'italic'},
-        -- ["@text"] = {fg = '#ff0000', fmt = 'underline'},
-        ["@parameter"] = {fg = '#cc9057'},
-        ["@keyword.operator"] = {fmt = 'bold'},
+    -- ["@property"] = {fg = "#abb2bf"},
+    -- ['@namespace'] = {fg = '#535965', fmt = 'italic'},
+    -- ["@text"] = {fg = '#ff0000', fmt = 'underline'},
+    ["@parameter"] = {fg = '#cc9057'},
+    ["@keyword.operator"] = {fmt = 'bold'},
 	}
 }
 require('onedark').load()
@@ -113,22 +150,22 @@ vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
 
 require("indent_blankline").setup {
-    show_current_context = true,
-    show_current_context_start = false,
-    use_treesitter = true,
-    use_treesitter_scope = true,
-    char_highlight_list = {
-        "IndentBlanklineIndent1"
-    }
+  show_current_context = true,
+  show_current_context_start = false,
+  use_treesitter = true,
+  use_treesitter_scope = true,
+  char_highlight_list = {
+      "IndentBlanklineIndent1"
+  }
 }
 vim.api.nvim_set_hl(0, 'FloatBorder', {fg = '#4fa6ed', bg='#151820'}) -- coloring for codewindow
 vim.api.nvim_set_hl(0, 'NormalFloat', {fg = '#4fa6ed', bg='#151820'}) -- coloring for codewindow
 require("codewindow").setup ({
-    auto_enable = false,
-    minimap_width = 15,
-    window_border = 'single',
-    -- width_multiplier = 4,
-    -- show_cursor = false,
+  auto_enable = false,
+  minimap_width = 15,
+  window_border = 'single',
+  -- width_multiplier = 4,
+  -- show_cursor = false,
 })
 
 
@@ -144,8 +181,7 @@ vim.api.nvim_set_hl(0, 'CodewindowBackground', {fg = '#4fa6ed'})
 --   refresh_interval= 250,
 -- }
 
-
-
+require("which-key").setup()
 require("codewindow").apply_default_keybinds()
 require('toggleterm').setup {}
 require('gitsigns').setup()

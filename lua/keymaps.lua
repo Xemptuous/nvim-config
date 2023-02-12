@@ -30,20 +30,20 @@ vim.keymap.set('n', 'X', [["_X]], {})
 -- Nvim-Tree
 vim.keymap.set('n', '<C-t>', [[:NvimTreeToggle<CR>]], {})
 vim.keymap.set('n', '<C-n>', [[:NvimTreeFocus<CR>]], {})
-vim.keymap.set('n', '<F8>', [[:TagbarToggle<CR>]], {})
+vim.keymap.set('n', '<F9>', [[:TagbarToggle<CR>]], {})
 
 -- Telescope
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', 'ff', builtin.find_files, {})
-vim.keymap.set('n', 'fg', builtin.live_grep, {})
-vim.keymap.set('n', 'fb', builtin.buffers, {})
-vim.keymap.set('n', 'fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>w', [[:lua require'telescope.builtin'.grep_string{}<CR>]])
-vim.keymap.set('n', '<leader>h', [[:lua require'telescope.builtin'.search_history{}<CR>]])
-vim.keymap.set('n', '<leader>ch', [[:lua require'telescope.builtin'.command_history{}<CR>]])
-vim.keymap.set('n', '<leader>cs', [[:lua require'telescope.builtin'.colorscheme{}<CR>]])
-vim.keymap.set('n', '<leader>o', [[:lua require'telescope.builtin'.options{}<CR>]])
-vim.keymap.set('n', '<leader>r', [[:lua require'telescope.builtin'.registers{}<CR>]])
+vim.keymap.set('n', '<leader>tf', builtin.find_files, {})
+vim.keymap.set('n', '<leader>tg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>tR', builtin.oldfiles, {})
+vim.keymap.set('n', '<leader>tw', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>tH', builtin.search_history, {})
+vim.keymap.set('n', '<leader>tC', builtin.command_history, {})
+vim.keymap.set('n', '<leader>tc', builtin.colorscheme, {})
+vim.keymap.set('n', '<leader>tr', builtin.registers, {})
 -- vim.keymap.set('n', '<leader>m', [[:lua require'telescope.builtin'.marks{}<CR>]])
 
 -- ToggleTerm
@@ -65,7 +65,31 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 -- LazyGit
-vim.keymap.set('n', '<leader>gg', [[:LazyGit<CR>]], {})
+vim.keymap.set('n', '<leader>g', [[:LazyGit<CR>]], {})
+
+-- DAP
+local dap_builtin = 
+vim.keymap.set('n', '<Leader>d<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<Leader>d<F6>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<Leader>d<F7>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<Leader>d<F8>', function() require('dap').step_out() end)
+vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+  require('dap.ui.widgets').hover()
+end)
+vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+  require('dap.ui.widgets').preview()
+end)
+vim.keymap.set('n', '<Leader>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end)
+vim.keymap.set('n', '<Leader>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end)
 
 -- CMP
 -- LSP
@@ -93,4 +117,50 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f',function() vim.lsp.buf.format { async = true } end, bufopts)
 end
+
+local wk = require("which-key")
+wk.register({
+  ["<leader>"] = {
+    t = {
+      name = "Telescope",
+      f = { "<cmd>Telescope find_files<cr>", "Find File" },
+      g = { "<cmd>Telescope live_grep<cr>", 'Grep' },
+      b = { "<cmd>Telescope buffers<cr>", 'Buffers' },
+      h = { "<cmd>Telescope help_tags<cr>", 'Help' },
+      R = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+      w = { "<cmd>Telescope grep_string{}<CR>", "String" },
+      H = { "<cmd>Telescope search_history{}<CR>", "Search History" },
+      C = { "<cmd>Telescope command_history{}<CR>", "Command History" },
+      c = { "<cmd>Telescope colorscheme{}<CR>", "Colorscheme" },
+      r = { "<cmd>Telescope registers{}<CR>", "Registers" },
+    },
+    d = {
+      name = "Debugger",
+      ["<F5>"] = { "<cmd>DapContinue<CR>", "Continue" },
+      ["<F6>"] = { "<cmd>DapStepOver<CR>", "StepOver" },
+      ["<F7>"] = { "<cmd>DapStepInto<CR>", "StepInto" },
+      ["<F8>"] = { "<cmd>DapStepOut<CR>", "StepOut" },
+      b = { "<cmd>DapToggleBreakpoint<CR>", "Breakpoint Toggle" },
+      r = { "<cmd>DapToggleReplCR>", "REPL Toggle" },
+      l = { "<cmd>:lua require('dap').run_last()", "Run Last" },
+      h = { "<cmd>:lua require('dap.ui.widgets').hover()", "Show Hover Info" },
+      p = { "<cmd>:lua require('dap.ui.widgets').preview()", "Show Preview" },
+      f = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').frames)", "Show Frames" },
+      s = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').scopes)", "Show Scopes" },
+    },
+    m = {
+      name = "Code Window",
+      o = {}
+    }
+  }
+}, {
+  mode = "n",
+  prefix = "",
+  buffer = nil,
+  silent = true,
+  noremap = true,
+  nowait = false,
+})
+
 return on_attach
+
