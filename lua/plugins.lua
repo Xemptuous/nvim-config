@@ -1,18 +1,20 @@
 return require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
+	use {
+		'wbthomason/packer.nvim',
+	}
 	use { -- Cacher for performance
 		'lewis6991/impatient.nvim',
-		config = function() require('plugins.impatient') end
+		config = function() require('configs.impatient') end
 	}
 	use {
 		'norcalli/nvim-colorizer.lua',
-		config = function() require('plugins.colorizer') end
+		config = function() require('configs.colorizer') end
 	}
 	use {
 		'nvim-tree/nvim-tree.lua',
 		opt = true,
 		cmd = {'NvimTreeToggle'},
-		config = function() require('plugins.nvim-tree') end,
+		config = function() require('configs.nvim-tree') end,
 	}
 	use {
 		'nvim-tree/nvim-web-devicons',
@@ -32,16 +34,16 @@ return require('packer').startup(function(use)
 	}
 	use {
 		'kylechui/nvim-surround',
-		config = function() require('plugins.nvim-surround') end
+		config = function() require('configs.nvim-surround') end
 	}
 	-- use 'tpope/vim-surround'
 	use {
 		'windwp/nvim-autopairs',
-		config = function() require('plugins.autopairs') end
+		config = function() require('configs.autopairs') end
 	}
 	use {
 		'numToStr/Comment.nvim',
-		config = function() require('plugins.comment') end
+		config = function() require('configs.comment') end
 	}
 	use {
 	-- Greeter Dashboard
@@ -51,28 +53,28 @@ return require('packer').startup(function(use)
 			'Alpha',
 			'AlphaRedraw'
 		},
-		config = function() require('plugins.alpha') end
+		config = function() require('configs.alpha') end
 	}
 	use {-- Text Highlighter
 		'RRethy/vim-illuminate',
-		config = function() require('plugins.illuminate') end
+		config = function() require('configs.illuminate') end
 	}
 	use {
 		'lukas-reineke/indent-blankline.nvim',
-		config = function() require('plugins.indent_blankline') end
+		config = function() require('configs.indent_blankline') end
 	}
 	use {'nvim-telescope/telescope.nvim',
 		requires = 'nvim-lua/plenary.nvim',
-		config = function() require('plugins.telescope') end
+		config = function() require('configs.telescope') end
 	}
 	use {
 		'p00f/nvim-ts-rainbow',
-		config = function() require('plugins.nvim-ts-rainbow') end
+		config = function() require('configs.nvim-ts-rainbow') end
 	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		after = 'nvim-ts-rainbow',
-		config = function() require('plugins.treesitter') end,
+		config = function() require('configs.treesitter') end,
 	}
 	use {
 		'nvim-treesitter/playground',
@@ -95,7 +97,7 @@ return require('packer').startup(function(use)
 		'gorbit99/codewindow.nvim',
 		opt = true,
 		keys = '<leader>mm',
-		config = function() require('plugins.codewindow') end
+		config = function() require('configs.codewindow') end
 	}
 	use { -- autoclose html tags
 		'alvan/vim-closetag',
@@ -107,56 +109,55 @@ return require('packer').startup(function(use)
 		opt = true,
 		cmd = 'SudaWrite'
 	}
-	use 'rhysd/clever-f.vim' -- use of Ff and Tt without ;
+	-- use 'rhysd/clever-f.vim' -- use of Ff and Tt without ;
 	-- use 'chentoast/marks.nvim' -- easier marks
-	-- use 'MunifTanjim/nui.nvim' -- component for ui
-	-- use 'rcarriga/nvim-notify' -- stylized popup notifications
 	use {
 		'folke/noice.nvim',
-		disable = true,
+		-- disabled = true,
+		after = 'nvim-cmp',
 		requires = {
-			{'MunifTanjim/nui.nvim'},
 			{
-				'rcarriga/nvim-notify',
-				config = function() require('plugins.notify') end
-			}
+				'MunifTanjim/nui.nvim'
+				-- disabled = true,
+			},
 		},
-		config = function() require('plugins.noice') end
+		config = function() require('configs.noice') end
 	}
 	use {
 		'folke/which-key.nvim',
-		config = function() require('plugins.whichkey') end
+		config = function() require('configs.whichkey') end
 	}
-	-- Colorschemes
+	-- use {
+	-- 	'olimorris/onedarkpro.nvim',
+	-- 	config = function() require('theme') end,
+	-- 	requires = {
+	-- 		{
+	-- 			'nvim-lualine/lualine.nvim',
+	-- 			config = function() require('configs.lualine') end
+	-- 		},
+	-- 		{
+	-- 			'lewis6991/gitsigns.nvim',
+	-- 			config = function() require('configs.gitsigns') end
+	-- 		}
+	-- 	}
+	-- }
 	use {
 		'navarasu/onedark.nvim',
 		config = function() require('theme') end,
 		requires = {
 			{
 				'nvim-lualine/lualine.nvim',
-				config = function() require('plugins.lualine') end
+				requires = {
+					'noice.nvim'
+				},
+				config = function() require('configs.lualine') end
 			},
 			{
 				'lewis6991/gitsigns.nvim',
-				config = function() require('plugins.gitsigns') end
+				config = function() require('configs.gitsigns') end
 			}
 		}
 	}
-	-- use {
-	-- 	'nvim-lualine/lualine.nvim',
-	-- 	after = 'onedark.nvim',
-	-- 	config = function() require('plugins.lualine') end
-	-- }
-	-- use {
-	-- 	'lewis6991/gitsigns.nvim',
-	-- 	after = 'onedark.nvim',
-	-- 	config = function() require('plugins.gitsigns') end
-	-- }
-	-- use {
-	-- 	'zbirenbaum/neodim',
-	-- 	config = function() require('plugins.neodim') end
-	-- }
-
 	use {
 		'kristijanhusak/vim-dadbod-ui',
 		opt = true,
@@ -186,7 +187,7 @@ return require('packer').startup(function(use)
 		opt = true,
 		after = 'mason.nvim',
 		cmd = "ToggleBreakpoint",
-		config = function() require('plugins.mason-dap') end,
+		config = function() require('configs.mason-dap') end,
 	}
 	-- use 'mfussenegger/nvim-dap' -- DAP plugin
 	use {
@@ -195,12 +196,12 @@ return require('packer').startup(function(use)
 		after = {'mason.nvim', 'nvim-lspconfig'},
 		config = function() require('mason-lspconfig').setup() end
 	}
-	-- Autocompletion plugins:
+	-- Autocompletion configs.
 		-- Integrater for Mason and lspconfig
 	use {
 		'hrsh7th/cmp-nvim-lsp',
 		after = 'nvim-lspconfig',
-		config = function() require('plugins.nvim_lsp') end
+		config = function() require('configs.nvim_lsp') end
 	}
 	-- use 'hrsh7th/cmp-buffer'
 	-- use 'hrsh7th/cmp-path'
@@ -208,24 +209,24 @@ return require('packer').startup(function(use)
 	-- use 'hrsh7th/cmp-vsnip'
 	use {
 		'hrsh7th/nvim-cmp',
+		after = 'nvim-treesitter',
 		requires = {
 			{'hrsh7th/cmp-buffer'},
 			{'hrsh7th/cmp-path'},
 			{'hrsh7th/cmp-cmdline'},
 			{'hrsh7th/cmp-nvim-lsp-signature-help'},
+			{'onsails/lspkind.nvim'},
 			{
 				'hrsh7th/cmp-vsnip',
 				requires = 'hrsh7th/vim-vsnip'
 			}
 		},
-		config = function() require('plugins.nvim_cmp') end,
+		config = function() require('configs.nvim_cmp') end,
 	}
-	use 'hrsh7th/vim-vsnip'
-	use "hrsh7th/cmp-nvim-lsp-signature-help"
 	use {
 		'zbirenbaum/neodim',
 		after = 'nvim-treesitter',
-		config = function() require('plugins.neodim') end,
+		config = function() require('configs.neodim') end,
 	}
 
 	-- Removed/Disabled Plugins
