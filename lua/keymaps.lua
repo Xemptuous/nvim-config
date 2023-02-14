@@ -68,7 +68,6 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 vim.keymap.set('n', '<leader>g', [[:LazyGit<CR>]], {})
 
 -- DAP
-local dap_builtin = 
 vim.keymap.set('n', '<Leader>d<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<Leader>d<F6>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<Leader>d<F7>', function() require('dap').step_into() end)
@@ -77,7 +76,7 @@ vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() 
 vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
 vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
 vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
-  require('dap.ui.widgets').hover()
+require('dap.ui.widgets').hover()
 end)
 vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
   require('dap.ui.widgets').preview()
