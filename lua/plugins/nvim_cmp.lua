@@ -9,13 +9,14 @@ local cmp = require('cmp')
 cmp.setup({
 	snippet = {
 			expand = function(args)
-				vim.fn["vsnip#anonymous"](args.body)
+      require('luasnip').lsp_expand(args.body)
+				-- vim.fn["vsnip#anonymous"](args.body)
 			end,
 	},
 	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "Normal:FloatBorder,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
-		}),
+		-- completion = cmp.config.window.bordered({
+		-- 	winhighlight = "Normal:FloatBorder,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
+		-- }),
 		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
@@ -57,39 +58,37 @@ cmp.setup({
 	sources = cmp.config.sources(
 		{
 			{ name = 'nvim_lsp' },
-			{ name = 'vsnip' },
+			-- { name = 'vsnip' },
+      { name = 'luasnip' },
 		},
 		{
 			{ name = 'buffer' },
 		}
 	),
-	experimental = {
-		ghost_text = true
-	}
 })
 
 cmp.setup.filetype('TelescopePrompt', {
 	enable = false,
 })
 --
--- cmp.setup.filetype('gitcommit', {
---     sources = cmp.config.sources({
---       { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
---     }, {
---       { name = 'buffer' },
---     })
--- })
--- cmp.setup.cmdline('/', {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = {
---       { name = 'buffer' }
---     }
--- })
--- cmp.setup.cmdline(':', {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = cmp.config.sources({
---       { name = 'path' }
---     }, {
---       { name = 'cmdline' }
---     })
--- })
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+})
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+})
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+})

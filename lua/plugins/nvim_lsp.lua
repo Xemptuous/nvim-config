@@ -4,9 +4,9 @@
 local lsp_flags = {
   debounce_text_changes = 150,
 }
-local on_attach = require('keymaps')
+local on_attach = require('../keymaps.lsp_keymap')
 local lsp = require('lspconfig')
-vim.lsp.set_log_level("debug")
+-- vim.lsp.set_log_level("debug")
 lsp.bashls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
@@ -15,18 +15,18 @@ lsp.clangd.setup {
   on_attach = on_attach,
   flags = lsp_flags,
 }
-lsp.cssls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-lsp.html.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
-lsp.jdtls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-}
+-- lsp.cssls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+-- }
+-- lsp.html.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+-- }
+-- lsp.jdtls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+-- }
 lsp.lua_ls.setup {
   settings = {
     Lua = {
@@ -83,27 +83,27 @@ end
 
 
 function filter_diagnostics(diagnostic)
-	-- Only filter out Pyright stuff for now
-	if diagnostic.source ~= "Pyright" then
-		return true
-	end
-
-	-- Allow kwargs to be unused, sometimes you want many functions to take the
-	-- same arguments but you don't use all the arguments in all the functions,
-	-- so kwargs is used to suck up all the extras
-	if diagnostic.message == '"kwargs" is not accessed' then
-		return false
-	end
-
-	-- Allow variables starting with an underscore
-	if string.match(diagnostic.message, '"_.+" is not accessed') then
-		return false
-	end
-
-  -- Django related fixes
-  if string.match(diagnostic.message, 'Cannot access member "objects" for type') then
-    return false
-  end
+	-- -- Only filter out Pyright stuff for now
+	-- if diagnostic.source ~= "Pyright" then
+	-- 	return true
+	-- end
+	--
+	-- -- Allow kwargs to be unused, sometimes you want many functions to take the
+	-- -- same arguments but you don't use all the arguments in all the functions,
+	-- -- so kwargs is used to suck up all the extras
+	-- if diagnostic.message == '"kwargs" is not accessed' then
+	-- 	return false
+	-- end
+	--
+	-- -- Allow variables starting with an underscore
+	-- if string.match(diagnostic.message, '"_.+" is not accessed') then
+	-- 	return false
+	-- end
+	--
+ --  -- Django related fixes
+ --  if string.match(diagnostic.message, 'Cannot access member "objects" for type') then
+ --    return false
+ --  end
 
 	return true
 end
