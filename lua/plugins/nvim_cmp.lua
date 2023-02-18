@@ -14,9 +14,9 @@ cmp.setup({
 			end,
 	},
 	window = {
-		-- completion = cmp.config.window.bordered({
-		-- 	winhighlight = "Normal:FloatBorder,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
-		-- }),
+		completion = cmp.config.window.bordered({
+			winhighlight = "Normal:FloatBorder,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
+		}),
 		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {

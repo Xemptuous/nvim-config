@@ -60,12 +60,32 @@ require("lazy").setup({
 	},
 	{
 		'folke/which-key.nvim',
+    enabled = false,
     event = 'VeryLazy',
 		config = function()
       require('keymaps.whichkey')
       require("which-key").setup()
     end
 	},
+  {
+    'mrjones2014/legendary.nvim',
+    event = 'VeryLazy',
+    config = function() require('plugins.legendary') end
+  },
+  {
+    'stevearc/dressing.nvim',
+    config = function() require('plugins.dressing') end
+  },
+  {
+    'glepnir/lspsaga.nvim',
+    lazy = true,
+    event = "BufRead",
+    config = function() require('keymaps.lspsaga') end,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-treesitter/nvim-treesitter"
+    }
+  },
 	{
 		'norcalli/nvim-colorizer.lua',
     -- lazy = true,
@@ -87,6 +107,7 @@ require("lazy").setup({
 	},
 	{
 		'preservim/tagbar',
+    enabled = false,
 		lazy = true,
 		cmd = {'TagbarToggle'}
 	},
@@ -215,6 +236,7 @@ require("lazy").setup({
     'mfussenegger/nvim-dap',
     lazy = true,
     keys = {'<leader>d'},
+    cmd = {"DapToggleBreakpoint", "DapToggleRepl"},
     config = function() require('keymaps.dap') end,
     dependencies = {
       'jay-babu/mason-nvim-dap.nvim',
@@ -226,17 +248,13 @@ require("lazy").setup({
     lazy = true,
     keys = {'<leader>d'},
     config = function() require('plugins.mason-dap') end,
-    dependencies = {
-      'mfussenegger/nvim-dap',
-      'williamboman/mason.nvim'
-    }
+    dependencies = {'williamboman/mason.nvim'}
   },
-  -- 'neovim/nvim-lspconfig',
   {
     'neovim/nvim-lspconfig',
-    lazy = false,
-    -- lazy = true,
+    event = 'VeryLazy',
     config = function() require('lspconfig') end,
+    dependencies = {'glepnir/lspsaga.nvim'}
   },
   {
     'mhartington/formatter.nvim',
@@ -251,7 +269,8 @@ require("lazy").setup({
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
-    lazy = false,
+    -- lazy = true,
+    -- event = "VeryLazy",
 		config = function()
       require('keymaps.lsp_keymap')
       require('plugins.nvim_lsp')
@@ -262,8 +281,9 @@ require("lazy").setup({
 	},
 	{
 		'hrsh7th/nvim-cmp',
-    event = {"InsertEnter"},
-    -- event = {"InsertEnter", "CmdlineEnter"},
+    lazy = true,
+    -- event = {"InsertEnter"},
+    event = {"InsertEnter", "CmdlineEnter"},
 		config = function() require('plugins.nvim_cmp') end,
 		dependencies = {
       'neovim/nvim-lspconfig',

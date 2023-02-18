@@ -115,12 +115,20 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	custom_on_publish_diagnostics, {})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+  vim.lsp.handlers.hover, 
+  {
+    border = "rounded",
+  }
+)
 
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
+  underline = false,
+  severity_sort = true,
   float = {
-    border = "single",
+    border = "rounded",
     format = function(diagnostic)
       return string.format(
         "%s (%s) [%s]",
