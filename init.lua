@@ -90,6 +90,6 @@ package.path = './lua/?.lua;' .. package.path
 -- async:send()
 
 require('keymaps.init')
-require("init")
 require('options')
+require("init")
 vim.opt.shadafile = ""

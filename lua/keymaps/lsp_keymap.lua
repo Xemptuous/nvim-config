@@ -7,7 +7,7 @@ k('n', '[d', d.goto_prev, opts)
 k('n', ']d', d.goto_next, opts)
 k('n', '<space>q', d.setloclist, opts)
 local on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     local bufopts = { noremap=true, silent=true, buffer=bufnr }
     -- k('n', 'gD', b.declaration, bufopts)
     -- k('n', 'gd', b.definition, bufopts)

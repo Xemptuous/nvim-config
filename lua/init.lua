@@ -18,17 +18,26 @@ require("lazy").setup({
     priority = 1000,
     config = function() require('impatient') end,
   },
+  {
+    'catppuccin/nvim',
+    enabled = true,
+    lazy = false,
+    priority = 900,
+    config = function() require('theme') end
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    enabled = false,
+    lazy = false,
+    priority = 900,
+    config = function() require('theme') end
+  },
 	{
 		'navarasu/onedark.nvim',
+    enabled = false,
     lazy = false,
     priority = 900,
 		config = function() require('theme') end,
-    -- dependencies = {'lukas-reineke/indent-blankline.nvim'}
-    -- dependencies = {
-    --   'nvim-lualine/lualine.nvim',
-    --   'lewis6991/gitsigns.nvim',
-    --   'lukas-reineke/indent-blankline.nvim',
-    -- }
 	},
 
   {
@@ -41,7 +50,7 @@ require("lazy").setup({
     'nvim-lualine/lualine.nvim',
     lazy = true,
     event = 'VeryLazy',
-    opts = { options = { theme = 'ayu_dark' } },
+    opts = { options = { theme = 'nightfly' } },
     -- dependencies = {'noice.nvim'},
   },
   {
@@ -131,7 +140,6 @@ require("lazy").setup({
 	{
     'windwp/nvim-autopairs',
     lazy = false,
-    -- keys = {'(', ')', '{', '}', '[', ']', '"', "'", '<', '>'},
     config = function() require('nvim-autopairs').setup {} end,
   },
 	{
@@ -140,14 +148,6 @@ require("lazy").setup({
     keys = {'gc', 'V'},
     config = function() require('Comment').setup() end,
 	},
-	-- { -- Greeter Dashboard
-	-- 	'goolord/alpha-nvim',
- --    name = 'alpha',
-	-- 	lazy = true,
-	-- 	cmd = {'Alpha', 'AlphaRedraw'},
- --    opts = { require('alpha.themes.dashboard').config },
-	-- 	-- config = function() require('plugins.alpha') end
-	-- },
 	{-- Text Highlighter
 		'RRethy/vim-illuminate',
     event = 'VeryLazy',
@@ -165,28 +165,11 @@ require("lazy").setup({
     end,
 		dependencies = 'nvim-lua/plenary.nvim',
 	},
-	{
-		'p00f/nvim-ts-rainbow',
-    enabled = false,
-    lazy = true,
-		config = function() require('plugins.nvim-ts-rainbow') end
-	},
-	{
-		'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-		config = function() require('plugins.treesitter') end,
-    dependencies = {'p00f/nvim-ts-rainbow'}
-	},
-	{
+	{ -- Treesitter playground
 		'nvim-treesitter/playground',
 		lazy = true,
-		cmd = {'TsPlaygroundToggle'},
+		cmd = {'TsPlaygroundToggle'}
 	},
-	-- { -- Treesitter playground
-	-- 	'nvim-treesitter/playground',
-	-- 	lazy = true,
-	-- 	cmd = {'TsPlaygroundToggle'}
-	-- }
 	-- 'p00f/nvim-ts-rainbow' -- Rainbow Brackets,
 	{
 		'Vimjas/vim-python-pep8-indent',
@@ -209,19 +192,6 @@ require("lazy").setup({
 		lazy = true,
 		cmd = 'SudaWrite'
 	},
-	-- 'rhysd/clever-f.vim' -- use of Ff and Tt without ;
-	-- {
-	-- 	'folke/noice.nvim',
-	-- 	dependencies = {
- --      'MunifTanjim/nui.nvim',
- --      -- {
- --      --   'rcarriga/nvim-notify',
- --      --   name = 'notify',
- --      --   opts = { background_colour="#000000" }
- --      -- }
- --    },
-	-- 	config = function() require('plugins.noice') end
-	-- },
 	{
 		'kristijanhusak/vim-dadbod-ui',
 		lazy = true,
@@ -251,12 +221,6 @@ require("lazy").setup({
     dependencies = {'williamboman/mason.nvim'}
   },
   {
-    'neovim/nvim-lspconfig',
-    event = 'VeryLazy',
-    config = function() require('lspconfig') end,
-    dependencies = {'glepnir/lspsaga.nvim'}
-  },
-  {
     'mhartington/formatter.nvim',
     lazy = true,
     cmd = {'Format', 'FormatWrite'},
@@ -268,41 +232,42 @@ require("lazy").setup({
 		config = function() require('mason-lspconfig').setup() end
 	},
 	{
-		'hrsh7th/cmp-nvim-lsp',
-    -- lazy = true,
-    -- event = "VeryLazy",
-		config = function()
-      require('keymaps.lsp_keymap')
-      require('plugins.nvim_lsp')
-    end,
-    -- dependencies = {
-    --   'neovim/nvim-lspconfig',
-    -- }
+		'p00f/nvim-ts-rainbow',
+    enabled = false,
+    lazy = true,
+		config = function() require('plugins.nvim-ts-rainbow') end
 	},
+	{
+		'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+		config = function() require('plugins.treesitter') end,
+	},
+	{
+		'nvim-treesitter/playground',
+		lazy = true,
+		cmd = {'TsPlaygroundToggle'},
+	},
+	{
+		'hrsh7th/cmp-nvim-lsp',
+		config = function() require('plugins.nvim_lsp') end,
+	},
+  {
+    'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
+    config = function() require('lspconfig') end,
+  },
 	{
 		'hrsh7th/nvim-cmp',
     lazy = true,
-    -- event = {"InsertEnter"},
     event = {"InsertEnter", "CmdlineEnter"},
 		config = function() require('plugins.nvim_cmp') end,
 		dependencies = {
-      'neovim/nvim-lspconfig',
-      'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-path',
 			'hrsh7th/cmp-cmdline',
 			'hrsh7th/cmp-nvim-lsp-signature-help',
 			'onsails/lspkind.nvim',
       "L3MON4D3/LuaSnip",
-      -- 'hrsh7th/cmp-vsnip',
-			-- 	dependencies = {'hrsh7th/vim-vsnip'}
-			-- {
-			-- 	'hrsh7th/cmp-vsnip',
-			-- 	dependencies = {'hrsh7th/vim-vsnip'}
-			-- }
 		},
 	},
 })
-	-- Removed/Disabled Plugins
-	-- Plug 'mg979/vim-visual-multi' -- multiple cursors
-	-- Plug 'kdheepak/lazygit.nvim' -- LazyGit,

@@ -1,11 +1,8 @@
 local opt = vim.opt
 local g = vim.g
--- Disabling builtin explorer
--- opt.shadafile = ""
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 vim.g.db_ui_use_nerd_fonts = 1
--- for highlight group enabling
 opt.termguicolors = true
 opt.ignorecase = true
 opt.ignorecase = true -- ignore search case-sensitivity
@@ -29,7 +26,6 @@ opt.ruler = true -- always show cursor position
 opt.splitbelow = true -- always split horizontal below
 opt.splitright = true -- always split vertical right
 opt.laststatus = 0 -- always show status line
--- vim.cmd("let g:db_ui_use_nerd_fonts = 1")
 
 -- Disable Newline Comment Continuation
 vim.cmd([[
