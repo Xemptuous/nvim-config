@@ -205,7 +205,7 @@ require("lazy").setup({
 	},
 	{ -- LSP, DAP, Linter, Formatter manager
 		'williamboman/mason.nvim',
-		config = function() require('mason').setup() end,
+		config = function() require('plugins.mason') end,
 	},
   {
     'mfussenegger/nvim-dap',
