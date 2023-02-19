@@ -1,6 +1,7 @@
 require('telescope').setup {
   pickers = {
     find_files = {
+      theme = "dropdown",
       mappings = {
         i = {
           ["<C-j>"] = "move_selection_next",

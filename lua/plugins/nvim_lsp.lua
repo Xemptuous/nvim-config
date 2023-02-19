@@ -9,11 +9,12 @@ end
 --   'bashls', 'clangd', 'cssls', 'html', 'jdtls', 
 --   'pyright', 'quick_lint_js', 'sqlls', 'vimls'
 -- }
-local servers = { 'bashls', 'clangd', 'html', 'pyright', 'sqlls' }
+local servers = { 'bashls', 'html', 'pyright', 'sqlls' }
 for _, server in pairs(servers) do
-  lsp[server].setup { on_attach = on_attach }
+  lsp[server].setup {}
 end
 
+lsp.clangd.setup { on_attach = on_attach }
 lsp.lua_ls.setup {
   settings = {
     Lua = {
@@ -22,7 +23,6 @@ lsp.lua_ls.setup {
       }
     }
   },
-  on_attach = on_attach
 }
 
 vim.diagnostic.config({

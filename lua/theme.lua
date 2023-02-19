@@ -82,6 +82,7 @@ vim.cmd.colorscheme 'catppuccin'
 -- 	}
 -- }
 -- require('onedark').load()
+
 -- local hl = vim.api.nvim_set_hl
 -- -- vim.cmd("colorscheme onedark_dark")
 -- hl(0, 'FloatBorder', {fg = '#4fa6ed'})
@@ -100,3 +101,13 @@ vim.cmd.colorscheme 'catppuccin'
 -- hl(0, 'CodewindowBorder', {fg = '#4fa6ed'})
 -- hl(0, 'CodewindowBackground', {fg = '#4fa6ed'})
 -- vim.api.nvim_command("redraw")
+
+
+-- Changing nvim-ts-rainbow first color
+-- vim.cmd [[hi rainbowcol1 guifg=#adadad]]
+-- vim.cmd [[hi rainbowcol2 guifg=#f0c837]]
+-- vim.cmd [[hi rainbowcol3 guifg=#bb60f7]]
+-- vim.cmd [[hi rainbowcol4 guifg=#359ff4]]
+-- vim.cmd [[hi rainbowcol5 guifg=#f0c837]]
+-- vim.cmd [[hi rainbowcol6 guifg=#bb60f7]]
+-- vim.cmd [[hi rainbowcol7 guifg=#359ff4]]

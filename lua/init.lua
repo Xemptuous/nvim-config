@@ -39,7 +39,13 @@ require("lazy").setup({
     priority = 900,
 		config = function() require('theme') end,
 	},
-
+  {
+    'glepnir/dashboard-nvim',
+    enabled = false,
+    event = 'VimEnter',
+    config = function() require('plugins.dashboard') end,
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
   {
     'lewis6991/gitsigns.nvim',
     lazy = true,
@@ -170,7 +176,6 @@ require("lazy").setup({
 		lazy = true,
 		cmd = {'TsPlaygroundToggle'}
 	},
-	-- 'p00f/nvim-ts-rainbow' -- Rainbow Brackets,
 	{
 		'Vimjas/vim-python-pep8-indent',
 		lazy = true,
@@ -232,15 +237,16 @@ require("lazy").setup({
 		config = function() require('mason-lspconfig').setup() end
 	},
 	{
-		'p00f/nvim-ts-rainbow',
-    enabled = false,
+		'mrjones2014/nvim-ts-rainbow',
+    enabled = true,
     lazy = true,
-		config = function() require('plugins.nvim-ts-rainbow') end
+		-- config = function() require('plugins.nvim-ts-rainbow') end
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
     lazy = false,
 		config = function() require('plugins.treesitter') end,
+    dependencies = {'mrjones2014/nvim-ts-rainbow'}
 	},
 	{
 		'nvim-treesitter/playground',
@@ -270,4 +276,12 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
 		},
 	},
-})
+  {
+    'xemptuous/sqlua.nvim'
+  }
+},
+  {
+  install = {
+      colorscheme = { 'catppuccin' }
+    }
+  })
