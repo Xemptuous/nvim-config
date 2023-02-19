@@ -9,7 +9,7 @@ end
 --   'bashls', 'clangd', 'cssls', 'html', 'jdtls', 
 --   'pyright', 'quick_lint_js', 'sqlls', 'vimls'
 -- }
-local servers = { 'bashls', 'html', 'pyright', 'sqlls' }
+local servers = { 'bashls', 'html', 'pyright', 'sqlls', 'vimls' }
 for _, server in pairs(servers) do
   lsp[server].setup {}
 end

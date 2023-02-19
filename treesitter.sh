@@ -37,3 +37,4 @@ mv "$old" "$new";
 chmod +x "$new"
 
 export PATH="$store_dir:$PATH"
+echo "Added tree-sitter to ~/.local/share/nvim/bin/. Make sure to add it to PATH"
