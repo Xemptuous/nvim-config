@@ -7,9 +7,9 @@ require("nvim-treesitter.configs").setup {
 	indent = {
 		enable = true
 	},
-	autotag = {
-		enable = true
-	},
+	-- autotag = {
+	-- 	enable = true
+	-- },
 	context_commentstring = {
 		enable = true,
 		enable_autocmd = false,
@@ -18,15 +18,15 @@ require("nvim-treesitter.configs").setup {
 		enable = true,
 		extended_mode = false,
 		max_file_lines = nil,
-		colors = {
-			'#adadad',
-			'#f0c837',
-			'#bb60f7',
-			'#359ff4',
-			'#ff4f4f',
-			'#359ff4',
-			'#bb60f7'
-		}
+		-- colors = {
+		-- 	'#adadad',
+		-- 	'#f0c837',
+		-- 	'#bb60f7',
+		-- 	'#359ff4',
+		-- 	'#ff4f4f',
+		-- 	'#359ff4',
+		-- 	'#bb60f7'
+		-- }
 	},
 	playground = {
 		enable = true,

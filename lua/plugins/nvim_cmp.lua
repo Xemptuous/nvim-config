@@ -1,15 +1,20 @@
 -- Completion Setup
 local lspkind = require('lspkind')
 require('cmp').setup {
-    sources = {
-        { name = 'nvim_lsp+signature_help' }
-    }
+  sources = {
+    { name = 'nvim_lsp+signature_help' },
+    { name = 'path' },
+    { name = 'nvim_lsp', keyword_length = 1 },
+    { name = 'luasnip', keyword_length = 2 },
+    { name = 'buffer', keyword_length = 3 },
+  }
 }
 local cmp = require('cmp')
 cmp.setup({
 	snippet = {
 			expand = function(args)
-				vim.fn["vsnip#anonymous"](args.body)
+      require('luasnip').lsp_expand(args.body)
+				-- vim.fn["vsnip#anonymous"](args.body)
 			end,
 	},
 	window = {
@@ -57,39 +62,46 @@ cmp.setup({
 	sources = cmp.config.sources(
 		{
 			{ name = 'nvim_lsp' },
-			{ name = 'vsnip' },
+			-- { name = 'vsnip' },
+      { name = 'luasnip' },
 		},
 		{
 			{ name = 'buffer' },
 		}
 	),
-	experimental = {
-		ghost_text = true
-	}
 })
 
 cmp.setup.filetype('TelescopePrompt', {
 	enable = false,
 })
 --
--- cmp.setup.filetype('gitcommit', {
---     sources = cmp.config.sources({
---       { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
---     }, {
---       { name = 'buffer' },
---     })
--- })
--- cmp.setup.cmdline('/', {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = {
---       { name = 'buffer' }
---     }
--- })
--- cmp.setup.cmdline(':', {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = cmp.config.sources({
---       { name = 'path' }
---     }, {
---       { name = 'cmdline' }
---     })
--- })
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources(
+    {
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    },
+    {
+      { name = 'buffer' },
+    })
+})
+cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+})
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+    {
+      { name = 'path' }
+    },
+    {
+      {
+        name = 'cmdline',
+        option = {
+          ignore_cmds = { 'Man', '!' }
+        }
+      }
+    })
+})
