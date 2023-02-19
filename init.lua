@@ -61,6 +61,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local handle = io.popen("echo $HOME")
+local home_dir = handle:read("*a")
+handle:close()
+os.execute(home_dir .. "/.config/nvim/treesitter.sh")
+
 vim.defer_fn(function()
   pcall(require, "impatient")
 end, 0)
