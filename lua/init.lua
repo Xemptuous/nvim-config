@@ -210,7 +210,7 @@ require("lazy").setup({
   {
     'mfussenegger/nvim-dap',
     lazy = true,
-    keys = {'<leader>d'},
+    keys = "<leader>d",
     cmd = {"DapToggleBreakpoint", "DapToggleRepl"},
     config = function() require('keymaps.dap') end,
     dependencies = {
@@ -221,7 +221,6 @@ require("lazy").setup({
   {
     'jay-babu/mason-nvim-dap.nvim',
     lazy = true,
-    keys = {'<leader>d'},
     config = function() require('plugins.mason-dap') end,
     dependencies = {'williamboman/mason.nvim'}
   },
@@ -276,6 +275,14 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
 		},
 	},
+  -- {
+  --   'yuratomo/w3m.vim',
+  --   enabled = false,
+  --   lazy = true,
+  --   cmd = {"W3m"},
+  --   keys = {"<leader>w"},
+  --   config = function() require('keymaps.w3m') end
+  -- },
   {
     'xemptuous/sqlua.nvim'
   }

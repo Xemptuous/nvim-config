@@ -14,6 +14,11 @@ require('legendary').setup({
         {'<leader>tC', ':Telescope command_history{}<CR>', description = 'Telescope Command History' },
         {'<leader>tc', ':Telescope colorscheme{}<CR>', description = 'Telescope Colorscheme' },
         {'<leader>tr', ':Telescope registers{}<CR>', description = 'Telescope Registers' },
+
+    --   itemgroup = 'W3m',
+    --   description = 'Text based web browser',
+    --   keymaps = {
+        -- {'<leader>wg', ':W3m google ', description = 'Telescope Registers' },
     --   }
     -- },
     -- {
@@ -24,8 +29,11 @@ require('legendary').setup({
         {'<F6>', "DapStepOver<CR>", description = "Debugger StepOver" },
         {'<F7>', "DapStepInto<CR>", description = "Debugger StepInto" },
         {'<F8>', "DapStepOut<CR>", description = "Debugger StepOut" },
-        {'<leader>db', "DapToggleBreakpoint<CR>", description = "Debugger Breakpoint Toggle" },
-        {'<leader>dr', "DapToggleReplCR>", description = "Debugger REPL Toggle" },
+        {'<leader>db', ":lua require('dap').toggle_breakpoint()<CR>", description = "Debugger Breakpoint Toggle" },
+        {'<leader>dr', ":lua require('dap').repl.open()<CR>", description = "Debugger REPL Toggle" },
+
+        -- {'<leader>db', "DapToggleBreakpoint<CR>", description = "Debugger Breakpoint Toggle" },
+        -- {'<leader>dr', "DapToggleReplCR>", description = "Debugger REPL Toggle" },
         {'<leader>dl', ":lua require('dap').run_last()<CR>", description = "Debugger Run Last" },
         {'<leader>dh', ":lua require('dap.ui.widgets').hover()<CR>", description = "Debugger Show Hover Info" },
         {'<leader>dp', ":lua require('dap.ui.widgets').preview()<CR>", description = "Debugger Show Preview" },

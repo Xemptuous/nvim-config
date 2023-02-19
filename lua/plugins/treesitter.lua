@@ -1,4 +1,18 @@
 require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "html",
+    "htmldjango",
+    "javascript",
+    "json",
+    "json5",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "vim"
+  },
 	highlight = {
 		enable = true,
 		use_languagetree = true,
