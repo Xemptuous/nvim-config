@@ -7,5 +7,7 @@ require("nvim-tree").setup({
       },
     },
   },
+  modified = {
+    enable = true,
+  },
 })
-

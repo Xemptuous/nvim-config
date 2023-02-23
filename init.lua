@@ -61,10 +61,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local handle = io.popen("echo $HOME")
-local home_dir = handle:read("*a")
-handle:close()
-os.execute(home_dir .. "/.config/nvim/treesitter.sh")
+-- local handle = io.popen("echo $HOME")
+-- local home_dir = handle:read("*a")
+-- handle:close()
+-- os.execute(home_dir .. "/.config/nvim/treesitter.sh")
 
 vim.defer_fn(function()
   pcall(require, "impatient")
@@ -93,6 +93,20 @@ package.path = './lua/?.lua;' .. package.path
 -- )
 --
 -- async:send()
+
+local function open_nvim_tree(data)
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  vim.cmd.enew()
+  vim.cmd.bw(data.buf)
+  vim.cmd.cd(data.file)
+  require("nvim-tree.api").tree.open()
+end
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 require('keymaps.init')
 require('options')

@@ -9,12 +9,16 @@ end
 --   'bashls', 'clangd', 'cssls', 'html', 'jdtls', 
 --   'pyright', 'quick_lint_js', 'sqlls', 'vimls'
 -- }
-local servers = { 'bashls', 'html', 'pyright', 'sqlls', 'vimls' }
-for _, server in pairs(servers) do
-  lsp[server].setup {}
-end
-
+-- local servers = { 'bashls', 'html', 'pyright', 'sqlls', 'vimls' }
+-- for _, server in pairs(servers) do
+--   lsp[server].setup {}
+-- end
+lsp.bashls.setup {}
 lsp.clangd.setup { on_attach = on_attach }
+lsp.html.setup {}
+lsp.pyright.setup {}
+lsp.sqlls.setup {}
+lsp.vimls.setup {}
 lsp.lua_ls.setup {
   settings = {
     Lua = {

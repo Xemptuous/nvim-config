@@ -93,8 +93,8 @@ require("lazy").setup({
   },
   {
     'glepnir/lspsaga.nvim',
-    lazy = true,
-    event = "BufRead",
+    lazy = false,
+    -- event = "BufRead",
     config = function() require('keymaps.lspsaga') end,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -110,8 +110,9 @@ require("lazy").setup({
 	{
 		'nvim-tree/nvim-tree.lua',
 		lazy = true,
-		cmd = {'NvimTreeToggle'},
-    keys = '<C-t>',
+    cmd = { "VimEnter" },
+		-- cmd = {'NvimTreeToggle'},
+  --   keys = '<C-t>',
 		config = function()
       require('keymaps.nvimtree')
       require('plugins.nvim-tree')
@@ -128,6 +129,7 @@ require("lazy").setup({
 	},
 	{
 		'akinsho/toggleterm.nvim',
+    enabled = false,
 		lazy = true,
 		cmd = {'ToggleTerm'},
     keys = {'<A-t>', '<A-v>'},
@@ -237,9 +239,9 @@ require("lazy").setup({
 	},
 	{
 		'mrjones2014/nvim-ts-rainbow',
-    enabled = true,
+    enabled = false,
     lazy = true,
-		-- config = function() require('plugins.nvim-ts-rainbow') end
+		config = function() require('plugins.nvim-ts-rainbow') end
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -258,6 +260,7 @@ require("lazy").setup({
 	},
   {
     'neovim/nvim-lspconfig',
+    lazy = true,
     event = 'VeryLazy',
     config = function() require('lspconfig') end,
   },

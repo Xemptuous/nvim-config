@@ -35,3 +35,4 @@ vim.cmd([[
 vim.cmd [[highlight CursorLineNr guifg=#4fa6ed gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
 vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
+
