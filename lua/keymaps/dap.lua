@@ -1,6 +1,6 @@
 local dap = require('dap')
 local widgets = require('dap.ui.widgets')
-local k = vim.keymap.set
+local k = vim.api.nvim_set_keymap
 k('n', '<F5>', function() dap.continue() end)
 k('n', '<F6>', function() dap.step_over() end)
 k('n', '<F7>', function() dap.step_into() end)

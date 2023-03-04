@@ -1,4 +1,4 @@
-local k = vim.keymap.set
+local k = vim.api.nvim_set_keymap
 k('t', '<A-t>', [[exit<CR>]])
 k('t', '<A-v>', [[exit<CR>]])
 k('t', '2<A-t>', [[<C-\><C-N>:ToggleTermToggleAll<CR>]])
@@ -14,4 +14,4 @@ function _G.set_terminal_keymaps()
     k('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
     k('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 end
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

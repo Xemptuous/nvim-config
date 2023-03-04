@@ -287,7 +287,8 @@ require("lazy").setup({
   --   config = function() require('keymaps.w3m') end
   -- },
   {
-    'xemptuous/sqlua.nvim'
+    'xemptuous/sqlua.nvim',
+    config = function() require('sqlua').setup() end
   }
 },
   {

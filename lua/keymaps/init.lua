@@ -1,20 +1,20 @@
-local k = vim.keymap.set
-k('n', '<CR>', [[o<Esc>]], {})
-k('n', '<TAB>', [[:bnext<CR>]], {})
-k('n', '<S-TAB>', [[:bprevious<CR>]], {})
+local k = vim.api.nvim_set_keymap
+k('n', '<CR>', [[o<Esc>]], {noremap = true})
+k('n', '<TAB>', [[:bnext<CR>]], {noremap = true})
+k('n', '<S-TAB>', [[:bprevious<CR>]], {noremap = true})
 
-k('n', '<C-c>', [[<Esc>]], {})
-k('i', 'jk', [[<Esc>]], {})
-k('i', 'kj', [[<Esc>]], {})
-k('v', 'q', [[<Esc>]], {})
+k('n', '<C-c>', [[<Esc>]], {noremap = true})
+k('i', 'jk', [[<Esc>]], {noremap = true})
+k('i', 'kj', [[<Esc>]], {noremap = true})
+k('v', 'q', [[<Esc>]], {noremap = true})
 
-k('n', '<C-h>', [[<C-w>h]], {})
-k('n', '<C-j>', [[<C-w>j]], {})
-k('n', '<C-k>', [[<C-w>k]], {})
-k('n', '<C-l>', [[<C-w>l]], {})
+k('n', '<C-h>', [[<C-w>h]], {noremap = true})
+k('n', '<C-j>', [[<C-w>j]], {noremap = true})
+k('n', '<C-k>', [[<C-w>k]], {noremap = true})
+k('n', '<C-l>', [[<C-w>l]], {noremap = true})
 
-k('v', '<', [[<gv]], {})
-k('v', '>', [[>gv]], {})
+k('v', '<', [[<gv]], {noremap = true})
+k('v', '>', [[>gv]], {noremap = true})
 
-k('n', 'x', [["_x]], {})
-k('n', 'X', [["_X]], {})
+k('n', 'x', [["_x]], {noremap = true})
+k('n', 'X', [["_X]], {noremap = true})

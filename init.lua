@@ -94,6 +94,7 @@ package.path = './lua/?.lua;' .. package.path
 --
 -- async:send()
 
+-- open nvimtree on dir open
 local function open_nvim_tree(data)
   local directory = vim.fn.isdirectory(data.file) == 1
 

@@ -13,5 +13,14 @@ require('telescope').setup {
         },
       },
     },
+    help_tags = {
+      theme = "dropdown"
+    },
+    live_grep = {
+      theme = "dropdown"
+    },
+    buffers = {
+      theme = "dropdown"
+    },
   },
 }

@@ -1,4 +1,4 @@
-local k = vim.keymap.set
+local k = vim.api.nvim_set_keymap
 local d = vim.diagnostic
 local b = vim.lsp.buf
 local opts = { noremap=true, silent=true }

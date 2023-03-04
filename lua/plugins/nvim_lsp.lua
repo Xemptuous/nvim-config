@@ -22,6 +22,9 @@ lsp.vimls.setup {}
 lsp.lua_ls.setup {
   settings = {
     Lua = {
+      -- runtime = { version = "LuaJIT" },
+      -- workspace = { library = vim.api.nvim_get_runtime_file("lua", true) },
+      -- telemetry = { enable = false },
       diagnostics = {
         globals = {'vim'}
       }
