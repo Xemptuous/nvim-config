@@ -3,8 +3,7 @@ if not vim.loop.fs_stat(lazypath) then
   print('Lazy not found. Cloning repo...')
   vim.fn.system({
     "git",
-    "clone",
-    "--filter=blob:none",
+    "clone", "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable", -- latest stable release
     lazypath,
@@ -48,6 +47,7 @@ require("lazy").setup({
   },
   {
     'lewis6991/gitsigns.nvim',
+    enabled = false,
     lazy = true,
     event = "VeryLazy",
     config = function() require('gitsigns').setup() end,
@@ -61,7 +61,7 @@ require("lazy").setup({
   },
   {
     'zbirenbaum/neodim',
-    -- enabled = false,
+    enabled = false,
     lazy = true,
     event = 'VeryLazy',
     config = function() require('plugins.neodim') end,
@@ -69,8 +69,8 @@ require("lazy").setup({
   },
 	{
 		'lukas-reineke/indent-blankline.nvim',
-    -- enabled = false,
-    lazy = true,
+    enabled = false,
+    -- lazy = true,
     event = 'VeryLazy',
 		config = function() require('plugins.indent_blankline') end,
     dependencies = {'nvim-treesitter/nvim-treesitter'}
@@ -86,15 +86,18 @@ require("lazy").setup({
 	},
   {
     'mrjones2014/legendary.nvim',
+    enabled = false,
     event = 'VeryLazy',
     config = function() require('plugins.legendary') end
   },
   {
     'stevearc/dressing.nvim',
+    enabled = false,
     config = function() require('plugins.dressing') end
   },
   {
     'glepnir/lspsaga.nvim',
+    enabled = false,
     lazy = true,
     event = "BufRead",
     config = function() require('keymaps.lspsaga') end,
@@ -105,6 +108,7 @@ require("lazy").setup({
   },
 	{
 		'norcalli/nvim-colorizer.lua',
+    enabled = false,
     -- lazy = true,
     event = 'VeryLazy',
     config = function() require('colorizer').setup() end,
@@ -131,7 +135,7 @@ require("lazy").setup({
 	},
 	{
 		'akinsho/toggleterm.nvim',
-    enabled = false,
+    -- enabled = false,
 		lazy = true,
 		cmd = {'ToggleTerm'},
     keys = {'<A-t>', '<A-v>'},
@@ -165,6 +169,7 @@ require("lazy").setup({
 	},
 	{
     'nvim-telescope/telescope.nvim',
+    enabled = false,
     lazy = true,
     cmd = 'Telescope',
     keys = '<leader>t',
@@ -177,7 +182,7 @@ require("lazy").setup({
 	},
 	{ -- Treesitter playground
 		'nvim-treesitter/playground',
-    -- enabled = false,
+    enabled = false,
 		lazy = true,
 		cmd = {'TsPlaygroundToggle'}
 	},
@@ -188,6 +193,7 @@ require("lazy").setup({
 	},
 	{ -- Minimap Sidebar
 		'gorbit99/codewindow.nvim',
+    enabled = false,
 		lazy = true,
 		keys = '<leader>mm',
 		config = function() require('plugins.codewindow') end
@@ -204,16 +210,19 @@ require("lazy").setup({
 	},
 	{
 		'kristijanhusak/vim-dadbod-ui',
+    enabled = false,
 		lazy = true,
 		cmd = 'DBUI',
 		dependencies = {'tpope/vim-dadbod'}
 	},
 	{ -- LSP, DAP, Linter, Formatter manager
 		'williamboman/mason.nvim',
+    enabled = false,
 		config = function() require('plugins.mason') end,
 	},
   {
     'mfussenegger/nvim-dap',
+    enabled = false,
     lazy = true,
     keys = "<leader>d",
     cmd = {"DapToggleBreakpoint", "DapToggleRepl"},
@@ -225,18 +234,21 @@ require("lazy").setup({
   },
   {
     'jay-babu/mason-nvim-dap.nvim',
+    enabled = false,
     lazy = true,
     config = function() require('plugins.mason-dap') end,
     dependencies = {'williamboman/mason.nvim'}
   },
   {
     'mhartington/formatter.nvim',
+    enabled = false,
     lazy = true,
     cmd = {'Format', 'FormatWrite'},
     config = function() require('plugins.formatter') end,
   },
 	{
 		'williamboman/mason-lspconfig.nvim',
+    enabled = false,
 		lazy = true,
 		config = function() require('mason-lspconfig').setup() end
 	},
@@ -248,28 +260,30 @@ require("lazy").setup({
 	},
 	{
 		'nvim-treesitter/nvim-treesitter',
-    -- enabled = false,
+    enabled = false,
     lazy = false,
 		config = function() require('plugins.treesitter') end,
     dependencies = {'mrjones2014/nvim-ts-rainbow'}
 	},
 	{
 		'nvim-treesitter/playground',
+    enabled = false,
 		lazy = true,
 		cmd = {'TsPlaygroundToggle'},
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
-		config = function() require('plugins.nvim_lsp') end,
+    enabled = false,
+		config = function() require('plugins.simplelsp') end,
 	},
   {
     'neovim/nvim-lspconfig',
+    enabled = false,
     lazy = true,
-    event = 'VeryLazy',
-    config = function() require('lspconfig') end,
   },
 	{
 		'hrsh7th/nvim-cmp',
+    enabled = false,
     lazy = true,
     event = {"InsertEnter", "CmdlineEnter"},
 		config = function() require('plugins.nvim_cmp') end,
@@ -292,6 +306,7 @@ require("lazy").setup({
   -- },
   {
     'xemptuous/sqlua.nvim',
+    enabled = false,
     config = function() require('sqlua').setup() end
   }
 },

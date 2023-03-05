@@ -19,8 +19,8 @@ k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
 k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
 k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
 
-k("n", "<space>v", "<cmd>Lspsaga show_line_diagnostics<, {}CR>", {})
-k("n", "<space>e", "<cmd>Lspsaga show_cursor_diagnostics<C, {}R>", {})
+k("n", "<space>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
+k("n", "<space>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
 k("n", "<space>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
 
 

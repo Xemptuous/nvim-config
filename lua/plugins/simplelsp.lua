@@ -8,8 +8,8 @@ end
 
 local types = {
   bash = lsp.bashls.setup {},
-  c = lsp.clangd.setup { on_attach = on_attach },
-  cpp = lsp.clangd.setup { on_attach = on_attach },
+  c = lsp.clangd.setup {},
+  cpp = lsp.clangd.setup {},
   -- c = lsp.clangd.setup {},
   -- cpp = lsp.clangd.setup {},
   html = lsp.html.setup {},

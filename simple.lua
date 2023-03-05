@@ -1,3 +1,39 @@
+local g = vim.g
+local default_plugins = {
+  "tutor",
+  "2html_plugin",
+  "getscript",
+  "getscriptPlugin",
+  "gzip",
+  "logipat",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "matchit",
+  "tar",
+  "tarPlugin",
+  "rrhelper",
+  "spellfile_plugin",
+  "vimball",
+  "vimballPlugin",
+  "zip",
+  "zipPlugin",
+  "rplugin",
+  "tohtml",
+  "zipPlugin",
+  "syntax",
+  "synmenu",
+  "optwin",
+  "compiler",
+  "bugreport",
+  "ftplugin",
+}
+
+for _, plugin in pairs(default_plugins) do
+  g["loaded_" .. plugin] = 1
+end
+
 -- keymaps
 local k = vim.api.nvim_set_keymap
 k('n', '<CR>', [[o<Esc>]], {noremap = true})
@@ -56,3 +92,6 @@ vim.cmd([[
 ]])
 
 vim.cmd.colorscheme "catppuccin_mocha"
+
+package.path = './lua/?.lua;' .. package.path
+require("simpleinit")
