@@ -1,6 +1,6 @@
-local k = vim.api.nvim_set_keymap
+local k = vim.keymap.set
 local builtin = require('telescope.builtin')
-k('n', '<leader>tf', builtin.find_files, {})
+k('n', '<leader>tf', builtin.find_files)
 k('n', '<leader>tg', builtin.live_grep, {})
 k('n', '<leader>tb', builtin.buffers, {})
 k('n', '<leader>th', builtin.help_tags, {})

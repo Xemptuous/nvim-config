@@ -2,6 +2,9 @@ require("lspsaga").setup({
   ui = {
     title = false,
     border = "rounded"
+  },
+  lightbulb = {
+    enable = false,
   }
 })
 local k = vim.api.nvim_set_keymap
