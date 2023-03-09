@@ -91,7 +91,7 @@ vim.cmd([[
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 ]])
 
-vim.cmd.colorscheme "catppuccin_mocha"
+-- vim.cmd.colorscheme "catppuccin_mocha"
 
 package.path = './lua/?.lua;' .. package.path
 require("simpleinit")
