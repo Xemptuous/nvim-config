@@ -18,3 +18,6 @@ k('v', '>', [[>gv]], {noremap = true})
 
 k('n', 'x', [["_x]], {noremap = true})
 k('n', 'X', [["_X]], {noremap = true})
+
+-- Fix for Xterm
+k('i', "<S-{>", '{', {noremap = false})
