@@ -252,18 +252,17 @@ require("lazy").setup({
 		lazy = true,
 		config = function() require('mason-lspconfig').setup() end
 	},
-	{
-		'mrjones2014/nvim-ts-rainbow',
-    enabled = false,
+  {
+    "HiPhish/nvim-ts-rainbow2",
     lazy = true,
-		config = function() require('plugins.nvim-ts-rainbow') end
-	},
+    dependencies = {'nvim-treesitter/nvim-treesitter'}
+  },
 	{
 		'nvim-treesitter/nvim-treesitter',
     enabled = false,
     lazy = false,
 		config = function() require('plugins.treesitter') end,
-    dependencies = {'mrjones2014/nvim-ts-rainbow'}
+    dependencies = {'HiPhish/nvim-ts-rainbow2'}
 	},
 	{
 		'nvim-treesitter/playground',

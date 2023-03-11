@@ -13,16 +13,6 @@ require('catppuccin').setup({
   styles = {
     comments = { "italic" },
     conditionals = { "italic" },
-    -- loops = {},
-    -- functions = {},
-    -- keywords = {},
-    -- strings = {},
-    -- variables = {},
-    -- numbers = {},
-    -- booleans = {},
-    -- properties = {},
-    -- types = {},
-    -- operators = {},
   },
   color_overrides = {},
   custom_highlights = {},
@@ -31,8 +21,6 @@ require('catppuccin').setup({
     gitsigns = true,
     nvimtree = true,
     telescope = true,
-    -- notify = false,
-    -- mini = false,
   },
 })
 vim.cmd.colorscheme 'catppuccin'
