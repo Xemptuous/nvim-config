@@ -27,49 +27,19 @@ local types = {
     },
   }
 }
--- local servers = {
---   'bashls', 'clangd', 'cssls', 'html', 'jdtls', 
---   'pyright', 'quick_lint_js', 'sqlls', 'vimls'
--- }
--- local servers = { 'bashls', 'html', 'pyright', 'sqlls', 'vimls' }
--- for _, server in pairs(servers) do
---   lsp[server].setup {}
--- end
-
 -- load only needed LSP's
 local type = vim.bo.filetype
 local _ = types[type]
-
--- lsp.bashls.setup {}
--- lsp.clangd.setup { on_attach = on_attach }
--- lsp.html.setup {}
--- lsp.pyright.setup {}
--- lsp.sqlls.setup {}
--- lsp.vimls.setup {}
--- lsp.lua_ls.setup {
---   settings = {
---     Lua = {
---       diagnostics = {
---         globals = {'vim'}
---       }
---     }
---   },
--- }
-
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
   underline = false,
   severity_sort = true,
-  -- float = {
-  --   border = "rounded",
-  --   format = function(diagnostic)
-  --     return string.format(
-  --       "%s (%s) [%s]",
-  --       diagnostic.message,
-  --       diagnostic.source,
-  --       diagnostic.code or diagnostic.user_data.lsp.code
-  --     )
-  --   end,
-  -- },
+  update_in_insert = false
 })
+--
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--     update_in_insert = false
+--   }
+-- )

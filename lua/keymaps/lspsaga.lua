@@ -5,6 +5,9 @@ require("lspsaga").setup({
   },
   lightbulb = {
     enable = false,
+  },
+  diagnostic = {
+    on_insert = false,
   }
 })
 local k = vim.api.nvim_set_keymap
