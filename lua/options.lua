@@ -28,9 +28,17 @@ opt.splitright = true -- always split vertical right
 opt.laststatus = 0 -- always show status line
 
 -- Disable Newline Comment Continuation
-vim.cmd([[
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-]])
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = "*",
+  command = "setlocal formatoptions-=c formatoptions-=r formatoptions -=o"
+})
+
+-- Highlight xrdb as xdefaults
+vim.api.nvim_create_autocmd({'FileType', 'BufNewFile', 'BufEnter'}, {
+  desc = 'Format xrdb files as xdefaults',
+  pattern = '*.xrdb',
+  command = "setfiletype xdefaults"
+})
 
 -- vim.cmd [[highlight CursorLineNr guifg=#4fa6ed gui=nocombine]]
 -- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
