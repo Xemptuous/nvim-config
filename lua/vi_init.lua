@@ -19,15 +19,16 @@ require("lazy").setup({
   },
   {
     "nyoom-engineering/oxocarbon.nvim",
+    enabled = false,
     priority = 900,
-    config = function() 
+    config = function()
       vim.opt.background = "dark"
       vim.cmd.colorscheme "oxocarbon"
     end
   },
   {
     'catppuccin/nvim',
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 900,
     config = function() require('theme') end

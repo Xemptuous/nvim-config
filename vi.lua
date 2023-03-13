@@ -55,6 +55,7 @@ k('v', '>', [[>gv]], {noremap = true})
 
 k('n', 'x', [["_x]], {noremap = true})
 k('n', 'X', [["_X]], {noremap = true})
+k('i', '<S-{>', '{', {noremap = false})
 
 -- options
 local opt = vim.opt
@@ -87,11 +88,17 @@ opt.splitright = true -- always split vertical right
 opt.laststatus = 0 -- always show status line
 
 -- Disable Newline Comment Continuation
-vim.cmd([[
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-]])
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = "*",
+  command = "setlocal formatoptions-=c formatoptions-=r formatoptions -=o"
+})
 
--- vim.cmd.colorscheme "catppuccin_mocha"
+-- Highlight xrdb as xdefaults
+vim.api.nvim_create_autocmd({'FileType', 'BufNewFile', 'BufEnter'}, {
+  desc = 'Format xrdb files as xdefaults',
+  pattern = '*.xrdb',
+  command = "setfiletype xdefaults"
+})
 
 package.path = './lua/?.lua;' .. package.path
 require("vi_init")
