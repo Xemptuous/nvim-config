@@ -28,8 +28,10 @@ local function scandir(directory)
     return t
 end
 
+local lsp_folder = vim.fn.stdpath("data").."/lsp_servers/"
 os.execute("mkdir -p "..lsp_folder)
 local dirs = scandir(lsp_folder)
+
 local function isInstalled(lsp)
   for _, dir in pairs(dirs) do
     if dir == lsp then
@@ -39,9 +41,8 @@ local function isInstalled(lsp)
   return false
 end
 
-local lsp_folder = vim.fn.stdpath("data").."/lsp_servers/"
-for _, lsp in pairs(lsps) do
-  if not isInstalled(lsp) then
+for key, lsp in pairs(lsps) do
+  if not isInstalled(key) then
     vim.cmd(':MasonInstall '..lsp)
   end
 end
