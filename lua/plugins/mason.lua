@@ -6,16 +6,19 @@ ms.setup({
 })
 
 local lsps = {
-  bashls = 'bash-language-server',
-  clangd = 'clangd',
-  cssls = 'css-lsp',
-  html = 'html-lsp',
-  jdtls = 'jdtls',
-  sumneko_lua = 'lua-language-server',
-  pyright = 'pyright',
-  quick_lint_js = 'quick-lint-js',
-  vimls = 'vim-language-server'
+  'bash-language-server',
+  'clangd',
+  'css-lsp',
+  'debugpy',
+  'html-lsp',
+  'jdtls',
+  'lua-language-server',
+  'pyright',
+  'quick-lint-js',
+  'sqlls',
+  'vim-language-server',
 }
+
 
 local function scandir(directory)
     local i, t, popen = 0, {}, io.popen
@@ -28,9 +31,11 @@ local function scandir(directory)
     return t
 end
 
-local lsp_folder = vim.fn.stdpath("data").."/lsp_servers/"
+
+local lsp_folder = vim.fn.stdpath("data").."/mason/packages"
 os.execute("mkdir -p "..lsp_folder)
 local dirs = scandir(lsp_folder)
+
 
 local function isInstalled(lsp)
   for _, dir in pairs(dirs) do
@@ -41,8 +46,9 @@ local function isInstalled(lsp)
   return false
 end
 
-for key, lsp in pairs(lsps) do
-  if not isInstalled(key) then
+
+for _, lsp in pairs(lsps) do
+  if not isInstalled(lsp) then
     vim.cmd(':MasonInstall '..lsp)
   end
 end
