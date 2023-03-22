@@ -1,11 +1,10 @@
 -- require("mason").setup()
 -- require("mason-lspconfig").setup()
--- local on_attach = require('../keymaps.lsp_keymap')
-local lsp = require('lspconfig')
-local on_attach = function(client, bufnr)
-  client.server_capabilities.semanticTokensProvider = nil
-end
+-- local on_attach = function(client, bufnr)
+--   client.server_capabilities.semanticTokensProvider = nil
+-- end
 
+local lsp = require('lspconfig')
 local types = {
   bash = lsp.bashls.setup {},
   c = lsp.clangd.setup {},
@@ -27,9 +26,11 @@ local types = {
     },
   }
 }
+
 -- load only needed LSP's
 local type = vim.bo.filetype
 local _ = types[type]
+
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,

@@ -61,7 +61,6 @@ require("lazy").setup({
   },
   {
     'zbirenbaum/neodim',
-    -- enabled = false,
     lazy = true,
     event = 'VeryLazy',
     config = function() require('plugins.neodim') end,
@@ -69,7 +68,6 @@ require("lazy").setup({
   },
 	{
 		'lukas-reineke/indent-blankline.nvim',
-    -- enabled = false,
     lazy = true,
     event = 'VeryLazy',
 		config = function() require('plugins.indent_blankline') end,
@@ -105,8 +103,6 @@ require("lazy").setup({
   },
 	{
 		'norcalli/nvim-colorizer.lua',
-    -- lazy = true,
-    -- event = 'VeryLazy',
     config = function() require('colorizer').setup() end,
 	},
 	{
@@ -161,23 +157,22 @@ require("lazy").setup({
 	{-- Text Highlighter
 		'RRethy/vim-illuminate',
     event = 'VeryLazy',
-		config = function() require('plugins.illuminate') end
+		config = function() require('plugins.illuminate') end,
 	},
 	{
     'nvim-telescope/telescope.nvim',
     lazy = true,
     cmd = 'Telescope',
     keys = '<leader>t',
-    -- init = function() require('keymaps.telescope') end,
 		config = function()
       require('keymaps.telescope')
       require('plugins.telescope')
     end,
 		dependencies = 'nvim-lua/plenary.nvim',
 	},
-	{ -- Treesitter playground
+	{
 		'nvim-treesitter/playground',
-    -- enabled = false,
+    enabled = false,
 		lazy = true,
 		cmd = {'TsPlaygroundToggle'}
 	},
@@ -250,16 +245,19 @@ require("lazy").setup({
     -- enabled = false,
     lazy = false,
 		config = function() require('plugins.treesitter') end,
-    dependencies = {'HiPhish/nvim-ts-rainbow2'}
+    dependencies = { 'HiPhish/nvim-ts-rainbow2' }
 	},
 	{
 		'nvim-treesitter/playground',
+    enabled = false,
 		lazy = true,
 		cmd = {'TsPlaygroundToggle'},
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
+    enabled = true,
 		config = function() require('plugins.nvim_lsp') end,
+    dependencies = {'RRethy/vim-illuminate'}
 	},
   {
     'neovim/nvim-lspconfig',

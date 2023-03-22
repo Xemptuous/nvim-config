@@ -15,7 +15,12 @@ require('catppuccin').setup({
     conditionals = { "italic" },
   },
   color_overrides = {},
-  custom_highlights = {},
+  custom_highlights = {
+    -- vim.cmd('hi def IlluminatedWordText gui=underline')
+    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#45475a", underline = true }),
+    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#45475a", underline = true }),
+    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#45475a", underline = true })
+  },
   integrations = {
     cmp = true,
     gitsigns = true,
@@ -24,6 +29,7 @@ require('catppuccin').setup({
   },
 })
 vim.cmd.colorscheme 'catppuccin'
+
 -- require('kanagawa').setup({
 --     undercurl = true,           -- enable undercurls
 --     commentStyle = { italic = true },
