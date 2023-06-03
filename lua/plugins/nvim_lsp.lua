@@ -12,6 +12,7 @@ local types = {
   cpp = lsp.clangd.setup {},
   -- c = lsp.clangd.setup {},
   -- cpp = lsp.clangd.setup {},
+  java = lsp.jdtls.setup {},
   html = lsp.html.setup {},
   htmldjango = lsp.html.setup {},
   python = lsp.pyright.setup {},
