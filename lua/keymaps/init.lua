@@ -21,3 +21,4 @@ k('n', 'X', [["_X]], {noremap = true})
 
 -- Fix for Xterm
 k('i', "<S-{>", '{', {noremap = false})
+k('i', "<S-}>", '}', {noremap = false})

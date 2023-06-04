@@ -17,9 +17,12 @@ require('catppuccin').setup({
   color_overrides = {},
   custom_highlights = {
     -- vim.cmd('hi def IlluminatedWordText gui=underline')
-    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#45475a", underline = true }),
-    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#45475a", underline = true }),
-    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#45475a", underline = true })
+    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#1e1e2e", underline = true }),
+    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#1e1e2e", underline = true }),
+    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#1e1e2e", underline = true })
+    -- vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#313244", underline = true }),
+    -- vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#313244", underline = true }),
+    -- vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#313244", underline = true })
   },
   integrations = {
     cmp = true,

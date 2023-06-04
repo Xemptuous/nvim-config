@@ -1,7 +1,6 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  print('Lazy not found. Cloning repo...')
-  vim.fn.system({
+  print('Lazy not found. Cloning repo...') vim.fn.system({
     "git",
     "clone",
     "--filter=blob:none",
@@ -207,23 +206,23 @@ require("lazy").setup({
 		'williamboman/mason.nvim',
 		config = function() require('plugins.mason') end,
 	},
-  {
-    'mfussenegger/nvim-dap',
-    lazy = true,
-    keys = "<leader>d",
-    cmd = {"DapToggleBreakpoint", "DapToggleRepl"},
-    config = function() require('keymaps.dap') end,
-    dependencies = {
-      'jay-babu/mason-nvim-dap.nvim',
-      'williamboman/mason.nvim'
-    }
-  },
-  {
-    'jay-babu/mason-nvim-dap.nvim',
-    lazy = true,
-    config = function() require('plugins.mason-dap') end,
-    dependencies = {'williamboman/mason.nvim'}
-  },
+  -- {
+  --   'mfussenegger/nvim-dap',
+  --   lazy = true,
+  --   keys = "<leader>d",
+  --   cmd = {"DapToggleBreakpoint", "DapToggleRepl"},
+  --   config = function() require('keymaps.dap') end,
+  --   dependencies = {
+  --     'jay-babu/mason-nvim-dap.nvim',
+  --     'williamboman/mason.nvim'
+  --   }
+  -- },
+  -- {
+  --   'jay-babu/mason-nvim-dap.nvim',
+  --   lazy = true,
+  --   config = function() require('plugins.mason-dap') end,
+  --   dependencies = {'williamboman/mason.nvim'}
+  -- },
   {
     'mhartington/formatter.nvim',
     lazy = true,
@@ -265,6 +264,48 @@ require("lazy").setup({
     event = 'VeryLazy',
     config = function() require('lspconfig') end,
   },
+  {
+    'simrat39/rust-tools.nvim',
+    config = function()
+      local function on_attach(client, buffer) end
+      local opts = {
+        tools = {
+          runnables = {
+            use_telescope = true,
+          },
+          inlay_hints = {
+            auto = true,
+            show_parameter_hints = false,
+            parameter_hints_prefix = "",
+            other_hints_prefix = "",
+          },
+        },
+        server = {
+          on_attach = on_attach,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy",
+              },
+            },
+          },
+        },
+      }
+      require("rust-tools").setup(opts)
+
+    --   local rt = require("rust-tools")
+    --   rt.setup({
+    --     server = {
+    --       on_attach = function(_, bufnr)
+    --         -- Hover actions
+    --         vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+    --         -- Code action groups
+    --         vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    --       end,
+    --     },
+    --   })
+    end
+  },
 	{
 		'hrsh7th/nvim-cmp',
     lazy = true,
@@ -279,6 +320,11 @@ require("lazy").setup({
       "L3MON4D3/LuaSnip",
 		},
 	},
+  {
+    "ellisonleao/glow.nvim",
+    config = function() require('glow').setup({ border = 'single' }) end,
+    cmd = "Glow"
+  },
   -- {
   --   'yuratomo/w3m.vim',
   --   enabled = false,
