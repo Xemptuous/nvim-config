@@ -256,8 +256,11 @@ require("lazy").setup({
 		'hrsh7th/cmp-nvim-lsp',
     enabled = true,
 		config = function() require('plugins.nvim_lsp') end,
-    dependencies = {'RRethy/vim-illuminate'}
+    dependencies = {'RRethy/vim-illuminate', 'simrat39/rust-tools.nvim'}
 	},
+  {
+    'simrat39/rust-tools.nvim',
+  },
   {
     'neovim/nvim-lspconfig',
     lazy = true,
