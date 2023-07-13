@@ -1,19 +1,19 @@
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cpp",
-    "html",
-    "htmldjango",
-    "javascript",
-    "json",
-    "json5",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "vim"
-  },
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"bash",
+		"c",
+		"cpp",
+		"html",
+		"htmldjango",
+		"javascript",
+		"json",
+		"json5",
+		"lua",
+		"markdown",
+		"markdown_inline",
+		"python",
+		"vim",
+	},
 	highlight = {
 		enable = true,
 		use_languagetree = true,
@@ -21,7 +21,7 @@ require("nvim-treesitter.configs").setup {
 	},
 	indent = {
 		enable = true,
-    disable = {"python"}
+		disable = { "python" },
 	},
 	context_commentstring = {
 		enable = true,
@@ -29,23 +29,23 @@ require("nvim-treesitter.configs").setup {
 	},
 	rainbow = {
 		enable = true,
-    query = {
-      'rainbow-parens',
-      html = 'rainbow-tags'
-    },
-    strategy = require 'ts-rainbow.strategy.global',
-    hlgroups = {
-      "TSRainbowYellow",
-      "TSRainbowBlue",
-      "TSRainbowRed",
-      "TSRainbowGreen",
-      "TSRainbowOrange",
-      "TSRainbowViolet",
-      "TSRainbowCyan",
-    },
+		query = {
+			"rainbow-parens",
+			html = "rainbow-tags",
+		},
+		strategy = require("ts-rainbow.strategy.global"),
+		hlgroups = {
+			"TSRainbowYellow",
+			"TSRainbowBlue",
+			"TSRainbowRed",
+			"TSRainbowGreen",
+			"TSRainbowOrange",
+			"TSRainbowViolet",
+			"TSRainbowCyan",
+		},
 	},
-}
-vim.api.nvim_set_hl(0, "MatchParen", {fg= "#cdd6f4", bg = "#45475a"})
+})
+vim.api.nvim_set_hl(0, "MatchParen", { fg = "#cdd6f4", bg = "#45475a" })
 -- vim.api.nvim_set_hl(0, "TSRainbowRed", {fg = "#f38ba8"})
 -- vim.api.nvim_set_hl(0, "TSRainbowOrange", {fg = "#fab387"})
 -- vim.api.nvim_set_hl(0, "TSRainbowYellow", {fg = "#f9e2af"})

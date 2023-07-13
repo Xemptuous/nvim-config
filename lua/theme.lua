@@ -1,37 +1,37 @@
-require('catppuccin').setup({
-  flavour = "mocha",
-   background = { -- :h background
-    light = "mocha",
-    dark = "mocha",
-  },
-  transparent_background = false,
-  dim_inactive = {
-    enabled = true,
-    shade = "dark",
-    percentage = 0.15,
-  },
-  styles = {
-    comments = { "italic" },
-    conditionals = { "italic" },
-  },
-  color_overrides = {},
-  custom_highlights = {
-    -- vim.cmd('hi def IlluminatedWordText gui=underline')
-    vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#1e1e2e", underline = true }),
-    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#1e1e2e", underline = true }),
-    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#1e1e2e", underline = true })
-    -- vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#313244", underline = true }),
-    -- vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#313244", underline = true }),
-    -- vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#313244", underline = true })
-  },
-  integrations = {
-    cmp = true,
-    gitsigns = true,
-    nvimtree = true,
-    telescope = true,
-  },
+require("catppuccin").setup({
+	flavour = "mocha",
+	background = { -- :h background
+		light = "mocha",
+		dark = "mocha",
+	},
+	transparent_background = false,
+	dim_inactive = {
+		enabled = true,
+		shade = "dark",
+		percentage = 0.15,
+	},
+	styles = {
+		comments = { "italic" },
+		conditionals = { "italic" },
+	},
+	color_overrides = {},
+	custom_highlights = {
+		-- vim.cmd('hi def IlluminatedWordText gui=underline')
+		vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#1e1e2e", underline = true }),
+		vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#1e1e2e", underline = true }),
+		vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#1e1e2e", underline = true }),
+		-- vim.api.nvim_set_hl(0, 'IlluminatedWordText', { bg = "#313244", underline = true }),
+		-- vim.api.nvim_set_hl(0, 'IlluminatedWordRead', { bg = "#313244", underline = true }),
+		-- vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', { bg = "#313244", underline = true })
+	},
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		nvimtree = true,
+		telescope = true,
+	},
 })
-vim.cmd.colorscheme 'catppuccin'
+vim.cmd.colorscheme("catppuccin")
 
 -- require('kanagawa').setup({
 --     undercurl = true,           -- enable undercurls
@@ -98,7 +98,6 @@ vim.cmd.colorscheme 'catppuccin'
 -- hl(0, 'CodewindowBorder', {fg = '#4fa6ed'})
 -- hl(0, 'CodewindowBackground', {fg = '#4fa6ed'})
 -- vim.api.nvim_command("redraw")
-
 
 -- Changing nvim-ts-rainbow first color
 -- vim.cmd [[hi rainbowcol1 guifg=#adadad]]
