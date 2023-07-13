@@ -268,9 +268,22 @@ require("lazy").setup({
 			require("plugins.formatter")
 		end,
 		init = function()
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				pattern = { "*" },
 				command = "FormatWrite",
+			})
+		end,
+	},
+	{
+		"mfussenegger/nvim-lint",
+		config = function()
+			require("plugins.nvim-lint")
+		end,
+		init = function()
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
 			})
 		end,
 	},
