@@ -1,11 +1,13 @@
 local ms = require("mason")
+local mr = require("mason-registry")
 ms.setup({
 	ui = {
 		border = "single",
 	},
 })
 
-local lsps = {
+local requirements = {
+	-- LSPs
 	"bash-language-server",
 	"clangd",
 	"css-lsp",
@@ -15,36 +17,27 @@ local lsps = {
 	"lua-language-server",
 	"pyright",
 	"quick-lint-js",
+	"rust-analyzer",
 	"sqlls",
 	"vim-language-server",
+	-- Linters
+	"jsonlint",
+	"luacheck",
+	"quick-lint-js",
+	"ruff",
+	"shellcheck",
+	"sqlfluff",
+	-- Formatters
+	"black",
+	"jq",
+	"rustfmt",
+	"shfmt",
+	"sql-formatter",
+	"stylua",
 }
 
-local function scandir(directory)
-	local i, t, popen = 0, {}, io.popen
-	local pfile = popen('ls "' .. directory .. '"')
-	for filename in pfile:lines() do
-		i = i + 1
-		t[i] = filename
-	end
-	pfile:close()
-	return t
-end
-
-local lsp_folder = vim.fn.stdpath("data") .. "/mason/packages"
-os.execute("mkdir -p " .. lsp_folder)
-local dirs = scandir(lsp_folder)
-
-local function isInstalled(lsp)
-	for _, dir in pairs(dirs) do
-		if dir == lsp then
-			return true
-		end
-	end
-	return false
-end
-
-for _, lsp in pairs(lsps) do
-	if not isInstalled(lsp) then
-		vim.cmd(":MasonInstall " .. lsp)
+for _, r in pairs(requirements) do
+	if not mr.is_installed(r) then
+		vim.cmd(":MasonInstall " .. r)
 	end
 end
