@@ -25,7 +25,6 @@ local requirements = {
 	"luacheck",
 	"quick-lint-js",
 	"ruff",
-	"shellcheck",
 	"sqlfluff",
 	-- Formatters
 	"black",
@@ -34,6 +33,7 @@ local requirements = {
 	"shfmt",
 	"sql-formatter",
 	"stylua",
+    "clang-format"
 }
 
 for _, r in pairs(requirements) do

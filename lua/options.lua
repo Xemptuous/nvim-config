@@ -26,6 +26,7 @@ opt.ruler = true -- always show cursor position
 opt.splitbelow = true -- always split horizontal below
 opt.splitright = true -- always split vertical right
 opt.laststatus = 0 -- always show status line
+opt.cindent = true
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {

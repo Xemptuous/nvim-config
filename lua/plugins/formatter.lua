@@ -5,7 +5,36 @@ require("formatter").setup({
 	log_level = vim.log.levels.WARN,
 	-- All formatter configurations are opt-in
 	filetype = {
-		-- cpp = { require("formatter.filetypes.cpp").clangformat },
+		c = {
+			-- require("formatter.filetypes.cpp").clangformat
+			function()
+				return {
+					exe = "clang-format",
+					args = {
+						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						-- "-assume-filename",
+						util.escape_path(util.get_current_buffer_file_name()),
+					},
+					stdin = true,
+				}
+			end,
+		},
+		cpp = {
+			-- require("formatter.filetypes.cpp").clangformat
+			function()
+				return {
+					exe = "clang-format",
+					args = {
+						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						-- "-assume-filename",
+						util.escape_path(util.get_current_buffer_file_name()),
+					},
+					stdin = true,
+				}
+			end,
+		},
 		json = { require("formatter.filetypes.json").jq },
 		lua = { require("formatter.filetypes.lua").stylua },
 		python = { require("formatter.filetypes.python").black },
