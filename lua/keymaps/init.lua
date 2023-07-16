@@ -8,6 +8,8 @@ k("i", "jk", [[<Esc>]], { noremap = true })
 k("i", "kj", [[<Esc>]], { noremap = true })
 k("v", "q", [[<Esc>]], { noremap = true })
 
+k("n", "j", "gj", { noremap = true })
+k("n", "k", "gk", { noremap = true })
 k("n", "<C-h>", [[<C-w>h]], { noremap = true })
 k("n", "<C-j>", [[<C-w>j]], { noremap = true })
 k("n", "<C-k>", [[<C-w>k]], { noremap = true })

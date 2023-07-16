@@ -35,6 +35,21 @@ require("formatter").setup({
 				}
 			end,
 		},
+		java = {
+			-- require("formatter.filetypes.cpp").clangformat
+			function()
+				return {
+					exe = "clang-format",
+					args = {
+						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100}"',
+						-- "-assume-filename",
+						util.escape_path(util.get_current_buffer_file_name()),
+					},
+					stdin = true,
+				}
+			end,
+		},
 		json = { require("formatter.filetypes.json").jq },
 		lua = { require("formatter.filetypes.lua").stylua },
 		python = { require("formatter.filetypes.python").black },
