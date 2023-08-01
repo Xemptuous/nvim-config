@@ -30,7 +30,7 @@ local requirements = {
 	"black",
 	"jq",
 	"rustfmt",
-	"shfmt",
+	"beautysh",
 	"sql-formatter",
 	"stylua",
     "clang-format"

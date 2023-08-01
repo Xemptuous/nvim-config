@@ -12,7 +12,7 @@ require("formatter").setup({
 					exe = "clang-format",
 					args = {
 						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse}"',
 						-- "-assume-filename",
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
@@ -27,7 +27,7 @@ require("formatter").setup({
 					exe = "clang-format",
 					args = {
 						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse}"',
 						-- "-assume-filename",
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
@@ -42,7 +42,7 @@ require("formatter").setup({
 					exe = "clang-format",
 					args = {
 						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, BreakAfterJavaFieldAnnotations: false}"',
 						-- "-assume-filename",
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
@@ -53,7 +53,9 @@ require("formatter").setup({
 		json = { require("formatter.filetypes.json").jq },
 		lua = { require("formatter.filetypes.lua").stylua },
 		python = { require("formatter.filetypes.python").black },
-		sh = { require("formatter.filetypes.sh").shfmt },
+		-- sh = { require("formatter.filetypes.sh").beautysh },
+		-- bash = { require("formatter.filetypes.bash").beautysh },
+		zsh = { require("formatter.filetypes.sh").beautysh },
 		sql = { require("formatter.filetypes.sql").sql_formatter },
 		rust = { require("formatter.filetypes.rust").rustfmt },
 		["*"] = {
