@@ -11,9 +11,7 @@ require("formatter").setup({
 				return {
 					exe = "clang-format",
 					args = {
-						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: false, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach}"',
-						-- "-assume-filename",
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: false, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach, AllowAllParametersOfDeclarationOnNextLine: true, AllowShortEnumsOnASingleLine: true, AlwaysBreakTemplateDeclarations: MultiLine, BreakBeforeBinaryOperators: NonAssignment, BreakBeforeTernaryOperators: true, PackConstructorInitializers: NextLine, AlignArrayOfStructures: Left, AlignConsecutiveAssignments: Consecutive}"',
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
 					stdin = true,
@@ -26,8 +24,7 @@ require("formatter").setup({
 				return {
 					exe = "clang-format",
 					args = {
-						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: false, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: false, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach, AllowAllParametersOfDeclarationOnNextLine: true, AllowShortEnumsOnASingleLine: true, AlwaysBreakTemplateDeclarations: MultiLine, BreakBeforeBinaryOperators: NonAssignment, BreakBeforeTernaryOperators: true, PackConstructorInitializers: NextLine, AlignArrayOfStructures: Left, AlignConsecutiveAssignments: Consecutive}"',
 						-- "-assume-filename",
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
@@ -41,8 +38,7 @@ require("formatter").setup({
 				return {
 					exe = "clang-format",
 					args = {
-						-- '--style="{BasedOnStyle: Google, IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left}"',
-						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: true, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, BreakAfterJavaFieldAnnotations: false, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach}"',
+						'--style="{IndentWidth: 4, AlignAfterOpenBracket: BlockIndent, PointerAlignment: Left, IndentCaseBlocks: false, IndentCaseLabels: true, ColumnLimit: 100, IncludeBlocks: Regroup, AllowShortIfStatementsOnASingleLine: AllIfsAndElse, AllowShortCaseLabelsOnASingleLine: true, BreakBeforeBraces: Attach, AllowAllParametersOfDeclarationOnNextLine: true, AllowShortEnumsOnASingleLine: true, AlwaysBreakTemplateDeclarations: MultiLine, BreakBeforeBinaryOperators: NonAssignment, BreakBeforeTernaryOperators: true, PackConstructorInitializers: NextLine, AlignArrayOfStructures: Left, AlignConsecutiveAssignments: Consecutive}"',
 						-- "-assume-filename",
 						util.escape_path(util.get_current_buffer_file_name()),
 					},
