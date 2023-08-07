@@ -112,7 +112,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"glepnir/lspsaga.nvim",
+		"nvimdev/lspsaga.nvim",
 		lazy = true,
 		event = "BufRead",
 		config = function()

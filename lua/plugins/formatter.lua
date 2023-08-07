@@ -1,7 +1,7 @@
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 local util = require("formatter.util")
 require("formatter").setup({
-	logging = true,
+	logging = false,
 	log_level = vim.log.levels.WARN,
 	-- All formatter configurations are opt-in
 	filetype = {
