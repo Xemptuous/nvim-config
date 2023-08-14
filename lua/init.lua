@@ -73,6 +73,7 @@ require("lazy").setup({
 	},
 	{
 		"zbirenbaum/neodim",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		config = function()
@@ -186,6 +187,7 @@ require("lazy").setup({
 	},
 	{ -- Text Highlighter
 		"RRethy/vim-illuminate",
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("plugins.illuminate")
@@ -323,9 +325,6 @@ require("lazy").setup({
 		dependencies = { "RRethy/vim-illuminate", "simrat39/rust-tools.nvim" },
 	},
 	{
-		"simrat39/rust-tools.nvim",
-	},
-	{
 		"neovim/nvim-lspconfig",
 		lazy = true,
 		event = "VeryLazy",
@@ -410,6 +409,12 @@ require("lazy").setup({
 		"xemptuous/sqlua.nvim",
 		config = function()
 			require("sqlua").setup()
+		end,
+	},
+	{
+		"m00qek/baleia.nvim",
+		config = function()
+			require("baleia").setup({})
 		end,
 	},
 }, {

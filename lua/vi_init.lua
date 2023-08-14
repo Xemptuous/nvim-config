@@ -206,6 +206,7 @@ require("lazy").setup({
 	},
 	{ -- Text Highlighter
 		"RRethy/vim-illuminate",
+        enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("plugins.illuminate")

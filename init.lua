@@ -62,8 +62,8 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = { "*" },
 	command = "FormatWrite",
 })
-
-package.path = "./lua/?.lua;" .. package.path
+package.path = "./lua/?.lua; ./lua/?.vim" .. package.path
 require("keymaps.init")
 require("options")
 require("init")
+vim.cmd("source /home/xempt/.config/nvim/vimscripts.vim")
