@@ -16,6 +16,7 @@ AlwaysBreakTemplateDeclarations: MultiLine
 BreakBeforeBinaryOperators: NonAssignment
 BreakBeforeTernaryOperators: true
 PackConstructorInitializers: NextLine
+AlignOperands: AlignAfterOperator
 AlignArrayOfStructures: Left
 AlignConsecutiveAssignments:
   Enabled: true

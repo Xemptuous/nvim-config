@@ -296,11 +296,11 @@ require("lazy").setup({
 			require("mason-lspconfig").setup()
 		end,
 	},
-	{
-		"HiPhish/nvim-ts-rainbow2",
-		lazy = true,
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-	},
+	-- {
+	-- 	"HiPhish/nvim-ts-rainbow2",
+	-- 	lazy = true,
+	-- 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	-- },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		-- enabled = false,
@@ -308,7 +308,7 @@ require("lazy").setup({
 		config = function()
 			require("plugins.treesitter")
 		end,
-		dependencies = { "HiPhish/nvim-ts-rainbow2" },
+		-- dependencies = { "HiPhish/nvim-ts-rainbow2" },
 	},
 	{
 		"nvim-treesitter/playground",
@@ -415,6 +415,33 @@ require("lazy").setup({
 		"m00qek/baleia.nvim",
 		config = function()
 			require("baleia").setup({})
+		end,
+	},
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+		config = function()
+			local rainbow_delimiters = require("rainbow-delimiters")
+
+			vim.g.rainbow_delimiters = {
+				strategy = {
+					[""] = rainbow_delimiters.strategy["global"],
+					vim = rainbow_delimiters.strategy["local"],
+				},
+				query = {
+					[""] = "rainbow-delimiters",
+					lua = "rainbow-blocks",
+				},
+				highlight = {
+					"RainbowDelimiterYellow",
+					"RainbowDelimiterBlue",
+					"RainbowDelimiterRed",
+					"RainbowDelimiterGreen",
+					"RainbowDelimiterOrange",
+					"RainbowDelimiterViolet",
+					"RainbowDelimiterCyan",
+				},
+			}
+			vim.api.nvim_set_hl(0, "MatchParen", { fg = "#cdd6f4", bg = "#45475a" })
 		end,
 	},
 }, {
