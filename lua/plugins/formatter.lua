@@ -41,9 +41,22 @@ require("formatter").setup({
 				}
 			end,
 		},
+		python = {
+			require("formatter.filetypes.python").black,
+			require("formatter.filetypes.python").isort,
+			function()
+				return {
+					exe = "ruff",
+					args = {
+						"--fix-only",
+						"-q",
+					},
+				}
+			end,
+		},
 		json = { require("formatter.filetypes.json").jq },
 		lua = { require("formatter.filetypes.lua").stylua },
-		python = { require("formatter.filetypes.python").black },
+		-- python = { require("formatter.filetypes.python").black },
 		sh = { require("formatter.filetypes.sh").beautysh },
 		bash = { require("formatter.filetypes.sh").beautysh },
 		zsh = { require("formatter.filetypes.sh").beautysh },
