@@ -1,6 +1,8 @@
 -- Completion Setup
 local lspkind = require("lspkind")
-require("cmp").setup({
+local cmp = require("cmp")
+
+cmp.setup({
 	sources = {
 		{ name = "nvim_lsp+signature_help" },
 		{ name = "path" },
@@ -8,9 +10,6 @@ require("cmp").setup({
 		{ name = "luasnip", keyword_length = 2 },
 		{ name = "buffer", keyword_length = 3 },
 	},
-})
-local cmp = require("cmp")
-cmp.setup({
 	snippet = {
 		expand = function(args)
 			require("luasnip").lsp_expand(args.body)
@@ -32,11 +31,11 @@ cmp.setup({
 				return vim_item
 			end,
 		}),
-		-- format = function (entry, vim_item)
-		-- 	vim_item.abbr = ' ' .. vim_item.abbr
-		-- 	vim_item.menu = (vim_item.menu or '') .. ' '
+		-- format = function(entry, vim_item)
+		-- 	vim_item.abbr = " " .. vim_item.abbr
+		-- 	vim_item.menu = (vim_item.menu or "") .. " "
 		-- 	return vim_item
-		-- end
+		-- end,
 	},
 	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -59,19 +58,12 @@ cmp.setup({
 			end
 		end,
 	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		-- { name = 'vsnip' },
-		{ name = "luasnip" },
-	}, {
-		{ name = "buffer" },
-	}),
 })
 
 cmp.setup.filetype("TelescopePrompt", {
-	enable = false,
+	enable = true,
 })
---
+
 cmp.setup.filetype("gitcommit", {
 	sources = cmp.config.sources({
 		{ name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.

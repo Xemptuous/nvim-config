@@ -1,4 +1,6 @@
 -- disable some builtin vim plugins
+vim.loader.enable()
+
 local g = vim.g
 local default_plugins = {
 	"tutor",
@@ -57,11 +59,13 @@ local function open_nvim_tree(data)
 	vim.cmd.cd(data.file)
 	require("nvim-tree.api").tree.open()
 end
+
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = { "*" },
 	command = "FormatWrite",
 })
+
 package.path = "./lua/?.lua; ./lua/?.vim" .. package.path
 require("keymaps.init")
 require("options")

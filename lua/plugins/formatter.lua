@@ -55,7 +55,7 @@ require("formatter").setup({
 			end,
 		},
 		json = { require("formatter.filetypes.json").jq },
-		lua = { require("formatter.filetypes.lua").stylua },
+		-- lua = { require("formatter.filetypes.lua").stylua },
 		-- python = { require("formatter.filetypes.python").black },
 		sh = { require("formatter.filetypes.sh").beautysh },
 		bash = { require("formatter.filetypes.sh").beautysh },

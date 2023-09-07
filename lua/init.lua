@@ -14,108 +14,58 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
-		"lewis6991/impatient.nvim",
-		priority = 1000,
-		config = function()
-			require("impatient")
-		end,
-	},
-	{
 		"catppuccin/nvim",
-		enabled = true,
-		lazy = false,
 		priority = 900,
-		config = function()
-			require("theme")
-		end,
-	},
-	{
-		"rebelot/kanagawa.nvim",
-		enabled = false,
-		lazy = false,
-		priority = 900,
-		config = function()
-			require("theme")
-		end,
-	},
-	{
-		"navarasu/onedark.nvim",
-		enabled = false,
-		lazy = false,
-		priority = 900,
-		config = function()
-			require("theme")
-		end,
-	},
-	{
-		"glepnir/dashboard-nvim",
-		enabled = false,
-		event = "VimEnter",
-		config = function()
-			require("plugins.dashboard")
-		end,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-	{
-		"lewis6991/gitsigns.nvim",
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("gitsigns").setup()
-		end,
+		config = function() require("theme") end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
 		lazy = true,
 		event = "VeryLazy",
 		opts = { options = { theme = "nightfly" } },
-		-- dependencies = {'noice.nvim'},
 	},
 	{
-		"zbirenbaum/neodim",
-		enabled = false,
+		"williamboman/mason.nvim",
+		priority = 850,
+		config = function() require("plugins.mason") end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		priority = 800,
 		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("plugins.neodim")
-		end,
-		dependencies = { "nvim-treesitter" },
+		event = { "BufReadPost", "BufNewFile" },
+		config = function() require("plugins.nvim_lsp") end,
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
+		"hrsh7th/nvim-cmp",
 		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("plugins.indent_blankline")
-		end,
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = { "InsertEnter", "CmdlineEnter" },
+		config = function() require("plugins.nvim_cmp") end,
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"onsails/lspkind.nvim",
+			"L3MON4D3/LuaSnip",
+		},
 	},
 	{
-		"folke/which-key.nvim",
-		enabled = false,
-		event = "VeryLazy",
-		config = function()
-			require("keymaps.whichkey")
-			require("which-key").setup()
-		end,
+		"nvim-treesitter/nvim-treesitter",
+		priority = 700,
+		config = function() require("plugins.treesitter") end,
+		dependencies = "HiPhish/rainbow-delimiters.nvim",
 	},
 	{
-		"mrjones2014/legendary.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("plugins.legendary")
-		end,
-	},
-	{
-		"stevearc/dressing.nvim",
-		config = function()
-			require("plugins.dressing")
-		end,
+		"HiPhish/rainbow-delimiters.nvim",
+		lazy = true,
+		config = function() require("plugins.rainbow-delimiters") end
 	},
 	{
 		"nvimdev/lspsaga.nvim",
 		lazy = true,
-		event = "BufRead",
+		event = "VeryLazy",
 		config = function()
 			require("keymaps.lspsaga")
 		end,
@@ -125,17 +75,58 @@ require("lazy").setup({
 		},
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
+		"mhartington/formatter.nvim",
+		lazy = true,
+		cmd = { "Format", "FormatWrite" },
+		config = function() require("plugins.formatter") end,
+		init = function()
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				pattern = { "*" },
+				command = "FormatWrite",
+			})
 		end,
+	},
+	{
+		"mfussenegger/nvim-lint",
+		config = function() require("plugins.nvim-lint") end,
+		init = function()
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
+		end,
+	},
+	{ "michaelb/sniprun" },
+	{
+		"xemptuous/sqlua.nvim",
+		enabled = false,
+		config = function() require("sqlua").setup() end,
+	},
+	{
+		"m00qek/baleia.nvim",
+		lazy = true,
+		cmd = { "BaleiaColorize" },
+		config = function() require("baleia").setup({}) end,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		lazy = true,
+		event = "VeryLazy",
+		config = function() require("gitsigns").setup() end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		lazy = true,
+		event = "VeryLazy",
+		config = function() require("plugins.indent_blankline") end,
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = true,
-		cmd = { "VimEnter" },
-		-- cmd = {'NvimTreeToggle'},
-		--   keys = '<C-t>',
+		cmd = { "VimEnter", "NvimTreeToggle" },
+		keys = "<C-t>",
 		config = function()
 			require("keymaps.nvimtree")
 			require("plugins.nvim-tree")
@@ -145,70 +136,32 @@ require("lazy").setup({
 		},
 	},
 	{
-		"preservim/tagbar",
-		enabled = false,
-		lazy = true,
-		cmd = { "TagbarToggle" },
-	},
-	{
-		"akinsho/toggleterm.nvim",
-		enabled = false,
-		lazy = true,
-		cmd = { "ToggleTerm" },
-		keys = { "<A-t>", "<A-v>" },
-		-- init = function() require('keymaps.toggleterm') end,
-		config = function()
-			require("keymaps.toggleterm")
-			require("toggleterm").setup()
-		end,
-	},
-	{
 		"kylechui/nvim-surround",
 		lazy = true,
 		keys = { "ys", "yS" },
-		config = function()
-			require("nvim-surround").setup()
-		end,
+		config = function() require("nvim-surround").setup() end,
 	},
 	{
 		"windwp/nvim-autopairs",
-		lazy = false,
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
+		config = function() require("nvim-autopairs").setup({}) end,
 	},
 	{
 		"numToStr/Comment.nvim",
 		lazy = true,
 		keys = { "gc", "V" },
-		config = function()
-			require("Comment").setup()
-		end,
-	},
-	{ -- Text Highlighter
-		"RRethy/vim-illuminate",
-		enabled = false,
-		event = "VeryLazy",
-		config = function()
-			require("plugins.illuminate")
-		end,
+		config = function() require("Comment").setup() end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = true,
-		cmd = "Telescope",
+		-- event = "VeryLazy",
+		-- cmd = "Telescope",
 		keys = "<leader>t",
 		config = function()
 			require("keymaps.telescope")
 			require("plugins.telescope")
 		end,
 		dependencies = "nvim-lua/plenary.nvim",
-	},
-	{
-		"nvim-treesitter/playground",
-		enabled = false,
-		lazy = true,
-		cmd = { "TsPlaygroundToggle" },
 	},
 	{
 		"Vimjas/vim-python-pep8-indent",
@@ -219,9 +172,7 @@ require("lazy").setup({
 		"gorbit99/codewindow.nvim",
 		lazy = true,
 		keys = "<leader>mm",
-		config = function()
-			require("plugins.codewindow")
-		end,
+		config = function() require("plugins.codewindow") end,
 	},
 	{ -- autoclose html tags
 		"alvan/vim-closetag",
@@ -240,11 +191,69 @@ require("lazy").setup({
 		dependencies = { "tpope/vim-dadbod" },
 	},
 	{
-		"williamboman/mason.nvim",
-		config = function()
-			require("plugins.mason")
-		end,
+		"simrat39/rust-tools.nvim",
+		lazy = true,
+		ft = "rust",
+		config = function() require("plugins.rust-tools") end,
 	},
+	{
+		"folke/flash.nvim",
+		lazy = true,
+		keys = {
+			{ "s", mode = { "n", "o", "x" }, function() require("flash").jump() end },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end },
+			{ "r", mode = "o", function() require("flash").remote() end },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end},
+		},
+		config = function()
+			vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#89b4fa" })
+			vim.api.nvim_set_hl(0, "FlashCurrent", { fg = "#a6e3a1" })
+			vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#11111b", bg = "#f38ba8" })
+		end
+	},
+	-- {
+	-- 	"mrjones2014/legendary.nvim",
+	-- 	enabled = false,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("plugins.legendary")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"ellisonleao/glow.nvim",
+	-- 	enabled = false,
+	-- 	config = function()
+	-- 		require("glow").setup({ border = "single" })
+	-- 	end,
+	-- 	cmd = "Glow",
+	-- },
+	-- {
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	enabled = false,
+	-- 	lazy = true,
+	-- 	config = function()
+	-- 		require("mason-lspconfig").setup()
+	-- 	end,
+	-- },
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	enabled = false,
+	-- 	lazy = false,
+	-- 	priority = 900,
+	-- 	config = function()
+	-- 		require("theme")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"navarasu/onedark.nvim",
+	-- 	enabled = false,
+	-- 	lazy = false,
+	-- 	priority = 900,
+	-- 	config = function()
+	-- 		require("theme")
+	-- 	end,
+	-- },
 	-- {
 	--   'mfussenegger/nvim-dap',
 	--   lazy = true,
@@ -262,141 +271,15 @@ require("lazy").setup({
 	--   config = function() require('plugins.mason-dap') end,
 	--   dependencies = {'williamboman/mason.nvim'}
 	-- },
-	{
-		"mhartington/formatter.nvim",
-		lazy = true,
-		cmd = { "Format", "FormatWrite" },
-		config = function()
-			require("plugins.formatter")
-		end,
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				pattern = { "*" },
-				command = "FormatWrite",
-			})
-		end,
-	},
-	{
-		"mfussenegger/nvim-lint",
-		config = function()
-			require("plugins.nvim-lint")
-		end,
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				callback = function()
-					require("lint").try_lint()
-				end,
-			})
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = true,
-		config = function()
-			require("mason-lspconfig").setup()
-		end,
-	},
 	-- {
-	-- 	"HiPhish/nvim-ts-rainbow2",
-	-- 	lazy = true,
-	-- 	dependencies = { "nvim-treesitter/nvim-treesitter" },
+	-- 	"glepnir/dashboard-nvim",
+	-- 	enabled = false,
+	-- 	event = "VimEnter",
+	-- 	config = function()
+	-- 		require("plugins.dashboard")
+	-- 	end,
+	-- 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	-- },
-	{
-		"nvim-treesitter/nvim-treesitter",
-		-- enabled = false,
-		lazy = false,
-		config = function()
-			require("plugins.treesitter")
-		end,
-		-- dependencies = { "HiPhish/nvim-ts-rainbow2" },
-	},
-	{
-		"nvim-treesitter/playground",
-		enabled = false,
-		lazy = true,
-		cmd = { "TsPlaygroundToggle" },
-	},
-	{
-		"hrsh7th/cmp-nvim-lsp",
-		enabled = true,
-		config = function()
-			require("plugins.nvim_lsp")
-		end,
-		dependencies = { "RRethy/vim-illuminate", "simrat39/rust-tools.nvim" },
-	},
-	{
-		"neovim/nvim-lspconfig",
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("lspconfig")
-		end,
-	},
-	{
-		"simrat39/rust-tools.nvim",
-		config = function()
-			local function on_attach(client, buffer) end
-			local opts = {
-				tools = {
-					runnables = {
-						use_telescope = true,
-					},
-					inlay_hints = {
-						auto = true,
-						show_parameter_hints = false,
-						parameter_hints_prefix = "",
-						other_hints_prefix = "",
-					},
-				},
-				server = {
-					on_attach = on_attach,
-					settings = {
-						["rust-analyzer"] = {
-							checkOnSave = {
-								command = "clippy",
-							},
-						},
-					},
-				},
-			}
-			require("rust-tools").setup(opts)
-
-			--   local rt = require("rust-tools")
-			--   rt.setup({
-			--     server = {
-			--       on_attach = function(_, bufnr)
-			--         -- Hover actions
-			--         vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-			--         -- Code action groups
-			--         vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-			--       end,
-			--     },
-			--   })
-		end,
-	},
-	{
-		"hrsh7th/nvim-cmp",
-		lazy = true,
-		event = { "InsertEnter", "CmdlineEnter" },
-		config = function()
-			require("plugins.nvim_cmp")
-		end,
-		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"onsails/lspkind.nvim",
-			"L3MON4D3/LuaSnip",
-		},
-	},
-	{
-		"ellisonleao/glow.nvim",
-		config = function()
-			require("glow").setup({ border = "single" })
-		end,
-		cmd = "Glow",
-	},
 	-- {
 	--   'yuratomo/w3m.vim',
 	--   enabled = false,
@@ -405,45 +288,75 @@ require("lazy").setup({
 	--   keys = {"<leader>w"},
 	--   config = function() require('keymaps.w3m') end
 	-- },
-	{
-		"xemptuous/sqlua.nvim",
-		config = function()
-			require("sqlua").setup()
-		end,
-	},
-	{
-		"m00qek/baleia.nvim",
-		config = function()
-			require("baleia").setup({})
-		end,
-	},
-	{
-		"HiPhish/rainbow-delimiters.nvim",
-		config = function()
-			local rainbow_delimiters = require("rainbow-delimiters")
-
-			vim.g.rainbow_delimiters = {
-				strategy = {
-					[""] = rainbow_delimiters.strategy["global"],
-					vim = rainbow_delimiters.strategy["local"],
-				},
-				query = {
-					[""] = "rainbow-delimiters",
-					lua = "rainbow-blocks",
-				},
-				highlight = {
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterRed",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterOrange",
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterCyan",
-				},
-			}
-			vim.api.nvim_set_hl(0, "MatchParen", { fg = "#cdd6f4", bg = "#45475a" })
-		end,
-	},
+	-- {
+	-- 	"hrsh7th/cmp-nvim-lsp",
+	-- 	-- dependencies = { "RRethy/vim-illuminate", "simrat39/rust-tools.nvim" },
+	-- },
+	-- {
+	-- 	"folke/which-key.nvim",
+	-- 	enabled = false,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("keymaps.whichkey")
+	-- 		require("which-key").setup()
+	-- 	end,
+	-- },
+	-- {
+	-- 	"zbirenbaum/neodim",
+	-- 	enabled = false,
+	-- 	lazy = true,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("plugins.neodim")
+	-- 	end,
+	-- 	dependencies = { "nvim-treesitter" },
+	-- },
+	-- {
+	-- 	"stevearc/dressing.nvim",
+	-- 	enabled = false,
+	-- 	config = function()
+	-- 		require("plugins.dressing")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"norcalli/nvim-colorizer.lua",
+	-- 	enabled = false,
+	-- 	config = function()
+	-- 		require("colorizer").setup()
+	-- 	end,
+	-- },
+	-- {
+	-- 	"preservim/tagbar",
+	-- 	enabled = false,
+	-- 	lazy = true,
+	-- 	cmd = { "TagbarToggle" },
+	-- },
+	-- {
+	-- 	"akinsho/toggleterm.nvim",
+	-- 	enabled = false,
+	-- 	lazy = true,
+	-- 	cmd = { "ToggleTerm" },
+	-- 	keys = { "<A-t>", "<A-v>" },
+	-- 	-- init = function() require('keymaps.toggleterm') end,
+	-- 	config = function()
+	-- 		require("keymaps.toggleterm")
+	-- 		require("toggleterm").setup()
+	-- 	end,
+	-- },
+	-- { -- Text Highlighter
+	-- 	"RRethy/vim-illuminate",
+	-- 	enabled = false,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("plugins.illuminate")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"nvim-treesitter/playground",
+	-- 	enabled = false,
+	-- 	lazy = true,
+	-- 	cmd = { "TsPlaygroundToggle" },
+	-- },
 }, {
 	install = {
 		colorscheme = { "catppuccin" },
