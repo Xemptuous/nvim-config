@@ -70,7 +70,30 @@ return {
 		lazy = true,
         -- event = "BufReadPre",
 		event = "VeryLazy",
-		opts = { options = { theme = "catppuccin" } },
+		opts = {
+            options = {
+                theme = "catppuccin"
+            },
+            sections = {
+                lualine_c = {
+                    {
+                        "filename",
+                        file_status = true,
+                        path = 3
+                    }
+                },
+                lualine_x = {'fileformat', 'filetype'},
+            },
+            inactive_sections = {
+                lualine_c = {
+                    {
+                        "filename",
+                        file_status = true,
+                        path = 4
+                    }
+                }
+            }
+        },
 	},
     {
         "lewis6991/gitsigns.nvim",
