@@ -73,7 +73,7 @@ return {
                     bash = { require("formatter.filetypes.sh").beautysh },
                     zsh = { require("formatter.filetypes.sh").beautysh },
                     sql = { require("formatter.filetypes.sql").sql_formatter },
-                    rust = { require("formatter.filetypes.rust").rustfmt },
+                    -- rust = { require("formatter.filetypes.rust").rustfmt },
                     ["*"] = {
                         require("formatter.filetypes.any").remove_trailing_whitespace,
                     }

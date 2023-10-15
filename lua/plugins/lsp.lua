@@ -33,7 +33,7 @@ return {
                 -- Formatters
                 "black",
                 "jq",
-                "rustfmt",
+                -- "rustfmt" DEPRECATED,
                 "beautysh",
                 "sql-formatter",
                 "stylua",
