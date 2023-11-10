@@ -82,7 +82,7 @@ return {
                         path = 3
                     }
                 },
-                lualine_x = {'fileformat', 'filetype'},
+                lualine_x = {'filetype'},
             },
             inactive_sections = {
                 lualine_c = {

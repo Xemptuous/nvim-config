@@ -70,3 +70,4 @@ package.path = "./lua/?.lua; ./lua/?.vim" .. package.path
 require("keymaps")
 require("options")
 require("init")
+vim.cmd("source /home/xempt/.config/nvim/vimscript.vim")
