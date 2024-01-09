@@ -59,4 +59,34 @@ AlignConsecutiveShortCaseStatements:
   AcrossEmptyLines: true
   AcrossComments: true
   AlignCaseColons: false
+# ---
+# Language: CSharp
+# IndentWidth: 4
+# ColumnLimit: 100
+# AlignAfterOpenBracket: BlockIndent
+# PointerAlignment: Left
+# IndentCaseBlocks: false
+# IndentCaseLabels: true
+# IncludeBlocks: Regroup
+# AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+# AllowShortCaseLabelsOnASingleLine: true
+# BreakBeforeBraces: Attach
+# AllowAllParametersOfDeclarationOnNextLine: true
+# AllowShortEnumsOnASingleLine: true
+# AlwaysBreakTemplateDeclarations: MultiLine
+# BreakBeforeBinaryOperators: NonAssignment
+# BreakBeforeTernaryOperators: true
+# PackConstructorInitializers: NextLine
+# AlignArrayOfStructures: Left
+# AlignConsecutiveAssignments:
+#   Enabled: true
+#   AcrossEmptyLines: false
+#   AcrossComments: true
+#   AlignCompound: true
+# Cpp11BracedListStyle: true
+# AlignConsecutiveShortCaseStatements:
+#   Enabled: true
+#   AcrossEmptyLines: true
+#   AcrossComments: true
+#   AlignCaseColons: false
 ...
