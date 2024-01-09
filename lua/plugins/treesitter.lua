@@ -95,13 +95,18 @@ return {
             require("ibl").setup {
                 debounce = 200,
                 indent = {
-                    char = "|"
+                    -- char = "|"
+                    char = "▏"
                 },
                 scope = {
-                    highlight = highlight
+                    highlight = highlight,
+                    show_start = false,
+                    show_end = false
                 }
             }
             hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+            hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
+            hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_tab_indent_level)
         end
 	},
 	{

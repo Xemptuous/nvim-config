@@ -11,7 +11,7 @@ require("lspsaga").setup({
 	},
 })
 local k = vim.api.nvim_set_keymap
-k("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", {})
+k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
 
 k("n", "gr", "<cmd>Lspsaga rename<CR>", {})
 k("n", "gR", "<cmd>Lspsaga rename ++project<CR>", {})

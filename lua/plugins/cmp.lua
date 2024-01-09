@@ -11,7 +11,7 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
-			-- "L3MON4D3/LuaSnip",
+			"L3MON4D3/LuaSnip",
 		},
         opts = function()
             local lspkind = require("lspkind")
@@ -27,14 +27,14 @@ return {
                     -- { name = "buffer", keyword_length = 3 },
                     -- { name = "look", keyword_length = 3, ft={"markup", "html"} },
                     { name = "path" },
-                    -- { name = "luasnip", keyword_length = 2 },
+                    { name = "luasnip", keyword_length = 2 },
                 },
-                -- snippet = {
-                --     expand = function(args)
-                --         require("luasnip").lsp_expand(args.body)
-                --         -- vim.fn["vsnip#anonymous"](args.body)
-                --     end,
-                -- },
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                        -- vim.fn["vsnip#anonymous"](args.body)
+                    end,
+                },
                 window = {
                     -- completion = {
                     --     winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,Search:None",

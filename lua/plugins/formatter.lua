@@ -28,19 +28,32 @@ return {
                             }
                         end,
                     },
-                    cpp = {
+                    -- cpp = {
+                    --     function()
+                    --         return {
+                    --             exe = "clang-format",
+                    --             args = {
+                    --                 "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
+                    --                 util.escape_path(util.get_current_buffer_file_name()),
+                    --             },
+                    --             stdin = true,
+                    --         }
+                    --     end,
+                    -- },
+                    java = {
                         function()
                             return {
                                 exe = "clang-format",
                                 args = {
                                     "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
+                                    -- "-assume-filename",
                                     util.escape_path(util.get_current_buffer_file_name()),
                                 },
                                 stdin = true,
                             }
                         end,
                     },
-                    java = {
+                    cs = {
                         function()
                             return {
                                 exe = "clang-format",
