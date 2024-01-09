@@ -4,7 +4,6 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		priority = 700,
 		dependencies = {
-            {"HiPhish/rainbow-delimiters.nvim"},
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
                 init = function()
