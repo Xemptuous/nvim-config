@@ -1,5 +1,11 @@
 return {
-    { "michaelb/sniprun" },
+    {
+        "michaelb/sniprun",
+        lazy = true,
+        cmd = "SnipRun",
+        build = "sh ./install.sh",
+        config = function() require("sniprun").setup({}) end
+    },
     {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup({}) end,
@@ -42,6 +48,18 @@ return {
             vim.api.nvim_set_hl(0, "FlashLabel", { fg = "#11111b", bg = "#f38ba8" })
 		end
 	},
+    {
+        "ggandor/leap.nvim",
+        enabled = false,
+        lazy = true,
+        keys = {{ "s", mode = { "n", "o", "x" }}},
+        config = function() require("leap").create_default_mappings() end
+    },
+    {
+        "karb94/neoscroll.nvim",
+        enabled = false,
+        config = function() require('neoscroll').setup {} end
+    },
 	{
 		"lambdalisue/suda.vim",
 		lazy = true,
@@ -49,6 +67,7 @@ return {
 	},
     { -- parse and color ansi escape color codes
         "m00qek/baleia.nvim",
+        enabled = false,
         lazy = true,
         cmd = { "BaleiaColorize" },
         config = function() require("baleia").setup({}) end,
@@ -117,7 +136,6 @@ return {
 	},
     {
 		"folke/which-key.nvim",
-		enabled = false,
 		event = "VeryLazy",
 		config = function()
             local wk = require("which-key")
