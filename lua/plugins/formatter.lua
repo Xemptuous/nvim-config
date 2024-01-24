@@ -74,6 +74,7 @@ return {
                                 exe = "ruff",
                                 args = {
                                     "--fix-only",
+                                    "--config" .. vim.fn.stdpath("config") .. "/.ruff.toml",
                                     "-q",
                                 },
                             }

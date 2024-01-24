@@ -35,6 +35,7 @@ return {
                 "sqlfluff",
                 -- Formatters
                 "black",
+                "isort",
                 "jq",
                 -- "rustfmt" DEPRECATED,
                 "beautysh",
