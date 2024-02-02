@@ -20,7 +20,7 @@ return {
                 "html-lsp",
                 "jdtls",
                 "lua-language-server",
-                "csharp-language-server",
+                -- "csharp-language-server",
                 -- "omnisharp-mono",
                 "pyright",
                 "quick-lint-js",
