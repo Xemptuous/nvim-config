@@ -136,6 +136,12 @@ return {
 		cmd = "DBUI",
 		dependencies = { "tpope/vim-dadbod" },
 	},
+    {
+        "xemptuous/sqlua.nvim",
+        lazy = true,
+        cmd = "SQLua",
+        config = function() require("sqlua").setup() end
+    },
     { -- Minimap Sidebar
         "gorbit99/codewindow.nvim",
         lazy = true,

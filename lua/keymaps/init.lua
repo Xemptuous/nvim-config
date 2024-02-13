@@ -51,8 +51,16 @@ local function standard_keymaps()
     k("n", "<leader>uw", ":set nowrap!<cr>", {})
 
 	-- Fix for Xterm
-	k("i", "<S-{>", "{", { noremap = false })
-	k("i", "<S-}>", "}", { noremap = false })
+    -- removed. Instead, add to .Xresources:
+    -- xterm.VT100.translations: #override \
+    --     Shift <Key>[: string("{") \n\
+    --     Shift <Key>]: string("}") \n\
+    --     Shift <Key>-: string("_") \n\
+    --     Shift <Key>`: string("~") \n\
+    --     Shift <Key>2: string("@") \n\
+    --     Shift <Key>6: string("^")
+	-- k("i", "<S-{>", "{", { noremap = false })
+	-- k("i", "<S-}>", "}", { noremap = false })
 end
 
 local function colemakdh_keymaps()

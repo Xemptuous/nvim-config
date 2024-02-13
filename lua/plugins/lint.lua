@@ -9,13 +9,13 @@ return {
 			})
 		end,
 		config = function()
-            require("lint").linters_by_ft = {
-                lua = { "luacheck" },
-                python = { "ruff" },
-                javascript = { "quick-lint-js" },
-                sql = { "sqlfluff" },
-                json = { "jsonlint" },
-            }
-        end
-	}
+			require("lint").linters_by_ft = {
+				-- lua = { "luacheck" },
+				python = { "ruff" },
+				-- javascript = { "quick-lint-js" },
+				-- sql = { "sqlfluff" },
+				json = { "jsonlint" },
+			}
+		end,
+	},
 }
