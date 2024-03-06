@@ -49,6 +49,7 @@ local function standard_keymaps()
 
     -- toggle wrap
     k("n", "<leader>uw", ":set nowrap!<cr>", {})
+    k("n", "<leader>f", ":Format<cr>", {})
 
 	-- Fix for Xterm
     -- removed. Instead, add to .Xresources:
