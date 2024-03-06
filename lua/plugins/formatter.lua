@@ -66,6 +66,18 @@ return {
                             }
                         end,
                     },
+                    php = {
+                        function()
+                            return {
+                                exe = "pretty-php",
+                                args = {
+                                    "--quiet", "--stdin-filename",
+                                    util.escape_path(util.get_current_buffer_file_name())
+                                },
+                                stdin = false
+                            }
+                        end,
+                    },
                     python = {
                         require("formatter.filetypes.python").black,
                         require("formatter.filetypes.python").isort,

@@ -5,6 +5,7 @@ return {
 			ui = {
 				border = "single",
 			},
+            log_level = vim.log.levels.DEBUG
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
@@ -26,6 +27,8 @@ return {
 				"quick-lint-js",
 				"rust-analyzer",
 				"sqlls",
+                "phpactor",
+                "pretty-php",
 				-- "sqls",
 				"vim-language-server",
 				-- Linters
@@ -110,6 +113,8 @@ return {
 			lsp.jdtls.setup({ cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" } })
 			lsp.html.setup({ handlers = default_handler })
 			lsp.pylsp.setup({ handlers = default_handler })
+            lsp.zls.setup({})
+            lsp.phpactor.setup({})
 			lsp.sqlls.setup({
 				single_file_support = true,
 				handlers = default_handler,
