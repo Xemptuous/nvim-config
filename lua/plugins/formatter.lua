@@ -78,6 +78,14 @@ return {
                             }
                         end,
                     },
+                    sql = {
+                        function()
+                            return {
+                                exe = "sleek",
+                                stdin = true
+                            }
+                        end
+                    },
                     python = {
                         require("formatter.filetypes.python").black,
                         require("formatter.filetypes.python").isort,
@@ -98,7 +106,6 @@ return {
                     sh = { require("formatter.filetypes.sh").beautysh },
                     bash = { require("formatter.filetypes.sh").beautysh },
                     zsh = { require("formatter.filetypes.sh").beautysh },
-                    sql = { require("formatter.filetypes.sql").sql_formatter },
                     -- rust = { require("formatter.filetypes.rust").rustfmt },
                     ["*"] = {
                         require("formatter.filetypes.any").remove_trailing_whitespace,
