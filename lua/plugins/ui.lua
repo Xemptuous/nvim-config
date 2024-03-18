@@ -12,13 +12,21 @@ return {
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
-                percentage = 0.15,
+                percentage = 0.25,
             },
             styles = {
                 comments = { "italic" },
                 conditionals = { "italic" },
             },
-            color_overrides = {},
+            color_overrides = {
+                all = {
+                    base = "#0d0d12",
+                    -- base = "#0b0b0b",
+                    -- base = "#11111b",
+                    mantle = "#080808",
+                    crust = "#040404",
+                }
+            },
             custom_highlights = {
                 -- vim.cmd('hi def IlluminatedWordText gui=underline')
                 vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#1e1e2e", underline = true }),

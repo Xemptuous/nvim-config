@@ -7,6 +7,16 @@ return {
         config = function() require("sniprun").setup({}) end
     },
     {
+        "max397574/better-escape.nvim",
+        opts = {
+            mapping = {"jk", "kj"},
+            timeout = vim.o.timeoutlen,
+            clear_empty_lines = false,
+            keys = "<Esc>"
+        },
+        config = function(_, opts) require("better_escape").setup(opts) end
+    },
+    {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup({}) end,
     },
@@ -136,6 +146,7 @@ return {
 	},
     {
 		"folke/which-key.nvim",
+        enabled = false,
 		event = "VeryLazy",
 		config = function()
             local wk = require("which-key")

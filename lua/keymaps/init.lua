@@ -8,11 +8,11 @@ local function standard_keymaps()
     -- better movement
     k("", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
     k("", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
-	k("n", "h", "h", { noremap = true })
-	k("n", "l", "l", { noremap = true })
+	-- k("n", "h", "h", { noremap = true })
+	-- k("n", "l", "l", { noremap = true })
 
-	k("n", "i", "i", { noremap = true })
-	k("n", "u", "u", { noremap = true })
+	-- k("n", "i", "i", { noremap = true })
+	-- k("n", "u", "u", { noremap = true })
 
 	k("n", "<C-c>", [[<Esc>]], { noremap = true })
 	k("i", "jk", [[<Esc>]], { noremap = true })
@@ -24,6 +24,10 @@ local function standard_keymaps()
 	k("n", "<C-j>", "<C-w>j", { noremap = true })
 	k("n", "<C-k>", "<C-w>k", { noremap = true })
 	k("n", "<C-l>", "<C-w>l", { noremap = true })
+	k("n", "<Left>", "<C-w>h", { noremap = true })
+	k("n", "<Down>", "<C-w>j", { noremap = true })
+	k("n", "<Up>", "<C-w>k", { noremap = true })
+	k("n", "<Right>", "<C-w>l", { noremap = true })
 
     -- resize windows
     k("n", "<C-Up>", "<cmd>resize +2<cr>", {desc = "Increase window height"})

@@ -16,18 +16,18 @@ return {
                 logging = false,
                 log_level = vim.log.levels.WARN,
                 filetype = {
-                    c = {
-                        function()
-                            return {
-                                exe = "clang-format",
-                                args = {
-                                    "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-                                    util.escape_path(util.get_current_buffer_file_name()),
-                                },
-                                stdin = true,
-                            }
-                        end,
-                    },
+                    -- c = {
+                    --     function()
+                    --         return {
+                    --             exe = "clang-format",
+                    --             args = {
+                    --                 "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
+                    --                 util.escape_path(util.get_current_buffer_file_name()),
+                    --             },
+                    --             stdin = true,
+                    --         }
+                    --     end,
+                    -- },
                     cpp = {
                         function()
                             return {
@@ -66,18 +66,18 @@ return {
                             }
                         end,
                     },
-                    php = {
-                        function()
-                            return {
-                                exe = "pretty-php",
-                                args = {
-                                    "--quiet", "--stdin-filename",
-                                    util.escape_path(util.get_current_buffer_file_name())
-                                },
-                                stdin = false
-                            }
-                        end,
-                    },
+                    -- php = {
+                    --     function()
+                    --         return {
+                    --             exe = "pretty-php",
+                    --             args = {
+                    --                 "--quiet", "--stdin-filename",
+                    --                 util.escape_path(util.get_current_buffer_file_name())
+                    --             },
+                    --             stdin = false
+                    --         }
+                    --     end,
+                    -- },
                     sql = {
                         function()
                             return {

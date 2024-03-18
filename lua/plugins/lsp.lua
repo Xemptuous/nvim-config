@@ -27,7 +27,7 @@ return {
 				"quick-lint-js",
 				"rust-analyzer",
 				"sqlls",
-                "phpactor",
+                -- "phpactor",
                 "pretty-php",
 				-- "sqls",
 				"vim-language-server",
@@ -221,7 +221,7 @@ return {
 		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter",
+			-- "nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
 			ui = {
