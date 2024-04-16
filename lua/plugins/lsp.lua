@@ -26,7 +26,7 @@ return {
 				"pyright",
 				"quick-lint-js",
 				"rust-analyzer",
-				"sqlls",
+				-- "sqlls",
                 -- "phpactor",
                 "pretty-php",
 				-- "sqls",
@@ -36,11 +36,12 @@ return {
 				-- "luacheck",
 				"quick-lint-js",
 				"ruff",
-				"sqlfluff",
+				-- "sqlfluff",
 				-- Formatters
 				"black",
 				"isort",
 				"jq",
+                "zls",
 				-- "rustfmt" DEPRECATED,
 				"beautysh",
 				"sql-formatter",
@@ -115,10 +116,11 @@ return {
 			lsp.pylsp.setup({ handlers = default_handler })
             lsp.zls.setup({})
             lsp.phpactor.setup({})
-			lsp.sqlls.setup({
-				single_file_support = true,
-				handlers = default_handler,
-			})
+            lsp.rust_analyzer.setup({})
+			-- lsp.sqlls.setup({
+			-- 	single_file_support = true,
+			-- 	handlers = default_handler,
+			-- })
 			lsp.vimls.setup({})
 			lsp.lua_ls.setup({
 				handlers = default_handler,
@@ -271,58 +273,95 @@ return {
 			k("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
 		end,
 	},
-	{
-		"simrat39/rust-tools.nvim",
-		lazy = true,
-		ft = "rust",
-		opts = function()
-			local rt = require("rust-tools")
-			local function on_attach(client, buffer)
-				vim.keymap.set("n", "<S-k>", rt.hover_actions.hover_actions, { buffer = buffer })
-				vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = buffer })
-				vim.api.nvim_create_augroup()
-			end
-			return {
-				tools = {
-					runnables = {
-						use_telescope = true,
-					},
-					inlay_hints = {
-						auto = true,
-						show_parameter_hints = false,
-						parameter_hints_prefix = "",
-						other_hints_prefix = "",
-					},
-					hover_actions = {
-
-						-- the border that is used for the hover window
-						-- see vim.api.nvim_open_win()
-						border = {
-							{ "╭", "FloatBorder" },
-							{ "─", "FloatBorder" },
-							{ "╮", "FloatBorder" },
-							{ "│", "FloatBorder" },
-							{ "╯", "FloatBorder" },
-							{ "─", "FloatBorder" },
-							{ "╰", "FloatBorder" },
-							{ "│", "FloatBorder" },
-						},
-					},
-				},
-				server = {
-					on_attach = on_attach,
-					settings = {
-						["rust-analyzer"] = {
-							checkOnSave = {
-								command = "clippy",
-							},
-						},
-					},
-				},
-			}
-		end,
-		config = function(_, opts)
-			require("rust-tools").setup(opts)
-		end,
-	},
+    {
+        "PedramNavid/dbtpal",
+        -- lazy = true,
+        -- event = "VeryLazy",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
+        -- ft = {
+        --     "sql",
+        --     "dbt",
+        --     "md",
+        --     "yaml",
+        -- },
+        -- keys = {
+        --     { "<leader>drf", "<cmd>DbtRun<cr>" },
+        --     { "<leader>drp", "<cmd>DbtRunAll<cr>" },
+        --     { "<leader>dtf", "<cmd>DbtTest<cr>" },
+        --     { "<leader>dm", "<cmd>lua require('dbtpal.telescope').dbt_picker()<cr>" },
+        -- },
+        config = function()
+            -- require("dbtpal").setup()
+            require("dbtpal").setup({
+                path_to_dbt = "dbt",
+                path_to_dbt_project = "",
+                path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+                extended_path_search = true,
+                protect_compiled_files = true,
+            })
+            require("telescope").load_extension("dbtpal")
+        end,
+    },
+    -- {
+    --     'mrcjkb/rustaceanvim',
+    --     version = '^4',
+    --     ft = { 'rust' },
+    -- }
+	-- {
+	-- 	"simrat39/rust-tools.nvim",
+	-- 	lazy = true,
+	-- 	ft = "rust",
+	-- 	opts = function()
+	-- 		local rt = require("rust-tools")
+	-- 		local function on_attach(client, buffer)
+	-- 			vim.keymap.set("n", "<S-k>", rt.hover_actions.hover_actions, { buffer = buffer })
+	-- 			vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = buffer })
+	-- 			vim.api.nvim_create_augroup()
+	-- 		end
+	-- 		return {
+	-- 			tools = {
+	-- 				runnables = {
+	-- 					use_telescope = true,
+	-- 				},
+	-- 				inlay_hints = {
+	-- 					auto = true,
+	-- 					show_parameter_hints = false,
+	-- 					parameter_hints_prefix = "",
+	-- 					other_hints_prefix = "",
+	-- 				},
+	-- 				hover_actions = {
+	--
+	-- 					-- the border that is used for the hover window
+	-- 					-- see vim.api.nvim_open_win()
+	-- 					border = {
+	-- 						{ "╭", "FloatBorder" },
+	-- 						{ "─", "FloatBorder" },
+	-- 						{ "╮", "FloatBorder" },
+	-- 						{ "│", "FloatBorder" },
+	-- 						{ "╯", "FloatBorder" },
+	-- 						{ "─", "FloatBorder" },
+	-- 						{ "╰", "FloatBorder" },
+	-- 						{ "│", "FloatBorder" },
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 			server = {
+	-- 				on_attach = on_attach,
+	-- 				settings = {
+	-- 					["rust-analyzer"] = {
+	-- 						checkOnSave = {
+	-- 							command = "clippy",
+	-- 						},
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 		}
+	-- 	end,
+	-- 	config = function(_, opts)
+	-- 		require("rust-tools").setup(opts)
+	-- 	end,
+	-- },
 }

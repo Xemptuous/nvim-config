@@ -21,10 +21,11 @@ return {
             color_overrides = {
                 all = {
                     base = "#0d0d12",
+                    -- mantle = "#0d0d12",
                     -- base = "#0b0b0b",
                     -- base = "#11111b",
                     mantle = "#080808",
-                    crust = "#040404",
+                    -- crust = "#040404",
                 }
             },
             custom_highlights = {
@@ -144,12 +145,6 @@ return {
 		cmd = "DBUI",
 		dependencies = { "tpope/vim-dadbod" },
 	},
-    {
-        "xemptuous/sqlua.nvim",
-        lazy = true,
-        cmd = "SQLua",
-        config = function() require("sqlua").setup() end
-    },
     { -- Minimap Sidebar
         "gorbit99/codewindow.nvim",
         lazy = true,
@@ -268,6 +263,8 @@ return {
         "xemptuous/sqlua.nvim",
         lazy = true,
         cmd = 'SQLua',
-        config = function() require("sqlua").setup() end
+        config = function() require("sqlua").setup({
+            load_connections_on_start = false,
+        }) end
     }
 }
