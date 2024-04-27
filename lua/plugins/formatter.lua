@@ -16,18 +16,18 @@ return {
                 logging = false,
                 log_level = vim.log.levels.WARN,
                 filetype = {
-                    -- c = {
-                    --     function()
-                    --         return {
-                    --             exe = "clang-format",
-                    --             args = {
-                    --                 "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-                    --                 util.escape_path(util.get_current_buffer_file_name()),
-                    --             },
-                    --             stdin = true,
-                    --         }
-                    --     end,
-                    -- },
+                    c = {
+                        function()
+                            return {
+                                exe = "clang-format",
+                                args = {
+                                    "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
+                                    util.escape_path(util.get_current_buffer_file_name()),
+                                },
+                                stdin = true,
+                            }
+                        end,
+                    },
                     cpp = {
                         function()
                             return {
@@ -45,8 +45,7 @@ return {
                             return {
                                 exe = "clang-format",
                                 args = {
-                                    "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-                                    -- "-assume-filename",
+                                    "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format", "-assume-filename",
                                     util.escape_path(util.get_current_buffer_file_name()),
                                 },
                                 stdin = true,
@@ -105,6 +104,7 @@ return {
                     -- python = { require("formatter.filetypes.python").black },
                     sh = { require("formatter.filetypes.sh").beautysh },
                     bash = { require("formatter.filetypes.sh").beautysh },
+                    html = { require("formatter.filetypes.html").prettier },
                     zsh = { require("formatter.filetypes.sh").beautysh },
                     -- rust = { require("formatter.filetypes.rust").rustfmt },
                     ["*"] = {

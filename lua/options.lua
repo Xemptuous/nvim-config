@@ -44,6 +44,9 @@ vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
 	command = "setfiletype xdefaults",
 })
 
--- vim.cmd [[highlight CursorLineNr guifg=#4fa6ed gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineIndent1 guifg=#313640 gui=nocombine]]
--- vim.cmd [[highlight IndentBlanklineContextChar guifg=#4fa6ed gui=nocombine]]
+-- Highlight sqlfluff config
+vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
+	desc = "Set sqlfluff file ft syntax",
+	pattern = "*.sqlfluff",
+	command = "setfiletype toml",
+})

@@ -195,4 +195,5 @@ return {
             })
 		end,
 	},
+    { "chrisbra/unicode.vim" }
 }
