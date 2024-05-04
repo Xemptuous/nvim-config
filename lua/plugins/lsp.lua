@@ -199,12 +199,12 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope.nvim"
         },
-        ft = {
-            "sql",
-            "dbt",
-            "md",
-            "yaml",
-        },
+        -- ft = {
+        --     "sql",
+        --     "dbt",
+        --     "md",
+        --     "yaml",
+        -- },
         config = function()
             require("dbtpal").setup({
                 path_to_dbt = "dbt",

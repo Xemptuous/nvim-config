@@ -266,5 +266,25 @@ return {
         config = function() require("sqlua").setup({
             load_connections_on_start = false,
         }) end
+    },
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {"MunifTanjim/nui.nvim"},
+        build = function() require("dbee").install() end,
+        config = function()
+            require("dbee").setup({
+                sources = {
+                    require("dbee.sources").FileSource:new(vim.fn.stdpath("data") .. "/dbee/connections.json") ,
+                },
+                default_connection = "americor-crm",
+                editor = {
+                    mappings = {
+                        { key = "<leader>r", mode = "v", action = "run_selection"},
+                        { key = "<leader>r", mode = "n", action = "run_file"},
+                    }
+                }
+
+            })
+        end
     }
 }
