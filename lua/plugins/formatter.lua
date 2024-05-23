@@ -14,7 +14,7 @@ return {
             local util = require("formatter.util")
             require("formatter").setup{
                 logging = false,
-                log_level = vim.log.levels.WARN,
+                log_level = vim.log.levels.ERROR,
                 filetype = {
                     c = {
                         function()
@@ -58,7 +58,7 @@ return {
                                 exe = "clang-format",
                                 args = {
                                     "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-                                    -- "-assume-filename",
+                                    "-assume-filename",
                                     util.escape_path(util.get_current_buffer_file_name()),
                                 },
                                 stdin = true,
@@ -92,13 +92,21 @@ return {
                             return {
                                 exe = "ruff",
                                 args = {
-                                    "--fix-only",
+                                    "--fix",
                                     "--config" .. vim.fn.stdpath("config") .. "/.ruff.toml",
                                     "-q",
                                 },
                             }
                         end,
                     },
+                    js = {require("formatter.filetypes.javascript").prettier},
+                    mjs = {require("formatter.filetypes.javascript").prettier},
+                    jsr = {require("formatter.filetypes.javascriptreact").prettier},
+                    jsx = {require("formatter.filetypes.javascriptreact").prettier},
+                    ts = {require("formatter.filetypes.typescript").prettier},
+                    tsr = {require("formatter.filetypes.typescriptreact").prettier},
+                    tsx = {require("formatter.filetypes.typescriptreact").prettier},
+                    svelte = {require("formatter.filetypes.svelte").prettier},
                     json = { require("formatter.filetypes.json").jq },
                     -- lua = { require("formatter.filetypes.lua").stylua },
                     -- python = { require("formatter.filetypes.python").black },

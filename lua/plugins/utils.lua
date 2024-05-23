@@ -195,5 +195,6 @@ return {
             })
 		end,
 	},
+    { "jidn/vim-dbml" },
     { "chrisbra/unicode.vim" }
 }

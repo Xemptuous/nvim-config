@@ -11,7 +11,9 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
+            "ray-x/cmp-sql",
 			"L3MON4D3/LuaSnip",
+            "nanotee/sqls.nvim"
 		},
         opts = function()
             local lspkind = require("lspkind")
@@ -20,6 +22,7 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     -- { name = "nvim_lsp", keyword_length = 1 },
+                    { name = "nvim_lsp+document_symbol" },
                     { name = "nvim_lsp+signature_help" },
                     { name = "nvim_lua", ft="lua"},
                     { name = "buffer" },
@@ -27,6 +30,7 @@ return {
                     -- { name = "buffer", keyword_length = 3 },
                     -- { name = "look", keyword_length = 3, ft={"markup", "html"} },
                     { name = "path" },
+                    { name = "sql"},
                     { name = "luasnip", keyword_length = 2 },
                 },
                 snippet = {

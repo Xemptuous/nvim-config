@@ -21,19 +21,18 @@ return {
 				"html-lsp",
 				"jdtls",
 				-- "lua-language-server",
-				-- "csharp-language-server",
-				-- "omnisharp-mono",
+				"csharp-language-server",
                 "python-lsp-server",
 				"quick-lint-js",
 				"rust-analyzer",
-				-- "sqlls",
                 -- "phpactor",
                 "pretty-php",
-				-- "sqls",
+				"sqls",
 				"vim-language-server",
 				-- Linters
 				"jsonlint",
 				-- "luacheck",
+                "typescript-language-server",
 				"quick-lint-js",
 				"ruff",
 				-- "sqlfluff",
@@ -42,7 +41,6 @@ return {
 				"isort",
 				"jq",
                 "zls",
-				-- "rustfmt" DEPRECATED,
 				"beautysh",
 				"sql-formatter",
 				"stylua",
@@ -63,6 +61,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"folke/neodev.nvim",
+            "nanotee/sqls.nvim",
 		},
 		config = function()
 			require("neodev").setup({})
@@ -118,10 +117,18 @@ return {
             lsp.zls.setup({})
             lsp.phpactor.setup({})
             lsp.rust_analyzer.setup({})
-			-- lsp.sqlls.setup({
-			-- 	single_file_support = true,
-			-- 	handlers = default_handler,
-			-- })
+            lsp.tsserver.setup({})
+            lsp.csharp_ls.setup({
+                root_dir = function(startpath)
+                    return lsp.util.root_pattern("*.sln")(startpath)
+                        or lsp.util.root_pattern("*.csproj")(startpath)
+                        or lsp.util.root_pattern("*.fsproj")(startpath)
+                        or lsp.util.root_pattern(".git")(startpath)
+                end,
+                -- on_attach = on_attach,
+                -- capabilities = capabilities,
+            })
+            lsp.sqls.setup({})
 			lsp.vimls.setup({})
 			lsp.lua_ls.setup({
 				handlers = default_handler,
@@ -217,4 +224,6 @@ return {
             require("telescope").load_extension("dbtpal")
         end,
     },
+    { "evanleck/vim-svelte" },
+    { "lifepillar/pgsql.vim" }
 }
