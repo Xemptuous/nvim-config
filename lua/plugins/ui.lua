@@ -133,12 +133,11 @@ return {
             vim.api.nvim_set_keymap("n", "<leader>d", [[:Twilight<CR>]], {})
         end
     },
-    { "sindrets/diffview.nvim" },
     {
         "NeogitOrg/neogit",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "sindreds/diffview.nvim",
+            "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
         },
         -- config = true,
