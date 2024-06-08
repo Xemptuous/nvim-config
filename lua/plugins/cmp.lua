@@ -11,6 +11,7 @@ return {
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
+            "mtoohey31/cmp-fish",
             "ray-x/cmp-sql",
 			"L3MON4D3/LuaSnip",
             "nanotee/sqls.nvim"
@@ -22,16 +23,17 @@ return {
                 sources = {
                     { name = "nvim_lsp" },
                     -- { name = "nvim_lsp", keyword_length = 1 },
-                    { name = "nvim_lsp+document_symbol" },
-                    { name = "nvim_lsp+signature_help" },
+                    { name = "nvim_lsp+document_symbol", ft={"lua"} },
+                    { name = "nvim_lsp+signature_help", ft={"lua"} },
                     { name = "nvim_lua", ft="lua"},
                     { name = "buffer" },
                     { name = "look", ft={"markup", "html"} },
+                    { name = "fish", ft={"fish"} },
                     -- { name = "buffer", keyword_length = 3 },
                     -- { name = "look", keyword_length = 3, ft={"markup", "html"} },
                     { name = "path" },
-                    { name = "sql"},
-                    { name = "luasnip", keyword_length = 2 },
+                    { name = "sql", ft={"sql", "pgsql"}},
+                    { name = "luasnip", keyword_length = 3 },
                 },
                 snippet = {
                     expand = function(args)
@@ -73,21 +75,7 @@ return {
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    ["<Tab>"] = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        else
-                            fallback()
-                        end
-                    end,
-                    ["<S-Tab>"] = function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        else
-                            fallback()
-                        end
-                    end,
+                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
                 }),
             }
         end,
