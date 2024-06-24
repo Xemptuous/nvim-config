@@ -20,6 +20,7 @@ return {
 				"debugpy",
 				"html-lsp",
 				"jdtls",
+                "gopls",
 				-- "lua-language-server",
 				"csharp-language-server",
                 "python-lsp-server",
@@ -27,7 +28,7 @@ return {
 				"rust-analyzer",
                 -- "phpactor",
                 "pretty-php",
-				"sqls",
+				-- "sqls",
 				"vim-language-server",
 				-- Linters
 				"jsonlint",
@@ -61,7 +62,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"folke/neodev.nvim",
-            "nanotee/sqls.nvim",
+            -- "nanotee/sqls.nvim",
 		},
 		config = function()
 			require("neodev").setup({})
@@ -116,6 +117,7 @@ return {
 			lsp.pylsp.setup({ handlers = default_handler })
             lsp.zls.setup({})
             lsp.phpactor.setup({})
+            lsp.gopls.setup({})
             lsp.rust_analyzer.setup({})
             lsp.tsserver.setup({})
             lsp.csharp_ls.setup({
@@ -128,7 +130,7 @@ return {
                 -- on_attach = on_attach,
                 -- capabilities = capabilities,
             })
-            lsp.sqls.setup({})
+            -- lsp.sqls.setup({})
 			lsp.vimls.setup({})
 			lsp.lua_ls.setup({
 				handlers = default_handler,

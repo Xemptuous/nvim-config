@@ -268,7 +268,7 @@ return {
             }
         end,
 		config = function(_, opts)
-            require("nvim-tree").setup(opts)
+            require("nvim-tree").setup()
             vim.api.nvim_set_keymap("n", "<C-t>", [[:NvimTreeToggle<CR>]], {})
         end
 	},

@@ -52,19 +52,19 @@ return {
                             }
                         end,
                     },
-                    cs = {
-                        function()
-                            return {
-                                exe = "clang-format",
-                                args = {
-                                    "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-                                    "-assume-filename",
-                                    util.escape_path(util.get_current_buffer_file_name()),
-                                },
-                                stdin = true,
-                            }
-                        end,
-                    },
+                    -- cs = {
+                    --     function()
+                    --         return {
+                    --             exe = "clang-format",
+                    --             args = {
+                    --                 "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
+                    --                 "-assume-filename",
+                    --                 util.escape_path(util.get_current_buffer_file_name()),
+                    --             },
+                    --             stdin = true,
+                    --         }
+                    --     end,
+                    -- },
                     -- php = {
                     --     function()
                     --         return {
@@ -99,6 +99,7 @@ return {
                             }
                         end,
                     },
+                    go = {require("formatter.filetypes.go").gofumpt},
                     js = {require("formatter.filetypes.javascript").prettier},
                     mjs = {require("formatter.filetypes.javascript").prettier},
                     jsr = {require("formatter.filetypes.javascriptreact").prettier},
