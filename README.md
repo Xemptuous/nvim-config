@@ -9,7 +9,6 @@ The main folder structure is:
 └── lua/
     ├── init.lua  # main plugin manager loader (lazy.nvim)
     ├── options.lua  # various global options
-    ├── theme.lua  # color scheme configs
     ├── keymaps/
     │   ├── init.lua  # main keymaps
     │   └── ...  # various individual keymaps
