@@ -12,9 +12,9 @@ return {
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
             "mtoohey31/cmp-fish",
-            "ray-x/cmp-sql",
+            -- "ray-x/cmp-sql",
 			"L3MON4D3/LuaSnip",
-            "nanotee/sqls.nvim"
+            -- "nanotee/sqls.nvim"
 		},
         opts = function()
             local lspkind = require("lspkind")
@@ -32,7 +32,7 @@ return {
                     -- { name = "buffer", keyword_length = 3 },
                     -- { name = "look", keyword_length = 3, ft={"markup", "html"} },
                     { name = "path" },
-                    { name = "sql", ft={"sql", "pgsql"}},
+                    -- { name = "sql", ft={"sql", "pgsql"}},
                     { name = "luasnip", keyword_length = 3 },
                 },
                 snippet = {
