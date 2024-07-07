@@ -29,7 +29,7 @@ opt.laststatus = 0 -- always show status line
 opt.cindent = true
 opt.autoread = true
 opt.lazyredraw = true
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {
