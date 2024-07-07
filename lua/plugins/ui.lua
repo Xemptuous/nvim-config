@@ -1,7 +1,9 @@
 return {
 	{
 		"catppuccin/nvim",
-		priority = 900,
+        enabled = true,
+        lazy = false,
+		priority = 1000,
         opts = {
             flavour = "mocha",
             background = { -- :h background
@@ -12,7 +14,7 @@ return {
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
-                percentage = 0.25,
+                percentage = 0.01,
             },
             styles = {
                 comments = { "italic" },
@@ -20,12 +22,8 @@ return {
             },
             color_overrides = {
                 all = {
-                    base = "#0d0d12",
-                    -- mantle = "#0d0d12",
-                    -- base = "#0b0b0b",
-                    -- base = "#11111b",
-                    mantle = "#080808",
-                    -- crust = "#040404",
+                    base = "#0d0d14",
+                    mantle = "#08080d",
                 }
             },
             custom_highlights = {
@@ -74,6 +72,17 @@ return {
             vim.cmd.colorscheme("catppuccin")
         end
 	},
+    {
+        "folke/tokyonight.nvim",
+        enabled = false,
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+            require("tokyonight").setup(opts)
+            vim.cmd.colorscheme("tokyonight-night")
+        end
+    },
 	{
 		"nvim-lualine/lualine.nvim",
 		lazy = true,
