@@ -9,10 +9,19 @@ return {
     {
         "max397574/better-escape.nvim",
         opts = {
-            mapping = {"jk", "kj"},
+            mappings = {
+                i = {
+                    j = {
+                        k = "<Esc>",
+                        j = "<Esc>",
+                    },
+                    k = {
+                        k = "<Esc>",
+                        j = "<Esc>",
+                    },
+                },
+            },
             timeout = vim.o.timeoutlen,
-            clear_empty_lines = false,
-            keys = "<Esc>"
         },
         config = function(_, opts) require("better_escape").setup(opts) end
     },
