@@ -46,5 +46,10 @@ require("lazy").setup("plugins", {
         "perl",
         "python3",
         "ruby",
+    },
+    install = {
+        colorscheme = {
+            "catppuccin"
+        }
     }
 })
