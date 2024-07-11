@@ -286,4 +286,5 @@ return {
             })
         end
     },
+    { "glench/vim-jinja2-syntax" },
 }

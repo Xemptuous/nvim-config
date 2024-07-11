@@ -73,16 +73,10 @@ return {
         end
 	},
     {
-        "folke/tokyonight.nvim",
-        enabled = false,
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        config = function(_, opts)
-            require("tokyonight").setup(opts)
-            vim.cmd.colorscheme("tokyonight-night")
-        end
+        "zenbones-theme/zenbones.nvim",
+        dependencies = {"rktjmp/lush.nvim"}
     },
+    { "folke/tokyonight.nvim" },
     { "NLKNguyen/papercolor-theme" },
     { "MetriC-DT/balance-theme.nvim" },
     { "sainnhe/edge" },
@@ -90,4 +84,8 @@ return {
     { "projekt0n/github-nvim-theme" },
     { "Shatur/neovim-ayu" },
     { 'maxmx03/solarized.nvim' },
+    { 'nyoom-engineering/nyoom.nvim' },
+    { 'scottmckendry/cyberdream.nvim' },
+    { 'preservim/vim-colors-pencil' },
+    { 'yorik1984/newpaper.nvim' },
 }

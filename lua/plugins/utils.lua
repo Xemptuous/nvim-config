@@ -85,32 +85,11 @@ return {
         config = function() require("baleia").setup({}) end,
     },
     {
-        "toppair/peek.nvim",
-        -- ft = {"markdown"},
-        init = function()
-            vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
-            vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
-        end,
-        opts = {
-            -- whether to automatically load preview when entering another markdown buffer
-            auto_load = true,
-            -- close preview window on buffer delete
-            close_on_bdelete = true,
-            -- enable syntax highlighting, affects performance
-            syntax = true,
-            -- 'dark' or 'light'
-            theme = 'dark',
-            update_on_change = true,
-            -- 'webview', 'browser', string or a table of strings explained below
-            app = 'webview',
-            -- list of filetypes to recognize as markdown relevant if update_on_change is true
-            filetype = { 'markdown' },
-            -- start throttling when file exceeds this amount of bytes in size
-            throttle_at = 200000,
-            -- minimum amount of time in milliseconds that has to pass before starting new render
-            throttle_time = 'auto',
-        },
-        config = function(_, opts) require("peek").setup(opts) end
+        "iamcco/markdown-preview.nvim",
+        lazy = true,
+        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+        ft = { "markdown" },
+        build = function() vim.fn["mkdp#util#install"]() end,
     },
 	{
 		"mrjones2014/legendary.nvim",
@@ -197,6 +176,10 @@ return {
             })
 		end,
 	},
+    {
+        "kevinhwang91/nvim-bqf",
+        ft = {"qf"}
+    },
     { "jidn/vim-dbml" },
     { "chrisbra/unicode.vim" }
 }

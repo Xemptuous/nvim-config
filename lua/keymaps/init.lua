@@ -60,6 +60,10 @@ k("n", "X", [["_X]], { noremap = true })
 k("n", "<leader>uw", ":set nowrap!<cr>", {})
 k("n", "<leader>f", ":Format<cr>", {})
 
+-- quickfix list
+k("n", "<C-n>", ":cn<CR>", {})
+k("n", "<C-p>", ":cp<CR>", {})
+
 -- Fix for Xterm
 -- removed. Instead, add to .Xresources:
 -- xterm.VT100.translations: #override \
