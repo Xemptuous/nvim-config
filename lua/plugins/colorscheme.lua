@@ -88,4 +88,7 @@ return {
     { 'scottmckendry/cyberdream.nvim' },
     { 'preservim/vim-colors-pencil' },
     { 'yorik1984/newpaper.nvim' },
+    { 'ryanpcmcquen/true-monochrome_vim' },
+    { 'owickstrom/vim-colors-paramount' },
+    { 'zenbones-theme/zenbones.nvim' },
 }
