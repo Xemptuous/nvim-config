@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
+        enabled = true,
 		lazy = true,
         -- event = "BufReadPre",
 		event = "VeryLazy",
@@ -60,6 +61,7 @@ return {
     },
     {
         "NeogitOrg/neogit",
+        enabled = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
@@ -268,6 +270,7 @@ return {
     },
     {
         "kndndrj/nvim-dbee",
+        enabled = false,
         dependencies = {"MunifTanjim/nui.nvim"},
         build = function() require("dbee").install() end,
         config = function()

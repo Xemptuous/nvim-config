@@ -5,10 +5,10 @@ return {
         lazy = false,
 		priority = 1000,
         opts = {
-            flavour = "latte",
+            flavour = "mocha",
             background = { -- :h background
-                light = "latte",
-                dark = "latte",
+                light = "mocha",
+                dark = "mocha",
             },
             transparent_background = false,
             dim_inactive = {

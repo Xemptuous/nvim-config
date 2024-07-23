@@ -51,6 +51,8 @@ k("v", "<A-k>", ":m '<-2<cr>gv=gv", {desc = "Move Up"})
 -- better indent
 k("v", "<", "<gv", { noremap = true })
 k("v", ">", ">gv", { noremap = true })
+k("n", "<", "<<", { noremap = true })
+k("n", ">", ">>", { noremap = true })
 
 -- dont save delete chars to clipboard
 k("n", "x", [["_x]], { noremap = true })

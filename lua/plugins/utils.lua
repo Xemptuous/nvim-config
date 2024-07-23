@@ -127,7 +127,7 @@ return {
 	},
     {
 		"folke/which-key.nvim",
-        enabled = true,
+        enabled = false,
 		event = "VeryLazy",
 		config = function()
             local wk = require("which-key")

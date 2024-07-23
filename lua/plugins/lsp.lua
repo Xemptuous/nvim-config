@@ -202,6 +202,7 @@ return {
 	},
     {
         "PedramNavid/dbtpal",
+        enabled = false,
         -- lazy = true,
         -- event = "VeryLazy",
         dependencies = {
