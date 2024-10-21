@@ -32,6 +32,7 @@ return {
 	},
     {
         "folke/twilight.nvim",
+        enabled = false,
         lazy = true,
         keys = "<leader>d",
         opts = {
@@ -142,11 +143,13 @@ return {
     },
 	{
 		"kristijanhusak/vim-dadbod-ui",
+        enabled = false,
 		lazy = true,
 		cmd = "DBUI",
 		dependencies = { "tpope/vim-dadbod" },
 	},
     { -- Minimap Sidebar
+        enabled = false,
         "gorbit99/codewindow.nvim",
         lazy = true,
         keys = "<leader>mm",

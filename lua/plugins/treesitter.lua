@@ -2,7 +2,7 @@ local load_textobjects = false
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		priority = 700,
+		-- priority = 700,
 		dependencies = {
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",

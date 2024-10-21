@@ -61,11 +61,9 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"folke/neodev.nvim",
             -- "nanotee/sqls.nvim",
 		},
 		config = function()
-			require("neodev").setup({})
 			require("mason").setup()
 			require("mason-lspconfig").setup()
 			local function filter(arr, func)
@@ -118,18 +116,32 @@ return {
             lsp.zls.setup({})
             lsp.phpactor.setup({})
             lsp.gopls.setup({})
-            lsp.rust_analyzer.setup({})
-            lsp.tsserver.setup({})
-            lsp.csharp_ls.setup({
-                root_dir = function(startpath)
-                    return lsp.util.root_pattern("*.sln")(startpath)
-                        or lsp.util.root_pattern("*.csproj")(startpath)
-                        or lsp.util.root_pattern("*.fsproj")(startpath)
-                        or lsp.util.root_pattern(".git")(startpath)
+            lsp.rust_analyzer.setup({
+                on_attach = function (client, bufnr)
+                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                 end,
-                -- on_attach = on_attach,
-                -- capabilities = capabilities,
+                settings = {
+                    ['rust_analyzer'] = {
+                        cargo = {
+                            allFeatures = true
+                        },
+                        checkOnSave = {
+                            command = "clippy"
+                        }
+                    }
+                }
             })
+            lsp.ts_ls.setup({})
+            -- lsp.csharp_ls.setup({
+            --     root_dir = function(startpath)
+            --         return lsp.util.root_pattern("*.sln")(startpath)
+            --             or lsp.util.root_pattern("*.csproj")(startpath)
+            --             or lsp.util.root_pattern("*.fsproj")(startpath)
+            --             or lsp.util.root_pattern(".git")(startpath)
+            --     end,
+            --     -- on_attach = on_attach,
+            --     -- capabilities = capabilities,
+            -- })
             -- lsp.sqls.setup({})
 			lsp.vimls.setup({})
 			lsp.lua_ls.setup({
@@ -144,8 +156,15 @@ return {
 			})
 		end,
 	},
+    {
+        'https://github.com/mrcjkb/rustaceanvim',
+        enabled = false,
+        version = '^5',
+        lazy = false
+    },
 	{
 		"nvimdev/lspsaga.nvim",
+        enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
@@ -169,8 +188,8 @@ return {
 			local k = vim.api.nvim_set_keymap
 			k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
 
-			k("n", "gr", "<cmd>Lspsaga rename<CR>", {})
-			k("n", "gR", "<cmd>Lspsaga rename ++project<CR>", {})
+			k("n", "<space>r", "<cmd>Lspsaga rename<CR>", {})
+			k("n", "<space>R", "<cmd>Lspsaga rename ++project<CR>", {})
 
 			k("n", "gd", "<cmd>Lspsaga peek_definition<CR>", {})
 			k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
@@ -193,7 +212,7 @@ return {
 			end)
 
 			k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
-			k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
+			-- k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
 			k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
 			k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
 			k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
@@ -227,6 +246,6 @@ return {
             require("telescope").load_extension("dbtpal")
         end,
     },
-    { "evanleck/vim-svelte" },
-    { "lifepillar/pgsql.vim" }
+    -- { "evanleck/vim-svelte" },
+    -- { "lifepillar/pgsql.vim" }
 }
