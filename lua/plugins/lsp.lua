@@ -1,60 +1,5 @@
 return {
 	{
-		"williamboman/mason.nvim",
-		opts = {
-			ui = {
-				border = "single",
-			},
-			log_level = vim.log.levels.DEBUG,
-		},
-		config = function(_, opts)
-			require("mason").setup(opts)
-			require("mason-lspconfig").setup()
-			local mr = require("mason-registry")
-
-			local requirements = {
-				-- LSPs
-				"bash-language-server",
-				"clangd",
-				"css-lsp",
-				"debugpy",
-				"html-lsp",
-				"jdtls",
-				"gopls",
-				-- "lua-language-server",
-				"csharp-language-server",
-				"python-lsp-server",
-				"quick-lint-js",
-				"rust-analyzer",
-				-- "phpactor",
-				"pretty-php",
-				-- "sqls",
-				"vim-language-server",
-				-- Linters
-				"jsonlint",
-				-- "luacheck",
-				"typescript-language-server",
-				"quick-lint-js",
-				"ruff",
-				-- "sqlfluff",
-				-- Formatters
-				"black",
-				"isort",
-				"jq",
-				"zls",
-				"beautysh",
-				"sql-formatter",
-				"stylua",
-				"clang-format",
-			}
-			for _, r in pairs(requirements) do
-				if not mr.is_installed(r) then
-					vim.cmd(":MasonInstall " .. r)
-				end
-			end
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
@@ -65,40 +10,84 @@ return {
 		},
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup()
-			local function filter(arr, func)
-				-- Filter in place
-				-- https://stackoverflow.com/questions/49709998/how-to-filter-a-lua-array-inplace
-				local new_index = 1
-				local size_orig = #arr
-				for old_index, v in ipairs(arr) do
-					if func(v, old_index) then
-						arr[new_index] = v
-						new_index = new_index + 1
-					end
-				end
-				for i = new_index, size_orig do
-					arr[i] = nil
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"bashls",
+					"clangd",
+					"cssls",
+					"html",
+					"jdtls",
+					"gopls",
+					"lua_ls",
+					"csharp_ls",
+					"pylsp",
+					"quick_lint_js",
+					"rust_analyzer",
+					"jqls",
+					"phpactor",
+					-- "sqls",
+					"jsonls",
+					"ts_ls",
+					"ruff",
+					"zls",
+				},
+			})
+			local mr = require("mason-registry")
+			for _, r in pairs({
+				"debugpy",
+				"pretty-php",
+				"vim-language-server",
+				"jsonlint",
+				-- "luacheck",
+				---Formatters
+				-- "sqlfluff",
+				"black",
+				"isort",
+				"jq",
+				"beautysh",
+				"sql-formatter",
+				"stylua",
+				"clang-format",
+			}) do
+				if not mr.is_installed(r) then
+					vim.cmd(":MasonInstall " .. r)
 				end
 			end
 
-			local function filter_diagnostics(diagnostic)
-				-- Only filter out sqlls stuff for now
-				if diagnostic.source ~= "sql" then
+			-- Filter diagnostics
+			local function custom_on_publish_diagnostics(a, params, client_id, c, config)
+				local function filter(arr, func)
+					-- Filter in place
+					-- https://stackoverflow.com/questions/49709998/how-to-filter-a-lua-array-inplace
+					local new_index = 1
+					local size_orig = #arr
+					for old_index, v in ipairs(arr) do
+						if func(v, old_index) then
+							arr[new_index] = v
+							new_index = new_index + 1
+						end
+					end
+					for i = new_index, size_orig do
+						arr[i] = nil
+					end
+				end
+				local function filter_diagnostics(diagnostic)
+					-- Only filter out sqlls stuff for now
+					if diagnostic.source ~= "sql" then
+						return true
+					end
+
+					if diagnostic.message:match('Expected "\\-\\-') then
+						return false
+					end
+
 					return true
 				end
 
-				if diagnostic.message:match('Expected "\\-\\-') then
-					return false
-				end
-
-				return true
-			end
-
-			local function custom_on_publish_diagnostics(a, params, client_id, c, config)
 				filter(params.diagnostics, filter_diagnostics)
 				vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_id, c, config)
 			end
+			-- Custom diagnostic visualization
 			local default_handler = {
 				["textDocument/publishDiagnostics"] = vim.lsp.with(custom_on_publish_diagnostics, {
 					virtual_text = false,
@@ -107,7 +96,7 @@ return {
 					update_in_insert = false,
 				}),
 			}
-			-- local cmp = require("cmp")
+			-- Default Capabilities
 			local capabilities = {
 				textDocument = {
 					completion = {
@@ -159,9 +148,13 @@ return {
 				},
 			}
 
+			-- LSP Setup
 			local lsp = require("lspconfig")
 			lsp.bashls.setup({ capabilities = capabilities })
-			lsp.clangd.setup({ capabilities = capabilities })
+			lsp.clangd.setup({
+				capabilities = capabilities,
+				filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
+			})
 			lsp.jdtls.setup({
 				capabilities = capabilities,
 				cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" },
@@ -224,7 +217,8 @@ return {
 		"https://github.com/mrcjkb/rustaceanvim",
 		enabled = false,
 		version = "^5",
-		lazy = false,
+		lazy = true,
+		ft = { "rust" },
 	},
 	{
 		"nvimdev/lspsaga.nvim",

@@ -117,6 +117,7 @@ return {
 	{
 		"lambdalisue/suda.vim",
 		lazy = true,
+		event = "VeryLazy",
 		cmd = "SudaWrite",
 	},
 	{ -- parse and color ansi escape color codes
@@ -131,6 +132,7 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		lazy = true,
+		event = "VeryLazy",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = function()

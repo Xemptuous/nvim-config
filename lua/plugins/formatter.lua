@@ -1,128 +1,82 @@
+local clang_config_path = "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format"
+
 return {
 	{
-		"mhartington/formatter.nvim",
+		"stevearc/conform.nvim",
 		lazy = true,
-		cmd = { "Format", "FormatWrite" },
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<leader>f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
 		init = function()
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				pattern = { "*" },
-				command = "FormatWrite",
-			})
+			-- Format on Save
+			-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+			-- 	pattern = { "*" },
+			-- 	callback = function(args)
+			-- 		require("conform").format({ bufnr = args.buf })
+			-- 	end,
+			-- })
+			-- Manual Format
+			vim.api.nvim_create_user_command("Format", function(args)
+				local range = nil
+				if args.count ~= -1 then
+					local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+					range = {
+						start = { args.line1, 0 },
+						["end"] = { args.line2, end_line:len() },
+					}
+				end
+				require("conform").format({ async = true, lsp_format = "fallback", range = range })
+			end, { range = true })
+			-- Enable/Disable Formatting
+			vim.api.nvim_create_user_command("FormatDisable", function()
+				vim.g.disable_autoformat = true
+			end, { desc = "Disable autoformat-on-save" })
+			vim.api.nvim_create_user_command("FormatEnable", function()
+				vim.b.disable_autoformat = false
+				vim.g.disable_autoformat = false
+			end, { desc = "Re-enable autoformat-on-save" })
 		end,
-		-- opts = {
-		config = function()
-			local util = require("formatter.util")
-			require("formatter").setup({
-				logging = false,
-				log_level = vim.log.levels.ERROR,
-				filetype = {
-					c = {
-						function()
-							return {
-								exe = "clang-format",
-								args = {
-									"--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-									util.escape_path(util.get_current_buffer_file_name()),
-								},
-								stdin = true,
-							}
-						end,
-					},
-					cpp = {
-						function()
-							return {
-								exe = "clang-format",
-								args = {
-									"--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-									util.escape_path(util.get_current_buffer_file_name()),
-								},
-								stdin = true,
-							}
-						end,
-					},
-					java = {
-						function()
-							return {
-								exe = "clang-format",
-								args = {
-									"--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-									"-assume-filename",
-									util.escape_path(util.get_current_buffer_file_name()),
-								},
-								stdin = true,
-							}
-						end,
-					},
-					cs = {
-						function()
-							return {
-								exe = "clang-format",
-								args = {
-									"--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format",
-									"-assume-filename",
-									util.escape_path(util.get_current_buffer_file_name()),
-								},
-								stdin = true,
-							}
-						end,
-					},
-					php = {
-						function()
-							return {
-								exe = "pretty-php",
-								args = {
-									"--quiet",
-									"--stdin-filename",
-									util.escape_path(util.get_current_buffer_file_name()),
-								},
-								stdin = false,
-							}
-						end,
-					},
-					sql = {
-						function()
-							return {
-								exe = "sleek",
-								stdin = true,
-							}
-						end,
-					},
-					python = {
-						require("formatter.filetypes.python").black,
-						require("formatter.filetypes.python").isort,
-						function()
-							return {
-								exe = "ruff",
-								args = {
-									"--fix",
-									"--config" .. vim.fn.stdpath("config") .. "/.ruff.toml",
-									"-q",
-								},
-							}
-						end,
-					},
-					go = { require("formatter.filetypes.go").gofumpt },
-					js = { require("formatter.filetypes.javascript").prettier },
-					mjs = { require("formatter.filetypes.javascript").prettier },
-					jsr = { require("formatter.filetypes.javascriptreact").prettier },
-					jsx = { require("formatter.filetypes.javascriptreact").prettier },
-					ts = { require("formatter.filetypes.typescript").prettier },
-					tsr = { require("formatter.filetypes.typescriptreact").prettier },
-					tsx = { require("formatter.filetypes.typescriptreact").prettier },
-					svelte = { require("formatter.filetypes.svelte").prettier },
-					json = { require("formatter.filetypes.json").jq },
-					lua = { require("formatter.filetypes.lua").stylua },
-					python = { require("formatter.filetypes.python").black },
-					sh = { require("formatter.filetypes.sh").beautysh },
-					bash = { require("formatter.filetypes.sh").beautysh },
-					html = { require("formatter.filetypes.html").prettier },
-					zsh = { require("formatter.filetypes.sh").beautysh },
-					rust = { require("formatter.filetypes.rust").rustfmt },
-					["*"] = {
-						require("formatter.filetypes.any").remove_trailing_whitespace,
-					},
-				},
-			})
-		end,
+		opts = {
+			format_on_save = function(bufnr)
+				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+					return
+				end
+				return { timeout_ms = 500, lsp_format = "fallback" }
+			end,
+			formatters_by_ft = {
+				bash = { "beautysh" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				cs = { "clang-format" },
+				fish = { "beautysh" },
+				go = { "gofmt" },
+				java = { "clang-format" },
+				js = { "prettier" },
+				json = { "jq" },
+				jsr = { "prettier" },
+				jsx = { "prettier" },
+				lua = { "stylua" },
+				mjs = { "prettier" },
+				php = { "pretty-php" },
+				python = { "isort", "black", "ruff" },
+				rust = { "rustfmt", lsp_format = "fallback" },
+				sh = { "beautysh" },
+				svelte = { "prettier" },
+				ts = { "prettier" },
+				tsr = { "prettier" },
+				tsx = { "prettier" },
+				zsh = { "beautysh" },
+			},
+		},
 	},
 }
