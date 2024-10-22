@@ -107,16 +107,29 @@ return {
 					update_in_insert = false,
 				}),
 			}
+            local cmp = require("cmp")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lsp = require("lspconfig")
-			lsp.bashls.setup({})
-			lsp.clangd.setup({})
-			lsp.jdtls.setup({ cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" } })
-			lsp.html.setup({ handlers = default_handler })
-			lsp.pylsp.setup({ handlers = default_handler })
-            lsp.zls.setup({})
-            lsp.phpactor.setup({})
-            lsp.gopls.setup({})
+			lsp.bashls.setup({capabilities = capabilities})
+			lsp.clangd.setup({capabilities = capabilities})
+			lsp.jdtls.setup({
+                capabilities = capabilities,
+                cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" }
+            })
+			lsp.html.setup({
+                capabilities = capabilities,
+                handlers = default_handler,
+            })
+			lsp.pylsp.setup({
+                capabilities = capabilities,
+                handlers = default_handler,
+            })
+            lsp.zls.setup({capabilities = capabilities})
+            lsp.phpactor.setup({capabilities = capabilities})
+            lsp.gopls.setup({capabilities = capabilities})
             lsp.rust_analyzer.setup({
+                capabilities = capabilities,
+                handlers = default_handler,
                 on_attach = function (client, bufnr)
                     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
                 end,
@@ -131,20 +144,21 @@ return {
                     }
                 }
             })
-            lsp.ts_ls.setup({})
-            -- lsp.csharp_ls.setup({
-            --     root_dir = function(startpath)
-            --         return lsp.util.root_pattern("*.sln")(startpath)
-            --             or lsp.util.root_pattern("*.csproj")(startpath)
-            --             or lsp.util.root_pattern("*.fsproj")(startpath)
-            --             or lsp.util.root_pattern(".git")(startpath)
-            --     end,
-            --     -- on_attach = on_attach,
-            --     -- capabilities = capabilities,
-            -- })
+            lsp.ts_ls.setup({capabilities = capabilities})
+            lsp.csharp_ls.setup({
+                root_dir = function(startpath)
+                    return lsp.util.root_pattern("*.sln")(startpath)
+                        or lsp.util.root_pattern("*.csproj")(startpath)
+                        or lsp.util.root_pattern("*.fsproj")(startpath)
+                        or lsp.util.root_pattern(".git")(startpath)
+                end,
+                on_attach = on_attach,
+                capabilities = capabilities,
+            })
             -- lsp.sqls.setup({})
-			lsp.vimls.setup({})
+			lsp.vimls.setup({capabilities = capabilities})
 			lsp.lua_ls.setup({
+                capabilities = capabilities,
 				handlers = default_handler,
 				settings = {
 					Lua = {

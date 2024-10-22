@@ -1,7 +1,7 @@
 return {
     {
         'saghen/blink.cmp',
-        enabled = true,
+        enabled = false,
         lazy = false,
         dependencies = 'rafamadriz/friendly-snippets',
         version = 'v0.*',
@@ -41,7 +41,7 @@ return {
     },
 	{
 		"hrsh7th/nvim-cmp",
-        enabled = false,
+        enabled = true,
 		lazy = true,
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
@@ -54,18 +54,15 @@ return {
 			"onsails/lspkind.nvim",
             "mtoohey31/cmp-fish",
 
-            -- "ray-x/cmp-sql",
 			"L3MON4D3/LuaSnip",
             "rafamadriz/friendly-snippets",
-            -- "hrsh7th/vim-vsnip"
-            -- "SirVer/ultisnips",
-            -- "quangnguyen30192/cmp-nvim-ultisnips",
             -- "nanotee/sqls.nvim"
 		},
         opts = function()
             local lspkind = require("lspkind")
             local luasnip = require("luasnip")
             local cmp = require("cmp")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
             return {
                 sources = {
                     { name = "nvim_lsp" },
@@ -83,9 +80,6 @@ return {
                 snippet = {
                     expand = function(args)
                         require("luasnip").lsp_expand(args.body)
-                        -- require("vsnip").lsp_expand(args.body)
-                        -- vim.fn["vsnip#anonymous"](args.body)
-                        -- vim.fn["UltiSnips#Anon"](args.body)
                     end,
                 },
                 -- window = {
@@ -124,26 +118,60 @@ return {
                             fallback()
                         end
                     end),
+                    -- ["<CR>"] = cmp.mapping({
+                    --    i = function(fallback)
+                    --      if cmp.visible() and cmp.get_active_entry() then
+                    --        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                    --      else
+                    --        fallback()
+                    --      end
+                    --    end,
+                    --    s = cmp.mapping.confirm({ select = true }),
+                    --    c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                    --  }),
+                    ['<Tab>'] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            if #cmp.get_entries() == 1 then
+                                cmp.confirm({ select = true })
+                            else
+                                cmp.select_next_item({behavior=cmp.SelectBehavior.Replace})
+                            end
+                        elseif luasnip.locally_jumpable(1) then
+                            luasnip.jump(1)
+                            -- luasnip.expand_or_advance(1)
+                        elseif has_words_before() then
+                            cmp.complete()
+                            if #cmp.get_entries() == 1 then
+                                cmp.confirm({ select = true })
+                            else
+                                cmp.select_next_item()
+                            end
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
 
-                    ["<Tab>"] = cmp.mapping(function(fallback)
+                    ['<S-Tab>'] = cmp.mapping(function(fallback)
                       if cmp.visible() then
-                        cmp.select_next_item()
-                      elseif luasnip.locally_jumpable(1) then
-                        luasnip.jump(1)
-                      else
-                        fallback()
-                      end
-                    end, { "i", "s", "n" }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                      if cmp.visible() then
-                        cmp.select_prev_item()
+                        if #cmp.get_entries() == 1 then
+                          cmp.confirm({ select = true })
+                        else
+                          cmp.select_prev_item()
+                        end
                       elseif luasnip.locally_jumpable(-1) then
                         luasnip.jump(-1)
+                      elseif has_words_before() then
+                        cmp.complete()
+                        if #cmp.get_entries() == 1 then
+                          cmp.confirm({ select = true })
+                        else
+                          cmp.select_prev_item()
+                        end
                       else
                         fallback()
                       end
-                    end, { "i", "s", "n" }),
+                    end, { "i", "s" }),
+
                 }),
             }
         end,

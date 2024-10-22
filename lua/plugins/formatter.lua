@@ -115,7 +115,7 @@ return {
                     bash = { require("formatter.filetypes.sh").beautysh },
                     html = { require("formatter.filetypes.html").prettier },
                     zsh = { require("formatter.filetypes.sh").beautysh },
-                    -- rust = { require("formatter.filetypes.rust").rustfmt },
+                    rust = { require("formatter.filetypes.rust").rustfmt },
                     ["*"] = {
                         require("formatter.filetypes.any").remove_trailing_whitespace,
                     }
