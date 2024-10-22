@@ -7,8 +7,8 @@ k("n", "<TAB>", [[:bnext<CR>]], { noremap = true })
 k("n", "<S-TAB>", [[:bprevious<CR>]], { noremap = true })
 
 -- better movement
-k("", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
-k("", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
+k("", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+k("", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- k("n", "h", "h", { noremap = true })
 -- k("n", "l", "l", { noremap = true })
 
@@ -35,18 +35,18 @@ k("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
 k("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
 
 -- resize windows
-k("n", "<C-Up>", "<cmd>resize +2<cr>", {desc = "Increase window height"})
-k("n", "<C-Down>", "<cmd>resize -2<cr>", {desc = "Decrease window height"})
-k("n", "<C-Left>", "<cmd>vertical resize -2<cr>", {desc = "Decrease window width"})
-k("n", "<C-Right>", "<cmd>vertical resize +2<cr>", {desc = "Increase window width"})
+k("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
+k("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
+k("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
+k("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
 -- move lines
-k("n", "<A-j>", "<cmd>m .+1<cr>==", {desc = "Move Down"})
-k("n", "<A-k>", "<cmd>m .-2<cr>==", {desc = "Move Up"})
-k("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", {desc = "Move Down"})
-k("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", {desc = "Move Up"})
-k("v", "<A-j>", ":m '>+1<cr>gv=gv", {desc = "Move Down"})
-k("v", "<A-k>", ":m '<-2<cr>gv=gv", {desc = "Move Up"})
+k("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+k("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+k("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+k("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+k("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+k("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
 -- better indent
 k("v", "<", "<gv", { noremap = true })

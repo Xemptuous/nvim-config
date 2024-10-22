@@ -5,7 +5,7 @@ return {
 			ui = {
 				border = "single",
 			},
-            log_level = vim.log.levels.DEBUG
+			log_level = vim.log.levels.DEBUG,
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
@@ -20,20 +20,20 @@ return {
 				"debugpy",
 				"html-lsp",
 				"jdtls",
-                "gopls",
+				"gopls",
 				-- "lua-language-server",
 				"csharp-language-server",
-                "python-lsp-server",
+				"python-lsp-server",
 				"quick-lint-js",
 				"rust-analyzer",
-                -- "phpactor",
-                "pretty-php",
+				-- "phpactor",
+				"pretty-php",
 				-- "sqls",
 				"vim-language-server",
 				-- Linters
 				"jsonlint",
 				-- "luacheck",
-                "typescript-language-server",
+				"typescript-language-server",
 				"quick-lint-js",
 				"ruff",
 				-- "sqlfluff",
@@ -41,7 +41,7 @@ return {
 				"black",
 				"isort",
 				"jq",
-                "zls",
+				"zls",
 				"beautysh",
 				"sql-formatter",
 				"stylua",
@@ -61,7 +61,7 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-            -- "nanotee/sqls.nvim",
+			-- "nanotee/sqls.nvim",
 		},
 		config = function()
 			require("mason").setup()
@@ -102,63 +102,113 @@ return {
 			local default_handler = {
 				["textDocument/publishDiagnostics"] = vim.lsp.with(custom_on_publish_diagnostics, {
 					virtual_text = false,
-                    underline = false,
+					underline = false,
 					signs = true,
 					update_in_insert = false,
 				}),
 			}
-            local cmp = require("cmp")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local cmp = require("cmp")
+			local capabilities = {
+				textDocument = {
+					completion = {
+						dynamicRegistration = false,
+						completionItem = {
+							snippetSupport = true,
+							commitCharactersSupport = true,
+							deprecatedSupport = true,
+							preselectSupport = true,
+							tagSupport = {
+								valueSet = {
+									1, -- Deprecated
+								},
+							},
+							insertReplaceSupport = true,
+							resolveSupport = {
+								properties = {
+									"documentation",
+									"detail",
+									"additionalTextEdits",
+									"sortText",
+									"filterText",
+									"insertText",
+									"textEdit",
+									"insertTextFormat",
+									"insertTextMode",
+								},
+							},
+							insertTextModeSupport = {
+								valueSet = {
+									1, -- asIs
+									2, -- adjustIndentation
+								},
+							},
+							labelDetailsSupport = true,
+						},
+						contextSupport = true,
+						insertTextMode = 1,
+						completionList = {
+							itemDefaults = {
+								"commitCharacters",
+								"editRange",
+								"insertTextFormat",
+								"insertTextMode",
+								"data",
+							},
+						},
+					},
+				},
+			}
+
 			local lsp = require("lspconfig")
-			lsp.bashls.setup({capabilities = capabilities})
-			lsp.clangd.setup({capabilities = capabilities})
+			lsp.bashls.setup({ capabilities = capabilities })
+			lsp.clangd.setup({ capabilities = capabilities })
 			lsp.jdtls.setup({
-                capabilities = capabilities,
-                cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" }
-            })
+				capabilities = capabilities,
+				cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" },
+			})
 			lsp.html.setup({
-                capabilities = capabilities,
-                handlers = default_handler,
-            })
+				capabilities = capabilities,
+				handlers = default_handler,
+			})
 			lsp.pylsp.setup({
-                capabilities = capabilities,
-                handlers = default_handler,
-            })
-            lsp.zls.setup({capabilities = capabilities})
-            lsp.phpactor.setup({capabilities = capabilities})
-            lsp.gopls.setup({capabilities = capabilities})
-            lsp.rust_analyzer.setup({
-                capabilities = capabilities,
-                handlers = default_handler,
-                on_attach = function (client, bufnr)
-                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-                end,
-                settings = {
-                    ['rust_analyzer'] = {
-                        cargo = {
-                            allFeatures = true
-                        },
-                        checkOnSave = {
-                            command = "clippy"
-                        }
-                    }
-                }
-            })
-            lsp.ts_ls.setup({capabilities = capabilities})
-            lsp.csharp_ls.setup({
-                root_dir = function(startpath)
-                    return lsp.util.root_pattern("*.sln")(startpath)
-                        or lsp.util.root_pattern("*.csproj")(startpath)
-                        or lsp.util.root_pattern("*.fsproj")(startpath)
-                        or lsp.util.root_pattern(".git")(startpath)
-                end,
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
-            -- lsp.sqls.setup({})
-			lsp.vimls.setup({capabilities = capabilities})
+				capabilities = capabilities,
+				handlers = default_handler,
+			})
+			lsp.zls.setup({ capabilities = capabilities })
+			lsp.phpactor.setup({ capabilities = capabilities })
+			lsp.gopls.setup({ capabilities = capabilities })
+			lsp.rust_analyzer.setup({
+				capabilities = capabilities,
+				handlers = default_handler,
+				on_attach = function(client, bufnr)
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+				end,
+				settings = {
+					["rust_analyzer"] = {
+						cargo = {
+							allFeatures = true,
+						},
+						checkOnSave = {
+							command = "clippy",
+						},
+					},
+				},
+			})
+			lsp.ts_ls.setup({ capabilities = capabilities })
+			lsp.csharp_ls.setup({
+				root_dir = function(startpath)
+					return lsp.util.root_pattern("*.sln")(startpath)
+						or lsp.util.root_pattern("*.csproj")(startpath)
+						or lsp.util.root_pattern("*.fsproj")(startpath)
+						or lsp.util.root_pattern(".git")(startpath)
+				end,
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			-- lsp.sqls.setup({})
+			lsp.vimls.setup({ capabilities = capabilities })
 			lsp.lua_ls.setup({
-                capabilities = capabilities,
+				capabilities = capabilities,
 				handlers = default_handler,
 				settings = {
 					Lua = {
@@ -170,15 +220,15 @@ return {
 			})
 		end,
 	},
-    {
-        'https://github.com/mrcjkb/rustaceanvim',
-        enabled = false,
-        version = '^5',
-        lazy = false
-    },
+	{
+		"https://github.com/mrcjkb/rustaceanvim",
+		enabled = false,
+		version = "^5",
+		lazy = false,
+	},
 	{
 		"nvimdev/lspsaga.nvim",
-        enabled = true,
+		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
@@ -199,67 +249,28 @@ return {
 		},
 		config = function(_, opts)
 			require("lspsaga").setup(opts)
-			local k = vim.api.nvim_set_keymap
-			k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
-
-			k("n", "<space>r", "<cmd>Lspsaga rename<CR>", {})
-			k("n", "<space>R", "<cmd>Lspsaga rename ++project<CR>", {})
-
-			k("n", "gd", "<cmd>Lspsaga peek_definition<CR>", {})
-			k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
-
-			k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
-			k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
-
-			k("n", "<space>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
-			k("n", "<space>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
-			k("n", "<space>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
-
-			local vd = vim.diagnostic.severity.ERROR
-			k("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {})
-			k("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {})
-			vim.keymap.set("n", "[E", function()
-				require("lspsaga.diagnostic"):goto_prev({ vd })
-			end)
-			vim.keymap.set("n", "]E", function()
-				require("lspsaga.diagnostic"):goto_next({ vd })
-			end)
-
-			k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
-			-- k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
-			k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
-			k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
-			k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
-			k("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
+			require("../keymaps/lspsaga")
 		end,
 	},
-    {
-        "PedramNavid/dbtpal",
-        enabled = false,
-        -- lazy = true,
-        -- event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        },
-        -- ft = {
-        --     "sql",
-        --     "dbt",
-        --     "md",
-        --     "yaml",
-        -- },
-        config = function()
-            require("dbtpal").setup({
-                path_to_dbt = "dbt",
-                path_to_dbt_project = "",
-                path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
-                extended_path_search = true,
-                protect_compiled_files = true,
-                custom_dbt_syntax_enabled = false
-            })
-            require("telescope").load_extension("dbtpal")
-        end,
-    },
-    -- { "evanleck/vim-svelte" },
-    -- { "lifepillar/pgsql.vim" }
+	{
+		"PedramNavid/dbtpal",
+		enabled = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("dbtpal").setup({
+				path_to_dbt = "dbt",
+				path_to_dbt_project = "",
+				path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+				extended_path_search = true,
+				protect_compiled_files = true,
+				custom_dbt_syntax_enabled = false,
+			})
+			require("telescope").load_extension("dbtpal")
+		end,
+	},
+	-- { "evanleck/vim-svelte" },
+	-- { "lifepillar/pgsql.vim" }
 }

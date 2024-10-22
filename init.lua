@@ -65,9 +65,14 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 	pattern = { "*" },
 	command = "FormatWrite",
 })
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	pattern = { "*" },
+	command = "wincmd =",
+})
 
 package.path = "./lua/?.lua; ./lua/?.vim" .. package.path
 require("keymaps")
 require("options")
 require("init")
+-- require("keymaps")
 -- vim.cmd("source /home/xempt/.config/nvim/vimscript.vim")
