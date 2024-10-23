@@ -68,7 +68,7 @@ return {
 				lua = { "stylua" },
 				mjs = { "prettier" },
 				php = { "pretty-php" },
-				python = { "isort", "black", "ruff" },
+				python = { "isort", "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				sh = { "beautysh" },
 				svelte = { "prettier" },

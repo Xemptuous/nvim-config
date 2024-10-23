@@ -32,6 +32,7 @@ return {
 				"markdown_inline",
 				"python",
 				"query",
+				"rust",
 				"sql",
 				"tsx",
 				"typescript",
@@ -73,6 +74,7 @@ return {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		enabled = false,
 		main = "ibl",
 		lazy = true,
 		event = "VeryLazy",
@@ -122,7 +124,6 @@ return {
 	{
 		"HiPhish/rainbow-delimiters.nvim",
 		enabled = true,
-		lazy = true,
 		config = function()
 			local rainbow_delimiters = require("rainbow-delimiters")
 
@@ -145,7 +146,7 @@ return {
 					"RainbowDelimiterCyan",
 				},
 			}
-			vim.api.nvim_set_hl(0, "MatchParen", { fg = "#cdd6f4", bg = "#45475a" })
+			-- vim.api.nvim_set_hl(0, "MatchParen", { fg = "#cdd6f4", bg = "#45475a" })
 		end,
 	},
 }

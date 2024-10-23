@@ -10,6 +10,8 @@ return {
 	},
 	{
 		"max397574/better-escape.nvim",
+		lazy = true,
+		event = "VeryLazy",
 		commit = "7e86edafb8c7e73699e0320f225464a298b96d12",
 		opts = {
 			mapping = { "jk", "kj" },
@@ -22,12 +24,14 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
+		enabled = false,
 		config = function()
 			require("nvim-autopairs").setup({})
 		end,
 	},
 	{
 		"kylechui/nvim-surround",
+		enabled = false,
 		lazy = true,
 		keys = { "ys", "yS" },
 		config = function()
@@ -41,6 +45,7 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
+		enabled = false,
 		lazy = true,
 		keys = { "gc", "V" },
 		config = function()
@@ -108,16 +113,8 @@ return {
 		end,
 	},
 	{
-		"karb94/neoscroll.nvim",
-		enabled = false,
-		config = function()
-			require("neoscroll").setup({})
-		end,
-	},
-	{
 		"lambdalisue/suda.vim",
 		lazy = true,
-		event = "VeryLazy",
 		cmd = "SudaWrite",
 	},
 	{ -- parse and color ansi escape color codes
@@ -132,64 +129,11 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		lazy = true,
-		event = "VeryLazy",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	},
-	{
-		"mrjones2014/legendary.nvim",
-		enabled = false,
-		event = "VeryLazy",
-		config = function()
-			vim.keymap.set("n", "<C-f>", ":Legendary<CR>")
-		end,
-		opts = {
-			keymaps = {
-				{ "<leader>tf", ":Telescope find_files<CR>", description = "Telescope Find File" },
-				{ "<leader>tg", ":Telescope live_grep<CR>", description = "Telescope Grep" },
-				{ "<leader>tb", ":Telescope buffers<CR>", description = "Telescope Buffers" },
-				{ "<leader>th", ":Telescope help_tags<CR>", description = "Telescope Help" },
-				{ "<leader>tR", ":Telescope oldfiles<CR>", description = "Telescope Open Recent File" },
-				{ "<leader>tw", ":Telescope grep_string{}<CR>", description = "Telescope String" },
-				{ "<leader>tH", ":Telescope search_history{}<CR>", description = "Telescope Search History" },
-				{ "<leader>tC", ":Telescope command_history{}<CR>", description = "Telescope Command History" },
-				{ "<leader>tc", ":Telescope colorscheme{}<CR>", description = "Telescope Colorscheme" },
-				{ "<leader>tr", ":Telescope registers{}<CR>", description = "Telescope Registers" },
-				{ "<F5>", "DapContinue<CR>", description = "Debugger Continue" },
-				{ "<F6>", "DapStepOver<CR>", description = "Debugger StepOver" },
-				{ "<F7>", "DapStepInto<CR>", description = "Debugger StepInto" },
-				{ "<F8>", "DapStepOut<CR>", description = "Debugger StepOut" },
-				{
-					"<leader>db",
-					":lua require('dap').toggle_breakpoint()<CR>",
-					description = "Debugger Breakpoint Toggle",
-				},
-				{ "<leader>dr", ":lua require('dap').repl.open()<CR>", description = "Debugger REPL Toggle" },
-
-				-- {'<leader>db', "DapToggleBreakpoint<CR>", description = "Debugger Breakpoint Toggle" },
-				-- {'<leader>dr', "DapToggleReplCR>", description = "Debugger REPL Toggle" },
-				{ "<leader>dl", ":lua require('dap').run_last()<CR>", description = "Debugger Run Last" },
-				{
-					"<leader>dh",
-					":lua require('dap.ui.widgets').hover()<CR>",
-					description = "Debugger Show Hover Info",
-				},
-				{ "<leader>dp", ":lua require('dap.ui.widgets').preview()<CR>", description = "Debugger Show Preview" },
-				{
-					"<leader>df",
-					":lua widgets.centered_float(require('dap.ui.widgets').frames)<CR>",
-					description = "Debugger Show Frames",
-				},
-				{
-					"<leader>ds",
-					":lua widgets.centered_float(require('dap.ui.widgets').scopes)<CR>",
-					description = "Debugger Show Scopes",
-				},
-			},
-		},
 	},
 	{
 		"folke/which-key.nvim",
@@ -244,8 +188,16 @@ return {
 	},
 	{
 		"kevinhwang91/nvim-bqf",
+		lazy = true,
 		ft = { "qf" },
 	},
-	{ "jidn/vim-dbml" },
-	{ "chrisbra/unicode.vim" },
+	{
+		"jidn/vim-dbml",
+		lazy = true,
+		ft = { "dbml" },
+	},
+	{
+		"chrisbra/unicode.vim",
+		lazy = true,
+	},
 }

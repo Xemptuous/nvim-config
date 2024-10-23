@@ -1,14 +1,5 @@
 return {
 	{
-		"echasnovski/mini.statusline",
-		lazy = true,
-		event = "VeryLazy",
-		version = false,
-		config = function()
-			require("mini.statusline").setup()
-		end,
-	},
-	{
 		"nvim-lualine/lualine.nvim",
 		enabled = false,
 		lazy = true,
@@ -91,27 +82,9 @@ return {
 		end,
 	},
 	{
-		"airblade/vim-gitgutter",
-		enabled = false,
-	},
-	{
 		"tpope/vim-fugitive",
 		lazy = true,
 		event = "VeryLazy",
-	},
-	{
-		"echasnovski/mini-git",
-		version = false,
-		config = function()
-			require("mini.git").setup()
-		end,
-	},
-	{
-		"echasnovski/mini.diff",
-		version = false,
-		config = function()
-			require("mini.diff").setup()
-		end,
 	},
 	{
 		"lewis6991/gitsigns.nvim",
@@ -177,13 +150,12 @@ return {
 	},
 	{
 		"kristijanhusak/vim-dadbod-ui",
-		enabled = false,
 		lazy = true,
 		cmd = "DBUI",
 		dependencies = { "tpope/vim-dadbod" },
 	},
 	{ -- Minimap Sidebar
-		enabled = false,
+		enabled = true,
 		"gorbit99/codewindow.nvim",
 		lazy = true,
 		keys = "<leader>mm",
@@ -201,11 +173,13 @@ return {
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
+		enabled = false,
 		lazy = true,
 		cmd = { "VimEnter", "NvimTreeToggle" },
 		keys = "<C-t>",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+			-- "nvim-tree/nvim-web-devicons",
+			"echasnovski/mini.icons",
 		},
 		init = function()
 			-- open nvimtree on dir open
@@ -256,7 +230,10 @@ return {
 		end,
 		config = function(_, opts)
 			require("nvim-tree").setup()
-			require("../keymaps/nvimtree")
+			local k = vim.api.nvim_set_keymap
+			k("n", "<C-t>", [[:NvimTreeToggle<CR>]], {})
+			-- k("n", "<C-n>", [[:NvimTreeFocus<CR>]], {})
+			-- k("n", "<F9>", [[:TagbarToggle<CR>]], {})
 		end,
 	},
 	{
@@ -308,7 +285,8 @@ return {
 	},
 	{
 		"stevearc/dressing.nvim",
-		enabled = true,
+		enabled = false,
+		lazy = true,
 		opts = {},
 	},
 	{

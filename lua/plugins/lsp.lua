@@ -6,9 +6,58 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			-- "nanotee/sqls.nvim",
 		},
 		config = function()
+			-- expand gutter to avoid resize
+			vim.opt.signcolumn = "yes"
+
+			vim.diagnostic.config({
+				virtual_text = false,
+				underline = false,
+				signs = true,
+				update_in_insert = false,
+				severity_sort = true,
+				float = {
+					border = "rounded",
+					source = "always",
+					header = "",
+					prefix = "",
+				},
+			})
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+			vim.lsp.handlers["textDocument/publishDiagnostics"] =
+				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+					virtual_text = false,
+					underline = false,
+					signs = true,
+					update_in_insert = false,
+				})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				desc = "LSP actions",
+				callback = function(event)
+					local opts = { buffer = event.buf }
+					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+					vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+					vim.keymap.set("n", "gR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+					vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+					vim.keymap.set("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
+					vim.keymap.set("n", "<space>v", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+					vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+					vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+					vim.keymap.set("n", "<space>b", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+					vim.keymap.set("n", "<space>w", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
+				end,
+			})
+
+			local lsp = require("lspconfig")
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -19,7 +68,8 @@ return {
 					"jdtls",
 					"gopls",
 					"lua_ls",
-					"csharp_ls",
+					-- "csharp_ls",
+					-- "omnisharp_mono",
 					"pylsp",
 					"quick_lint_js",
 					"rust_analyzer",
@@ -28,8 +78,65 @@ return {
 					-- "sqls",
 					"jsonls",
 					"ts_ls",
-					"ruff",
+					-- "ruff",
 					"zls",
+				},
+				handlers = {
+					function(server_name)
+						lsp[server_name].setup({})
+					end,
+					rust_analyzer = function()
+						lsp.rust_analyzer.setup({
+							-- capabilities = capabilities,
+							-- handlers = default_handler,
+							on_attach = function(client, bufnr)
+								vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+							end,
+							settings = {
+								["rust_analyzer"] = {
+									cargo = {
+										allFeatures = true,
+									},
+									checkOnSave = {
+										command = "clippy",
+									},
+								},
+							},
+						})
+					end,
+					clangd = function()
+						lsp.clangd.setup({
+							capabilities = capabilities,
+							filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
+						})
+					end,
+					-- csharp_ls = function()
+					-- 	lsp.csharp_ls.setup({
+					-- 		root_dir = function(startpath)
+					-- 			return lsp.util.root_pattern("*.sln")(startpath)
+					-- 				or lsp.util.root_pattern("*.csproj")(startpath)
+					-- 				or lsp.util.root_pattern("*.fsproj")(startpath)
+					-- 				or lsp.util.root_pattern(".git")(startpath)
+					-- 		end,
+					-- 		on_attach = on_attach,
+					-- 		capabilities = capabilities,
+					-- 	})
+					-- end,
+					-- lsp.sqls.setup({})
+					-- lsp.vimls.setup({ capabilities = capabilities })
+					-- lua_ls = function()
+					-- 	lsp.lua_ls.setup({
+					-- 		capabilities = capabilities,
+					-- 		-- handlers = default_handler,
+					-- 		settings = {
+					-- 			Lua = {
+					-- 				completion = {
+					-- 					callSnippet = "Replace",
+					-- 				},
+					-- 			},
+					-- 		},
+					-- 	})
+					-- end,
 				},
 			})
 			local mr = require("mason-registry")
@@ -39,7 +146,6 @@ return {
 				"vim-language-server",
 				"jsonlint",
 				-- "luacheck",
-				---Formatters
 				-- "sqlfluff",
 				"black",
 				"isort",
@@ -53,164 +159,6 @@ return {
 					vim.cmd(":MasonInstall " .. r)
 				end
 			end
-
-			-- Filter diagnostics
-			local function custom_on_publish_diagnostics(a, params, client_id, c, config)
-				local function filter(arr, func)
-					-- Filter in place
-					-- https://stackoverflow.com/questions/49709998/how-to-filter-a-lua-array-inplace
-					local new_index = 1
-					local size_orig = #arr
-					for old_index, v in ipairs(arr) do
-						if func(v, old_index) then
-							arr[new_index] = v
-							new_index = new_index + 1
-						end
-					end
-					for i = new_index, size_orig do
-						arr[i] = nil
-					end
-				end
-				local function filter_diagnostics(diagnostic)
-					-- Only filter out sqlls stuff for now
-					if diagnostic.source ~= "sql" then
-						return true
-					end
-
-					if diagnostic.message:match('Expected "\\-\\-') then
-						return false
-					end
-
-					return true
-				end
-
-				filter(params.diagnostics, filter_diagnostics)
-				vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_id, c, config)
-			end
-			-- Custom diagnostic visualization
-			local default_handler = {
-				["textDocument/publishDiagnostics"] = vim.lsp.with(custom_on_publish_diagnostics, {
-					virtual_text = false,
-					underline = false,
-					signs = true,
-					update_in_insert = false,
-				}),
-			}
-			-- Default Capabilities
-			local capabilities = {
-				textDocument = {
-					completion = {
-						dynamicRegistration = false,
-						completionItem = {
-							snippetSupport = true,
-							commitCharactersSupport = true,
-							deprecatedSupport = true,
-							preselectSupport = true,
-							tagSupport = {
-								valueSet = {
-									1, -- Deprecated
-								},
-							},
-							insertReplaceSupport = true,
-							resolveSupport = {
-								properties = {
-									"documentation",
-									"detail",
-									"additionalTextEdits",
-									"sortText",
-									"filterText",
-									"insertText",
-									"textEdit",
-									"insertTextFormat",
-									"insertTextMode",
-								},
-							},
-							insertTextModeSupport = {
-								valueSet = {
-									1, -- asIs
-									2, -- adjustIndentation
-								},
-							},
-							labelDetailsSupport = true,
-						},
-						contextSupport = true,
-						insertTextMode = 1,
-						completionList = {
-							itemDefaults = {
-								"commitCharacters",
-								"editRange",
-								"insertTextFormat",
-								"insertTextMode",
-								"data",
-							},
-						},
-					},
-				},
-			}
-
-			-- LSP Setup
-			local lsp = require("lspconfig")
-			lsp.bashls.setup({ capabilities = capabilities })
-			lsp.clangd.setup({
-				capabilities = capabilities,
-				filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
-			})
-			lsp.jdtls.setup({
-				capabilities = capabilities,
-				cmd = { vim.fn.stdpath("data") .. "/mason/bin/jdtls" },
-			})
-			lsp.html.setup({
-				capabilities = capabilities,
-				handlers = default_handler,
-			})
-			lsp.pylsp.setup({
-				capabilities = capabilities,
-				handlers = default_handler,
-			})
-			lsp.zls.setup({ capabilities = capabilities })
-			lsp.phpactor.setup({ capabilities = capabilities })
-			lsp.gopls.setup({ capabilities = capabilities })
-			lsp.rust_analyzer.setup({
-				capabilities = capabilities,
-				handlers = default_handler,
-				on_attach = function(client, bufnr)
-					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-				end,
-				settings = {
-					["rust_analyzer"] = {
-						cargo = {
-							allFeatures = true,
-						},
-						checkOnSave = {
-							command = "clippy",
-						},
-					},
-				},
-			})
-			lsp.ts_ls.setup({ capabilities = capabilities })
-			lsp.csharp_ls.setup({
-				root_dir = function(startpath)
-					return lsp.util.root_pattern("*.sln")(startpath)
-						or lsp.util.root_pattern("*.csproj")(startpath)
-						or lsp.util.root_pattern("*.fsproj")(startpath)
-						or lsp.util.root_pattern(".git")(startpath)
-				end,
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-			-- lsp.sqls.setup({})
-			lsp.vimls.setup({ capabilities = capabilities })
-			lsp.lua_ls.setup({
-				capabilities = capabilities,
-				handlers = default_handler,
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = "Replace",
-						},
-					},
-				},
-			})
 		end,
 	},
 	{
@@ -222,11 +170,12 @@ return {
 	},
 	{
 		"nvimdev/lspsaga.nvim",
-		enabled = true,
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
+			"echasnovski/mini.icons",
+			-- "nvim-tree/nvim-web-devicons",
 			-- "nvim-treesitter/nvim-treesitter",
 		},
 		opts = {
@@ -243,7 +192,38 @@ return {
 		},
 		config = function(_, opts)
 			require("lspsaga").setup(opts)
-			require("../keymaps/lspsaga")
+			local k = vim.api.nvim_set_keymap
+			k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
+
+			k("n", "gr", "<cmd>Lspsaga rename<CR>", {})
+			k("n", "gR", "<cmd>Lspsaga rename ++project<CR>", {})
+
+			k("n", "gd", "<cmd>Lspsaga peek_definition<CR>", {})
+			k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
+
+			k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
+			k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
+
+			k("n", "<space>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
+			k("n", "<space>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
+			k("n", "<space>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
+
+			local vd = vim.diagnostic.severity.ERROR
+			k("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {})
+			k("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {})
+			vim.keymap.set("n", "[E", function()
+				require("lspsaga.diagnostic"):goto_prev({ vd })
+			end)
+			vim.keymap.set("n", "]E", function()
+				require("lspsaga.diagnostic"):goto_next({ vd })
+			end)
+
+			k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
+			k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
+			k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
+			k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
+			k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
+			k("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
 		end,
 	},
 	{
