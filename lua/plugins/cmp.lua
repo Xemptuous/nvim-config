@@ -53,7 +53,6 @@ return {
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"onsails/lspkind.nvim",
 			"mtoohey31/cmp-fish",
-
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
 			-- "nanotee/sqls.nvim"
@@ -62,19 +61,18 @@ return {
 			local lspkind = require("lspkind")
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "nvim_lsp+document_symbol", ft = { "lua" } },
 					{ name = "nvim_lsp+signature_help", ft = { "lua" } },
+					{ name = "friendly-snippets" },
+					{ name = "luasnip", keyword_length = 1 },
 					{ name = "nvim_lua", ft = "lua" },
 					{ name = "buffer" },
 					{ name = "look", ft = { "markup", "html" } },
 					{ name = "fish", ft = { "fish" } },
 					{ name = "path" },
-					{ name = "luasnip", keyword_length = 1 },
-					{ name = "friendly-snippets" },
 					-- { name = "sql", ft={"sql", "pgsql"}},
 				},
 				snippet = {
@@ -118,34 +116,20 @@ return {
 							fallback()
 						end
 					end),
-					-- ["<CR>"] = cmp.mapping({
-					--    i = function(fallback)
-					--      if cmp.visible() and cmp.get_active_entry() then
-					--        cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-					--      else
-					--        fallback()
-					--      end
-					--    end,
-					--    s = cmp.mapping.confirm({ select = true }),
-					--    c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-					--  }),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							if #cmp.get_entries() == 1 then
-								cmp.confirm({ select = true })
-							else
-								cmp.select_next_item({ behavior = cmp.SelectBehavior.Replace })
-							end
+							cmp.select_next_item()
 						elseif luasnip.locally_jumpable(1) then
 							luasnip.jump(1)
-							-- luasnip.expand_or_advance(1)
-						elseif has_words_before() then
-							cmp.complete()
-							if #cmp.get_entries() == 1 then
-								cmp.confirm({ select = true })
-							else
-								cmp.select_next_item()
-							end
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["Up"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.locally_jumpable(1) then
+							luasnip.jump(1)
 						else
 							fallback()
 						end
@@ -153,20 +137,18 @@ return {
 
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							if #cmp.get_entries() == 1 then
-								cmp.confirm({ select = true })
-							else
-								cmp.select_prev_item()
-							end
+							cmp.select_prev_item()
 						elseif luasnip.locally_jumpable(-1) then
 							luasnip.jump(-1)
-						elseif has_words_before() then
-							cmp.complete()
-							if #cmp.get_entries() == 1 then
-								cmp.confirm({ select = true })
-							else
-								cmp.select_prev_item()
-							end
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+					["Down"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
 						else
 							fallback()
 						end

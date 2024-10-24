@@ -7,10 +7,13 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
-		config = function()
+		init = function()
 			-- expand gutter to avoid resize
 			vim.opt.signcolumn = "yes"
+			-- set swapfile update for auto hover diagnostics
+			-- vim.o.updatetime = 250
 
+			local border = { " ", "", "", "", "", "", " ", " " }
 			vim.diagnostic.config({
 				virtual_text = false,
 				underline = false,
@@ -18,15 +21,16 @@ return {
 				update_in_insert = false,
 				severity_sort = true,
 				float = {
-					border = "rounded",
+					border = border,
 					source = "always",
 					header = "",
 					prefix = "",
 				},
 			})
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "none" })
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					virtual_text = false,
@@ -35,27 +39,66 @@ return {
 					update_in_insert = false,
 				})
 
+			local signs = {
+				Error = "󰅚 ",
+				Warn = "󰀪 ",
+				Hint = "󰌶 ",
+				Info = " ",
+			}
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+			end
+		end,
+		config = function()
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					-- client.server_capabilities.semanticTokensProvider = nil
 					local opts = { buffer = event.buf }
-					vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-					vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-					vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-					vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-					vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-					vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					vim.keymap.set("n", "gR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-					vim.keymap.set("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
-					vim.keymap.set("n", "<space>v", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-					vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
-					vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-					vim.keymap.set("n", "<space>b", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
-					vim.keymap.set("n", "<space>w", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
+					local k = vim.keymap.set
+					k("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
+					k("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+					k("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+					k("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+					k("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
+					k("n", "gR", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+					k("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+					k("n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+					k("n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+					k("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+					k("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
+					k("n", "<space>v", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
+					k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
+					k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
+					k("n", "<space>b", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+					k("n", "<space>w", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
 				end,
 			})
+
+			-- -- show diagnostics on cursor hover
+			-- vim.api.nvim_create_autocmd({ "CursorHold" }, {
+			-- 	pattern = "*",
+			-- 	callback = function()
+			-- 		for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+			-- 			if vim.api.nvim_win_get_config(winid).zindex then
+			-- 				return
+			-- 			end
+			-- 		end
+			-- 		vim.diagnostic.open_float({
+			-- 			scope = "cursor",
+			-- 			focusable = false,
+			-- 			close_events = {
+			-- 				"CursorMoved",
+			-- 				"CursorMovedI",
+			-- 				"BufHidden",
+			-- 				"InsertCharPre",
+			-- 				"WinLeave",
+			-- 			},
+			-- 		})
+			-- 	end,
+			-- })
 
 			local lsp = require("lspconfig")
 			require("mason").setup()
@@ -106,7 +149,7 @@ return {
 					end,
 					clangd = function()
 						lsp.clangd.setup({
-							capabilities = capabilities,
+							-- capabilities = capabilities,
 							filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
 						})
 					end,

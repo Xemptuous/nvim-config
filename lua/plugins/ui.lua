@@ -83,6 +83,7 @@ return {
 	},
 	{
 		"tpope/vim-fugitive",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 	},
@@ -155,7 +156,7 @@ return {
 		dependencies = { "tpope/vim-dadbod" },
 	},
 	{ -- Minimap Sidebar
-		enabled = true,
+		enabled = false,
 		"gorbit99/codewindow.nvim",
 		lazy = true,
 		keys = "<leader>mm",
@@ -237,53 +238,6 @@ return {
 		end,
 	},
 	{
-		"glepnir/dashboard-nvim",
-		enabled = false,
-		event = "VimEnter",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			theme = "hyper",
-			config = {
-				week_header = {
-					enable = true,
-				},
-				shortcut = {
-					{
-						desc = " Update",
-						group = "@property",
-						action = "Lazy update",
-						key = "u",
-					},
-					{
-						icon = " ",
-						icon_hl = "@variable",
-						desc = "Files",
-						group = "Label",
-						action = "Telescope find_files",
-						key = "f",
-					},
-					{
-						desc = " Apps",
-						group = "DiagnosticHint",
-						action = "Telescope app",
-						key = "a",
-					},
-					{
-						desc = " dotfiles",
-						group = "Number",
-						action = "Telescope dotfiles",
-						key = "d",
-					},
-				},
-			},
-			hide = {
-				statusline = true,
-				tabline = true,
-				winbar = true,
-			},
-		},
-	},
-	{
 		"stevearc/dressing.nvim",
 		enabled = false,
 		lazy = true,
@@ -311,6 +265,8 @@ return {
 	{
 		"kndndrj/nvim-dbee",
 		enabled = false,
+		lazy = true,
+		cmd = "Dbee",
 		dependencies = { "MunifTanjim/nui.nvim" },
 		build = function()
 			require("dbee").install()
@@ -330,5 +286,9 @@ return {
 			})
 		end,
 	},
-	{ "glench/vim-jinja2-syntax" },
+	{
+		"glench/vim-jinja2-syntax",
+		lazy = true,
+		event = "VeryLazy",
+	},
 }

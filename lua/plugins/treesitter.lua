@@ -1,8 +1,7 @@
-local load_textobjects = false
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- priority = 700,
+		-- enabled = false,
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
@@ -56,20 +55,20 @@ return {
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
-			if load_textobjects then
-				-- PERF: no need to load the plugin, if we only need its queries for mini.ai
-				if opts.textobjects then
-					for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-						if opts.textobjects[mod] and opts.textobjects[mod].enable then
-							local Loader = require("lazy.core.loader")
-							Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-							local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-							require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-							break
-						end
-					end
-				end
-			end
+			-- if load_textobjects then
+			-- 	-- PERF: no need to load the plugin, if we only need its queries for mini.ai
+			-- 	if opts.textobjects then
+			-- 		for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+			-- 			if opts.textobjects[mod] and opts.textobjects[mod].enable then
+			-- 				local Loader = require("lazy.core.loader")
+			-- 				Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+			-- 				local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+			-- 				require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+			-- 				break
+			-- 			end
+			-- 		end
+			-- 	end
+			-- end
 		end,
 	},
 	{
@@ -123,7 +122,7 @@ return {
 	},
 	{
 		"HiPhish/rainbow-delimiters.nvim",
-		enabled = true,
+		enabled = false,
 		config = function()
 			local rainbow_delimiters = require("rainbow-delimiters")
 

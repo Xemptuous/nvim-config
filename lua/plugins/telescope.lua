@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
+		enabled = false,
 		lazy = true,
 		cmd = "Telescope",
 		keys = "<leader>t",
@@ -43,6 +44,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
+		enabled = false,
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
 }

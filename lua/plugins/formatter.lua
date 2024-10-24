@@ -6,17 +6,17 @@ return {
 		lazy = true,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		keys = {
-			{
-				-- Customize or remove this keymap to your liking
-				"<leader>f",
-				function()
-					require("conform").format({ async = true })
-				end,
-				mode = "",
-				desc = "Format buffer",
-			},
-		},
+		-- keys = {
+		-- 	{
+		-- 		-- Customize or remove this keymap to your liking
+		-- 		"<leader>f",
+		-- 		function()
+		-- 			require("conform").format({ async = true })
+		-- 		end,
+		-- 		mode = "",
+		-- 		desc = "Format buffer",
+		-- 	},
+		-- },
 		init = function()
 			-- Format on Save
 			-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
