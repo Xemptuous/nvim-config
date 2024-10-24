@@ -29,6 +29,7 @@ opt.laststatus = 0 -- always show status line
 opt.cindent = true
 opt.autoread = true
 opt.lazyredraw = true
+opt.scrolloff = 5
 -- opt.clipboard = "unnamedplus"
 
 -- Disable Newline Comment Continuation
