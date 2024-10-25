@@ -118,7 +118,16 @@ return {
 		"echasnovski/mini.notify",
 		lazy = true,
 		event = "VeryLazy",
-		opts = {},
+		opts = {
+			lsp_progress = {
+				enable = true,
+				duration_last = 100,
+			},
+			window = {
+				config = {},
+				winblend = 100,
+			},
+		},
 	},
 	{
 		"echasnovski/mini.pairs",

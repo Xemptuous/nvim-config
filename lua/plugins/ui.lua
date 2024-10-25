@@ -31,6 +31,16 @@ return {
 		},
 	},
 	{
+		"mikesmithgh/borderline.nvim",
+		enabled = false,
+		lazy = true,
+		event = "VeryLazy",
+		config = function()
+			require("borderline").setup({})
+			require("borderline.api").borderline("single")
+		end,
+	},
+	{
 		"folke/twilight.nvim",
 		enabled = false,
 		lazy = true,

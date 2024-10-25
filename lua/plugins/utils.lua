@@ -62,14 +62,14 @@ return {
 		lazy = true,
 		keys = {
 			{
-				"s",
+				"<space>s",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").jump()
 				end,
 			},
 			{
-				"S",
+				"<space>S",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").treesitter()

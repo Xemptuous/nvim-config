@@ -58,7 +58,7 @@ return {
 			-- "rafamadriz/friendly-snippets",
 			"windwp/nvim-autopairs",
 			-- "nanotee/sqls.nvim"
-			-- "onsails/lspkind.nvim",
+			"onsails/lspkind.nvim",
 		},
 		opts = function()
 			-- local lspkind = require("lspkind")
@@ -92,25 +92,52 @@ return {
 						vim.snippet.expand(args.body)
 					end,
 				},
-				-- window = {
-				--     completion = cmp.config.window.bordered({
-				--         winhighlight = "Normal:FloatBorder,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
-				--     }),
-				--     documentation = cmp.config.window.bordered({
-				--         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-				--     }),
-				-- },
-				-- formatting = {
-				-- 	format = lspkind.cmp_format({
-				-- 		mode = "symbol_text",
-				-- 		maxwidth = 50,
-				-- 		ellipsis_char = "...",
-				-- 		before = function(entry, vim_item)
-				-- 			return vim_item
-				-- 		end,
-				-- 	}),
-				-- },
-
+				-- experimental = { ghost_text = true },
+				window = {
+					completion = {
+						border = "none",
+						winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
+						col_offset = -3,
+						side_padding = 0,
+						scrollbar = false,
+					},
+					documentation = {
+						border = "single",
+						winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
+						col_offset = -3,
+						side_padding = 0,
+					},
+					-- completion = cmp.config.window.bordered({
+					-- 	border = "single",
+					-- 	col_offset = -3,
+					-- 	side_padding = 0,
+					-- }),
+					-- documentation = cmp.config.window.bordered({
+					-- 	border = "single",
+					-- }),
+				},
+				formatting = {
+					fields = { "kind", "abbr" },
+					expandable_indicator = true,
+					format = function(entry, vim_item)
+						local kind = require("lspkind").cmp_format({
+							mode = "symbol_text",
+							maxwidth = 50,
+						})(entry, vim_item)
+						local strings = vim.split(kind.kind, "%s", { trimempty = true })
+						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.menu = "    (" .. (strings[2] or "") .. ")"
+						return kind
+					end,
+					-- format = lspkind.cmp_format({
+					-- 	mode = "symbol_text",
+					-- 	maxwidth = 50,
+					-- 	ellipsis_char = "...",
+					-- 	before = function(entry, vim_item)
+					-- 		return vim_item
+					-- 	end,
+					-- }),
+				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),

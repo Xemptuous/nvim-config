@@ -13,7 +13,9 @@ return {
 			-- set swapfile update for auto hover diagnostics
 			-- vim.o.updatetime = 250
 
-			local border = { " ", "", "", "", "", "", " ", " " }
+			-- local border = { " ", "", "", "", "", "", " ", " " }
+
+			local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 			vim.diagnostic.config({
 				virtual_text = false,
 				underline = false,
@@ -30,7 +32,7 @@ return {
 
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "none" })
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					virtual_text = false,
@@ -51,6 +53,13 @@ return {
 			end
 		end,
 		config = function()
+			local capabilities = require("lspconfig").util.default_config
+			capabilities.capabilities =
+				vim.tbl_deep_extend("force", capabilities.capabilities, require("cmp_nvim_lsp").default_capabilities())
+			local on_attach = function(client, bufnr)
+				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
@@ -99,7 +108,6 @@ return {
 			-- })
 
 			local lsp = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -112,7 +120,8 @@ return {
 					"lua_ls",
 					-- "csharp_ls",
 					-- "omnisharp_mono",
-					"pylsp",
+					"basedpyright",
+					-- "pylsp",
 					"quick_lint_js",
 					"rust_analyzer",
 					"jqls",
@@ -125,11 +134,10 @@ return {
 				},
 				handlers = {
 					function(server_name)
-						if server_name == "rust_analyzer" then
-							return
-						end
-						lsp[server_name].setup({})
-						capabilities = capabilities
+						lsp[server_name].setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
+						})
 					end,
 					lua_ls = function()
 						lsp.lua_ls.setup({
@@ -142,13 +150,31 @@ return {
 							},
 						})
 					end,
+					basedpyright = function()
+						lsp.basedpyright.setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
+							settings = {
+								basedpyright = {
+									analysis = {
+										autoImportCompletions = true,
+										typeCheckingMode = "basic", -- off, basic, standard, strict, recommended, all
+									},
+								},
+							},
+						})
+					end,
+					clangd = function()
+						lsp.clangd.setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
+							filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
+						})
+					end,
 					rust_analyzer = function()
 						lsp.rust_analyzer.setup({
 							capabilities = capabilities,
-							-- handlers = default_handler,
-							on_attach = function(client, bufnr)
-								vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-							end,
+							on_attach = on_attach,
 							settings = {
 								["rust_analyzer"] = {
 									cargo = {
@@ -159,12 +185,6 @@ return {
 									},
 								},
 							},
-						})
-					end,
-					clangd = function()
-						lsp.clangd.setup({
-							capabilities = capabilities,
-							filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
 						})
 					end,
 					-- csharp_ls = function()

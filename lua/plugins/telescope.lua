@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		cmd = "Telescope",
 		keys = "<leader>t",
