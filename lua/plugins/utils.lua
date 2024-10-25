@@ -24,19 +24,19 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
-		enabled = false,
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
+		enabled = true,
+		lazy = true,
+		event = "InsertEnter",
+		opts = {
+			check_ts = true,
+		},
 	},
 	{
 		"kylechui/nvim-surround",
 		enabled = false,
 		lazy = true,
 		keys = { "ys", "yS" },
-		config = function()
-			require("nvim-surround").setup()
-		end,
+		opts = {},
 	},
 	{
 		"alvan/vim-closetag",
@@ -186,6 +186,7 @@ return {
 			})
 		end,
 	},
+	{ "tpope/vim-abolish" },
 	{
 		"kevinhwang91/nvim-bqf",
 		lazy = true,

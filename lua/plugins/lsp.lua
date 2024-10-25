@@ -34,7 +34,7 @@ return {
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 					virtual_text = false,
-					underline = false,
+					underline = true,
 					signs = true,
 					update_in_insert = false,
 				})
@@ -54,8 +54,6 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
-					-- client.server_capabilities.semanticTokensProvider = nil
 					local opts = { buffer = event.buf }
 					local k = vim.keymap.set
 					k("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
@@ -101,6 +99,7 @@ return {
 			-- })
 
 			local lsp = require("lspconfig")
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -126,11 +125,26 @@ return {
 				},
 				handlers = {
 					function(server_name)
+						if server_name == "rust_analyzer" then
+							return
+						end
 						lsp[server_name].setup({})
+						capabilities = capabilities
+					end,
+					lua_ls = function()
+						lsp.lua_ls.setup({
+							settings = {
+								Lua = {
+									diagnostics = {
+										globals = { "vim" },
+									},
+								},
+							},
+						})
 					end,
 					rust_analyzer = function()
 						lsp.rust_analyzer.setup({
-							-- capabilities = capabilities,
+							capabilities = capabilities,
 							-- handlers = default_handler,
 							on_attach = function(client, bufnr)
 								vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -149,7 +163,7 @@ return {
 					end,
 					clangd = function()
 						lsp.clangd.setup({
-							-- capabilities = capabilities,
+							capabilities = capabilities,
 							filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
 						})
 					end,

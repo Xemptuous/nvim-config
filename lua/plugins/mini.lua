@@ -122,6 +122,7 @@ return {
 	},
 	{
 		"echasnovski/mini.pairs",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		opts = {},

@@ -1,7 +1,7 @@
 return {
 	{
 		"saghen/blink.cmp",
-		enabled = true,
+		enabled = false,
 		lazy = true,
 		event = { "InsertEnter" },
 		dependencies = "rafamadriz/friendly-snippets",
@@ -41,7 +41,7 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
@@ -51,15 +51,18 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"onsails/lspkind.nvim",
 			"mtoohey31/cmp-fish",
-			"L3MON4D3/LuaSnip",
-			"rafamadriz/friendly-snippets",
+			"garymjr/nvim-snippets",
+			-- "L3MON4D3/LuaSnip",
+			-- "saadparwaiz1/cmp_luasnip",
+			-- "rafamadriz/friendly-snippets",
+			"windwp/nvim-autopairs",
 			-- "nanotee/sqls.nvim"
+			-- "onsails/lspkind.nvim",
 		},
 		opts = function()
-			local lspkind = require("lspkind")
-			local luasnip = require("luasnip")
+			-- local lspkind = require("lspkind")
+			-- local luasnip = require("luasnip")
 			local cmp = require("cmp")
 			return {
 				sources = {
@@ -67,7 +70,7 @@ return {
 					{ name = "nvim_lsp+document_symbol", ft = { "lua" } },
 					{ name = "nvim_lsp+signature_help", ft = { "lua" } },
 					{ name = "friendly-snippets" },
-					{ name = "luasnip", keyword_length = 1 },
+					-- { name = "luasnip", keyword_length = 1 },
 					{ name = "nvim_lua", ft = "lua" },
 					{ name = "buffer" },
 					{ name = "look", ft = { "markup", "html" } },
@@ -75,9 +78,18 @@ return {
 					{ name = "path" },
 					-- { name = "sql", ft={"sql", "pgsql"}},
 				},
+				completion = {
+					completeopt = "noselect",
+				},
+				performance = {
+					debounce = 0,
+					throttle = 0,
+					async_budget = 20,
+				},
+				-- preselect = cmp.PreselectMode.None,
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						vim.snippet.expand(args.body)
 					end,
 				},
 				-- window = {
@@ -88,16 +100,17 @@ return {
 				--         winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
 				--     }),
 				-- },
-				formatting = {
-					format = lspkind.cmp_format({
-						mode = "symbol_text",
-						maxwidth = 50,
-						ellipsis_char = "...",
-						before = function(entry, vim_item)
-							return vim_item
-						end,
-					}),
-				},
+				-- formatting = {
+				-- 	format = lspkind.cmp_format({
+				-- 		mode = "symbol_text",
+				-- 		maxwidth = 50,
+				-- 		ellipsis_char = "...",
+				-- 		before = function(entry, vim_item)
+				-- 			return vim_item
+				-- 		end,
+				-- 	}),
+				-- },
+
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -105,13 +118,10 @@ return {
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							if luasnip.expandable() then
-								luasnip.expand()
-							else
-								cmp.confirm({
-									select = true,
-								})
-							end
+							cmp.confirm({
+								behavior = cmp.ConfirmBehavior.Insert,
+								select = true,
+							})
 						else
 							fallback()
 						end
@@ -119,8 +129,8 @@ return {
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
-						elseif luasnip.locally_jumpable(1) then
-							luasnip.jump(1)
+						elseif vim.snippet.active({ direction = 1 }) then
+							vim.snippet.jump(1)
 						else
 							fallback()
 						end
@@ -128,8 +138,8 @@ return {
 					["Up"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
-						elseif luasnip.locally_jumpable(1) then
-							luasnip.jump(1)
+						elseif vim.snippet.active({ direction = 1 }) then
+							vim.snippet.jump(1)
 						else
 							fallback()
 						end
@@ -138,8 +148,8 @@ return {
 					["<S-Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
-						elseif luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
+						elseif vim.snippet.active({ direction = -1 }) then
+							vim.snippet.jump(-1)
 						else
 							fallback()
 						end
@@ -147,8 +157,8 @@ return {
 					["Down"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
-						elseif luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
+						elseif vim.snippet.active({ direction = -1 }) then
+							vim.snippet.jump(-1)
 						else
 							fallback()
 						end
@@ -157,8 +167,11 @@ return {
 			}
 		end,
 		config = function(_, opts)
+			vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+			vim.opt.shortmess = vim.opt.shortmess + { c = true }
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
-			require("luasnip.loaders.from_vscode").lazy_load(opts)
+			-- require("luasnip.loaders.from_vscode").lazy_load(opts)
 			cmp.setup(opts)
 			cmp.setup.filetype("TelescopePrompt", {
 				enable = true,
@@ -180,6 +193,53 @@ return {
 					},
 				}),
 			})
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
+	},
+	{
+		"garymjr/nvim-snippets",
+		keys = {
+			{
+				"<Tab>",
+				function()
+					if vim.snippet.active({ direction = 1 }) then
+						vim.schedule(function()
+							vim.snippet.jump(1)
+						end)
+						return
+					end
+					return "<Tab>"
+				end,
+				expr = true,
+				silent = true,
+				mode = "i",
+			},
+			{
+				"<Tab>",
+				function()
+					vim.schedule(function()
+						vim.snippet.jump(1)
+					end)
+				end,
+				expr = true,
+				silent = true,
+				mode = "s",
+			},
+			{
+				"<S-Tab>",
+				function()
+					if vim.snippet.active({ direction = -1 }) then
+						vim.schedule(function()
+							vim.snippet.jump(-1)
+						end)
+						return
+					end
+					return "<S-Tab>"
+				end,
+				expr = true,
+				silent = true,
+				mode = { "i", "s" },
+			},
+		},
 	},
 }

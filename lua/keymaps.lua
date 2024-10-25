@@ -7,8 +7,9 @@ k("n", "<TAB>", [[:bnext<CR>]], { noremap = true })
 k("n", "<S-TAB>", [[:bprevious<CR>]], { noremap = true })
 
 -- better movement
-k("", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-k("", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- k("", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- k("", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 -- k("n", "h", "h", { noremap = true })
 -- k("n", "l", "l", { noremap = true })
 
