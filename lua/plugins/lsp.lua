@@ -141,6 +141,8 @@ return {
 					end,
 					lua_ls = function()
 						lsp.lua_ls.setup({
+							capabilities = capabilities,
+							on_attach = on_attach,
 							settings = {
 								Lua = {
 									diagnostics = {
@@ -158,7 +160,7 @@ return {
 								basedpyright = {
 									analysis = {
 										autoImportCompletions = true,
-										typeCheckingMode = "basic", -- off, basic, standard, strict, recommended, all
+										typeCheckingMode = "off", -- off, basic, standard, strict, recommended, all
 									},
 								},
 							},

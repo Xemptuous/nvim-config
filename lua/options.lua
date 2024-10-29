@@ -30,6 +30,7 @@ opt.cindent = true
 opt.autoread = true
 opt.lazyredraw = true
 opt.scrolloff = 5
+-- opt.guicursor = "i:block"
 -- opt.clipboard = "unnamedplus"
 
 -- Disable Newline Comment Continuation

@@ -86,7 +86,7 @@ return {
 					throttle = 0,
 					async_budget = 20,
 				},
-				-- preselect = cmp.PreselectMode.None,
+				preselect = cmp.PreselectMode.None,
 				snippet = {
 					expand = function(args)
 						vim.snippet.expand(args.body)
@@ -117,8 +117,8 @@ return {
 					-- }),
 				},
 				formatting = {
-					fields = { "kind", "abbr" },
-					expandable_indicator = true,
+					fields = { "kind", "abbr", "menu" },
+					-- expandable_indicator = true,
 					format = function(entry, vim_item)
 						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
@@ -143,7 +143,7 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping(function(fallback)
+					["<Tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.confirm({
 								behavior = cmp.ConfirmBehavior.Insert,
@@ -153,16 +153,26 @@ return {
 							fallback()
 						end
 					end),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif vim.snippet.active({ direction = 1 }) then
-							vim.snippet.jump(1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["Up"] = cmp.mapping(function(fallback)
+					-- ["<CR>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.confirm({
+					-- 			behavior = cmp.ConfirmBehavior.Insert,
+					-- 			select = true,
+					-- 		})
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end),
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.select_next_item()
+					-- 	elseif vim.snippet.active({ direction = 1 }) then
+					-- 		vim.snippet.jump(1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
+					["<Down>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif vim.snippet.active({ direction = 1 }) then
@@ -172,16 +182,16 @@ return {
 						end
 					end, { "i", "s" }),
 
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif vim.snippet.active({ direction = -1 }) then
-							vim.snippet.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["Down"] = cmp.mapping(function(fallback)
+					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.select_prev_item()
+					-- 	elseif vim.snippet.active({ direction = -1 }) then
+					-- 		vim.snippet.jump(-1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
+					["<Up>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif vim.snippet.active({ direction = -1 }) then
@@ -196,7 +206,7 @@ return {
 		config = function(_, opts)
 			vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 			vim.opt.shortmess = vim.opt.shortmess + { c = true }
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			-- require("luasnip.loaders.from_vscode").lazy_load(opts)
 			cmp.setup(opts)
@@ -220,7 +230,7 @@ return {
 					},
 				}),
 			})
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 	{

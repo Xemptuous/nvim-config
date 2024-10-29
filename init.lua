@@ -62,7 +62,7 @@ require("lazy").setup("plugins", {
 				"vimballPlugin",
 				"zip",
 				"zipPlugin",
-				-- "shada",
+				"shada",
 			},
 		},
 	},

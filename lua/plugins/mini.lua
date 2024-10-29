@@ -54,7 +54,10 @@ return {
 		"echasnovski/mini.diff",
 		lazy = true,
 		event = "VeryLazy",
-		opts = {},
+		config = function()
+			require("mini.diff").setup()
+			vim.api.nvim_set_keymap("n", "<leader>o", ":lua MiniDiff.toggle_overlay()<CR>", { noremap = true })
+		end,
 	},
 	{
 		"echasnovski/mini.files",

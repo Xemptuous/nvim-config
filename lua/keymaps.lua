@@ -2,6 +2,8 @@ local k = vim.api.nvim_set_keymap
 
 -- vim.cmd(':let mapleader = "\\<Space>"')
 
+k("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true })
+
 -- k("n", "<CR>", [[o<Esc>]], { noremap = true })
 k("n", "<TAB>", [[:bnext<CR>]], { noremap = true })
 k("n", "<S-TAB>", [[:bprevious<CR>]], { noremap = true })
