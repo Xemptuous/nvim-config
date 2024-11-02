@@ -96,14 +96,17 @@ return {
 				window = {
 					completion = {
 						border = "none",
-						winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
+						-- winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
+
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+						winblend = vim.o.pumblend,
 						col_offset = -3,
 						side_padding = 0,
 						scrollbar = false,
 					},
 					documentation = {
 						border = "single",
-						winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
+						-- winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
 						col_offset = -3,
 						side_padding = 0,
 					},
@@ -123,10 +126,11 @@ return {
 						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
 							maxwidth = 50,
+							show_labelDetails = true,
 						})(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
 						kind.kind = " " .. (strings[1] or "") .. " "
-						kind.menu = "    (" .. (strings[2] or "") .. ")"
+						-- kind.menu = "    (" .. (strings[2] or "") .. ")"
 						return kind
 					end,
 					-- format = lspkind.cmp_format({

@@ -33,7 +33,7 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		keys = { "ys", "yS" },
 		opts = {},

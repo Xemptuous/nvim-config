@@ -58,7 +58,7 @@ return {
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				cs = { "clang-format" },
-				fish = { "beautysh" },
+				fish = { "fish_indent" },
 				go = { "gofmt" },
 				java = { "clang-format" },
 				js = { "prettier" },

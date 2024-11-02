@@ -51,12 +51,15 @@ return {
 				return {
 					-- CmpItemAbbrMatch = { fg = C.red, bg = C.surface0 },
 					-- CmpItemAbbrMatchFuzzy = { fg = C.red, bg = C.surface0 },
-					PmenuSel = { fg = C.text, bg = C.surface1 },
-					Pmenu = { fg = C.text, bg = C.mantle },
+
+					-- PmenuSel = { fg = C.text, bg = C.base },
+					-- Pmenu = { fg = C.text, bg = C.base },
 					NormalFloat = { fg = C.text, bg = C.base },
-					CmpItemMenu = { fg = C.text, bg = C.mantle },
+					-- CmpItemMenu = { fg = C.text, bg = C.base },
+					-- CursorLine = { fg = C.text, bg = C.surface0 },
 
 					FloatBorder = { fg = C.surface1, bg = C.base },
+
 					-- CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
 					-- CmpItemKindKeyword = { fg = C.base, bg = C.red },
 					-- CmpItemKindText = { fg = C.base, bg = C.teal },
@@ -92,33 +95,60 @@ return {
 		end,
 	},
 	{
-		"nyoom-engineering/oxocarbon.nvim",
+		"folke/tokyonight.nvim",
+		lazy = true,
+		event = "VeryLazy",
 		priority = 1000,
-		-- config = function()
-		-- 	vim.opt.background = "dark"
-		-- 	vim.cmd.colorscheme("oxocarbon")
-		-- 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-		-- 	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-		-- 	-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-		-- end,
+		opts = {
+			style = "day",
+			day_brightness = 0.3,
+			dim_inactive = true,
+		},
+		config = function(_, opts)
+			require("tokyonight").setup(opts)
+		end,
 	},
-	-- { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, lazy = true, event = "VeryLazy" },
-	-- { "folke/tokyonight.nvim", lazy = true, event = "VeryLazy" },
-	-- { "NLKNguyen/papercolor-theme", lazy = true, event = "VeryLazy" },
+	{
+		"EdenEast/nightfox.nvim",
+		enabled = false,
+		lazy = true,
+		event = "VeryLazy",
+		opts = {
+			options = {
+				dim_inactive = true,
+			},
+		},
+		config = function(_, opts)
+			require("nightfox").setup(opts)
+		end,
+	},
+	-- { "nyoom-engineering/oxocarbon.nvim", lazy = true, event = "VeryLazy" },
 	-- { "MetriC-DT/balance-theme.nvim", lazy = true, event = "VeryLazy" },
-	-- { "sainnhe/edge", lazy = true, event = "VeryLazy" },
-	-- { "neanias/everforest-nvim", lazy = true, event = "VeryLazy" },
-	-- { "projekt0n/github-nvim-theme", lazy = true, event = "VeryLazy" },
+	-- { "NLKNguyen/papercolor-theme", lazy = true, event = "VeryLazy" },
 	-- { "Shatur/neovim-ayu", lazy = true, event = "VeryLazy" },
-	-- { "maxmx03/solarized.nvim", lazy = true, event = "VeryLazy" },
-	-- { "nyoom-engineering/nyoom.nvim", lazy = true, event = "VeryLazy" },
-	-- { "scottmckendry/cyberdream.nvim", lazy = true, event = "VeryLazy" },
-	-- { "ryanpcmcquen/true-monochrome_vim", lazy = true, event = "VeryLazy" },
-	-- { "owickstrom/vim-colors-paramount", lazy = true, event = "VeryLazy" },
-	-- { "axvr/photon.vim", lazy = true, event = "VeryLazy" },
-	-- { "widatama/vim-phoenix", lazy = true, event = "VeryLazy" },
-	-- { "rebelot/kanagawa.nvim", lazy = true, event = "VeryLazy" },
-	-- { "marko-cerovac/material.nvim", lazy = true, event = "VeryLazy" },
-	-- { "shaunsingh/nord.nvim", lazy = true, event = "VeryLazy" },
 	-- { "alexvzyl/nordic.nvim", lazy = true, event = "VeryLazy" },
+	-- { "axvr/photon.vim", lazy = true, event = "VeryLazy" },
+	-- { "cocopon/iceberg.vim", lazy = true, event = "VeryLazy" },
+	-- { "d00h/nvim-rusticated", lazy = true, event = "VeryLazy" },
+	-- { "jonathanfilip/vim-lucius", lazy = true, event = "VeryLazy" },
+	-- { "marko-cerovac/material.nvim", lazy = true, event = "VeryLazy" },
+	-- { "maxmx03/solarized.nvim", lazy = true, event = "VeryLazy" },
+	-- { "navarasu/onedark.nvim", lazy = true, event = "VeryLazy" },
+	-- { "neanias/everforest-nvim", lazy = true, event = "VeryLazy" },
+	-- { "nyoom-engineering/nyoom.nvim", lazy = true, event = "VeryLazy" },
+	-- { "owickstrom/vim-colors-paramount", lazy = true, event = "VeryLazy" },
+	-- { "projekt0n/github-nvim-theme", lazy = true, event = "VeryLazy" },
+	-- { "rakr/vim-one", lazy = true, event = "VeryLazy" },
+	-- { "rebelot/kanagawa.nvim", lazy = true, event = "VeryLazy" },
+	-- { "rmehri01/onenord.nvim", lazy = true, event = "VeryLazy" },
+	-- { "ryanpcmcquen/true-monochrome_vim", lazy = true, event = "VeryLazy" },
+	-- { "sainnhe/edge", lazy = true, event = "VeryLazy" },
+	-- { "savq/melange-nvim", lazy = true, event = "VeryLazy" },
+	-- { "scottmckendry/cyberdream.nvim", lazy = true, event = "VeryLazy" },
+	-- { "shaunsingh/nord.nvim", lazy = true, event = "VeryLazy" },
+	-- { "sonph/onehalf", lazy = true, event = "VeryLazy" },
+	-- { "uloco/bluloco.nvim", lazy = true, event = "VeryLazy" },
+	-- { "widatama/vim-phoenix", lazy = true, event = "VeryLazy" },
+	-- { "wuelnerdotexe/vim-enfocado", lazy = true, event = "VeryLazy" },
+	-- { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, lazy = true, event = "VeryLazy" },
 }

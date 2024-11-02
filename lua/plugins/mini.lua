@@ -204,6 +204,7 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		opts = {},
