@@ -5,12 +5,12 @@ local k = vim.api.nvim_set_keymap
 k("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true })
 
 -- k("n", "<CR>", [[o<Esc>]], { noremap = true })
-k("n", "<TAB>", [[:bnext<CR>]], { noremap = true })
-k("n", "<S-TAB>", [[:bprevious<CR>]], { noremap = true })
+k("n", "<leader>n", [[:bnext<CR>]], { noremap = true })
+k("n", "<leader>p", [[:bprevious<CR>]], { noremap = true })
 
 -- better movement
--- k("", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
--- k("", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+k("", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+k("", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- k("n", "h", "h", { noremap = true })
 -- k("n", "l", "l", { noremap = true })
@@ -34,8 +34,10 @@ k("n", "<Up>", "<C-w>k", { noremap = true })
 k("n", "<Right>", "<C-w>l", { noremap = true })
 
 --switch tabs
-k("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
-k("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
+-- k("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
+-- k("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
+k("n", "<S-Left>", "<cmd>bprevious<cr>", { noremap = true })
+k("n", "<S-Right>", "<cmd>bnext<cr>", { noremap = true })
 
 -- resize windows
 k("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

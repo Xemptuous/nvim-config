@@ -7,7 +7,14 @@ return {
 		keys = "<leader>t",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				-- build = "make",
+				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+				config = function()
+					require("telescope").load_extension("fzf")
+				end,
+			},
 		},
 		opts = {
 			extensions = {
@@ -21,8 +28,7 @@ return {
 			pickers = {},
 		},
 		config = function(_, opts)
-			ts = require("telescope")
-			ts.setup(opts)
+			require("telescope").setup(opts)
 			local k = vim.keymap.set
 			local builtin = require("telescope.builtin")
 			k("n", "<leader>to", builtin.vim_options, {})
@@ -39,7 +45,6 @@ return {
 			k("n", "<leader>tc", builtin.commands, {})
 			k("n", "<leader>tr", builtin.registers, {})
 			k("n", "<leader>m", [[:lua require'telescope.builtin'.marks{}<CR>]])
-			ts.load_extension("fzf")
 		end,
 	},
 	{

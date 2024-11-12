@@ -93,17 +93,21 @@ return {
 	},
 	{
 		"tpope/vim-fugitive",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 	},
 	{
 		"lewis6991/gitsigns.nvim",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		config = function()
 			require("gitsigns").setup({
+				signcolumn = false, -- Toggle with `:Gitsigns toggle_signs`
+				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 				on_attach = function(bufnr)
 					local gitsigns = require("gitsigns")
 
@@ -148,11 +152,11 @@ return {
 					end)
 					map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
 					map("n", "<leader>hd", gitsigns.diffthis)
+					map("n", "<leader>hg", gitsigns.setqflist)
 					map("n", "<leader>hD", function()
 						gitsigns.diffthis("~")
 					end)
 					map("n", "<leader>td", gitsigns.toggle_deleted)
-
 					-- Text object
 					map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 				end,
@@ -300,5 +304,46 @@ return {
 		"glench/vim-jinja2-syntax",
 		lazy = true,
 		event = "VeryLazy",
+	},
+	{
+		"folke/trouble.nvim",
+		ops = {},
+		config = function()
+			require("trouble").setup()
+		end,
+		lazy = true,
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
 	},
 }

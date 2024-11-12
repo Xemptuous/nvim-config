@@ -33,7 +33,7 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		enabled = true,
+		enabled = false,
 		lazy = true,
 		keys = { "ys", "yS" },
 		opts = {},
@@ -137,7 +137,7 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		enabled = false,
+		enabled = true,
 		event = "VeryLazy",
 		config = function()
 			local wk = require("which-key")
@@ -146,15 +146,18 @@ return {
 				["<leader>"] = {
 					t = {
 						name = "Telescope",
+						o = { "<cmd>Telescope vim_options<cr>", "Vim Options" },
 						f = { "<cmd>Telescope find_files<cr>", "Find File" },
 						g = { "<cmd>Telescope live_grep<cr>", "Grep" },
 						b = { "<cmd>Telescope buffers<cr>", "Buffers" },
 						h = { "<cmd>Telescope help_tags<cr>", "Help" },
+						m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+						k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 						R = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 						w = { "<cmd>Telescope grep_string{}<CR>", "String" },
 						H = { "<cmd>Telescope search_history{}<CR>", "Search History" },
 						C = { "<cmd>Telescope command_history{}<CR>", "Command History" },
-						c = { "<cmd>Telescope colorscheme{}<CR>", "Colorscheme" },
+						c = { "<cmd>Telescope commands{}<CR>", "Colorscheme" },
 						r = { "<cmd>Telescope registers{}<CR>", "Registers" },
 					},
 					d = {
@@ -172,8 +175,7 @@ return {
 						s = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').scopes)", "Show Scopes" },
 					},
 					m = {
-						name = "Code Window",
-						o = {},
+						name = "Telescope Marks",
 					},
 				},
 			}, {

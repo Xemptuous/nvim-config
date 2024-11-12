@@ -52,6 +52,7 @@ return {
 	},
 	{
 		"echasnovski/mini.diff",
+		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		config = function()
@@ -204,7 +205,7 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
-		enabled = false,
+		enabled = true,
 		lazy = true,
 		event = "VeryLazy",
 		opts = {},
