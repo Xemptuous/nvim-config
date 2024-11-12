@@ -37,7 +37,9 @@ k("n", "<Right>", "<C-w>l", { noremap = true })
 -- k("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
 -- k("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
 k("n", "<S-Left>", "<cmd>bprevious<cr>", { noremap = true })
+k("n", "<S-Down>", "<cmd>bprevious<cr>", { noremap = true })
 k("n", "<S-Right>", "<cmd>bnext<cr>", { noremap = true })
+k("n", "<S-Up>", "<cmd>bnext<cr>", { noremap = true })
 
 -- resize windows
 k("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

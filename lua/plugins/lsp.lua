@@ -79,8 +79,8 @@ return {
 					k("n", "<space>v", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
 					k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
 					k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-					k("n", "<space>b", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
-					k("n", "<space>w", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
+					k("n", "<space>B", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
+					k("n", "<space>W", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
 				end,
 			})
 
