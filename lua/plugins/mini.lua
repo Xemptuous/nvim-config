@@ -154,10 +154,11 @@ return {
 			mp.setup(opts)
 			local builtin = mp.builtin
 			local k = vim.keymap.set
-			k("n", "<leader>f", builtin.files, {})
-			k("n", "<leader>g", builtin.grep_live, {})
-			k("n", "<leader>h", builtin.help, {})
-			k("n", "<leader>b", builtin.buffers, {})
+			k("n", "<space>f", builtin.files, {})
+			k("n", "<space>g", builtin.grep, {})
+			k("n", "<space>G", builtin.grep_live, {})
+			k("n", "<space>h", builtin.help, {})
+			k("n", "<space>b", builtin.buffers, {})
 		end,
 	},
 	{

@@ -76,7 +76,7 @@ return {
 				end,
 			},
 			{
-				"r",
+				"<space>e",
 				mode = "o",
 				function()
 					require("flash").remote()
@@ -143,6 +143,16 @@ return {
 			local wk = require("which-key")
 			wk.setup()
 			wk.register({
+				["<space>"] = {
+					s = { "<cmd>:lua require('flash').jump()<cr>", "Flash Jump" },
+					S = { "<cmd>:lua require('flash').treesitter()<cr>", "Flash Treesitter" },
+					e = { "<cmd>:lua require('flash').remote()<cr>", "Flash Remote" },
+					b = { "<cmd>Pick buffers<cr>", "Grep Buffers" },
+					f = { "<cmd>Pick files<cr>", "Grep Files" },
+					g = { "<cmd>Pick grep<cr>", "Grep" },
+					G = { "<cmd>Pick grep_live<cr>", "Grep Live" },
+					h = { "<cmd>Pick help<cr>", "Grep Help" },
+				},
 				["<leader>"] = {
 					t = {
 						name = "Telescope",
@@ -159,6 +169,8 @@ return {
 						C = { "<cmd>Telescope command_history{}<CR>", "Command History" },
 						c = { "<cmd>Telescope commands{}<CR>", "Colorscheme" },
 						r = { "<cmd>Telescope registers{}<CR>", "Registers" },
+						-- b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Current Line Blame" },
+						d = { "<cmd>Gitsigns toggle_deleted<cr>", "Gitsigns Toggle Deleted" },
 					},
 					d = {
 						name = "Debugger",
@@ -168,11 +180,24 @@ return {
 						["<F8>"] = { "<cmd>DapStepOut<CR>", "StepOut" },
 						b = { "<cmd>DapToggleBreakpoint<CR>", "Breakpoint Toggle" },
 						r = { "<cmd>DapToggleReplCR>", "REPL Toggle" },
-						l = { "<cmd>:lua require('dap').run_last()", "Run Last" },
-						h = { "<cmd>:lua require('dap.ui.widgets').hover()", "Show Hover Info" },
-						p = { "<cmd>:lua require('dap.ui.widgets').preview()", "Show Preview" },
+						l = { "<cmd>:lua require('dap').run_last()<cr>", "Run Last" },
+						h = { "<cmd>:lua require('dap.ui.widgets').hover()<cr>", "Show Hover Info" },
+						p = { "<cmd>:lua require('dap.ui.widgets').preview()<cr>", "Show Preview" },
 						f = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').frames)", "Show Frames" },
 						s = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').scopes)", "Show Scopes" },
+					},
+					h = {
+						name = "Gitsigns Hunks",
+						s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
+						r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
+						S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+						u = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
+						R = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
+						p = { "<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk" },
+						b = { "<cmd>:lua require('gitsigns').blame_line({full = true})<cr>", "Show Blame Full" },
+						d = { "<cmd>Gitsigns diffthis<cr>", "Diff This" },
+						g = { "<cmd>Gitsigns setqflist<cr>", "Set Quickfix List" },
+						D = { "<cmd>:lua require('gitsigns').diffthis('~')<cr>", "Diff This Dir" },
 					},
 					m = {
 						name = "Telescope Marks",
