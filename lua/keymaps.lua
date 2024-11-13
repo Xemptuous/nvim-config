@@ -37,7 +37,9 @@ k("n", "<Right>", "<C-w>l", { noremap = true })
 -- k("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
 -- k("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
 k("n", "<S-Left>", "<cmd>bprevious<cr>", { noremap = true })
+k("n", "<S-Down>", "<cmd>bprevious<cr>", { noremap = true })
 k("n", "<S-Right>", "<cmd>bnext<cr>", { noremap = true })
+k("n", "<S-Up>", "<cmd>bnext<cr>", { noremap = true })
 
 -- resize windows
 k("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -56,8 +58,8 @@ k("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 -- better indent
 k("v", "<", "<gv", { noremap = true })
 k("v", ">", ">gv", { noremap = true })
-k("n", "<", "<<", { noremap = true })
-k("n", ">", ">>", { noremap = true })
+-- k("n", "<", "<<", { noremap = true, nowait = true })
+-- k("n", ">", ">>", { noremap = true, nowait = true })
 
 -- dont save delete chars to clipboard
 k("n", "x", [["_x]], { noremap = true })

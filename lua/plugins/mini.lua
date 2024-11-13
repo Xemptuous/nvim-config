@@ -145,7 +145,7 @@ return {
 		lazy = true,
 		event = "VeryLazy",
 		cmd = "Pick",
-		keys = { "leader" },
+		keys = { "<leader>" },
 		opts = {
 			options = { use_cache = true },
 		},
