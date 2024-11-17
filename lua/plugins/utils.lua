@@ -228,4 +228,14 @@ return {
 		"chrisbra/unicode.vim",
 		lazy = true,
 	},
+	{
+		"tree-sitter-grammars/tree-sitter-hyprlang",
+		lazy = true,
+		event = "VeryLazy",
+		init = function()
+			vim.filetype.add({
+				pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+			})
+		end,
+	},
 }

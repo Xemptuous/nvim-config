@@ -80,6 +80,9 @@ return {
 				width_preview = 60,
 			},
 		},
+		config = function(_, opts)
+			require("mini.files").setup(opts)
+		end,
 	},
 	{
 		"echasnovski/mini.fuzzy",
