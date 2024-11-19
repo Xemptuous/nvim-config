@@ -67,7 +67,7 @@ return {
 		lazy = true,
 		event = "VeryLazy",
 		keys = "<C-t>",
-		dependencies = "echasnovski/mini.icons",
+		-- dependencies = "echasnovski/mini.icons",
 		init = function()
 			local m = require("mini.files")
 			vim.keymap.set("n", "<C-t>", function()
@@ -79,6 +79,8 @@ return {
 		opts = {
 			windows = {
 				preview = true,
+				width_focus = 30,
+				width_nofocus = 15,
 				width_preview = 60,
 			},
 		},
@@ -103,6 +105,7 @@ return {
 	},
 	{
 		"echasnovski/mini.icons",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		opts = {},

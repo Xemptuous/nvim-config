@@ -72,11 +72,12 @@ return {
 	},
 	{
 		"NeogitOrg/neogit",
-		enabled = false,
+		enabled = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
 			"nvim-telescope/telescope.nvim",
+			"nvim-tree/nvim-web-devicons",
 		},
 		-- config = true,
 		config = function()
@@ -88,7 +89,7 @@ return {
 					},
 				},
 			})
-			vim.api.nvim_set_keymap("n", "<leader>ng", [[:Neogit<CR>]], { noremap = true })
+			vim.api.nvim_set_keymap("n", "<leader>ng", [[:Neogit<CR>]], { noremap = true, desc = "NeoGit" })
 		end,
 	},
 	{
