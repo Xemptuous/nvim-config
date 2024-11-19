@@ -67,6 +67,7 @@ return {
 				function()
 					require("flash").jump()
 				end,
+				desc = "Flash Jump",
 			},
 			{
 				"<space>S",
@@ -74,6 +75,7 @@ return {
 				function()
 					require("flash").treesitter()
 				end,
+				desc = "Flash Treesitter",
 			},
 			{
 				"<space>e",
@@ -81,6 +83,7 @@ return {
 				function()
 					require("flash").remote()
 				end,
+				desc = "Flash Remote",
 			},
 			{
 				"R",
@@ -88,6 +91,7 @@ return {
 				function()
 					require("flash").treesitter_search()
 				end,
+				desc = "Flash Treesitter Search",
 			},
 			{
 				"<c-s>",
@@ -95,6 +99,7 @@ return {
 				function()
 					require("flash").toggle()
 				end,
+				desc = "Flash Toggle",
 			},
 		},
 		config = function()
@@ -104,18 +109,16 @@ return {
 		end,
 	},
 	{
-		"ggandor/leap.nvim",
+		"lambdalisue/suda.vim",
 		enabled = false,
 		lazy = true,
-		keys = { { "s", mode = { "n", "o", "x" } } },
-		config = function()
-			require("leap").create_default_mappings()
-		end,
-	},
-	{
-		"lambdalisue/suda.vim",
-		lazy = true,
 		cmd = "SudaWrite",
+		keys = {
+			"<leader>sw",
+			mode = "n",
+			"<cmd>SudaWrite<cr>",
+			desc = "Sudo Write",
+		},
 	},
 	{ -- parse and color ansi escape color codes
 		"m00qek/baleia.nvim",
@@ -140,76 +143,13 @@ return {
 		enabled = true,
 		event = "VeryLazy",
 		config = function()
-			local wk = require("which-key")
-			wk.setup()
-			wk.register({
-				["<space>"] = {
-					s = { "<cmd>:lua require('flash').jump()<cr>", "Flash Jump" },
-					S = { "<cmd>:lua require('flash').treesitter()<cr>", "Flash Treesitter" },
-					e = { "<cmd>:lua require('flash').remote()<cr>", "Flash Remote" },
-					b = { "<cmd>Pick buffers<cr>", "Grep Buffers" },
-					f = { "<cmd>Pick files<cr>", "Grep Files" },
-					g = { "<cmd>Pick grep<cr>", "Grep" },
-					G = { "<cmd>Pick grep_live<cr>", "Grep Live" },
-					h = { "<cmd>Pick help<cr>", "Grep Help" },
-				},
-				["<leader>"] = {
-					t = {
-						name = "Telescope",
-						o = { "<cmd>Telescope vim_options<cr>", "Vim Options" },
-						f = { "<cmd>Telescope find_files<cr>", "Find File" },
-						g = { "<cmd>Telescope live_grep<cr>", "Grep" },
-						b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-						h = { "<cmd>Telescope help_tags<cr>", "Help" },
-						m = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-						k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-						R = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-						w = { "<cmd>Telescope grep_string{}<CR>", "String" },
-						H = { "<cmd>Telescope search_history{}<CR>", "Search History" },
-						C = { "<cmd>Telescope command_history{}<CR>", "Command History" },
-						c = { "<cmd>Telescope commands{}<CR>", "Colorscheme" },
-						r = { "<cmd>Telescope registers{}<CR>", "Registers" },
-						-- b = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Toggle Current Line Blame" },
-						d = { "<cmd>Gitsigns toggle_deleted<cr>", "Gitsigns Toggle Deleted" },
-					},
-					d = {
-						name = "Debugger",
-						["<F5>"] = { "<cmd>DapContinue<CR>", "Continue" },
-						["<F6>"] = { "<cmd>DapStepOver<CR>", "StepOver" },
-						["<F7>"] = { "<cmd>DapStepInto<CR>", "StepInto" },
-						["<F8>"] = { "<cmd>DapStepOut<CR>", "StepOut" },
-						b = { "<cmd>DapToggleBreakpoint<CR>", "Breakpoint Toggle" },
-						r = { "<cmd>DapToggleReplCR>", "REPL Toggle" },
-						l = { "<cmd>:lua require('dap').run_last()<cr>", "Run Last" },
-						h = { "<cmd>:lua require('dap.ui.widgets').hover()<cr>", "Show Hover Info" },
-						p = { "<cmd>:lua require('dap.ui.widgets').preview()<cr>", "Show Preview" },
-						f = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').frames)", "Show Frames" },
-						s = { "<cmd>:lua widgets.centered_float(require('dap.ui.widgets').scopes)", "Show Scopes" },
-					},
-					h = {
-						name = "Gitsigns Hunks",
-						s = { "<cmd>Gitsigns stage_hunk<cr>", "Stage Hunk" },
-						r = { "<cmd>Gitsigns reset_hunk<cr>", "Reset Hunk" },
-						S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
-						u = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
-						R = { "<cmd>Gitsigns reset_buffer<cr>", "Reset Buffer" },
-						p = { "<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk" },
-						b = { "<cmd>:lua require('gitsigns').blame_line({full = true})<cr>", "Show Blame Full" },
-						d = { "<cmd>Gitsigns diffthis<cr>", "Diff This" },
-						g = { "<cmd>Gitsigns setqflist<cr>", "Set Quickfix List" },
-						D = { "<cmd>:lua require('gitsigns').diffthis('~')<cr>", "Diff This Dir" },
-					},
-					m = {
-						name = "Telescope Marks",
-					},
-				},
-			}, {
-				mode = "n",
-				prefix = "",
-				buffer = nil,
-				silent = true,
-				noremap = true,
-				nowait = false,
+			require("which-key").add({
+				{ "<leader>t", group = "Telescope" },
+				{ "<leader>d", group = "Debugger" },
+				{ "<leader>g", group = "Gitsigns" },
+				{ "<leader>gt", group = "Toggle" },
+				{ "<leader>x", group = "Trouble" },
+				{ "<leader>c", group = "Trouble" },
 			})
 		end,
 	},

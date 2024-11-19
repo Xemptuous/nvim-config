@@ -46,18 +46,20 @@ return {
 				auto_setup = true,
 			},
 		},
-		-- config = function(_, opts)
-		-- 	require("mini.completion").setup(opts)
-		-- end,
 	},
 	{
 		"echasnovski/mini.diff",
-		enabled = true,
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		config = function()
 			require("mini.diff").setup()
-			vim.api.nvim_set_keymap("n", "<leader>o", ":lua MiniDiff.toggle_overlay()<CR>", { noremap = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>go",
+				":lua MiniDiff.toggle_overlay()<CR>",
+				{ noremap = true, desc = "Toggle Overlay" }
+			)
 		end,
 	},
 	{
@@ -92,6 +94,7 @@ return {
 	},
 	{
 		"echasnovski/mini-git",
+		enabled = false,
 		lazy = true,
 		event = "CmdlineEnter",
 		config = function()
@@ -157,11 +160,11 @@ return {
 			mp.setup(opts)
 			local builtin = mp.builtin
 			local k = vim.keymap.set
-			k("n", "<space>f", builtin.files, {})
-			k("n", "<space>g", builtin.grep, {})
-			k("n", "<space>G", builtin.grep_live, {})
-			k("n", "<space>h", builtin.help, {})
-			k("n", "<space>b", builtin.buffers, {})
+			k("n", "<space>f", builtin.files, { desc = "Grep Files" })
+			k("n", "<space>G", builtin.grep, { desc = "Grep" })
+			k("n", "<space>g", builtin.grep_live, { desc = "Grep Live" })
+			k("n", "<space>h", builtin.help, { desc = "Grep Help" })
+			k("n", "<space>b", builtin.buffers, { desc = "Grep Buffers" })
 		end,
 	},
 	{

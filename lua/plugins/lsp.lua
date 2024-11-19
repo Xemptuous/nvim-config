@@ -66,21 +66,70 @@ return {
 					local opts = { buffer = event.buf }
 					local k = vim.keymap.set
 					k("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
-					k("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-					k("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
-					k("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-					k("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-					k("n", "gR", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+					k(
+						"n",
+						"gd",
+						"<cmd>lua vim.lsp.buf.definition()<cr>",
+						{ desc = "Goto Definition", buffer = event.buf }
+					)
+					k(
+						"n",
+						"gD",
+						"<cmd>lua vim.lsp.buf.declaration()<cr>",
+						{ desc = "Goto Declaration", buffer = event.buf }
+					)
+					k(
+						"n",
+						"gi",
+						"<cmd>lua vim.lsp.buf.implementation()<cr>",
+						{ desc = "Goto Implementation", buffer = event.buf }
+					)
+					k(
+						"n",
+						"go",
+						"<cmd>lua vim.lsp.buf.type_definition()<cr>",
+						{ desc = "Goto Type Definition", buffer = event.buf }
+					)
+					k(
+						"n",
+						"gR",
+						"<cmd>lua vim.lsp.buf.references()<cr>",
+						{ desc = "Goto References", buffer = event.buf }
+					)
 					k("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					k("n", "gr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-					k("n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+					k("n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "LSP Rename", buffer = event.buf })
 					k("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 					k("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
-					k("n", "<space>v", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-					k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", opts)
-					k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", opts)
-					k("n", "<space>B", "<cmd>lua vim.diagnostic.setloclist()<cr>", opts)
-					k("n", "<space>W", "<cmd>lua vim.diagnostic.setqflist()<cr>", opts)
+					k(
+						"n",
+						"<space>v",
+						"<cmd>lua vim.diagnostic.open_float()<cr>",
+						{ desc = "Current Line Diagnostics", buffer = event.buf }
+					)
+					k(
+						"n",
+						"[d",
+						"<cmd>lua vim.diagnostic.goto_prev()<cr>",
+						{ desc = "Next Diagnostic", buffer = event.buf }
+					)
+					k(
+						"n",
+						"]d",
+						"<cmd>lua vim.diagnostic.goto_next()<cr>",
+						{ desc = "Prev Diagnostic", buffer = event.buf }
+					)
+					k(
+						"n",
+						"<space>B",
+						"<cmd>lua vim.diagnostic.setloclist()<cr>",
+						{ desc = "LSP Rename", buffer = event.buf }
+					)
+					k(
+						"n",
+						"<space>W",
+						"<cmd>lua vim.diagnostic.setqflist()<cr>",
+						{ desc = "LSP Rename", buffer = event.buf }
+					)
 				end,
 			})
 
