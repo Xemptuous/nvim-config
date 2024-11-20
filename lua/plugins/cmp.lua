@@ -53,9 +53,11 @@ return {
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"mtoohey31/cmp-fish",
 			"garymjr/nvim-snippets",
+			"xemptuous/sqlua.nvim",
 			-- "L3MON4D3/LuaSnip",
 			-- "saadparwaiz1/cmp_luasnip",
 			-- "rafamadriz/friendly-snippets",
+			"kristijanhusak/vim-dadbod-completion",
 			"windwp/nvim-autopairs",
 			-- "nanotee/sqls.nvim"
 			"onsails/lspkind.nvim",
@@ -76,6 +78,8 @@ return {
 					{ name = "look", ft = { "markup", "html" } },
 					{ name = "fish", ft = { "fish" } },
 					{ name = "path" },
+					{ name = "vim-dadbod-completion" },
+					{ name = "sqlua" },
 					-- { name = "sql", ft={"sql", "pgsql"}},
 				},
 				completion = {
@@ -176,15 +180,15 @@ return {
 					-- 		fallback()
 					-- 	end
 					-- end, { "i", "s" }),
-					["<Down>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif vim.snippet.active({ direction = 1 }) then
-							vim.snippet.jump(1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					-- ["<Down>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.select_next_item()
+					-- 	elseif vim.snippet.active({ direction = 1 }) then
+					-- 		vim.snippet.jump(1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
 
 					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
 					-- 	if cmp.visible() then
@@ -195,15 +199,15 @@ return {
 					-- 		fallback()
 					-- 	end
 					-- end, { "i", "s" }),
-					["<Up>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif vim.snippet.active({ direction = -1 }) then
-							vim.snippet.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					-- ["<Up>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.select_prev_item()
+					-- 	elseif vim.snippet.active({ direction = -1 }) then
+					-- 		vim.snippet.jump(-1)
+					-- 	else
+					-- 		fallback()
+					-- 	end
+					-- end, { "i", "s" }),
 				}),
 			}
 		end,

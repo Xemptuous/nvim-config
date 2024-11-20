@@ -173,7 +173,48 @@ return {
 		"kristijanhusak/vim-dadbod-ui",
 		lazy = true,
 		cmd = "DBUI",
-		dependencies = { "tpope/vim-dadbod" },
+		dependencies = {
+			"tpope/vim-dadbod",
+			{
+				"kristijanhusak/vim-dadbod-completion",
+				lazy = true,
+				ft = { "sql", "mysql", "plsql" },
+			},
+		},
+	},
+	{
+		"xemptuous/sqlua.nvim",
+		lazy = true,
+		cmd = "SQLua",
+		config = function()
+			require("sqlua").setup({
+				load_connections_on_start = false,
+			})
+		end,
+	},
+	{
+		"kndndrj/nvim-dbee",
+		enabled = false,
+		lazy = true,
+		cmd = "Dbee",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		build = function()
+			require("dbee").install()
+		end,
+		config = function()
+			require("dbee").setup({
+				sources = {
+					require("dbee.sources").FileSource:new(vim.fn.stdpath("data") .. "/dbee/connections.json"),
+				},
+				default_connection = "americor-crm",
+				editor = {
+					mappings = {
+						{ key = "<leader>r", mode = "v", action = "run_selection" },
+						{ key = "<leader>r", mode = "n", action = "run_file" },
+					},
+				},
+			})
+		end,
 	},
 	{ -- Minimap Sidebar
 		enabled = false,
@@ -271,40 +312,6 @@ return {
 			"stevearc/dressing.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
-	},
-	{
-		"xemptuous/sqlua.nvim",
-		lazy = true,
-		cmd = "SQLua",
-		config = function()
-			require("sqlua").setup({
-				load_connections_on_start = false,
-			})
-		end,
-	},
-	{
-		"kndndrj/nvim-dbee",
-		enabled = false,
-		lazy = true,
-		cmd = "Dbee",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		build = function()
-			require("dbee").install()
-		end,
-		config = function()
-			require("dbee").setup({
-				sources = {
-					require("dbee.sources").FileSource:new(vim.fn.stdpath("data") .. "/dbee/connections.json"),
-				},
-				default_connection = "americor-crm",
-				editor = {
-					mappings = {
-						{ key = "<leader>r", mode = "v", action = "run_selection" },
-						{ key = "<leader>r", mode = "n", action = "run_file" },
-					},
-				},
-			})
-		end,
 	},
 	{
 		"glench/vim-jinja2-syntax",
