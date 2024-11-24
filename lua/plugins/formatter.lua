@@ -1,4 +1,4 @@
-local clang_config_path = "--style=file:" .. vim.fn.stdpath("config") .. "/.clang-format"
+local config_dir = vim.fn.stdpath("config"):match("(.*[/\\])")
 
 return {
 	{
@@ -6,17 +6,6 @@ return {
 		lazy = true,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		-- keys = {
-		-- 	{
-		-- 		-- Customize or remove this keymap to your liking
-		-- 		"<leader>f",
-		-- 		function()
-		-- 			require("conform").format({ async = true })
-		-- 		end,
-		-- 		mode = "",
-		-- 		desc = "Format buffer",
-		-- 	},
-		-- },
 		init = function()
 			-- Format on Save
 			-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -47,6 +36,8 @@ return {
 			end, { desc = "Re-enable autoformat-on-save" })
 		end,
 		opts = {
+			log_level = vim.log.levels.DEBUG,
+			-- notify_on_error = true,
 			format_on_save = function(bufnr)
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
@@ -55,12 +46,12 @@ return {
 			end,
 			formatters_by_ft = {
 				bash = { "beautysh" },
-				c = { "clang-format" },
-				cpp = { "clang-format" },
-				cs = { "clang-format" },
+				c = { "clang_format" },
+				cpp = { "clang_format" },
+				cs = { "clang_format" },
 				fish = { "fish_indent" },
 				go = { "gofmt" },
-				java = { "clang-format" },
+				java = { "clang_format" },
 				js = { "prettier" },
 				json = { "jq" },
 				jsr = { "prettier" },
@@ -77,6 +68,17 @@ return {
 				tsx = { "prettier" },
 				zsh = { "beautysh" },
 			},
+			formatters = {
+				clang_format = {
+					command = "clang-format",
+					append_args = function()
+						return { "-style=file:" .. config_dir .. "clangd/.clang-format" }
+					end,
+				},
+			},
 		},
+		config = function(_, opts)
+			require("conform").setup(opts)
+		end,
 	},
 }
