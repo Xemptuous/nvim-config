@@ -1,4 +1,7 @@
 vim.loader.enable()
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.g.python3_host_prog = "/bin/python3"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -76,5 +79,5 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
 package.path = "./lua/?.lua; ./lua/?.vim" .. package.path
 require("keymaps")
-require("options")
 -- require("init")
+require("options")

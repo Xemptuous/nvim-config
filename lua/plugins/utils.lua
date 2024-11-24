@@ -62,7 +62,7 @@ return {
 		lazy = true,
 		keys = {
 			{
-				"<space>s",
+				"<leader>s",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").jump()
@@ -70,7 +70,7 @@ return {
 				desc = "Flash Jump",
 			},
 			{
-				"<space>S",
+				"<leader>S",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").treesitter()
@@ -78,7 +78,7 @@ return {
 				desc = "Flash Treesitter",
 			},
 			{
-				"<space>e",
+				"<leader>e",
 				mode = "o",
 				function()
 					require("flash").remote()

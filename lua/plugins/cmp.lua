@@ -49,22 +49,16 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lua",
+			{ "hrsh7th/cmp-nvim-lua", ft = { "lua" }, lazy = true },
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"mtoohey31/cmp-fish",
+			{ "mtoohey31/cmp-fish", ft = { "fish" }, lazy = true },
 			"garymjr/nvim-snippets",
-			"xemptuous/sqlua.nvim",
-			-- "L3MON4D3/LuaSnip",
-			-- "saadparwaiz1/cmp_luasnip",
-			-- "rafamadriz/friendly-snippets",
-			"kristijanhusak/vim-dadbod-completion",
+			{ "sqlua.nvim", ft = { "sql", "mysql", "psql" }, lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "psql" }, lazy = true },
 			"windwp/nvim-autopairs",
-			-- "nanotee/sqls.nvim"
 			"onsails/lspkind.nvim",
 		},
 		opts = function()
-			-- local lspkind = require("lspkind")
-			-- local luasnip = require("luasnip")
 			local cmp = require("cmp")
 			return {
 				sources = {
@@ -72,15 +66,13 @@ return {
 					{ name = "nvim_lsp+document_symbol", ft = { "lua" } },
 					{ name = "nvim_lsp+signature_help", ft = { "lua" } },
 					{ name = "friendly-snippets" },
-					-- { name = "luasnip", keyword_length = 1 },
 					{ name = "nvim_lua", ft = "lua" },
 					{ name = "buffer" },
 					{ name = "look", ft = { "markup", "html" } },
 					{ name = "fish", ft = { "fish" } },
 					{ name = "path" },
-					{ name = "vim-dadbod-completion" },
-					{ name = "sqlua" },
-					-- { name = "sql", ft={"sql", "pgsql"}},
+					{ name = "vim-dadbod-completion", ft = { "sql", "mysql", "psql" } },
+					{ name = "sqlua", ft = { "sql", "mysql", "psql" } },
 				},
 				completion = {
 					completeopt = "noselect",
@@ -100,8 +92,6 @@ return {
 				window = {
 					completion = {
 						border = "none",
-						-- winhighlight = "Normal:Normal,Search:None,FloatBorder:FloatBorder",
-
 						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
 						winblend = vim.o.pumblend,
 						col_offset = -3,
@@ -114,18 +104,9 @@ return {
 						col_offset = -3,
 						side_padding = 0,
 					},
-					-- completion = cmp.config.window.bordered({
-					-- 	border = "single",
-					-- 	col_offset = -3,
-					-- 	side_padding = 0,
-					-- }),
-					-- documentation = cmp.config.window.bordered({
-					-- 	border = "single",
-					-- }),
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
-					-- expandable_indicator = true,
 					format = function(entry, vim_item)
 						local kind = require("lspkind").cmp_format({
 							mode = "symbol_text",
@@ -137,14 +118,6 @@ return {
 						-- kind.menu = "    (" .. (strings[2] or "") .. ")"
 						return kind
 					end,
-					-- format = lspkind.cmp_format({
-					-- 	mode = "symbol_text",
-					-- 	maxwidth = 50,
-					-- 	ellipsis_char = "...",
-					-- 	before = function(entry, vim_item)
-					-- 		return vim_item
-					-- 	end,
-					-- }),
 				},
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -161,60 +134,13 @@ return {
 							fallback()
 						end
 					end),
-					-- ["<CR>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.confirm({
-					-- 			behavior = cmp.ConfirmBehavior.Insert,
-					-- 			select = true,
-					-- 		})
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end),
-					-- ["<Tab>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.select_next_item()
-					-- 	elseif vim.snippet.active({ direction = 1 }) then
-					-- 		vim.snippet.jump(1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
-					-- ["<Down>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.select_next_item()
-					-- 	elseif vim.snippet.active({ direction = 1 }) then
-					-- 		vim.snippet.jump(1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
-
-					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.select_prev_item()
-					-- 	elseif vim.snippet.active({ direction = -1 }) then
-					-- 		vim.snippet.jump(-1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
-					-- ["<Up>"] = cmp.mapping(function(fallback)
-					-- 	if cmp.visible() then
-					-- 		cmp.select_prev_item()
-					-- 	elseif vim.snippet.active({ direction = -1 }) then
-					-- 		vim.snippet.jump(-1)
-					-- 	else
-					-- 		fallback()
-					-- 	end
-					-- end, { "i", "s" }),
 				}),
 			}
 		end,
 		config = function(_, opts)
 			vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 			vim.opt.shortmess = vim.opt.shortmess + { c = true }
-			-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			-- require("luasnip.loaders.from_vscode").lazy_load(opts)
 			cmp.setup(opts)
@@ -238,7 +164,7 @@ return {
 					},
 				}),
 			})
-			-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 	{

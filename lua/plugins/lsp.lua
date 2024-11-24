@@ -97,12 +97,17 @@ return {
 						{ desc = "Goto References", buffer = event.buf }
 					)
 					k("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-					k("n", "<space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "LSP Rename", buffer = event.buf })
+					k(
+						"n",
+						"<leader>r",
+						"<cmd>lua vim.lsp.buf.rename()<cr>",
+						{ desc = "LSP Rename", buffer = event.buf }
+					)
 					k("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 					k("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
 					k(
 						"n",
-						"<space>v",
+						"<leader>v",
 						"<cmd>lua vim.diagnostic.open_float()<cr>",
 						{ desc = "Current Line Diagnostics", buffer = event.buf }
 					)
@@ -120,15 +125,15 @@ return {
 					)
 					k(
 						"n",
-						"<space>B",
+						"<leader>B",
 						"<cmd>lua vim.diagnostic.setloclist()<cr>",
-						{ desc = "LSP Rename", buffer = event.buf }
+						{ desc = "LSP LOC List", buffer = event.buf }
 					)
 					k(
 						"n",
-						"<space>W",
+						"<leader>W",
 						"<cmd>lua vim.diagnostic.setqflist()<cr>",
-						{ desc = "LSP Rename", buffer = event.buf }
+						{ desc = "LSP QF List", buffer = event.buf }
 					)
 				end,
 			})
@@ -297,6 +302,25 @@ return {
 		ft = { "rust" },
 	},
 	{
+		"stevearc/aerial.nvim",
+		lazy = true,
+		keys = { "<leader>a", "<leader>A" },
+		config = function()
+			require("aerial").setup({
+				-- optionally use on_attach to set keymaps when aerial has attached to a buffer
+				on_attach = function(bufnr)
+					-- Jump forwards/backwards with '{' and '}'
+					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				end,
+				autojump = true,
+			})
+			-- You probably also want to set a keymap to toggle aerial
+			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+			vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>")
+		end,
+	},
+	{
 		"nvimdev/lspsaga.nvim",
 		enabled = false,
 		lazy = true,
@@ -332,9 +356,9 @@ return {
 			k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
 			k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
 
-			k("n", "<space>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
-			k("n", "<space>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
-			k("n", "<space>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
+			k("n", "<leader>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
+			k("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
+			k("n", "<leader>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
 
 			local vd = vim.diagnostic.severity.ERROR
 			k("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {})

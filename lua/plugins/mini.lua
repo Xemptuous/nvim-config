@@ -6,6 +6,11 @@ return {
 		opts = {},
 	},
 	{
+		"echasnovski/mini.basics",
+		enabled = false,
+		opts = {},
+	},
+	{
 		"echasnovski/mini.bufremove",
 		lazy = true,
 		event = "VeryLazy",
@@ -15,6 +20,12 @@ return {
 		"echasnovski/mini.comment",
 		lazy = true,
 		keys = { "gc", "V" },
+		opts = {},
+	},
+	{
+		"echasnovski/mini.cursorword",
+		lazy = true,
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
@@ -143,6 +154,13 @@ return {
 		},
 	},
 	{
+		"echasnovski/mini.operators",
+		enabled = true,
+		lazy = true,
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
 		"echasnovski/mini.pairs",
 		enabled = false,
 		lazy = true,
@@ -151,6 +169,7 @@ return {
 	},
 	{
 		"echasnovski/mini.pick",
+		enabled = false,
 		lazy = true,
 		event = "VeryLazy",
 		cmd = "Pick",
@@ -163,11 +182,11 @@ return {
 			mp.setup(opts)
 			local builtin = mp.builtin
 			local k = vim.keymap.set
-			k("n", "<space>f", builtin.files, { desc = "Grep Files" })
-			k("n", "<space>G", builtin.grep, { desc = "Grep" })
-			k("n", "<space>g", builtin.grep_live, { desc = "Grep Live" })
-			k("n", "<space>h", builtin.help, { desc = "Grep Help" })
-			k("n", "<space>b", builtin.buffers, { desc = "Grep Buffers" })
+			k("n", "<leader>f", builtin.files, { desc = "Grep Files" })
+			k("n", "<leader>G", builtin.grep, { desc = "Grep" })
+			k("n", "<leader>g", builtin.grep_live, { desc = "Grep Live" })
+			k("n", "<leader>h", builtin.help, { desc = "Grep Help" })
+			k("n", "<leader>b", builtin.buffers, { desc = "Grep Buffers" })
 		end,
 	},
 	{

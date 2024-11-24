@@ -73,6 +73,8 @@ return {
 	{
 		"NeogitOrg/neogit",
 		enabled = true,
+		lazy = true,
+		keys = { "<leader>ng" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
