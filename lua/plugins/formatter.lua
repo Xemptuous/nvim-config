@@ -34,6 +34,7 @@ return {
 				vim.b.disable_autoformat = false
 				vim.g.disable_autoformat = false
 			end, { desc = "Re-enable autoformat-on-save" })
+			vim.api.nvim_set_keymap("n", "<\\>f", ":Format<cr>", {})
 		end,
 		opts = {
 			log_level = vim.log.levels.DEBUG,

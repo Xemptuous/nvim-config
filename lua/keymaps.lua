@@ -84,8 +84,6 @@ map("n", "X", [["_X]], { noremap = true })
 
 -- toggle wrap
 map("n", "<leader>uw", ":set nowrap!<cr>", {})
-map("n", "<leader>f", ":Format<cr>", {})
-
 -- quickfix list
 map("n", "<C-n>", ":cn<CR>", {})
 map("n", "<C-p>", ":cp<CR>", {})
