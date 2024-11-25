@@ -321,6 +321,23 @@ return {
 		event = "VeryLazy",
 	},
 	{
+		"numToStr/FTerm.nvim",
+		lazy = true,
+		keys = { "<A-t>", desc = "Toggle Float Terminal", mode = "n" },
+		opts = {
+			border = "single",
+			dimensions = {
+				height = 0.9,
+				width = 0.9,
+			},
+		},
+		config = function(_, opts)
+			require("FTerm").setup(opts)
+			vim.api.nvim_set_keymap("n", "<A-t>", "<cmd>lua require('FTerm').toggle()<cr>", {})
+			vim.api.nvim_set_keymap("t", "<A-t>", "<C-\\><cmd>lua require('FTerm').toggle()<cr>", {})
+		end,
+	},
+	{
 		"folke/trouble.nvim",
 		ops = {},
 		config = function()
