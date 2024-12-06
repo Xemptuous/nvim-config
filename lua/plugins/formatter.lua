@@ -3,7 +3,6 @@ local config_dir = vim.fn.stdpath("config"):match("(.*[/\\])")
 return {
 	{
 		"stevearc/conform.nvim",
-		lazy = true,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		init = function()

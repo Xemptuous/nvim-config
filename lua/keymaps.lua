@@ -10,19 +10,6 @@ end
 
 map("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true })
 
-map(
-	"n",
-	"\\h",
-	'<Cmd>let v:hlsearch = 1 - v:hlsearch | echo (v:hlsearch ? "  " : "no") . "hlsearch"<CR>',
-	{ desc = "Toggle search highlight" }
-)
-map("n", "\\i", "<Cmd>setlocal ignorecase! ignorecase?<CR>", { desc = "Toggle 'ignorecase'" })
-map("n", "\\r", "<Cmd>setlocal relativenumber! relativenumber?<CR>", { desc = "Toggle 'relativenumber'" })
-map("n", "\\w", "<Cmd>setlocal wrap! wrap?<CR>", { desc = "Toggle 'wrap'" })
-
-map("", "<leader>bn", [[:bnext<CR>]], { noremap = true })
-map("", "<leader>bp", [[:bprevious<CR>]], { noremap = true })
-
 map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual selection" })
 
 -- better movement

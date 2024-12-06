@@ -1,7 +1,9 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- enabled = false,
+		lazy = false,
+		priority = 1000,
+		ft = { "*" },
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter-textobjects",
@@ -10,35 +12,61 @@ return {
 					load_textobjects = true
 				end,
 			},
+			{
+				"HiPhish/rainbow-delimiters.nvim",
+				config = function()
+					local rainbow_delimiters = require("rainbow-delimiters")
+
+					vim.g.rainbow_delimiters = {
+						strategy = {
+							[""] = rainbow_delimiters.strategy["global"],
+							vim = rainbow_delimiters.strategy["local"],
+						},
+						query = {
+							[""] = "rainbow-delimiters",
+							lua = "rainbow-blocks",
+						},
+						highlight = {
+							"RainbowDelimiterViolet",
+							"RainbowDelimiterYellow",
+							"RainbowDelimiterBlue",
+							"RainbowDelimiterRed",
+							"RainbowDelimiterGreen",
+							"RainbowDelimiterOrange",
+							"RainbowDelimiterCyan",
+						},
+					}
+				end,
+			},
 		},
 		opts = {
-			ensure_installed = {
-				"bash",
-				"c",
-				"c_sharp",
-				"cpp",
-				"csv",
-				"gitignore",
-				"go",
-				"html",
-				"htmldjango",
-				"javascript",
-				"json",
-				"json5",
-				"lua",
-				"luadoc",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"query",
-				"rust",
-				"sql",
-				"tsx",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"zig",
-			},
+			-- ensure_installed = {
+			-- 	"bash",
+			-- 	"c",
+			-- 	"c_sharp",
+			-- 	"cpp",
+			-- 	"csv",
+			-- 	"gitignore",
+			-- 	"go",
+			-- 	"html",
+			-- 	"htmldjango",
+			-- 	"javascript",
+			-- 	"json",
+			-- 	"json5",
+			-- 	"lua",
+			-- 	"luadoc",
+			-- 	"markdown",
+			-- 	"markdown_inline",
+			-- 	"python",
+			-- 	"query",
+			-- 	"rust",
+			-- 	"sql",
+			-- 	"tsx",
+			-- 	"typescript",
+			-- 	"vim",
+			-- 	"vimdoc",
+			-- 	"zig",
+			-- },
 			highlight = {
 				enable = true,
 				use_languagetree = true,
@@ -75,7 +103,6 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		enabled = false,
 		main = "ibl",
-		lazy = true,
 		event = "VeryLazy",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
@@ -121,30 +148,14 @@ return {
 		end,
 	},
 	{
-		"HiPhish/rainbow-delimiters.nvim",
-		enabled = true,
+		"tree-sitter-grammars/tree-sitter-hyprlang",
+		enabled = false,
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		lazy = false,
 		config = function()
-			local rainbow_delimiters = require("rainbow-delimiters")
-
-			vim.g.rainbow_delimiters = {
-				strategy = {
-					[""] = rainbow_delimiters.strategy["global"],
-					vim = rainbow_delimiters.strategy["local"],
-				},
-				query = {
-					[""] = "rainbow-delimiters",
-					lua = "rainbow-blocks",
-				},
-				highlight = {
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterRed",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterOrange",
-					"RainbowDelimiterCyan",
-				},
-			}
+			vim.filetype.add({
+				pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+			})
 		end,
 	},
 }

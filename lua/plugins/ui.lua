@@ -2,7 +2,6 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		enabled = false,
-		lazy = true,
 		-- event = "BufReadPre",
 		event = "VeryLazy",
 		opts = {
@@ -33,7 +32,6 @@ return {
 	{
 		"mikesmithgh/borderline.nvim",
 		enabled = false,
-		lazy = true,
 		event = "VeryLazy",
 		config = function()
 			require("borderline").setup({})
@@ -43,7 +41,6 @@ return {
 	{
 		"folke/twilight.nvim",
 		enabled = false,
-		lazy = true,
 		keys = "<leader>d",
 		opts = {
 			dimming = {
@@ -72,9 +69,8 @@ return {
 	},
 	{
 		"NeogitOrg/neogit",
-		enabled = true,
-		lazy = true,
 		keys = { "<leader>ng" },
+		cmd = { "Neogit" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"sindrets/diffview.nvim",
@@ -94,16 +90,10 @@ return {
 			vim.api.nvim_set_keymap("n", "<leader>ng", [[:Neogit<CR>]], { noremap = true, desc = "NeoGit" })
 		end,
 	},
-	{
-		"tpope/vim-fugitive",
-		enabled = false,
-		lazy = true,
-		event = "VeryLazy",
-	},
+	{ "tpope/vim-fugitive", enabled = false, event = "VeryLazy" },
 	{
 		"lewis6991/gitsigns.nvim",
-		enabled = true,
-		lazy = true,
+		enabled = false,
 		event = "VeryLazy",
 		config = function()
 			require("gitsigns").setup({
@@ -173,20 +163,18 @@ return {
 	},
 	{
 		"kristijanhusak/vim-dadbod-ui",
-		lazy = true,
-		cmd = "DBUI",
+		cmd = { "DBUI" },
 		dependencies = {
 			"tpope/vim-dadbod",
-			{
-				"kristijanhusak/vim-dadbod-completion",
-				lazy = true,
-				ft = { "sql", "mysql", "plsql" },
-			},
+			-- {
+			-- 	"kristijanhusak/vim-dadbod-completion",
+			-- 	cmd = { "DBUI" },
+			-- 	ft = { "sql", "mysql", "plsql" },
+			-- },
 		},
 	},
 	{
 		"xemptuous/sqlua.nvim",
-		lazy = true,
 		cmd = "SQLua",
 		config = function()
 			require("sqlua").setup({
@@ -197,7 +185,6 @@ return {
 	{
 		"kndndrj/nvim-dbee",
 		enabled = false,
-		lazy = true,
 		cmd = "Dbee",
 		dependencies = { "MunifTanjim/nui.nvim" },
 		build = function()
@@ -221,7 +208,6 @@ return {
 	{ -- Minimap Sidebar
 		enabled = false,
 		"gorbit99/codewindow.nvim",
-		lazy = true,
 		keys = "<leader>mm",
 		opts = {
 			auto_enable = false,
@@ -238,7 +224,6 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		enabled = false,
-		lazy = true,
 		cmd = { "VimEnter", "NvimTreeToggle" },
 		keys = "<C-t>",
 		dependencies = {
@@ -301,34 +286,26 @@ return {
 		end,
 	},
 	{
-		"stevearc/dressing.nvim",
-		enabled = false,
-		lazy = true,
-		opts = {},
-	},
-	{
 		"2kabhishek/nerdy.nvim",
-		lazy = true,
 		cmd = "Nerdy",
+		key = { "<leader>n", mode = "n", "<cmd>Nerdy<CR>", desc = "Nerd Icons" },
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-telescope/telescope.nvim",
 		},
+		config = function()
+			require("telescope").load_extension("nerdy")
+		end,
 	},
-	{
-		"glench/vim-jinja2-syntax",
-		lazy = true,
-		event = "VeryLazy",
-	},
+	{ "glench/vim-jinja2-syntax", ft = { "html", "sql" } },
 	{
 		"numToStr/FTerm.nvim",
-		lazy = true,
 		keys = { "<A-t>", desc = "Toggle Float Terminal", mode = "n" },
 		opts = {
 			border = "single",
+			width = 0.9,
 			dimensions = {
 				height = 0.9,
-				width = 0.9,
 			},
 		},
 		config = function(_, opts)
@@ -343,7 +320,6 @@ return {
 		config = function()
 			require("trouble").setup()
 		end,
-		lazy = true,
 		cmd = "Trouble",
 		keys = {
 			{

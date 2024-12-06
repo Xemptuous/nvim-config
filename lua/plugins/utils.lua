@@ -1,7 +1,6 @@
 return {
 	{
 		"michaelb/sniprun",
-		lazy = true,
 		cmd = "SnipRun",
 		build = "sh ./install.sh",
 		config = function()
@@ -10,8 +9,7 @@ return {
 	},
 	{
 		"max397574/better-escape.nvim",
-		lazy = true,
-		event = "VeryLazy",
+		event = { "InsertEnter" },
 		commit = "7e86edafb8c7e73699e0320f225464a298b96d12",
 		opts = {
 			mapping = { "jk", "kj" },
@@ -24,8 +22,6 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
-		enabled = true,
-		lazy = true,
 		event = "InsertEnter",
 		opts = {
 			check_ts = true,
@@ -34,32 +30,24 @@ return {
 	{
 		"kylechui/nvim-surround",
 		enabled = false,
-		lazy = true,
 		keys = { "ys", "yS" },
 		opts = {},
 	},
 	{
 		"alvan/vim-closetag",
-		lazy = true,
 		ft = { "html", "djangohtml", "htmldjango" },
 	},
 	{
 		"numToStr/Comment.nvim",
 		enabled = false,
-		lazy = true,
 		keys = { "gc", "V" },
 		config = function()
 			require("Comment").setup()
 		end,
 	},
-	{
-		"Vimjas/vim-python-pep8-indent",
-		lazy = true,
-		ft = { "python", "py" },
-	},
+	{ "Vimjas/vim-python-pep8-indent", enabled = false, ft = { "python", "py" } },
 	{
 		"folke/flash.nvim",
-		lazy = true,
 		keys = {
 			{
 				"<leader>s",
@@ -111,7 +99,6 @@ return {
 	{
 		"lambdalisue/suda.vim",
 		enabled = false,
-		lazy = true,
 		cmd = "SudaWrite",
 		keys = {
 			"<leader>sw",
@@ -123,7 +110,6 @@ return {
 	{ -- parse and color ansi escape color codes
 		"m00qek/baleia.nvim",
 		enabled = false,
-		lazy = true,
 		cmd = { "BaleiaColorize" },
 		config = function()
 			require("baleia").setup({})
@@ -131,7 +117,6 @@ return {
 	},
 	{
 		"iamcco/markdown-preview.nvim",
-		lazy = true,
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 		ft = { "markdown" },
 		build = function()
@@ -140,41 +125,77 @@ return {
 	},
 	{
 		"folke/which-key.nvim",
-		enabled = true,
 		event = "VeryLazy",
 		config = function()
 			require("which-key").add({
 				{ "<leader>t", group = "Telescope" },
 				{ "<leader>d", group = "Debugger" },
-				{ "<leader>g", group = "Gitsigns" },
+				{ "<leader>g", group = "Git" },
+				{ "<leader>n", group = "NeoGit" },
 				{ "<leader>gt", group = "Toggle" },
 				{ "<leader>x", group = "Trouble" },
 				{ "<leader>c", group = "Trouble" },
 			})
 		end,
 	},
-	{ "tpope/vim-abolish" },
+	{ "tpope/vim-abolish", keys = "cr" },
+	{ "kevinhwang91/nvim-bqf", ft = { "qf" } },
+	{ "jidn/vim-dbml", enabled = false, ft = { "dbml" } },
+	{ "chrisbra/unicode.vim", event = "VeryLazy" },
 	{
-		"kevinhwang91/nvim-bqf",
-		lazy = true,
-		ft = { "qf" },
+		"MagicDuck/grug-far.nvim",
+		cmd = "GrugFar",
+		config = function()
+			require("grug-far").setup({})
+		end,
 	},
 	{
-		"jidn/vim-dbml",
-		lazy = true,
-		ft = { "dbml" },
-	},
-	{
-		"chrisbra/unicode.vim",
-		lazy = true,
-	},
-	{
-		"tree-sitter-grammars/tree-sitter-hyprlang",
-		lazy = true,
-		event = "VeryLazy",
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		keys = {
+			{
+				"<leader>.",
+				function()
+					Snacks.scratch()
+				end,
+				desc = "Toggle Scratch Buffer",
+			},
+			{
+				"<leader>gB",
+				function()
+					Snacks.gitbrowse()
+				end,
+				desc = "Git Browse",
+			},
+		},
+		opts = {
+			bigfile = { enabled = true },
+			dashboard = { enabled = true },
+			gitbrowse = { enabled = true },
+			quickfile = { enabled = false },
+			statuscolumn = { enabled = false },
+		},
 		init = function()
-			vim.filetype.add({
-				pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					-- -- Setup some globals for debugging (lazy-loaded)
+					-- _G.dd = function(...)
+					-- 	Snacks.debug.inspect(...)
+					-- end
+					-- _G.bt = function()
+					-- 	Snacks.debug.backtrace()
+					-- end
+					vim.print = _G.dd -- Override print to use snacks for `:=` command
+					Snacks.toggle.treesitter():map("\\T")
+					Snacks.toggle.inlay_hints():map("\\H")
+					Snacks.toggle.line_number():map("\\l")
+					Snacks.toggle.option("wrap", { name = "Wrap" }):map("\\w")
+					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("\\r")
+					Snacks.toggle.option("ignorecase", { name = "Ignore Case" }):map("\\i")
+					Snacks.toggle.option("hlsearch", { name = "Highlight Search" }):map("\\h")
+				end,
 			})
 		end,
 	},

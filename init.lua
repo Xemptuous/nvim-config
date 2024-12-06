@@ -21,7 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
 	install = { colorscheme = { "catppuccin" } },
-	-- defaults = { lazy = true },
+	defaults = { lazy = true },
 	ui = { border = "rounded" },
 	change_detection = {
 		enabled = false,
@@ -41,6 +41,7 @@ require("lazy").setup("plugins", {
 				"gzip",
 				"logipat",
 				"man",
+				"matchit",
 				"netrw",
 				"netrwFileHandlers",
 				"netrwPlugin",

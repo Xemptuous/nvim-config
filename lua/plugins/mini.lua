@@ -1,37 +1,12 @@
 return {
-	{
-		"echasnovski/mini.ai",
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
-		"echasnovski/mini.basics",
-		enabled = false,
-		opts = {},
-	},
-	{
-		"echasnovski/mini.bufremove",
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
-		"echasnovski/mini.comment",
-		lazy = true,
-		keys = { "gc", "V" },
-		opts = {},
-	},
-	{
-		"echasnovski/mini.cursorword",
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "echasnovski/mini.ai", enabled = false, event = "VeryLazy", opts = {} },
+	{ "echasnovski/mini.basics", enabled = false, opts = {} },
+	{ "echasnovski/mini.bufremove", event = { "BufReadPost" }, opts = {} },
+	{ "echasnovski/mini.comment", keys = { "gc", "V" }, opts = {} },
+	{ "echasnovski/mini.cursorword", enabled = false, event = "VeryLazy", opts = {} },
 	{
 		"echasnovski/mini.completion",
 		enabled = false,
-		lazy = true,
 		event = "VeryLazy",
 		opts = {
 			delay = {
@@ -60,11 +35,17 @@ return {
 	},
 	{
 		"echasnovski/mini.diff",
-		enabled = false,
-		lazy = true,
-		event = "VeryLazy",
-		config = function()
-			require("mini.diff").setup()
+		-- key = { "<leader>g" },
+		-- event = "VeryLazy",
+		event = { "BufReadPost" },
+		opts = {
+			mappings = {
+				apply = "<leader>gs",
+				reset = "<leader>gr",
+			},
+		},
+		config = function(_, opts)
+			require("mini.diff").setup(opts)
 			vim.api.nvim_set_keymap(
 				"n",
 				"<leader>go",
@@ -75,17 +56,23 @@ return {
 	},
 	{
 		"echasnovski/mini.files",
-		lazy = true,
 		event = "VeryLazy",
 		keys = "<C-t>",
 		-- dependencies = "echasnovski/mini.icons",
 		init = function()
-			local m = require("mini.files")
-			vim.keymap.set("n", "<C-t>", function()
-				if m.close() == nil then
-					m.open()
-				end
-			end)
+			vim.api.nvim_create_autocmd({ "VimEnter" }, {
+				callback = function(data)
+					local directory = vim.fn.isdirectory(data.file) == 1
+					if not directory then
+						return
+					end
+
+					vim.cmd.enew()
+					vim.cmd.bw(data.buf)
+					vim.cmd.cd(data.file)
+					require("mini.files").open()
+				end,
+			})
 		end,
 		opts = {
 			windows = {
@@ -96,35 +83,28 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("mini.files").setup(opts)
+			local m = require("mini.files")
+			m.setup(opts)
+			vim.keymap.set("n", "<C-t>", function()
+				if not m.close() then
+					m.open()
+				end
+			end)
 		end,
 	},
-	{
-		"echasnovski/mini.fuzzy",
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "echasnovski/mini.fuzzy", enabled = false, event = "VeryLazy", opts = {} },
 	{
 		"echasnovski/mini-git",
-		enabled = false,
-		lazy = true,
 		event = "CmdlineEnter",
 		config = function()
 			require("mini.git").setup()
 		end,
 	},
-	{
-		"echasnovski/mini.icons",
-		enabled = false,
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "echasnovski/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
 	{
 		"echasnovski/mini.indentscope",
-		lazy = true,
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		event = { "BufReadPost" },
 		opts = {
 			symbol = "▏",
 			draw = {
@@ -140,8 +120,8 @@ return {
 	},
 	{
 		"echasnovski/mini.notify",
-		lazy = true,
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		event = { "LspAttach" },
 		opts = {
 			lsp_progress = {
 				enable = true,
@@ -153,24 +133,11 @@ return {
 			},
 		},
 	},
-	{
-		"echasnovski/mini.operators",
-		enabled = true,
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
-	{
-		"echasnovski/mini.pairs",
-		enabled = false,
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "echasnovski/mini.operators", enabled = false, event = "VeryLazy", opts = {} },
+	{ "echasnovski/mini.pairs", enabled = false, event = "VeryLazy", opts = {} },
 	{
 		"echasnovski/mini.pick",
 		enabled = false,
-		lazy = true,
 		event = "VeryLazy",
 		cmd = "Pick",
 		keys = { "<leader>" },
@@ -189,16 +156,11 @@ return {
 			k("n", "<leader>b", builtin.buffers, { desc = "Grep Buffers" })
 		end,
 	},
-	{
-		"echasnovski/mini.splitjoin",
-		lazy = true,
-		keys = "gS",
-		opts = {},
-	},
+	{ "echasnovski/mini.splitjoin", keys = "gS", opts = {} },
 	{
 		"echasnovski/mini.statusline",
-		lazy = true,
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		event = { "BufReadPost" },
 		version = false,
 		config = function()
 			local m = require("mini.statusline")
@@ -234,15 +196,8 @@ return {
 	},
 	{
 		"echasnovski/mini.surround",
-		enabled = true,
-		lazy = true,
 		event = "VeryLazy",
 		opts = {},
 	},
-	{
-		"echasnovski/mini.tabline",
-		lazy = true,
-		event = "VeryLazy",
-		opts = {},
-	},
+	{ "echasnovski/mini.tabline", event = { "BufReadPost" }, opts = {} },
 }

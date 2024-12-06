@@ -1,18 +1,45 @@
+local languages = {
+	"bashls",
+	"clangd",
+	"cssls",
+	"html",
+	"jdtls",
+	"gopls",
+	"lua_ls",
+	"basedpyright",
+	"quick_lint_js",
+	"rust_analyzer",
+	"jqls",
+	"phpactor",
+	"jsonls",
+	"ts_ls",
+	"zls",
+}
+-- formatters, linters, debuggers
+local additionals = {
+	"debugpy",
+	"pretty-php",
+	"vim-language-server",
+	"jsonlint",
+	"black",
+	"isort",
+	"jq",
+	"beautysh",
+	"sql-formatter",
+	"stylua",
+}
+
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = true,
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-		},
+		-- dependencies = {
+		--           "williamboman/mason.nvim",
+		--           "williamboman/mason-lspconfig.nvim",
+		-- },
 		init = function()
 			-- expand gutter to avoid resize
 			vim.opt.signcolumn = "yes"
-			-- set swapfile update for auto hover diagnostics
-			-- vim.o.updatetime = 250
-
 			-- local border = { " ", "", "", "", "", "", " ", " " }
 
 			local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
@@ -53,13 +80,6 @@ return {
 			end
 		end,
 		config = function()
-			local capabilities = require("lspconfig").util.default_config
-			capabilities.capabilities =
-				vim.tbl_deep_extend("force", capabilities.capabilities, require("cmp_nvim_lsp").default_capabilities())
-			local on_attach = function(client, bufnr)
-				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-			end
-
 			vim.api.nvim_create_autocmd("LspAttach", {
 				desc = "LSP actions",
 				callback = function(event)
@@ -137,6 +157,109 @@ return {
 					)
 				end,
 			})
+			local lsp = require("lspconfig")
+
+			local capabilities = lsp.util.default_config
+			capabilities.capabilities = vim.tbl_deep_extend("force", capabilities.capabilities, {
+				textDocument = {
+					completion = {
+						dynamicRegistration = false,
+						completionItem = {
+							snippetSupport = true,
+							commitCharactersSupport = true,
+							deprecatedSupport = true,
+							preselectSupport = true,
+							tagSupport = {
+								valueSet = {
+									1, -- Deprecated
+								},
+							},
+							insertReplaceSupport = true,
+							resolveSupport = {
+								properties = {
+									"documentation",
+									"detail",
+									"additionalTextEdits",
+									"sortText",
+									"filterText",
+									"insertText",
+									"textEdit",
+									"insertTextFormat",
+									"insertTextMode",
+								},
+							},
+							insertTextModeSupport = {
+								valueSet = {
+									1, -- asIs
+									2, -- adjustIndentation
+								},
+							},
+							labelDetailsSupport = true,
+						},
+						contextSupport = true,
+						insertTextMode = 1,
+						completionList = {
+							itemDefaults = {
+								"commitCharacters",
+								"editRange",
+								"insertTextFormat",
+								"insertTextMode",
+								"data",
+							},
+						},
+					},
+				},
+			})
+
+			local on_attach = function(client, bufnr)
+				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end
+			-- require("mason").setup()
+			-- require("mason-lspconfig").setup({ ensure_installed = languages })
+			-- local mr = require("mason-registry")
+			-- for _, r in pairs(additionals) do
+			-- 	if not mr.is_installed(r) then
+			-- 		vim.cmd(":MasonInstall " .. r)
+			-- 	end
+			-- end
+			for _, lang in pairs(languages) do
+				local opts = {
+					capabilities = capabilities,
+					on_attach = on_attach,
+				}
+				if lang == "lua_ls" then
+					opts.settings = {
+						Lua = {
+							diagnostics = {
+								globals = { "vim" },
+							},
+						},
+					}
+				elseif lang == "basedpyright" then
+					opts.settings = {
+						basedpyright = {
+							analysis = {
+								autoImportCompletions = true,
+								typeCheckingMode = "off", -- off, basic, standard, strict, recommended, all
+							},
+						},
+					}
+				elseif lang == "rust_analyzer" then
+					opts.settings = {
+						["rust_analyzer"] = {
+							cargo = {
+								allFeatures = true,
+							},
+							checkOnSave = {
+								command = "clippy",
+							},
+						},
+					}
+				elseif lang == "clang" then
+					opts.filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" }
+				end
+				lsp[lang].setup(opts)
+			end
 
 			-- vim.api.nvim_create_autocmd("BufWritePre", {
 			--     callback = function ()
@@ -145,6 +268,10 @@ return {
 			-- })
 
 			-- -- show diagnostics on cursor hover
+
+			-- -- set swapfile update for auto hover diagnostics
+			-- vim.o.updatetime = 250
+
 			-- vim.api.nvim_create_autocmd({ "CursorHold" }, {
 			-- 	pattern = "*",
 			-- 	callback = function()
@@ -166,32 +293,119 @@ return {
 			-- 		})
 			-- 	end,
 			-- })
+		end,
+	},
+	{
+		"stevearc/aerial.nvim",
+		keys = { "<leader>a", "<leader>A" },
+		config = function()
+			require("aerial").setup({
+				-- optionally use on_attach to set keymaps when aerial has attached to a buffer
+				on_attach = function(bufnr)
+					-- Jump forwards/backwards with '{' and '}'
+					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				end,
+				autojump = true,
+			})
+			-- You probably also want to set a keymap to toggle aerial
+			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+			vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>")
+		end,
+	},
+	{
+		"nvimdev/lspsaga.nvim",
+		enabled = false,
+		event = "VeryLazy",
+		dependencies = {
+			"echasnovski/mini.icons",
+			-- "nvim-tree/nvim-web-devicons",
+			-- "nvim-treesitter/nvim-treesitter",
+		},
+		opts = {
+			ui = {
+				title = false,
+				border = "rounded",
+			},
+			lightbulb = {
+				enable = false,
+			},
+			diagnostic = {
+				on_insert = false,
+			},
+		},
+		config = function(_, opts)
+			require("lspsaga").setup(opts)
+			local k = vim.api.nvim_set_keymap
+			k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
 
+			k("n", "gr", "<cmd>Lspsaga rename<CR>", {})
+			k("n", "gR", "<cmd>Lspsaga rename ++project<CR>", {})
+
+			k("n", "gd", "<cmd>Lspsaga peek_definition<CR>", {})
+			k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
+
+			k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
+			k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
+
+			k("n", "<leader>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
+			k("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
+			k("n", "<leader>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
+
+			local vd = vim.diagnostic.severity.ERROR
+			k("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {})
+			k("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {})
+			vim.keymap.set("n", "[E", function()
+				require("lspsaga.diagnostic"):goto_prev({ vd })
+			end)
+			vim.keymap.set("n", "]E", function()
+				require("lspsaga.diagnostic"):goto_next({ vd })
+			end)
+
+			k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
+			k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
+			k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
+			k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
+			k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
+			k("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
+		end,
+	},
+	{
+		"PedramNavid/dbtpal",
+		enabled = false,
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("dbtpal").setup({
+				path_to_dbt = "dbt",
+				path_to_dbt_project = "",
+				path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+				extended_path_search = true,
+				protect_compiled_files = true,
+				custom_dbt_syntax_enabled = false,
+			})
+			require("telescope").load_extension("dbtpal")
+		end,
+	},
+	-- { "evanleck/vim-svelte" },
+	-- { "lifepillar/pgsql.vim" }
+	{
+		"williamboman/mason.nvim",
+		enabled = false,
+		dependencies = "williamboman/mason-lspconfig.nvim",
+		config = function()
 			local lsp = require("lspconfig")
-			require("mason").setup()
+
+			local mr = require("mason-registry")
+			for _, r in pairs(additionals) do
+				if not mr.is_installed(r) then
+					vim.cmd(":MasonInstall " .. r)
+				end
+			end
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"bashls",
-					"clangd",
-					"cssls",
-					"html",
-					"jdtls",
-					"gopls",
-					"lua_ls",
-					-- "csharp_ls",
-					-- "omnisharp_mono",
-					"basedpyright",
-					-- "pylsp",
-					"quick_lint_js",
-					"rust_analyzer",
-					"jqls",
-					"phpactor",
-					-- "sqls",
-					"jsonls",
-					"ts_ls",
-					-- "ruff",
-					"zls",
-				},
+				ensure_installed = languages,
 				handlers = {
 					function(server_name)
 						lsp[server_name].setup({
@@ -278,131 +492,6 @@ return {
 					-- end,
 				},
 			})
-			local mr = require("mason-registry")
-			for _, r in pairs({
-				"debugpy",
-				"pretty-php",
-				"vim-language-server",
-				"jsonlint",
-				-- "luacheck",
-				-- "sqlfluff",
-				"black",
-				"isort",
-				"jq",
-				"beautysh",
-				"sql-formatter",
-				"stylua",
-				"clang-format",
-			}) do
-				if not mr.is_installed(r) then
-					vim.cmd(":MasonInstall " .. r)
-				end
-			end
 		end,
 	},
-	{
-		"https://github.com/mrcjkb/rustaceanvim",
-		enabled = false,
-		version = "^5",
-		lazy = true,
-		ft = { "rust" },
-	},
-	{
-		"stevearc/aerial.nvim",
-		lazy = true,
-		keys = { "<leader>a", "<leader>A" },
-		config = function()
-			require("aerial").setup({
-				-- optionally use on_attach to set keymaps when aerial has attached to a buffer
-				on_attach = function(bufnr)
-					-- Jump forwards/backwards with '{' and '}'
-					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
-				end,
-				autojump = true,
-			})
-			-- You probably also want to set a keymap to toggle aerial
-			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
-			vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>")
-		end,
-	},
-	{
-		"nvimdev/lspsaga.nvim",
-		enabled = false,
-		lazy = true,
-		event = "VeryLazy",
-		dependencies = {
-			"echasnovski/mini.icons",
-			-- "nvim-tree/nvim-web-devicons",
-			-- "nvim-treesitter/nvim-treesitter",
-		},
-		opts = {
-			ui = {
-				title = false,
-				border = "rounded",
-			},
-			lightbulb = {
-				enable = false,
-			},
-			diagnostic = {
-				on_insert = false,
-			},
-		},
-		config = function(_, opts)
-			require("lspsaga").setup(opts)
-			local k = vim.api.nvim_set_keymap
-			k("n", "gh", "<cmd>Lspsaga finder<CR>", {})
-
-			k("n", "gr", "<cmd>Lspsaga rename<CR>", {})
-			k("n", "gR", "<cmd>Lspsaga rename ++project<CR>", {})
-
-			k("n", "gd", "<cmd>Lspsaga peek_definition<CR>", {})
-			k("n", "gD", "<cmd>Lspsaga goto_definition<CR>", {})
-
-			k("n", "gt", "<cmd>Lspsaga peek_type_definition<CR>", {})
-			k("n", "gT", "<cmd>Lspsaga goto_type_definition<CR>", {})
-
-			k("n", "<leader>v", "<cmd>Lspsaga show_line_diagnostics<CR>", {})
-			k("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<CR>", {})
-			k("n", "<leader>b", "<cmd>Lspsaga show_buf_diagnostics<CR>", {})
-
-			local vd = vim.diagnostic.severity.ERROR
-			k("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {})
-			k("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {})
-			vim.keymap.set("n", "[E", function()
-				require("lspsaga.diagnostic"):goto_prev({ vd })
-			end)
-			vim.keymap.set("n", "]E", function()
-				require("lspsaga.diagnostic"):goto_next({ vd })
-			end)
-
-			k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
-			k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
-			k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
-			k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
-			k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
-			k("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
-		end,
-	},
-	{
-		"PedramNavid/dbtpal",
-		enabled = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
-			require("dbtpal").setup({
-				path_to_dbt = "dbt",
-				path_to_dbt_project = "",
-				path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
-				extended_path_search = true,
-				protect_compiled_files = true,
-				custom_dbt_syntax_enabled = false,
-			})
-			require("telescope").load_extension("dbtpal")
-		end,
-	},
-	-- { "evanleck/vim-svelte" },
-	-- { "lifepillar/pgsql.vim" }
 }
