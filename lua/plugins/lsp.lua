@@ -29,6 +29,61 @@ local additionals = {
 	"stylua",
 }
 
+local default_capabilities = {
+	textDocument = {
+		completion = {
+			dynamicRegistration = false,
+			completionItem = {
+				snippetSupport = true,
+				commitCharactersSupport = true,
+				deprecatedSupport = true,
+				preselectSupport = true,
+				tagSupport = {
+					valueSet = {
+						1, -- Deprecated
+					},
+				},
+				insertReplaceSupport = true,
+				resolveSupport = {
+					properties = {
+						"documentation",
+						"detail",
+						"additionalTextEdits",
+						"sortText",
+						"filterText",
+						"insertText",
+						"textEdit",
+						"insertTextFormat",
+						"insertTextMode",
+					},
+				},
+				insertTextModeSupport = {
+					valueSet = {
+						1, -- asIs
+						2, -- adjustIndentation
+					},
+				},
+				labelDetailsSupport = true,
+			},
+			contextSupport = true,
+			insertTextMode = 1,
+			completionList = {
+				itemDefaults = {
+					"commitCharacters",
+					"editRange",
+					"insertTextFormat",
+					"insertTextMode",
+					"data",
+				},
+			},
+		},
+	},
+}
+
+local on_attach = function(client, bufnr)
+	vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+end
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -160,60 +215,8 @@ return {
 			local lsp = require("lspconfig")
 
 			local capabilities = lsp.util.default_config
-			capabilities.capabilities = vim.tbl_deep_extend("force", capabilities.capabilities, {
-				textDocument = {
-					completion = {
-						dynamicRegistration = false,
-						completionItem = {
-							snippetSupport = true,
-							commitCharactersSupport = true,
-							deprecatedSupport = true,
-							preselectSupport = true,
-							tagSupport = {
-								valueSet = {
-									1, -- Deprecated
-								},
-							},
-							insertReplaceSupport = true,
-							resolveSupport = {
-								properties = {
-									"documentation",
-									"detail",
-									"additionalTextEdits",
-									"sortText",
-									"filterText",
-									"insertText",
-									"textEdit",
-									"insertTextFormat",
-									"insertTextMode",
-								},
-							},
-							insertTextModeSupport = {
-								valueSet = {
-									1, -- asIs
-									2, -- adjustIndentation
-								},
-							},
-							labelDetailsSupport = true,
-						},
-						contextSupport = true,
-						insertTextMode = 1,
-						completionList = {
-							itemDefaults = {
-								"commitCharacters",
-								"editRange",
-								"insertTextFormat",
-								"insertTextMode",
-								"data",
-							},
-						},
-					},
-				},
-			})
+			capabilities.capabilities = vim.tbl_deep_extend("force", capabilities.capabilities, default_capabilities)
 
-			local on_attach = function(client, bufnr)
-				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-			end
 			-- require("mason").setup()
 			-- require("mason-lspconfig").setup({ ensure_installed = languages })
 			-- local mr = require("mason-registry")
@@ -246,7 +249,10 @@ return {
 					}
 				elseif lang == "rust_analyzer" then
 					opts.settings = {
-						["rust_analyzer"] = {
+						["rust-analyzer"] = {
+							diagnostics = {
+								disabled = { "unlinked-file" },
+							},
 							cargo = {
 								allFeatures = true,
 							},
@@ -293,6 +299,44 @@ return {
 			-- 		})
 			-- 	end,
 			-- })
+		end,
+	},
+	{
+		"mrcjkb/rustaceanvim",
+		enabled = false,
+		dependencies = "neovim/nvim-lspconfig",
+		version = "^5",
+		ft = { "rust" },
+		config = function()
+			local lsp = require("lspconfig")
+			local capabilities = lsp.util.default_config
+			capabilities.capabilities = vim.tbl_deep_extend("force", capabilities.capabilities, default_capabilities)
+
+			vim.g.rustaceanvim = {
+				on_attach = on_attach,
+				capabilities = capabilities,
+				tools = {
+					on_initialized = function()
+						return false
+					end,
+				},
+				server = {
+					show_notify_level = false,
+					status_notify_level = false,
+					-- on_attach = on_attach,
+					-- capabilities = capabilities,
+					default_settings = {
+						["rust_analyzer"] = {
+							cargo = {
+								allFeatures = true,
+							},
+							checkOnSave = {
+								command = "clippy",
+							},
+						},
+					},
+				},
+			}
 		end,
 	},
 	{
@@ -394,6 +438,8 @@ return {
 	{
 		"williamboman/mason.nvim",
 		enabled = false,
+		lazy = false,
+		-- enabled = false,
 		dependencies = "williamboman/mason-lspconfig.nvim",
 		config = function()
 			local lsp = require("lspconfig")
@@ -404,6 +450,7 @@ return {
 					vim.cmd(":MasonInstall " .. r)
 				end
 			end
+			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = languages,
 				handlers = {
