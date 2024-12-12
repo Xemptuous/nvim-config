@@ -85,7 +85,8 @@ local on_attach = function(client, bufnr) vim.lsp.inlay_hint.enable(true, { bufn
 return {
     {
         "neovim/nvim-lspconfig",
-        event = { "BufReadPost", "BufNewFile" },
+        enabled = false,
+        -- event = { "BufReadPost", "BufNewFile" },
         -- dependencies = {
         --           "williamboman/mason.nvim",
         --           "williamboman/mason-lspconfig.nvim",
@@ -285,7 +286,7 @@ return {
     },
     {
         "stevearc/aerial.nvim",
-        keys = { "<leader>a", "<leader>A" },
+        keys = { "<leader>a" },
         config = function()
             require("aerial").setup({
                 -- optionally use on_attach to set keymaps when aerial has attached to a buffer
@@ -298,7 +299,7 @@ return {
             })
             -- You probably also want to set a keymap to toggle aerial
             vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
-            vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>")
+            -- vim.keymap.set("n", "<leader>A", "<cmd>AerialNavToggle<CR>")
         end,
     },
     {
@@ -378,105 +379,104 @@ return {
     {
         "williamboman/mason.nvim",
         enabled = false,
-        lazy = false,
-        -- enabled = false,
-        dependencies = "williamboman/mason-lspconfig.nvim",
+        event = { "CmdlineEnter" },
+        -- dependencies = "williamboman/mason-lspconfig.nvim",
         config = function()
-            local lsp = require("lspconfig")
+            -- local lsp = require("lspconfig")
 
-            local mr = require("mason-registry")
-            for _, r in pairs(additionals) do
-                if not mr.is_installed(r) then vim.cmd(":MasonInstall " .. r) end
-            end
+            -- local mr = require("mason-registry")
+            -- for _, r in pairs(additionals) do
+            --     if not mr.is_installed(r) then vim.cmd(":MasonInstall " .. r) end
+            -- end
             require("mason").setup()
-            require("mason-lspconfig").setup({
-                ensure_installed = languages,
-                handlers = {
-                    function(server_name)
-                        lsp[server_name].setup({
-                            capabilities = capabilities,
-                            on_attach = on_attach,
-                        })
-                    end,
-                    lua_ls = function()
-                        lsp.lua_ls.setup({
-                            capabilities = capabilities,
-                            on_attach = on_attach,
-                            settings = {
-                                Lua = {
-                                    diagnostics = {
-                                        globals = { "vim" },
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                    basedpyright = function()
-                        lsp.basedpyright.setup({
-                            capabilities = capabilities,
-                            on_attach = on_attach,
-                            settings = {
-                                basedpyright = {
-                                    analysis = {
-                                        autoImportCompletions = true,
-                                        typeCheckingMode = "off", -- off, basic, standard, strict, recommended, all
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                    clangd = function()
-                        lsp.clangd.setup({
-                            capabilities = capabilities,
-                            on_attach = on_attach,
-                            filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
-                        })
-                    end,
-                    rust_analyzer = function()
-                        lsp.rust_analyzer.setup({
-                            capabilities = capabilities,
-                            on_attach = on_attach,
-                            settings = {
-                                ["rust_analyzer"] = {
-                                    cargo = {
-                                        allFeatures = true,
-                                    },
-                                    checkOnSave = {
-                                        command = "clippy",
-                                    },
-                                },
-                            },
-                        })
-                    end,
-                    -- csharp_ls = function()
-                    -- 	lsp.csharp_ls.setup({
-                    -- 		root_dir = function(startpath)
-                    -- 			return lsp.util.root_pattern("*.sln")(startpath)
-                    -- 				or lsp.util.root_pattern("*.csproj")(startpath)
-                    -- 				or lsp.util.root_pattern("*.fsproj")(startpath)
-                    -- 				or lsp.util.root_pattern(".git")(startpath)
-                    -- 		end,
-                    -- 		on_attach = on_attach,
-                    -- 		capabilities = capabilities,
-                    -- 	})
-                    -- end,
-                    -- lsp.sqls.setup({})
-                    -- lsp.vimls.setup({ capabilities = capabilities })
-                    -- lua_ls = function()
-                    -- 	lsp.lua_ls.setup({
-                    -- 		capabilities = capabilities,
-                    -- 		-- handlers = default_handler,
-                    -- 		settings = {
-                    -- 			Lua = {
-                    -- 				completion = {
-                    -- 					callSnippet = "Replace",
-                    -- 				},
-                    -- 			},
-                    -- 		},
-                    -- 	})
-                    -- end,
-                },
-            })
+            -- require("mason-lspconfig").setup({
+            --     ensure_installed = languages,
+            --     handlers = {
+            --         function(server_name)
+            --             lsp[server_name].setup({
+            --                 capabilities = capabilities,
+            --                 on_attach = on_attach,
+            --             })
+            --         end,
+            --         lua_ls = function()
+            --             lsp.lua_ls.setup({
+            --                 capabilities = capabilities,
+            --                 on_attach = on_attach,
+            --                 settings = {
+            --                     Lua = {
+            --                         diagnostics = {
+            --                             globals = { "vim" },
+            --                         },
+            --                     },
+            --                 },
+            --             })
+            --         end,
+            --         basedpyright = function()
+            --             lsp.basedpyright.setup({
+            --                 capabilities = capabilities,
+            --                 on_attach = on_attach,
+            --                 settings = {
+            --                     basedpyright = {
+            --                         analysis = {
+            --                             autoImportCompletions = true,
+            --                             typeCheckingMode = "off", -- off, basic, standard, strict, recommended, all
+            --                         },
+            --                     },
+            --                 },
+            --             })
+            --         end,
+            --         clangd = function()
+            --             lsp.clangd.setup({
+            --                 capabilities = capabilities,
+            --                 on_attach = on_attach,
+            --                 filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto", "cs", "java" },
+            --             })
+            --         end,
+            --         rust_analyzer = function()
+            --             lsp.rust_analyzer.setup({
+            --                 capabilities = capabilities,
+            --                 on_attach = on_attach,
+            --                 settings = {
+            --                     ["rust_analyzer"] = {
+            --                         cargo = {
+            --                             allFeatures = true,
+            --                         },
+            --                         checkOnSave = {
+            --                             command = "clippy",
+            --                         },
+            --                     },
+            --                 },
+            --             })
+            --         end,
+            --         -- csharp_ls = function()
+            --         -- 	lsp.csharp_ls.setup({
+            --         -- 		root_dir = function(startpath)
+            --         -- 			return lsp.util.root_pattern("*.sln")(startpath)
+            --         -- 				or lsp.util.root_pattern("*.csproj")(startpath)
+            --         -- 				or lsp.util.root_pattern("*.fsproj")(startpath)
+            --         -- 				or lsp.util.root_pattern(".git")(startpath)
+            --         -- 		end,
+            --         -- 		on_attach = on_attach,
+            --         -- 		capabilities = capabilities,
+            --         -- 	})
+            --         -- end,
+            --         -- lsp.sqls.setup({})
+            --         -- lsp.vimls.setup({ capabilities = capabilities })
+            --         -- lua_ls = function()
+            --         -- 	lsp.lua_ls.setup({
+            --         -- 		capabilities = capabilities,
+            --         -- 		-- handlers = default_handler,
+            --         -- 		settings = {
+            --         -- 			Lua = {
+            --         -- 				completion = {
+            --         -- 					callSnippet = "Replace",
+            --         -- 				},
+            --         -- 			},
+            --         -- 		},
+            --         -- 	})
+            --         -- end,
+            --     },
+            -- })
         end,
     },
 }

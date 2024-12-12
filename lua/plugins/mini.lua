@@ -35,7 +35,7 @@ return {
     },
     {
         "echasnovski/mini.diff",
-        key = { "<leader>go" },
+        -- key = { "<leader>go" },
         -- event = "VeryLazy",
         event = { "BufReadPost" },
         opts = {

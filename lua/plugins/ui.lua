@@ -152,7 +152,7 @@ return {
                     map("n", "<leader>gD", function() gitsigns.diffthis("~") end, { desc = "Diff This HEAD~" })
                     map("n", "\\gd", gitsigns.toggle_deleted, { desc = "Toggle Deleted" })
                     map("n", "\\gs", "<cmd>:Gitsigns toggle_signs<cr>", { desc = "Toggle Signs" })
-                    map("n", "\\gn", "<cmd>:Gitsigns toggle_numhl<cr>", { desc = "Toggle Number Highlight" })
+                    map("n", "\\gn", "<cmd>:Gitsigns toggle_numhl<cr><cmd>:lua MiniDiff.toggle()<cr>", { desc = "Toggle Number Highlight" })
                     map("n", "\\gl", "<cmd>:Gitsigns toggle_linehl<cr>", { desc = "Toggle Line Highlight" })
                     map("n", "\\gw", "<cmd>:Gitsigns toggle_word_diff<cr>", { desc = "Toggle Word Diff" })
                     -- Text object

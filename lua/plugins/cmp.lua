@@ -2,7 +2,7 @@ return {
     {
         "saghen/blink.cmp",
         enabled = false,
-        event = { "InsertEnter", "CmdlineEnter" },
+        event = { "InsertEnter" },
         dependencies = "rafamadriz/friendly-snippets",
         version = "v0.*",
         opts = {
@@ -30,9 +30,18 @@ return {
                 jump = function(direction) vim.snippet.jump(direction) end,
             },
             completion = {
+                keyword = { range = "full" },
                 trigger = {
                     show_in_snippet = false,
                 },
+            },
+            documentation = {
+                auto_show = true,
+                auto_show_delay_ms = 20,
+                update_delay_ms = 10,
+            },
+            fuzzy = {
+                use_typo_resistance = false,
             },
             opts_extend = { "sources.completion.enabled_providers" },
         },
@@ -40,13 +49,14 @@ return {
 
     {
         "hrsh7th/nvim-cmp",
+        enabled = true,
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
-            { "hrsh7th/cmp-nvim-lua" },
+            "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "windwp/nvim-autopairs",
             "onsails/lspkind.nvim",
@@ -92,9 +102,9 @@ return {
                         mode = { "i", "s" },
                     },
                 },
-            },
-            opts = {
-                friendly_snippets = true,
+                opts = {
+                    friendly_snippets = true,
+                },
             },
             -- { "sqlua.nvim", ft = { "sql", "mysql", "psql" }},
             -- { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "psql" }},
