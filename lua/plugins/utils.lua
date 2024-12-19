@@ -73,6 +73,7 @@ return {
     },
     {
         "folke/which-key.nvim",
+        enabled = false,
         event = "VeryLazy",
         config = function()
             require("which-key").add({

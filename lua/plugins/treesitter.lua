@@ -7,6 +7,7 @@ return {
         dependencies = {
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
+                enabled = false,
                 init = function()
                     require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
                     load_textobjects = true
@@ -14,6 +15,7 @@ return {
             },
             {
                 "HiPhish/rainbow-delimiters.nvim",
+                enabled = false,
                 config = function()
                     local rainbow_delimiters = require("rainbow-delimiters")
 

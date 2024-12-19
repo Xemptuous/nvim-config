@@ -1,5 +1,5 @@
-vim.lsp.config.basedpyright = {
-    cmd = { "basedpyright-langserver", "--stdio" },
+vim.lsp.config.pyright = {
+    cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = {
         "pyproject.toml",
@@ -9,10 +9,11 @@ vim.lsp.config.basedpyright = {
         "Pipfile",
         "pyrightconfig.json",
         ".git",
-        "__pycache__",
+        "venv",
+        ".venv"
     },
     settings = {
-        basedpyright = {
+        python = {
             analysis = {
                 autoSearchPaths = true,
                 useLibraryCodeForTypes = true,

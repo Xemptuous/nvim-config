@@ -348,7 +348,7 @@ return {
             vim.keymap.set("n", "]E", function() require("lspsaga.diagnostic"):goto_next({ vd }) end)
 
             k("n", "<leader>o", "<cmd>Lspsaga outline<CR>", {})
-            k("n", "K", "<cmd>Lspsaga hover_doc<CR>", {})
+            k("n", "<leader>k", "<cmd>Lspsaga hover_doc<CR>", {})
             k("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>", {})
             k("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>", {})
             k("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {})
@@ -380,17 +380,21 @@ return {
         "williamboman/mason.nvim",
         enabled = false,
         event = { "CmdlineEnter" },
-        -- dependencies = "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim",
+            "neovim/nvim-lspconfig",
+        },
+
         config = function()
             -- local lsp = require("lspconfig")
-
-            -- local mr = require("mason-registry")
-            -- for _, r in pairs(additionals) do
-            --     if not mr.is_installed(r) then vim.cmd(":MasonInstall " .. r) end
-            -- end
+            local mr = require("mason-registry")
+            for _, r in pairs(additionals) do
+                if not mr.is_installed(r) then vim.cmd(":MasonInstall " .. r) end
+            end
             require("mason").setup()
-            -- require("mason-lspconfig").setup({
-            --     ensure_installed = languages,
+            require("mason-lspconfig").setup({
+                ensure_installed = languages,
+            })
             --     handlers = {
             --         function(server_name)
             --             lsp[server_name].setup({

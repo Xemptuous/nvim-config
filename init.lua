@@ -46,6 +46,7 @@ require("lazy").setup("plugins", {
                 "netrwFileHandlers",
                 "netrwPlugin",
                 "netrwSettings",
+                "nvim-treesitter-textobjects",
                 "node",
                 "optwin",
                 "osc52",
