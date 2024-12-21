@@ -1,25 +1,27 @@
 return {
     {
         "saghen/blink.cmp",
-        enabled = false,
-        event = { "InsertEnter" },
-        dependencies = "rafamadriz/friendly-snippets",
+        enabled = true,
+        -- build = "cargo build --release",
+        event = { "InsertEnter", "CmdlineEnter" },
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            -- "echasnovski/mini.icons",
+            "onsails/lspkind.nvim",
+        },
         version = "v0.*",
         opts = {
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
             keymap = { preset = "super-tab" },
+            signature = { enabled = false },
+            fuzzy = {
+                use_typo_resistance = false,
+            },
             appearance = {
                 use_nvim_cmp_as_default = true,
                 nerd_font_variant = "mono",
-            },
-            sources = {
-                completion = {
-                    enabled_providers = {
-                        "lsp",
-                        "path",
-                        "snippets",
-                        "buffer",
-                    },
-                },
             },
             snippets = {
                 -- Function to use when expanding LSP provided snippets
@@ -30,26 +32,47 @@ return {
                 jump = function(direction) vim.snippet.jump(direction) end,
             },
             completion = {
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 10,
+                    update_delay_ms = 10,
+                    window = {
+                        border = "single",
+                        winblend = 10,
+                    },
+                },
                 keyword = { range = "full" },
-                trigger = {
-                    show_in_snippet = false,
+                trigger = { show_in_snippet = false },
+                list = { max_items = 50 },
+                accept = { auto_brackets = { enabled = true } },
+                menu = {
+                    max_height = 20,
+                    border = "padded",
+                    winblend = 10,
+                    auto_show = true,
+                    draw = {
+                        columns = {
+                            { "kind_icon" },
+                            { "label", "label_description", "kind", gap = 1 },
+                        },
+                        components = {
+                            kind_icon = {
+                                ellipsis = false,
+                                text = function(ctx)
+                                    -- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
+                                    return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
+                                end,
+                            },
+                        },
+                    },
                 },
             },
-            documentation = {
-                auto_show = true,
-                auto_show_delay_ms = 20,
-                update_delay_ms = 10,
-            },
-            fuzzy = {
-                use_typo_resistance = false,
-            },
-            opts_extend = { "sources.completion.enabled_providers" },
         },
     },
 
     {
         "hrsh7th/nvim-cmp",
-        enabled = true,
+        enabled = false,
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "hrsh7th/cmp-buffer",

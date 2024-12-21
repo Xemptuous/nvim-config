@@ -1,9 +1,9 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        enabled = false,
+        enabled = true,
         cmd = "Telescope",
-        keys = "<leader>",
+        -- keys = "<leader>",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {

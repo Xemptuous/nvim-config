@@ -307,7 +307,7 @@ return {
         enabled = false,
         event = "VeryLazy",
         dependencies = {
-            "echasnovski/mini.icons",
+            -- "echasnovski/mini.icons",
             -- "nvim-tree/nvim-web-devicons",
             -- "nvim-treesitter/nvim-treesitter",
         },

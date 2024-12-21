@@ -56,8 +56,9 @@ return {
     },
     {
         "echasnovski/mini.files",
+        enabled = false,
         event = "VeryLazy",
-        keys = "<C-t>",
+        -- keys = "<C-t>",
         -- dependencies = "echasnovski/mini.icons",
         init = function()
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
@@ -113,6 +114,7 @@ return {
     },
     {
         "echasnovski/mini.notify",
+        enabled = false,
         -- event = "VeryLazy",
         event = { "LspAttach" },
         opts = {
@@ -149,7 +151,7 @@ return {
             map("n", "<leader>h", mp.builtin.help, { desc = "Pick Help" })
             map("n", "<leader>b", mp.builtin.buffers, { desc = "Pick Buffers" })
             map("n", "<leader>gb", function() MiniExtra.pickers.git_branches({}, opts) end, { desc = "Pick Git Branches" })
-            map("n", "<leader>o", function() MiniExtra.pickers.opts({}, opts) end, { desc = "Pick LSP Definition" })
+            map("n", "<leader>o", function() MiniExtra.pickers.options({}, opts) end, { desc = "Pick LSP Definition" })
             map("n", "<leader>e", function() MiniExtra.pickers.explorer({}, opts) end, { desc = "Pick Explorer" })
             map(
                 "n",

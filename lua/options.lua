@@ -27,7 +27,7 @@ o.ignorecase = true -- ignore search case-sensitivity
 o.incsearch = true -- incremental serach as characters added
 o.infercase = true
 o.laststatus = 0 -- always show status line
-o.lazyredraw = true
+o.lazyredraw = false
 o.linebreak = true
 o.mouse = "a" -- enable mouse functionality
 o.number = true -- show line numbers
@@ -56,20 +56,20 @@ o.writebackup = false
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
-	command = "setlocal formatoptions-=c formatoptions-=r formatoptions -=o",
+    pattern = "*",
+    command = "setlocal formatoptions-=c formatoptions-=r formatoptions -=o",
 })
 
 -- Highlight xrdb as xdefaults
 vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
-	desc = "Format xrdb files as xdefaults",
-	pattern = "*.xrdb",
-	command = "setfiletype xdefaults",
+    desc = "Format xrdb files as xdefaults",
+    pattern = "*.xrdb",
+    command = "setfiletype xdefaults",
 })
 
 -- Highlight sqlfluff config
 vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
-	desc = "Set sqlfluff file ft syntax",
-	pattern = "*.sqlfluff",
-	command = "setfiletype toml",
+    desc = "Set sqlfluff file ft syntax",
+    pattern = "*.sqlfluff",
+    command = "setfiletype toml",
 })
