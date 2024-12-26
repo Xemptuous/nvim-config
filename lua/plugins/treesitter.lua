@@ -1,13 +1,14 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        lazy = false,
+        -- lazy = false,
+        event = "VeryLazy",
         priority = 1000,
-        ft = { "*" },
         dependencies = {
             {
                 "HiPhish/rainbow-delimiters.nvim",
                 enabled = false,
+                disable = { "rust" },
                 config = function()
                     local rainbow_delimiters = require("rainbow-delimiters")
 

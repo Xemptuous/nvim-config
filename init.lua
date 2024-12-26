@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     command = "wincmd =",
 })
 
-package.path = "./lua/?.lua; ./lua/?.vim;" .. package.path
+package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 -- require("init")
 require("options")

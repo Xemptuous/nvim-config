@@ -1,7 +1,7 @@
 return {
     { "echasnovski/mini.ai", enabled = false, event = "VeryLazy", opts = {} },
     { "echasnovski/mini.basics", enabled = false, opts = {} },
-    { "echasnovski/mini.bufremove", event = { "BufReadPost" }, opts = {} },
+    { "echasnovski/mini.bufremove", event = { "VeryLazy" }, opts = {} },
     { "echasnovski/mini.comment", keys = { "gc", "V" }, opts = {} },
     { "echasnovski/mini.cursorword", enabled = false, event = "VeryLazy", opts = {} },
     {
@@ -36,8 +36,7 @@ return {
     {
         "echasnovski/mini.diff",
         -- key = { "<leader>go" },
-        -- event = "VeryLazy",
-        event = { "BufReadPost" },
+        event = { "VeryLazy" },
         opts = {
             mappings = {
                 apply = "",
@@ -92,6 +91,7 @@ return {
     { "echasnovski/mini.fuzzy", enabled = false, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini-git",
+        enabled = false,
         event = "CmdlineEnter",
         config = function() require("mini.git").setup() end,
     },
@@ -193,7 +193,7 @@ return {
     {
         "echasnovski/mini.statusline",
         -- event = "VeryLazy",
-        event = { "BufReadPost" },
+        event = { "VeryLazy" },
         version = false,
         config = function()
             local m = require("mini.statusline")

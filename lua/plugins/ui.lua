@@ -7,8 +7,8 @@ return {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
             "nvim-telescope/telescope.nvim",
-            "nvim-tree/nvim-web-devicons",
-            -- "echasnovski/mini.icons",
+            -- "nvim-tree/nvim-web-devicons",
+            "echasnovski/mini.icons",
         },
         -- config = true,
         config = function()
@@ -154,7 +154,7 @@ return {
     {
         "folke/noice.nvim",
         enabled = true,
-        event = "VeryLazy",
+        event = "BufReadPost",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",

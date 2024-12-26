@@ -9,7 +9,8 @@ return {
             -- "echasnovski/mini.icons",
             "onsails/lspkind.nvim",
         },
-        version = "v0.*",
+        -- version = "v0.*",
+        build = "cargo build --release",
         opts = {
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },

@@ -3,8 +3,7 @@ local config_dir = vim.fn.stdpath("config"):match("(.*[/\\])")
 return {
     {
         "stevearc/conform.nvim",
-        event = { "BufWritePre" },
-        cmd = { "ConformInfo" },
+        event = { "VeryLazy" },
         init = function()
             -- Format on Save
             -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -90,6 +89,5 @@ return {
                 },
             },
         },
-        config = function(_, opts) require("conform").setup(opts) end,
     },
 }

@@ -89,8 +89,8 @@ return {
     },
     { "tpope/vim-abolish", keys = "cr" },
     { "kevinhwang91/nvim-bqf", ft = { "qf" } },
-    { "jidn/vim-dbml", enabled = false, ft = { "dbml" } },
-    { "chrisbra/unicode.vim", event = "VeryLazy" },
+    -- { "jidn/vim-dbml", ft = { "dbml" } },
+    -- { "chrisbra/unicode.vim", event = "VeryLazy" },
     {
         "MagicDuck/grug-far.nvim",
         cmd = "GrugFar",
@@ -98,6 +98,7 @@ return {
     },
     {
         "folke/snacks.nvim",
+        enabled = false,
         priority = 1000,
         lazy = false,
         keys = {
@@ -109,7 +110,16 @@ return {
         },
         opts = {
             bigfile = { enabled = true },
-            dashboard = { enabled = true },
+            dashboard = {
+                enabled = true,
+                sections = {
+                    { section = "header" },
+                    { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+                    { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                    { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                    { section = "startup" },
+                },
+            },
             dim = { enabled = true, animate = { enabled = false } },
             gitbrowse = { enabled = true },
             indent = { enabled = false, scope = { only_current = true, animate = { enabled = false } } },
