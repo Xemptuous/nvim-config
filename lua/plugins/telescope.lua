@@ -3,7 +3,7 @@ return {
         "nvim-telescope/telescope.nvim",
         enabled = true,
         cmd = "Telescope",
-        -- keys = "<leader>",
+        keys = "<leader>",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
@@ -32,16 +32,27 @@ return {
                 keymaps = { theme = "ivy" },
                 live_grep = { theme = "ivy" },
                 man_pages = { theme = "ivy" },
+                marks = { theme = "ivy" },
                 oldfiles = { theme = "ivy" },
                 registers = { theme = "ivy" },
                 search_history = { theme = "ivy" },
                 vim_options = { theme = "ivy" },
+
+                git_branches = { theme = "ivy" },
+                diagnostics = { theme = "ivy" },
+                lsp_definitions = { theme = "ivy" },
+                lsp_document_symbols = { theme = "ivy" },
+                lsp_implementations = { theme = "ivy" },
+                lsp_references = { theme = "ivy" },
+                lsp_type_definitions = { theme = "ivy" },
+                lsp_workspace_symbols = { theme = "ivy" },
             },
         },
         config = function(_, opts)
             require("telescope").setup(opts)
             local k = vim.keymap.set
             local builtin = require("telescope.builtin")
+            -- stylua: ignore start
             k("n", "<leader>to", builtin.vim_options, { desc = "Vim Options" })
             k("n", "<leader>tf", builtin.find_files, { desc = "Find File" })
             k("n", "<leader>f", builtin.find_files, { desc = "Find File" })
@@ -63,6 +74,17 @@ return {
             k("n", "<leader>tr", builtin.registers, { desc = "Registers" })
             k("n", "<leader>tM", builtin.marks, { desc = "Marks" })
             k("n", "<leader>tn", "<cmd>Telescope nerdy<cr>", { desc = "Nerd Icons" })
+
+            k("n", "<leader>gb", builtin.git_branches, { desc = "Pick Git Branches" })
+            k("n", "<leader>d", function() builtin.diagnostics({bufnr=0}) end, { desc = "Pick Diagnostic (Buffer)" })
+            k("n", "<leader>d", builtin.diagnostics, { desc = "Pick Diagnostic (All)" })
+            k("n", "<leader>ld", builtin.lsp_definitions, { desc = "Pick LSP Definition" })
+            k("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Pick LSP Document Symbol" })
+            k("n", "<leader>li", builtin.lsp_implementations, { desc = "Pick LSP Implementation" })
+            k("n", "<leader>lr", builtin.lsp_references, { desc = "Pick LSP References" })
+            k("n", "<leader>lt", function() builtin.lsp_type_definitions({}) end, { desc = "Pick LSP Type Definition" })
+            k("n", "<leader>lS", builtin.lsp_workspace_symbols, { desc = "Pick LSP Workspace Symbol" })
+            -- stylua: ignore end
         end,
     },
     {

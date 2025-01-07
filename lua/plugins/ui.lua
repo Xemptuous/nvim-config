@@ -14,10 +14,7 @@ return {
         config = function()
             require("neogit").setup({
                 mappings = {
-                    popup = {
-                        ["l"] = false,
-                        ["L"] = "LogPopup",
-                    },
+                    popup = { ["l"] = false, ["L"] = "LogPopup" },
                 },
             })
             vim.api.nvim_set_keymap("n", "<leader>ng", [[:Neogit<CR>]], { noremap = true, desc = "NeoGit" })
@@ -60,6 +57,7 @@ return {
                 end, { desc = "Previous" })
 
                 -- Actions
+                -- stylua: ignore start
                 map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
                 map("v", "<leader>gs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Stage Hunk" })
                 map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
@@ -79,8 +77,8 @@ return {
                 map("n", "\\gn", "<cmd>:Gitsigns toggle_numhl<cr><cmd>:lua MiniDiff.toggle()<cr>", { desc = "Toggle Number Highlight" })
                 map("n", "\\gl", "<cmd>:Gitsigns toggle_linehl<cr>", { desc = "Toggle Line Highlight" })
                 map("n", "\\gw", "<cmd>:Gitsigns toggle_word_diff<cr>", { desc = "Toggle Word Diff" })
-                -- Text object
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Hunk" })
+                -- stylua: ignore end
             end,
         },
     },
@@ -148,13 +146,14 @@ return {
     },
     {
         "folke/todo-comments.nvim",
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {},
     },
     {
         "folke/noice.nvim",
         enabled = true,
-        event = "BufReadPost",
+        event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -175,22 +174,24 @@ return {
                 hover = { enabled = true },
                 signature = { enabled = true },
             },
-            -- you can enable a preset for easier configuration
             presets = {
                 bottom_search = true, -- use a classic bottom cmdline for search
                 command_palette = true, -- position the cmdline and popupmenu together
-                long_message_to_split = true, -- long messages will be sent to a split
+                long_message_to_split = false,
                 inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                lsp_doc_border = true, -- add a border to hover docs and signature help
+                lsp_doc_border = true,
             },
+            messages = { enabled = false },
+            popupmenu = { enabled = false },
             health = { checker = false },
         },
     },
     {
         "stevearc/oil.nvim",
+        enabled = false,
         keys = "<C-t>",
         cmd = "Oil",
-        dependencies = "echasnovski/mini.icons",
+        dependencies = "nvim-tree/nvim-web-devicons",
         init = function(_, opts)
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function(data)

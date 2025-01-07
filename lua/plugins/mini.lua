@@ -55,10 +55,10 @@ return {
     },
     {
         "echasnovski/mini.files",
-        enabled = false,
+        enabled = true,
         event = "VeryLazy",
-        -- keys = "<C-t>",
-        -- dependencies = "echasnovski/mini.icons",
+        keys = "<C-t>",
+        dependencies = "echasnovski/mini.icons",
         init = function()
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function(data)
@@ -95,12 +95,11 @@ return {
         event = "CmdlineEnter",
         config = function() require("mini.git").setup() end,
     },
-    { "echasnovski/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
+    { "echasnovski/mini.icons", enabled = true, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini.indentscope",
         enabled = true,
-        -- event = "VeryLazy",
-        event = { "BufReadPost" },
+        event = "VeryLazy",
         opts = {
             symbol = "▏",
             draw = {
@@ -115,8 +114,7 @@ return {
     {
         "echasnovski/mini.notify",
         enabled = false,
-        -- event = "VeryLazy",
-        event = { "LspAttach" },
+        event = "VeryLazy",
         opts = {
             lsp_progress = {
                 enable = true,
@@ -133,7 +131,7 @@ return {
     {
         "echasnovski/mini.pick",
         dependencies = "echasnovski/mini.extra",
-        enabled = true,
+        enabled = false,
         cmd = "Pick",
         keys = { "<leader>" },
         opts = {
@@ -145,6 +143,7 @@ return {
             local mp = require("mini.pick")
             mp.setup(opts)
             local map = vim.keymap.set
+            -- stylua: ignore start
             map("n", "<leader>f", mp.builtin.files, { desc = "Pick Files" })
             map("n", "<leader>G", mp.builtin.grep_live, { desc = "Pick Grep Live" })
             map("n", "<leader>gg", mp.builtin.grep_live, { desc = "Pick Grep Live" })
@@ -153,40 +152,16 @@ return {
             map("n", "<leader>gb", function() MiniExtra.pickers.git_branches({}, opts) end, { desc = "Pick Git Branches" })
             map("n", "<leader>o", function() MiniExtra.pickers.options({}, opts) end, { desc = "Pick LSP Definition" })
             map("n", "<leader>e", function() MiniExtra.pickers.explorer({}, opts) end, { desc = "Pick Explorer" })
-            map(
-                "n",
-                "<leader>d",
-                function() MiniExtra.pickers.diagnostic({ scope = "current" }, opts) end,
-                { desc = "Pick Diagnostic (Buffer)" }
-            )
+            map("n", "<leader>d", function() MiniExtra.pickers.diagnostic({ scope = "current" }, opts) end, { desc = "Pick Diagnostic (Buffer)" })
             map("n", "<leader>D", function() MiniExtra.pickers.diagnostic({ scope = "all" }, opts) end, { desc = "Pick Diagnostic (All)" })
             map("n", "<leader>ld", function() MiniExtra.pickers.lsp({ scope = "definition" }, opts) end, { desc = "Pick LSP Definition" })
             map("n", "<leader>lD", function() MiniExtra.pickers.lsp({ scope = "declaration" }, opts) end, { desc = "Pick LSP Declaration" })
-            map(
-                "n",
-                "<leader>ls",
-                function() MiniExtra.pickers.lsp({ scope = "document_symbol" }, opts) end,
-                { desc = "Pick LSP Document Symbol" }
-            )
-            map(
-                "n",
-                "<leader>li",
-                function() MiniExtra.pickers.lsp({ scope = "implementation" }, opts) end,
-                { desc = "Pick LSP Implementation" }
-            )
+            map("n", "<leader>ls", function() MiniExtra.pickers.lsp({ scope = "document_symbol" }, opts) end, { desc = "Pick LSP Document Symbol" })
+            map("n", "<leader>li", function() MiniExtra.pickers.lsp({ scope = "implementation" }, opts) end, { desc = "Pick LSP Implementation" })
             map("n", "<leader>lr", function() MiniExtra.pickers.lsp({ scope = "references" }, opts) end, { desc = "Pick LSP References" })
-            map(
-                "n",
-                "<leader>lt",
-                function() MiniExtra.pickers.lsp({ scope = "type_definition" }, opts) end,
-                { desc = "Pick LSP Type Definition" }
-            )
-            map(
-                "n",
-                "<leader>lS",
-                function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }, opts) end,
-                { desc = "Pick LSP Workspace Symbol" }
-            )
+            map("n", "<leader>lt", function() MiniExtra.pickers.lsp({ scope = "type_definition" }, opts) end, { desc = "Pick LSP Type Definition" })
+            map("n", "<leader>lS", function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }, opts) end, { desc = "Pick LSP Workspace Symbol" })
+            -- stylua: ignore end
         end,
     },
     { "echasnovski/mini.splitjoin", keys = "gS", opts = {} },
@@ -232,5 +207,5 @@ return {
         event = "VeryLazy",
         opts = {},
     },
-    { "echasnovski/mini.tabline", event = { "BufReadPost" }, opts = {} },
+    { "echasnovski/mini.tabline", event = { "BufReadPre" }, opts = {} },
 }

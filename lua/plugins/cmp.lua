@@ -35,8 +35,8 @@ return {
             completion = {
                 documentation = {
                     auto_show = true,
-                    auto_show_delay_ms = 10,
-                    update_delay_ms = 10,
+                    -- auto_show_delay_ms = 250,
+                    -- update_delay_ms = 50,
                     window = {
                         border = "single",
                         winblend = 10,
@@ -44,7 +44,7 @@ return {
                 },
                 keyword = { range = "full" },
                 trigger = { show_in_snippet = false },
-                list = { max_items = 50 },
+                list = { max_items = 20 },
                 accept = { auto_brackets = { enabled = true } },
                 menu = {
                     max_height = 20,

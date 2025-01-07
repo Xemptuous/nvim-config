@@ -1,11 +1,9 @@
 local function map(modes, lhs, rhs, opts)
-	if type(modes) == "string" then
-		modes = { modes }
-	end
+    if type(modes) == "string" then modes = { modes } end
 
-	for _, mode in ipairs(modes) do
-		vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
-	end
+    for _, mode in ipairs(modes) do
+        vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+    end
 end
 
 map("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true })
@@ -74,6 +72,13 @@ map("n", "<leader>uw", ":set nowrap!<cr>", {})
 -- quickfix list
 map("n", "<C-n>", ":cn<CR>", {})
 map("n", "<C-p>", ":cp<CR>", {})
+
+map("n", "\\h", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })<CR>", {})
+map("n", "\\t", ":lua vim.treesitter[vim.b.ts_highlight and 'start' or 'stop']()<CR>", {})
+map("n", "\\r", ":lua vim.opt_local.wrap = not vim.opt_local.wrap:get()<CR>", {})
+map("n", "\\i", ":lua vim.opt_local.ignorecase = not vim.opt_local.ignorecase:get()<CR>", {})
+map("n", "\\s", ":lua vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()<CR>", {})
+map("n", "\\r", ":lua vim.opt_local.relativenumber = not vim.opt_local.relativenumber:get()<CR>", {})
 
 -- Fix for Xterm
 -- removed. Instead, add to .Xresources:

@@ -1,10 +1,20 @@
 return {
+    -- {
+    --     "rktjmp/lush.nvim",
+    --     event = "VeryLazy",
+    --     -- config = function()
+    --     --     require("lazy").setup({
+    --     --         { dir = "/home/xempt/Documents/test/lush", lazy = true },
+    --     --     })
+    --     -- end,
+    -- },
     {
         "catppuccin/nvim",
+        enabled = true,
         lazy = false,
         priority = 1000,
         opts = {
-            flavour = "mocha",
+            flavour = "latte",
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
@@ -47,6 +57,17 @@ return {
                 semantic_tokens = true,
                 telescope = { enabled = true },
                 treesitter = true,
+            },
+            color_overrides = {
+                latte = {
+                    -- base = "#ff0000"
+                    -- yellow = "#f9eac7", -- S: 30 -> 20
+                    -- peach = "#f9cbae", -- S:  46 -> 30
+                    -- mauve = "#d5b9f7", -- S: 33 -> 20
+                    -- red = "#f2b5c6", -- S: 43 -> 30
+                    -- maroon = "#eaafb9", -- S: 32 -> 25
+                    -- blue = "#9dc0f9", -- S: 45 -> 37
+                },
             },
             custom_highlights = function(C)
                 return {
@@ -97,7 +118,7 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        enabled = false,
+        enabled = true,
         event = "VeryLazy",
         priority = 1000,
         opts = {
@@ -107,40 +128,55 @@ return {
         },
         config = function(_, opts) require("tokyonight").setup(opts) end,
     },
-    {
-        "EdenEast/nightfox.nvim",
-        enabled = false,
-        event = "VeryLazy",
-        opts = { options = { dim_inactive = true } },
-        config = function(_, opts) require("nightfox").setup(opts) end,
-    },
-    -- { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
-    -- { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },
+    -- {
+    --     "EdenEast/nightfox.nvim",
+    --     enabled = true,
+    --     event = "VeryLazy",
+    --     opts = { options = { dim_inactive = true } },
+    --     config = function(_, opts) require("nightfox").setup(opts) end,
+    -- },
+    -- {
+    --     "olivercederborg/poimandres.nvim",
+    --     enabled = true,
+    --     event = "VeryLazy",
+    --     config = function() require("poimandres").setup({}) end,
+    -- },
     -- { "NLKNguyen/papercolor-theme", event = "VeryLazy" },
     -- { "Shatur/neovim-ayu", event = "VeryLazy" },
     -- { "alexvzyl/nordic.nvim", event = "VeryLazy" },
-    -- { "axvr/photon.vim", event = "VeryLazy" },
-    -- { "cocopon/iceberg.vim", event = "VeryLazy" },
     -- { "d00h/nvim-rusticated", event = "VeryLazy" },
+    -- { "dgox16/oldworld.nvim", event = "VeryLazy" },
     -- { "jonathanfilip/vim-lucius", event = "VeryLazy" },
     -- { "marko-cerovac/material.nvim", event = "VeryLazy" },
     -- { "maxmx03/solarized.nvim", event = "VeryLazy" },
     -- { "navarasu/onedark.nvim", event = "VeryLazy" },
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
-    -- { "nyoom-engineering/nyoom.nvim", event = "VeryLazy" },
-    -- { "owickstrom/vim-colors-paramount", event = "VeryLazy" },
+    -- { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
     -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
+    -- { "rafamadriz/neon", event = "VeryLazy" },
     -- { "rakr/vim-one", event = "VeryLazy" },
     -- { "rebelot/kanagawa.nvim", event = "VeryLazy" },
     -- { "rmehri01/onenord.nvim", event = "VeryLazy" },
-    -- { "ryanpcmcquen/true-monochrome_vim", event = "VeryLazy" },
     -- { "sainnhe/edge", event = "VeryLazy" },
     -- { "savq/melange-nvim", event = "VeryLazy" },
-    -- { "scottmckendry/cyberdream.nvim", event = "VeryLazy" },
-    -- { "shaunsingh/nord.nvim", event = "VeryLazy" },
-    -- { "sonph/onehalf", event = "VeryLazy" },
-    -- { "uloco/bluloco.nvim", event = "VeryLazy" },
+    { "shaunsingh/nord.nvim", event = "VeryLazy" },
+    -- { "tinted-theming/tinted-vim", event = "VeryLazy" },
+
+    -- Light Themes
+    { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },
+
+    -- Muted Themes
+    -- { "axvr/photon.vim", event = "VeryLazy" },
+    -- { "cocopon/iceberg.vim", event = "VeryLazy" },
+    -- { "darkvoid-theme/darkvoid.nvim", event = "VeryLazy" },
+    -- { "kdheepak/monochrome.nvim", event = "VeryLazy" },
+    -- { "killitar/obscure.nvim", event = "VeryLazy" },
+    -- { "kvrohit/rasmus.nvim", event = "VeryLazy" },
+    { "kvrohit/substrata.nvim", event = "VeryLazy" },
+    -- { "mellow-theme/mellow.nvim", event = "VeryLazy" },
+    -- { "owickstrom/vim-colors-paramount", event = "VeryLazy" },
+    { "slugbyte/lackluster.nvim", event = "VeryLazy" },
+    -- { "vague2k/vague.nvim", event = "VeryLazy", opts = {} },
     -- { "widatama/vim-phoenix", event = "VeryLazy" },
-    -- { "wuelnerdotexe/vim-enfocado", event = "VeryLazy" },
     -- { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, event = "VeryLazy" },
 }
