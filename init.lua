@@ -83,4 +83,4 @@ package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 -- require("init")
 require("options")
-require("lsp")
+-- require("lsp")

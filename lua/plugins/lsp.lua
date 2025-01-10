@@ -85,7 +85,7 @@ local on_attach = function(client, bufnr) vim.lsp.inlay_hint.enable(true, { bufn
 return {
     {
         "neovim/nvim-lspconfig",
-        enabled = false,
+        enabled = true,
         -- event = { "VeryLazy", "BufNewFile" },
         -- dependencies = {
         --           "williamboman/mason.nvim",

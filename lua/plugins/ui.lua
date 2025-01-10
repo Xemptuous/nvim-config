@@ -153,7 +153,7 @@ return {
     },
     {
         "folke/noice.nvim",
-        enabled = true,
+        enabled = false,
         event = "BufReadPost",
         dependencies = {
             "MunifTanjim/nui.nvim",

@@ -1,16 +1,15 @@
 return {
     {
         "saghen/blink.cmp",
-        enabled = true,
-        -- build = "cargo build --release",
+        enabled = false,
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "rafamadriz/friendly-snippets",
             -- "echasnovski/mini.icons",
             "onsails/lspkind.nvim",
         },
-        -- version = "v0.*",
-        build = "cargo build --release",
+        version = "v0.*",
+        -- build = "cargo build --release",
         opts = {
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
@@ -73,7 +72,7 @@ return {
 
     {
         "hrsh7th/nvim-cmp",
-        enabled = false,
+        enabled = true,
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "hrsh7th/cmp-buffer",

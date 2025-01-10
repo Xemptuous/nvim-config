@@ -1,6 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        enabled = false,
         -- lazy = false,
         event = "VeryLazy",
         priority = 1000,
