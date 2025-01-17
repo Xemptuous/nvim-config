@@ -152,7 +152,7 @@ return {
     },
     {
         "folke/noice.nvim",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -182,29 +182,66 @@ return {
                 lsp_doc_border = true,
             },
             messages = { enabled = false },
+            redirect = { view = "messages" },
             popupmenu = { enabled = false },
             health = { checker = false },
         },
     },
     {
         "stevearc/oil.nvim",
-        enabled = false,
-        keys = "<C-t>",
+        enabled = true,
+        keys = { "<C-t>", "<leader>o" },
         cmd = "Oil",
         dependencies = "nvim-tree/nvim-web-devicons",
         init = function(_, opts)
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function(data)
                     if vim.fn.isdirectory(data.file) ~= 1 then return end
-
                     require("oil").setup({ keymaps = { ["<C-t>"] = {} } })
                 end,
             })
         end,
-        opts = { keymaps = { ["<C-t>"] = {} } },
+        opts = {
+            keymaps = {
+                ["<C-t>"] = {},
+                ["g?"] = { "actions.show_help", mode = "n" },
+                ["<CR>"] = "actions.select",
+                ["<C-s>"] = { "actions.select", opts = { vertical = true } },
+                ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
+                -- ["<C-t>"] = { "actions.select", opts = { tab = true } },
+                ["<C-p>"] = "actions.preview",
+                ["<C-c>"] = { "actions.close", mode = "n" },
+                ["<C-l>"] = "actions.refresh",
+                ["-"] = { "actions.parent", mode = "n" },
+                ["_"] = { "actions.open_cwd", mode = "n" },
+                ["`"] = { "actions.cd", mode = "n" },
+                ["~"] = { "actions.cd", opts = { scope = "tab" }, mode = "n" },
+                ["gs"] = { "actions.change_sort", mode = "n" },
+                ["gx"] = "actions.open_external",
+                ["g."] = { "actions.toggle_hidden", mode = "n" },
+                ["g\\"] = { "actions.toggle_trash", mode = "n" },
+            },
+        },
         config = function(_, opts)
             require("oil").setup(opts)
+            vim.keymap.set("n", "<leader>o", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil") end)
             vim.keymap.set("n", "<C-t>", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil --float") end)
+        end,
+    },
+    {
+        "j-hui/fidget.nvim",
+        enabled = false,
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
+        "maan2003/lsp_lines.nvim",
+        enabled = false,
+        event = "VeryLazy",
+        config = function()
+            local l = require("lsp_lines")
+            l.setup()
+            vim.keymap.set("", "\\l", l.toggle, { desc = "Toggle lsp_lines" })
         end,
     },
 }

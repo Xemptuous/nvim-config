@@ -2,7 +2,6 @@ return {
     {
         "saghen/blink.cmp",
         enabled = true,
-        -- build = "cargo build --release",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "rafamadriz/friendly-snippets",
@@ -12,14 +11,10 @@ return {
         -- version = "v0.*",
         build = "cargo build --release",
         opts = {
-            sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
-            },
+            sources = { default = { "lsp", "path", "snippets", "buffer" } },
             keymap = { preset = "super-tab" },
             signature = { enabled = false },
-            fuzzy = {
-                use_typo_resistance = false,
-            },
+            fuzzy = { use_typo_resistance = false },
             appearance = {
                 use_nvim_cmp_as_default = true,
                 nerd_font_variant = "mono",
@@ -44,7 +39,7 @@ return {
                 },
                 keyword = { range = "full" },
                 trigger = { show_in_snippet = false },
-                list = { max_items = 20 },
+                -- list = { max_items = 20 },
                 accept = { auto_brackets = { enabled = true } },
                 menu = {
                     max_height = 20,

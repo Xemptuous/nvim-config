@@ -1,13 +1,4 @@
 return {
-    -- {
-    --     "rktjmp/lush.nvim",
-    --     event = "VeryLazy",
-    --     -- config = function()
-    --     --     require("lazy").setup({
-    --     --         { dir = "/home/xempt/Documents/test/lush", lazy = true },
-    --     --     })
-    --     -- end,
-    -- },
     {
         "catppuccin/nvim",
         enabled = true,
@@ -49,65 +40,18 @@ return {
                         warnings = { "undercurl" },
                         information = { "undercurl" },
                     },
-                    inlay_hints = {
-                        background = true,
-                    },
+                    inlay_hints = { background = true },
                 },
                 rainbow_delimiters = true,
                 semantic_tokens = true,
                 telescope = { enabled = true },
                 treesitter = true,
             },
-            color_overrides = {
-                mocha = {
-                    -- base = "#ff0000"
-                    -- yellow = "#f9eac7", -- S: 30 -> 20
-                    -- peach = "#f9cbae", -- S:  46 -> 30
-                    -- mauve = "#d5b9f7", -- S: 33 -> 20
-                    -- red = "#f2b5c6", -- S: 43 -> 30
-                    -- maroon = "#eaafb9", -- S: 32 -> 25
-                    -- blue = "#9dc0f9", -- S: 45 -> 37
-                },
-            },
+            color_overrides = {},
             custom_highlights = function(C)
                 return {
-                    -- CmpItemAbbrMatch = { fg = C.red, bg = C.surface0 },
-                    -- CmpItemAbbrMatchFuzzy = { fg = C.red, bg = C.surface0 },
-
-                    -- PmenuSel = { fg = C.text, bg = C.base },
-                    -- Pmenu = { fg = C.text, bg = C.base },
                     NormalFloat = { fg = C.text, bg = C.base },
-                    -- CmpItemMenu = { fg = C.text, bg = C.base },
-                    -- CursorLine = { fg = C.text, bg = C.surface0 },
-
                     FloatBorder = { fg = C.surface1, bg = C.base },
-
-                    -- CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
-                    -- CmpItemKindKeyword = { fg = C.base, bg = C.red },
-                    -- CmpItemKindText = { fg = C.base, bg = C.teal },
-                    -- CmpItemKindMethod = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindConstructor = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindFunction = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindFolder = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindModule = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindConstant = { fg = C.base, bg = C.peach },
-                    -- CmpItemKindField = { fg = C.base, bg = C.green },
-                    -- CmpItemKindProperty = { fg = C.base, bg = C.green },
-                    -- CmpItemKindEnum = { fg = C.base, bg = C.green },
-                    -- CmpItemKindUnit = { fg = C.base, bg = C.green },
-                    -- CmpItemKindClass = { fg = C.base, bg = C.yellow },
-                    -- CmpItemKindVariable = { fg = C.base, bg = C.flamingo },
-                    -- CmpItemKindFile = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindInterface = { fg = C.base, bg = C.yellow },
-                    -- CmpItemKindColor = { fg = C.base, bg = C.red },
-                    -- CmpItemKindReference = { fg = C.base, bg = C.red },
-                    -- CmpItemKindEnumMember = { fg = C.base, bg = C.red },
-                    -- CmpItemKindStruct = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindValue = { fg = C.base, bg = C.peach },
-                    -- CmpItemKindEvent = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindOperator = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
-                    -- CmpItemKindCopilot = { fg = C.base, bg = C.teal },
                 }
             end,
         },
@@ -116,18 +60,18 @@ return {
             vim.cmd.colorscheme("catppuccin")
         end,
     },
-    {
-        "folke/tokyonight.nvim",
-        enabled = true,
-        event = "VeryLazy",
-        priority = 1000,
-        opts = {
-            style = "day",
-            day_brightness = 0.3,
-            dim_inactive = true,
-        },
-        config = function(_, opts) require("tokyonight").setup(opts) end,
-    },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     enabled = false,
+    --     event = "VeryLazy",
+    --     priority = 1000,
+    --     opts = {
+    --         style = "day",
+    --         day_brightness = 0.3,
+    --         dim_inactive = true,
+    --     },
+    --     config = function(_, opts) require("tokyonight").setup(opts) end,
+    -- },
     -- {
     --     "EdenEast/nightfox.nvim",
     --     enabled = true,
@@ -141,46 +85,54 @@ return {
     --     event = "VeryLazy",
     --     config = function() require("poimandres").setup({}) end,
     -- },
-    -- { "NLKNguyen/papercolor-theme", event = "VeryLazy" },
+    -- Famous stuff
     -- { "Shatur/neovim-ayu", event = "VeryLazy" },
-    -- { "alexvzyl/nordic.nvim", event = "VeryLazy" },
-    -- { "d00h/nvim-rusticated", event = "VeryLazy" },
-    -- { "dgox16/oldworld.nvim", event = "VeryLazy" },
-    -- { "jonathanfilip/vim-lucius", event = "VeryLazy" },
+    -- { "alexvzyl/nordic.nvim", event = "VeryLazy" }, -- nord but different
     -- { "marko-cerovac/material.nvim", event = "VeryLazy" },
     -- { "maxmx03/solarized.nvim", event = "VeryLazy" },
-    -- { "navarasu/onedark.nvim", event = "VeryLazy" },
-    -- { "neanias/everforest-nvim", event = "VeryLazy" },
-    -- { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
-    -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
-    -- { "rafamadriz/neon", event = "VeryLazy" },
-    -- { "rakr/vim-one", event = "VeryLazy" },
     -- { "rebelot/kanagawa.nvim", event = "VeryLazy" },
     -- { "rmehri01/onenord.nvim", event = "VeryLazy" },
-    -- { "sainnhe/edge", event = "VeryLazy" },
-    -- { "savq/melange-nvim", event = "VeryLazy" },
     -- { "shaunsingh/nord.nvim", event = "VeryLazy" },
-    -- { "tinted-theming/tinted-vim", event = "VeryLazy" },
+    -- { "navarasu/onedark.nvim", event = "VeryLazy" },
+    -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
+    -- { "neanias/everforest-nvim", event = "VeryLazy" },
+    { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, event = "VeryLazy" },
 
     -- Light Themes
     -- { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },
+    -- { "kkga/vim-envy", event = "VeryLazy" }, -- simple grayscale
+    -- { "holidaycereal/notation.nvim", event = "VeryLazy" }, -- very notepad++y
+    -- { "d00h/nvim-rusticated", event = "VeryLazy" }, -- very 90s style colors with beige-ish background
 
-    -- Muted Themes
-    { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, event = "VeryLazy" },
-    { "kvrohit/substrata.nvim", event = "VeryLazy" },
-    { "slugbyte/lackluster.nvim", event = "VeryLazy" },
-    -- { "davidosomething/vim-colors-meh", event = "VeryLazy" },
-    -- { "Lokaltog/vim-monotone", event = "VeryLazy" },
-    -- { "karoliskoncevicius/distilled-vim", event = "VeryLazy" },
-    -- { "axvr/photon.vim", event = "VeryLazy" },
-    -- { "cocopon/iceberg.vim", event = "VeryLazy" },
-    -- { "darkvoid-theme/darkvoid.nvim", event = "VeryLazy" },
-    -- { "jackplus-xyz/binary.nvim", event = "VeryLazy", opts = { colors = { fg = "#1e1e2e", bg = "#cdd6f4" } } },
-    -- { "kdheepak/monochrome.nvim", event = "VeryLazy" },
-    -- { "killitar/obscure.nvim", event = "VeryLazy" },
-    -- { "kvrohit/rasmus.nvim", event = "VeryLazy" },
-    -- { "mellow-theme/mellow.nvim", event = "VeryLazy" },
-    -- { "owickstrom/vim-colors-paramount", event = "VeryLazy" },
-    -- { "vague2k/vague.nvim", event = "VeryLazy", opts = {} },
-    -- { "widatama/vim-phoenix", event = "VeryLazy" },
+    -- Muted Light && Dark
+    -- { "ronisbr/nano-theme.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
+    -- { "eihigh/vim-aomi-grayscale", event = "VeryLazy" }, -- mostly monochrome with colored functions
+    -- { "jaredgorski/Mies.vim", event = "VeryLazy" }, -- grayscale font
+    -- { "ntk148v/komau.vim", event = "VeryLazy" }, -- muted monochrome
+    -- { "jackplus-xyz/binary.nvim", event = "VeryLazy", opts = {} }, -- pure white or black with no formats (bold, italic, etc.)
+    -- { "cocopon/iceberg.vim", event = "VeryLazy" }, -- muted with blue tones
+    -- { "kdheepak/monochrome.nvim", event = "VeryLazy" }, -- grayscale with high contrast diff between dark and light
+    -- { "owickstrom/vim-colors-paramount", event = "VeryLazy" }, -- grayscale/monochrome with purple accents
+
+    -- Muted Light Themes
+
+    -- Muted Dark Themes
+    -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
+    { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
+    -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
+    -- { "dzfrias/noir.nvim", event = "VeryLazy" }, -- extremely dark muted colors
+    -- { "sho-87/kanagawa-paper.nvim", event = "VeryLazy" }, -- slightly more color than kanagawabones
+    -- { "igemnace/highlight.vim", event = "VeryLazy" }, -- monochrome with some colors only where "important"
+    -- { "kar9222/minimalist.nvim", event = "VeryLazy" }, -- mostly desaturated, some colors on significant keywords
+    -- { "teloe/bland.vim", event = "VeryLazy" }, -- muted with slight color
+    -- { "davidosomething/vim-colors-meh", event = "VeryLazy" }, -- mostly grayscale with some important colors; reds and pale blues
+    -- { "Lokaltog/vim-monotone", event = "VeryLazy" }, -- very grayscale/monochrome
+    -- { "axvr/photon.vim", event = "VeryLazy" }, -- monochrome with purple accent
+    -- { "darkvoid-theme/darkvoid.nvim", event = "VeryLazy" }, -- all monochrome with ops/signs colored bright
+    -- { "killitar/obscure.nvim", event = "VeryLazy" }, -- muted with many colors
+    -- { "kvrohit/rasmus.nvim", event = "VeryLazy" }, -- vscode-y muted
+    -- { "mellow-theme/mellow.nvim", event = "VeryLazy" }, -- pale colored muted with pinks and purples
+    -- { "vague2k/vague.nvim", event = "VeryLazy", opts = {} }, -- muted similar to kanagawa colors
+    -- { "widatama/vim-phoenix", event = "VeryLazy" }, -- mostly monochrome with lots of blues
+    -- { "ficcdaf/ashen.nvim", event = "VeryLazy" }, -- red and orange, like autumn
 }

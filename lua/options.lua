@@ -49,6 +49,7 @@ o.splitright = true -- always split vertical right
 o.tabstop = 4 -- number of spaces per tab
 o.termguicolors = true
 o.undofile = true
+-- o.updatetime = 200
 o.virtualedit = "block"
 o.winblend = 10
 o.wrap = true
@@ -60,16 +61,16 @@ vim.api.nvim_create_autocmd("FileType", {
     command = "setlocal formatoptions-=c formatoptions-=r formatoptions -=o",
 })
 
--- Highlight xrdb as xdefaults
-vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
-    desc = "Format xrdb files as xdefaults",
-    pattern = "*.xrdb",
-    command = "setfiletype xdefaults",
-})
-
--- Highlight sqlfluff config
-vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
-    desc = "Set sqlfluff file ft syntax",
-    pattern = "*.sqlfluff",
-    command = "setfiletype toml",
-})
+-- -- Highlight xrdb as xdefaults
+-- vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
+--     desc = "Format xrdb files as xdefaults",
+--     pattern = "*.xrdb",
+--     command = "setfiletype xdefaults",
+-- })
+--
+-- -- Highlight sqlfluff config
+-- vim.api.nvim_create_autocmd({ "FileType", "BufNewFile", "BufEnter" }, {
+--     desc = "Set sqlfluff file ft syntax",
+--     pattern = "*.sqlfluff",
+--     command = "setfiletype toml",
+-- })

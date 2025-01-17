@@ -1,9 +1,9 @@
 return {
     { "echasnovski/mini.ai", enabled = false, event = "VeryLazy", opts = {} },
-    { "echasnovski/mini.basics", enabled = false, opts = {} },
-    { "echasnovski/mini.bufremove", event = { "VeryLazy" }, opts = {} },
+    -- { "echasnovski/mini.basics", enabled = false, opts = {} },
+    -- { "echasnovski/mini.bufremove", event = { "VeryLazy" }, opts = {} },
     { "echasnovski/mini.comment", keys = { "gc", "V" }, opts = {} },
-    { "echasnovski/mini.cursorword", enabled = false, event = "VeryLazy", opts = {} },
+    -- { "echasnovski/mini.cursorword", enabled = false, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini.completion",
         enabled = false,
@@ -55,7 +55,7 @@ return {
     },
     {
         "echasnovski/mini.files",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         keys = "<C-t>",
         dependencies = "echasnovski/mini.icons",
@@ -78,6 +78,7 @@ return {
                 width_focus = 30,
                 width_nofocus = 15,
                 width_preview = 60,
+                winblend = 0,
             },
         },
         config = function(_, opts)
@@ -95,10 +96,10 @@ return {
         event = "CmdlineEnter",
         config = function() require("mini.git").setup() end,
     },
-    { "echasnovski/mini.icons", enabled = true, event = "VeryLazy", opts = {} },
+    { "echasnovski/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini.indentscope",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         opts = {
             symbol = "▏",
@@ -113,7 +114,7 @@ return {
     },
     {
         "echasnovski/mini.notify",
-        enabled = false,
+        enabled = true,
         event = "VeryLazy",
         opts = {
             lsp_progress = {
