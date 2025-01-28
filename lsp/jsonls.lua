@@ -1,4 +1,4 @@
-vim.lsp.config.jsonls = {
+return {
     cmd = { "vscode-json-language-server", "--stdio" },
     filetypes = { "json", "json5", "jsonc" },
     init_options = {

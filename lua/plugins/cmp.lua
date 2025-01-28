@@ -39,7 +39,6 @@ return {
                 },
                 keyword = { range = "full" },
                 trigger = { show_in_snippet = false },
-                -- list = { max_items = 20 },
                 accept = { auto_brackets = { enabled = true } },
                 menu = {
                     max_height = 20,

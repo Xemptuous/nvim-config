@@ -1,4 +1,4 @@
-vim.lsp.config.quick_lint_js = {
+return {
     cmd = { "quick-lint-js", "--lsp-server" },
     filetypes = { "javascript", "javascriptreact", "jsx", "typescript" },
     root_markers = { "package.json" },

@@ -1,4 +1,4 @@
-vim.lsp.config.pyright = {
+return {
     cmd = { "pyright-langserver", "--stdio" },
     filetypes = { "python" },
     root_markers = {
@@ -10,7 +10,7 @@ vim.lsp.config.pyright = {
         "pyrightconfig.json",
         ".git",
         "venv",
-        ".venv"
+        ".venv",
     },
     settings = {
         python = {

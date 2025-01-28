@@ -96,7 +96,12 @@ return {
     -- { "navarasu/onedark.nvim", event = "VeryLazy" },
     -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
-    { "zenbones-theme/zenbones.nvim", dependencies = { "rktjmp/lush.nvim" }, event = "VeryLazy" },
+    {
+        "zenbones-theme/zenbones.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
+        event = "VeryLazy",
+    },
+    -- { "tinted-theming/tinted-vim", event = "VeryLazy" }, -- lots of base16 and base24 themes
 
     -- Light Themes
     -- { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },
