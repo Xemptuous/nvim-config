@@ -51,7 +51,7 @@ o.termguicolors = true
 o.undofile = true
 -- o.updatetime = 200
 o.virtualedit = "block"
-o.winblend = 10
+o.winblend = 0
 o.wrap = true
 o.writebackup = false
 
