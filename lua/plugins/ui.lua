@@ -192,16 +192,22 @@ return {
         enabled = true,
         keys = { "<C-t>", "<leader>o" },
         cmd = "Oil",
-        dependencies = "nvim-tree/nvim-web-devicons",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+        },
         init = function(_, opts)
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function(data)
                     if vim.fn.isdirectory(data.file) ~= 1 then return end
-                    require("oil").setup({ keymaps = { ["<C-t>"] = {} } })
+                    require("oil").setup({
+                        keymaps = { ["<C-t>"] = {} },
+                        win_options = { signcolumn = "yes:2" },
+                    })
                 end,
             })
         end,
         opts = {
+            win_options = { signcolumn = "yes:2" },
             keymaps = {
                 ["<C-t>"] = {},
                 ["g?"] = { "actions.show_help", mode = "n" },
@@ -227,6 +233,12 @@ return {
             vim.keymap.set("n", "<leader>o", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil") end)
             vim.keymap.set("n", "<C-t>", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil --float") end)
         end,
+    },
+    {
+        "refractalize/oil-git-status.nvim",
+        event = "VeryLazy",
+        dependencies = { "stevearc/oil.nvim" },
+        config = true,
     },
     {
         "j-hui/fidget.nvim",
