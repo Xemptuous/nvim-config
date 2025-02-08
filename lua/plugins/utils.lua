@@ -98,6 +98,25 @@ return {
             map("n", "<leader>bw", "<cmd>lua require('bufdelete').bufwipeout(0)<cr>", { desc = "Buf Wipeout" })
         end,
     },
+    {
+        "stevearc/aerial.nvim",
+        event = "VeryLazy",
+        -- cmd = "<leader>A",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {
+            on_attach = function(bufnr)
+                vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+                vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+            end,
+        },
+        config = function(_, opts)
+            require("aerial").setup(opts)
+            vim.keymap.set("n", "<leader>A", "<cmd>AerialToggle!<CR>")
+        end,
+    },
     -- { "jidn/vim-dbml", ft = { "dbml" } },
     -- { "chrisbra/unicode.vim", event = "VeryLazy" },
     {
