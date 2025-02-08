@@ -12,6 +12,7 @@ return {
                 percentage = 0.01,
             },
             integrations = {
+                aerial = true,
                 cmp = true,
                 blink_cmp = true,
                 dadbod_ui = true,
