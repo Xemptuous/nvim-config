@@ -21,6 +21,19 @@ return {
                     override_file_sorter = true,
                     case_mode = "smart_case",
                 },
+                aerial = {
+                    col1_width = 4,
+                    col2_width = 30,
+                    format_symbol = function(symbol_path, filetype)
+                        if filetype == "json" or filetype == "yaml" then
+                            return table.concat(symbol_path, ".")
+                        else
+                            return symbol_path[#symbol_path]
+                        end
+                    end,
+                    -- Available modes: symbols, lines, both
+                    show_columns = "both",
+                },
             },
             pickers = {
                 buffers = { theme = "ivy" },
@@ -50,9 +63,11 @@ return {
         },
         config = function(_, opts)
             require("telescope").setup(opts)
+            require("telescope").load_extension("aerial")
             local k = vim.keymap.set
             local builtin = require("telescope.builtin")
             -- stylua: ignore start
+            k("n", "<leader>ta", "<cmd>Telescope aerial<cr>", { desc = "Vim Options" })
             k("n", "<leader>to", builtin.vim_options, { desc = "Vim Options" })
             k("n", "<leader>tf", builtin.find_files, { desc = "Find File" })
             k("n", "<leader>f", builtin.find_files, { desc = "Find File" })
@@ -74,7 +89,6 @@ return {
             k("n", "<leader>tr", builtin.registers, { desc = "Registers" })
             k("n", "<leader>tM", builtin.marks, { desc = "Marks" })
             k("n", "<leader>tn", "<cmd>Telescope nerdy<cr>", { desc = "Nerd Icons" })
-
             k("n", "<leader>gb", builtin.git_branches, { desc = "Pick Git Branches" })
             k("n", "<leader>d", function() builtin.diagnostics({bufnr=0}) end, { desc = "Pick Diagnostic (Buffer)" })
             k("n", "<leader>d", builtin.diagnostics, { desc = "Pick Diagnostic (All)" })
