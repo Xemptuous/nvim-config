@@ -13,7 +13,13 @@ return {
         opts = {
             sources = { default = { "lsp", "path", "snippets", "buffer" } },
             keymap = { preset = "super-tab" },
-            signature = { enabled = false },
+            signature = {
+                enabled = true,
+                window = {
+                    border = "single",
+                    winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+                },
+            },
             appearance = {
                 use_nvim_cmp_as_default = true,
                 nerd_font_variant = "mono",
@@ -29,8 +35,8 @@ return {
             completion = {
                 documentation = {
                     auto_show = true,
-                    -- auto_show_delay_ms = 250,
-                    -- update_delay_ms = 50,
+                    auto_show_delay_ms = 250,
+                    update_delay_ms = 50,
                     window = {
                         border = "single",
                         winblend = 10,
@@ -38,11 +44,12 @@ return {
                 },
                 keyword = { range = "full" },
                 trigger = { show_in_snippet = false },
-                accept = { auto_brackets = { enabled = true } },
+                accept = { auto_brackets = { enabled = false } },
                 menu = {
-                    max_height = 20,
                     border = "padded",
-                    winblend = 10,
+                    winblend = 0,
+                    winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+                    scrolloff = 2,
                     auto_show = true,
                     draw = {
                         columns = {

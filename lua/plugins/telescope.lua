@@ -89,7 +89,7 @@ return {
             k("n", "<leader>tr", builtin.registers, { desc = "Registers" })
             k("n", "<leader>tM", builtin.marks, { desc = "Marks" })
             k("n", "<leader>tn", "<cmd>Telescope nerdy<cr>", { desc = "Nerd Icons" })
-            k("n", "<leader>gb", builtin.git_branches, { desc = "Pick Git Branches" })
+            -- k("n", "<leader>gb", builtin.git_branches, { desc = "Pick Git Branches" })
             k("n", "<leader>d", function() builtin.diagnostics({bufnr=0}) end, { desc = "Pick Diagnostic (Buffer)" })
             k("n", "<leader>d", builtin.diagnostics, { desc = "Pick Diagnostic (All)" })
             k("n", "<leader>ld", builtin.lsp_definitions, { desc = "Pick LSP Definition" })
