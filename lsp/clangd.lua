@@ -17,6 +17,6 @@ return {
     init_options = {
         fallbackFlags = { "-std=c++17" },
     },
-    filetypes = { "c", "cpp", "cs", "java", "objc", "objcpp", "cuda", "proto" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     single_file_support = true,
 }

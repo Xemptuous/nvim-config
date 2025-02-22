@@ -62,18 +62,6 @@ return {
         end,
     },
     -- {
-    --     "folke/tokyonight.nvim",
-    --     enabled = false,
-    --     event = "VeryLazy",
-    --     priority = 1000,
-    --     opts = {
-    --         style = "day",
-    --         day_brightness = 0.3,
-    --         dim_inactive = true,
-    --     },
-    --     config = function(_, opts) require("tokyonight").setup(opts) end,
-    -- },
-    -- {
     --     "EdenEast/nightfox.nvim",
     --     enabled = true,
     --     event = "VeryLazy",
@@ -86,7 +74,6 @@ return {
     --     event = "VeryLazy",
     --     config = function() require("poimandres").setup({}) end,
     -- },
-    -- Famous stuff
     -- { "Shatur/neovim-ayu", event = "VeryLazy" },
     -- { "alexvzyl/nordic.nvim", event = "VeryLazy" }, -- nord but different
     -- { "marko-cerovac/material.nvim", event = "VeryLazy" },
@@ -125,6 +112,7 @@ return {
     -- Muted Dark Themes
     -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
     { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
+    -- { "rjshkhr/shadow.nvim", event = "VeryLazy" },
     -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
     -- { "dzfrias/noir.nvim", event = "VeryLazy" }, -- extremely dark muted colors
     -- { "sho-87/kanagawa-paper.nvim", event = "VeryLazy" }, -- slightly more color than kanagawabones

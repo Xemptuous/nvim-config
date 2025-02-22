@@ -18,7 +18,7 @@ return {
                 useLibraryCodeForTypes = true,
                 autoImportCompletions = true,
                 typeCheckingMode = "off", -- off, basic, standard, strict, recommended, all
-                diagnosticMode = "openFilesOnly",
+                -- diagnosticMode = "openFilesOnly",
             },
         },
     },

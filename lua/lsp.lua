@@ -61,6 +61,8 @@ local lsps = {
     "bashls",
     "clangd",
     -- "cmake",
+    "csharp",
+    "fsharp",
     "cssls",
     "html",
     "gopls",

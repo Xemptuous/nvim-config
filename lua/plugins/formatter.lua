@@ -61,6 +61,7 @@ return {
                 python = { "isort", "black" },
                 rust = { "rustfmt", lsp_format = "fallback" },
                 sh = { "beautysh" },
+                -- sql = { "sqlfluff" },
                 svelte = { "prettier" },
                 ts = { "prettier" },
                 tsr = { "prettier" },
@@ -72,6 +73,16 @@ return {
                     command = "clang-format",
                     append_args = function() return { "-style=file:" .. config_dir .. "clangd/.clang-format" } end,
                 },
+                -- sql = {
+                --     command = "sqlfluff",
+                --     stdin = true,
+                --     append_args = function()
+                --         return {
+                --             "fix",
+                --             "-",
+                --         }
+                --     end,
+                -- },
                 stylua = {
                     command = "stylua",
                     append_args = function()
