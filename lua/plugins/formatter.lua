@@ -73,6 +73,10 @@ return {
                     command = "clang-format",
                     append_args = function() return { "-style=file:" .. config_dir .. "clangd/.clang-format" } end,
                 },
+                odin = {
+                    command = "odinfmt",
+                    -- append_args = function()  return end,
+                },
                 -- sql = {
                 --     command = "sqlfluff",
                 --     stdin = true,
