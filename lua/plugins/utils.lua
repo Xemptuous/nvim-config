@@ -119,7 +119,7 @@ return {
             vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
         end,
     },
-    -- { "jidn/vim-dbml", ft = { "dbml" } },
+    { "jidn/vim-dbml", ft = { "dbml" }, event = "VeryLazy" },
     -- { "chrisbra/unicode.vim", event = "VeryLazy" },
     {
         "MagicDuck/grug-far.nvim",

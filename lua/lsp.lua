@@ -4,7 +4,8 @@ local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 
 vim.diagnostic.config({
     virtual_text = false,
-    virtual_lines = { only_current_line = true },
+    -- virtual_lines = false,
+    virtual_lines = { current_line = true },
     underline = false,
     signs = {
         text = {
@@ -73,7 +74,7 @@ local lsps = {
     "rust_analyzer",
     "phpactor",
     "jsonls",
-    "ts_ls",
+    -- "ts_ls",
     "zls",
 }
 

@@ -8,29 +8,38 @@ return {
             -- "echasnovski/mini.icons",
             "onsails/lspkind.nvim",
         },
-        -- version = "v0.*",
+        version = "*",
         build = "cargo build --release",
         opts = {
             sources = { default = { "lsp", "path", "snippets", "buffer" } },
-            keymap = { preset = "super-tab" },
+            keymap = {
+                preset = "super-tab",
+                ["<Tab>"] = {
+                    function(cmp)
+                        if cmp.snippet_active() or cmp.is_visible() then
+                            return cmp.accept()
+                        else
+                            return cmp.select_and_accept()
+                        end
+                    end,
+                    "snippet_forward",
+                    "fallback",
+                },
+                -- ["<CR>"] = { "accept", "fallback" },
+            },
             signature = {
                 enabled = true,
+                trigger = {
+                    show_on_insert = true,
+                },
                 window = {
                     border = "single",
                     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
                 },
             },
             appearance = {
-                use_nvim_cmp_as_default = true,
+                use_nvim_cmp_as_default = false,
                 nerd_font_variant = "mono",
-            },
-            snippets = {
-                -- Function to use when expanding LSP provided snippets
-                expand = function(snippet) vim.snippet.expand(snippet) end,
-                -- Function to use when checking if a snippet is active
-                active = function(filter) return vim.snippet.active(filter) end,
-                -- Function to use when jumping between tab stops in a snippet, where direction can be negative or positive
-                jump = function(direction) vim.snippet.jump(direction) end,
             },
             completion = {
                 documentation = {
@@ -43,7 +52,7 @@ return {
                     },
                 },
                 keyword = { range = "full" },
-                trigger = { show_in_snippet = false },
+                trigger = { show_in_snippet = true },
                 accept = { auto_brackets = { enabled = false } },
                 menu = {
                     border = "padded",

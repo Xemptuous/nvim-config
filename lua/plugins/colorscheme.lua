@@ -98,6 +98,7 @@ return {
     -- { "d00h/nvim-rusticated", event = "VeryLazy" }, -- very 90s style colors with beige-ish background
 
     -- Muted Light && Dark
+    { "alexxGmZ/e-ink.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
     -- { "ronisbr/nano-theme.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
     -- { "eihigh/vim-aomi-grayscale", event = "VeryLazy" }, -- mostly monochrome with colored functions
     -- { "jaredgorski/Mies.vim", event = "VeryLazy" }, -- grayscale font

@@ -22,7 +22,6 @@ o.formatoptions = "qjl1"
 o.guicursor = "i:block"
 o.hidden = true -- multiple buffers
 o.hlsearch = true -- highlights all found search items
-o.ignorecase = true
 o.ignorecase = true -- ignore search case-sensitivity
 o.incsearch = true -- incremental serach as characters added
 o.infercase = true
