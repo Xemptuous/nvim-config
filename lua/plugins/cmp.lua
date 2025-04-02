@@ -7,6 +7,10 @@ return {
             "rafamadriz/friendly-snippets",
             -- "echasnovski/mini.icons",
             "onsails/lspkind.nvim",
+            {
+                "xzbdmw/colorful-menu.nvim",
+                opts = {},
+            },
         },
         version = "*",
         build = "cargo build --release",
@@ -61,9 +65,12 @@ return {
                     scrolloff = 2,
                     auto_show = true,
                     draw = {
+                        -- We don't need label_description now because label and label_description are already
+                        -- combined together in label by colorful-menu.nvim.
                         columns = {
                             { "kind_icon" },
-                            { "label", "label_description", "kind", gap = 1 },
+                            { "label", gap = 1 },
+                            -- { "label", "label_description", "kind", gap = 1 },
                         },
                         components = {
                             kind_icon = {
@@ -72,6 +79,10 @@ return {
                                     -- local kind_icon, _, _ = require("mini.icons").get("lsp", ctx.kind)
                                     return require("lspkind").symbolic(ctx.kind, { mode = "symbol" })
                                 end,
+                            },
+                            label = {
+                                text = function(ctx) return require("colorful-menu").blink_components_text(ctx) end,
+                                highlight = function(ctx) return require("colorful-menu").blink_components_highlight(ctx) end,
                             },
                         },
                     },
