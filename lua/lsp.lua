@@ -22,7 +22,7 @@ vim.diagnostic.config({
         },
     },
     -- signs = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = true,
     float = {
         border = border,
@@ -41,15 +41,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition", buffer = event.buf })
         map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration", buffer = event.buf })
         map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Goto Implementation", buffer = event.buf })
-        map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>",
-            { desc = "Goto Type Definition", buffer = event.buf })
+        map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto Type Definition", buffer = event.buf })
         map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Goto References", buffer = event.buf })
         map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
         map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "LSP Rename", buffer = event.buf })
         map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
         map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
-        map("n", "<leader>v", "<cmd>lua vim.diagnostic.open_float()<cr>",
-            { desc = "Current Line Diagnostics", buffer = event.buf })
+        map("n", "<leader>v", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Current Line Diagnostics", buffer = event.buf })
         map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next Diagnostic", buffer = event.buf })
         map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Prev Diagnostic", buffer = event.buf })
         map("n", "<leader>B", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "LSP LOC List", buffer = event.buf })
