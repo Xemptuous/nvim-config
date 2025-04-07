@@ -99,7 +99,7 @@ return {
     { "echasnovski/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini.indentscope",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         opts = {
             symbol = "▏",
