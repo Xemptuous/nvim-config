@@ -268,4 +268,13 @@ return {
             vim.keymap.set("", "\\l", l.toggle, { desc = "Toggle lsp_lines" })
         end,
     },
+    {
+        "stevearc/overseer.nvim",
+        event = "VeryLazy",
+        keys = {
+            { "<leader>R", "<cmd>OverseerRun<cr>", desc = "Toggle Overseer Run" },
+            { "<leader>O", "<cmd>OverseerToggle<cr>", desc = "Toggle Overseer Task List" },
+        },
+        opts = {},
+    },
 }

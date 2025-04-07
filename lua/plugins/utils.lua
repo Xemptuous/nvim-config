@@ -127,6 +127,17 @@ return {
         config = function() require("grug-far").setup({}) end,
     },
     {
+        -- should be implemented in 0.12+ according to roadmap
+        "jake-stewart/auto-cmdheight.nvim",
+        lazy = false,
+        opts = {
+            max_lines = 10,
+            duration = 2,
+            remove_on_key = true,
+            clear_always = false,
+        },
+    },
+    {
         "folke/snacks.nvim",
         enabled = false,
         priority = 1000,
