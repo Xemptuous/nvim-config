@@ -52,7 +52,7 @@ return {
                 go = { "gofmt" },
                 java = { "clang_format" },
                 js = { "prettier" },
-                json = { "jq" },
+                json = { "fixjson" },
                 jsr = { "prettier" },
                 jsx = { "prettier" },
                 lua = { "stylua" },
