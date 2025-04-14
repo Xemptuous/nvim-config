@@ -86,6 +86,12 @@ return {
         end,
     },
     {
+        "williamboman/mason.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts) require("mason").setup(opts) end,
+    },
+    {
         "pmizio/typescript-tools.nvim",
         ft = { "javascriptreact", "typescriptreact" },
         dependencies = {
