@@ -5,15 +5,16 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "rafamadriz/friendly-snippets",
-            -- "echasnovski/mini.icons",
             "onsails/lspkind.nvim",
             {
                 "xzbdmw/colorful-menu.nvim",
                 opts = {},
             },
         },
-        version = "*",
-        build = "cargo build --release",
+        version = "1.*",
+        -- build = "cargo build --release",
+
+        opts_extend = { "sources.default" },
         opts = {
             sources = { default = { "lsp", "path", "snippets", "buffer" } },
             keymap = {
