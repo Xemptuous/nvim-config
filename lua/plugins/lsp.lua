@@ -8,12 +8,8 @@ return {
             vim.opt.runtimepath:append(lspConfigPath)
 
             vim.opt.signcolumn = "yes"
-            local border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
-
             vim.diagnostic.config({
-                virtual_text = false,
-                -- virtual_lines = false,
-                virtual_lines = { current_line = true },
+                -- virtual_lines = { current_line = true },
                 underline = false,
                 signs = {
                     text = {
@@ -22,21 +18,26 @@ return {
                         [vim.diagnostic.severity.HINT] = "󰌶 ",
                         [vim.diagnostic.severity.INFO] = " ",
                     },
-                    num_hl = {
-                        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-                        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-                        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-                        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-                    },
+                    -- linehl = {
+                    --     [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+                    --     [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+                    --     [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+                    --     [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+                    -- },
+                    -- numhl = {
+                    --     [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+                    --     [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+                    --     [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+                    --     [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+                    -- },
                 },
-                -- signs = true,
                 update_in_insert = false,
                 severity_sort = true,
                 float = {
-                    border = border,
-                    source = "always",
+                    border = "single",
+                    -- source = "always",
                     header = "",
-                    prefix = "",
+                    -- prefix = "",
                 },
             })
 
@@ -45,7 +46,22 @@ return {
                 callback = function(event)
                     local opts = { buffer = event.buf }
                     local map = vim.keymap.set
-                    map("n", "K", function() vim.lsp.buf.hover({ border = border }) end, opts)
+                    map("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, opts)
+                    -- map("n", "K", function() vim.lsp.buf.hover({ border = border }) end, opts)
+                    map("n", "\\c", function()
+                        local cur = vim.diagnostic.config().virtual_lines
+                        if cur == nil or cur == false or cur == true then
+                            vim.diagnostic.config({ virtual_lines = { current_line = true } })
+                        else
+                            vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+                        end
+                    end, { desc = "Toggle Virtual Lines", buffer = event.buf })
+                    map(
+                        "n",
+                        "\\v",
+                        function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end,
+                        { desc = "Toggle Virtual Lines", buffer = event.buf }
+                    )
                     map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition", buffer = event.buf })
                     map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration", buffer = event.buf })
                     map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Goto Implementation", buffer = event.buf })
