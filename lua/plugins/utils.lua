@@ -28,10 +28,6 @@ return {
         opts = {},
     },
     {
-        "alvan/vim-closetag",
-        ft = { "html", "djangohtml", "htmldjango" },
-    },
-    {
         "numToStr/Comment.nvim",
         enabled = false,
         keys = { "gc", "V" },
