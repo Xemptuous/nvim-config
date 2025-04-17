@@ -187,16 +187,6 @@ return {
             popupmenu = { enabled = false },
             health = { checker = false },
         },
-        routes = {
-            {
-                filter = {
-                    event = "lsp",
-                    kind = "progress",
-                    find = ".*.fsharp.*",
-                },
-                opts = { skip = true },
-            },
-        },
     },
     {
         "stevearc/oil.nvim",
