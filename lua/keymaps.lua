@@ -6,88 +6,67 @@ local function map(modes, lhs, rhs, opts)
     end
 end
 
-map("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true })
+map("i", "<Esc>", 'col(\'.\') == 1 ? "<Esc>" : "<Esc>l"', { expr = true, noremap = true, silent = true, desc = "Better Escape" })
+map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search Inside Visual Selection" })
 
-map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search inside visual selection" })
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, noremap = true, desc = "Better Movement (Down)" })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, noremap = true, desc = "Better Movement (Down)" })
 
--- better movement
-map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, noremap = true })
-map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, noremap = true })
+map("n", "<C-h>", "<C-w>h", { noremap = true, desc = "Switch Window (Left)" })
+map("n", "<C-j>", "<C-w>j", { noremap = true, desc = "Switch Window (Down)" })
+map("n", "<C-k>", "<C-w>k", { noremap = true, desc = "Switch Window (Up)" })
+map("n", "<C-l>", "<C-w>l", { noremap = true, desc = "Switch Window (Right)" })
+map("n", "<Left>", "<C-w>h", { noremap = true, desc = "Switch Window (Left)" })
+map("n", "<Down>", "<C-w>j", { noremap = true, desc = "Switch Window (Down)" })
+map("n", "<Up>", "<C-w>k", { noremap = true, desc = "Switch Window (Up)" })
+map("n", "<Right>", "<C-w>l", { noremap = true, desc = "Switch Window (Right)" })
 
--- map("n", "h", "h", { noremap = true })
--- map("n", "l", "l", { noremap = true })
+map("n", "<A-h>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
+map("n", "<A-j>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
+map("n", "<A-l>", "<cmd>bnext<cr>", { noremap = true, desc = "Switch Tab Next" })
+map("n", "<A-k>", "<cmd>bnext<cr>", { noremap = true, desc = "Switch Tab Next" })
 
--- map("n", "i", "i", { noremap = true })
--- map("n", "u", "u", { noremap = true })
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
-map("n", "<C-c>", [[<Esc>]], { noremap = true })
-map("i", "jk", [[<Esc>]], { noremap = true })
-map("i", "kj", [[<Esc>]], { noremap = true })
-map("v", "q", [[<Esc>]], { noremap = true })
+map("v", "<", "<gv", { noremap = true, desc = "Better Indent (Left)" })
+map("v", ">", ">gv", { noremap = true, desc = "Better Indent (Right)" })
 
--- switch windows
-map("n", "<C-h>", "<C-w>h", { noremap = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true })
-map("n", "<C-k>", "<C-w>k", { noremap = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true })
-map("n", "<Left>", "<C-w>h", { noremap = true })
-map("n", "<Down>", "<C-w>j", { noremap = true })
-map("n", "<Up>", "<C-w>k", { noremap = true })
-map("n", "<Right>", "<C-w>l", { noremap = true })
+map("n", "<C-n>", ":cn<CR>", { desc = "Quickfix Next" })
+map("n", "<C-p>", ":cp<CR>", { desc = "Quickfix Prev" })
 
---switch tabs
--- map("n", "<S-Left>", "<cmd>tabprevious<cr>", { noremap = true })
--- map("n", "<S-Right>", "<cmd>tabnext<cr>", { noremap = true })
-map("n", "<S-Left>", "<cmd>bprevious<cr>", { noremap = true })
-map("n", "<S-Down>", "<cmd>bprevious<cr>", { noremap = true })
-map("n", "<S-Right>", "<cmd>bnext<cr>", { noremap = true })
-map("n", "<S-Up>", "<cmd>bnext<cr>", { noremap = true })
+map("n", "\\w", "<cmd>lua vim.opt_local.wrap = not vim.opt_local.wrap:get()<CR>", { desc = "Toggle Linewrap" })
+map("n", "\\i", "<cmd>lua vim.opt_local.ignorecase = not vim.opt_local.ignorecase:get()<CR>", { desc = "Toggle Ignorecase" })
+map("n", "\\s", "<cmd>lua vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()<CR>", { desc = "Toggle HighlightSearch" })
+map("n", "\\r", "<cmd>lua vim.opt_local.relativenumber = not vim.opt_local.relativenumber:get()<CR>", { desc = "Toggle RelativeLine" })
 
--- resize windows
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+-- LSP
+local currentVirtualLineToggle = function()
+    local cur = vim.diagnostic.config().virtual_lines
+    if cur == nil or cur == false or cur == true then
+        vim.diagnostic.config({ virtual_lines = { current_line = true } })
+    else
+        vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
+    end
+end
+local virtualLineToggle = function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end
 
--- move lines
--- map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
--- map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
--- map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
--- map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
--- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
--- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
-
--- better indent
-map("v", "<", "<gv", { noremap = true })
-map("v", ">", ">gv", { noremap = true })
--- map("n", "<", "<<", { noremap = true, nowait = true })
--- map("n", ">", ">>", { noremap = true, nowait = true })
-
--- dont save delete chars to clipboard
-map("n", "x", [["_x]], { noremap = true })
-map("n", "X", [["_X]], { noremap = true })
-
--- toggle wrap
-map("n", "<leader>uw", ":set nowrap!<cr>", {})
--- quickfix list
-map("n", "<C-n>", ":cn<CR>", {})
-map("n", "<C-p>", ":cp<CR>", {})
-
-map("n", "\\h", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })<CR>", {})
-map("n", "\\t", ":lua vim.treesitter[vim.b.ts_highlight and 'start' or 'stop']()<CR>", {})
-map("n", "\\r", ":lua vim.opt_local.wrap = not vim.opt_local.wrap:get()<CR>", {})
-map("n", "\\i", ":lua vim.opt_local.ignorecase = not vim.opt_local.ignorecase:get()<CR>", {})
-map("n", "\\s", ":lua vim.opt_local.hlsearch = not vim.opt_local.hlsearch:get()<CR>", {})
-map("n", "\\r", ":lua vim.opt_local.relativenumber = not vim.opt_local.relativenumber:get()<CR>", {})
-
--- Fix for Xterm
--- removed. Instead, add to .Xresources:
--- xterm.VT100.translations: #override \
---     Shift <Key>[: string("{") \n\
---     Shift <Key>]: string("}") \n\
---     Shift <Key>-: string("_") \n\
---     Shift <Key>`: string("~") \n\
---     Shift <Key>2: string("@") \n\
---     Shift <Key>6: string("^")
--- map("i", "<S-{>", "{", { noremap = false })
--- map("i", "<S-}>", "}", { noremap = false })
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, {})
+vim.keymap.set("n", "\\c", currentVirtualLineToggle, {})
+vim.keymap.set("n", "\\v", virtualLineToggle, { desc = "Toggle Virtual Lines" })
+vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", {})
+vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", {})
+vim.keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", {})
+vim.keymap.set("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", {})
+vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", {})
+vim.keymap.set("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", {})
+vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", {})
+vim.keymap.set("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", {})
+vim.keymap.set("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", {})
+vim.keymap.set("n", "<leader>v", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Current Line Diagnostics" })
+vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", {})
+vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", {})
+vim.keymap.set("n", "<leader>B", "<cmd>lua vim.diagnostic.setloclist()<cr>", {})
+vim.keymap.set("n", "<leader>W", "<cmd>lua vim.diagnostic.setqflist()<cr>", {})

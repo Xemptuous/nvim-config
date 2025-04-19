@@ -18,18 +18,6 @@ return {
                         [vim.diagnostic.severity.HINT] = "󰌶 ",
                         [vim.diagnostic.severity.INFO] = " ",
                     },
-                    -- linehl = {
-                    --     [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-                    --     [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-                    --     [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-                    --     [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-                    -- },
-                    -- numhl = {
-                    --     [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-                    --     [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-                    --     [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-                    --     [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-                    -- },
                 },
                 update_in_insert = false,
                 severity_sort = true,
@@ -39,49 +27,6 @@ return {
                     header = "",
                     -- prefix = "",
                 },
-            })
-
-            vim.api.nvim_create_autocmd("LspAttach", {
-                desc = "LSP actions",
-                callback = function(event)
-                    local opts = { buffer = event.buf }
-                    local map = vim.keymap.set
-                    map("n", "K", function() vim.lsp.buf.hover({ border = "single" }) end, opts)
-                    -- map("n", "K", function() vim.lsp.buf.hover({ border = border }) end, opts)
-                    map("n", "\\c", function()
-                        local cur = vim.diagnostic.config().virtual_lines
-                        if cur == nil or cur == false or cur == true then
-                            vim.diagnostic.config({ virtual_lines = { current_line = true } })
-                        else
-                            vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines })
-                        end
-                    end, { desc = "Toggle Virtual Lines", buffer = event.buf })
-                    map(
-                        "n",
-                        "\\v",
-                        function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end,
-                        { desc = "Toggle Virtual Lines", buffer = event.buf }
-                    )
-                    map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition", buffer = event.buf })
-                    map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration", buffer = event.buf })
-                    map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Goto Implementation", buffer = event.buf })
-                    map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Goto Type Definition", buffer = event.buf })
-                    map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Goto References", buffer = event.buf })
-                    map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-                    map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "LSP Rename", buffer = event.buf })
-                    map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-                    map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>", opts)
-                    map(
-                        "n",
-                        "<leader>v",
-                        "<cmd>lua vim.diagnostic.open_float()<cr>",
-                        { desc = "Current Line Diagnostics", buffer = event.buf }
-                    )
-                    map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Next Diagnostic", buffer = event.buf })
-                    map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Prev Diagnostic", buffer = event.buf })
-                    map("n", "<leader>B", "<cmd>lua vim.diagnostic.setloclist()<cr>", { desc = "LSP LOC List", buffer = event.buf })
-                    map("n", "<leader>W", "<cmd>lua vim.diagnostic.setqflist()<cr>", { desc = "LSP QF List", buffer = event.buf })
-                end,
             })
 
             local lsps = {}
