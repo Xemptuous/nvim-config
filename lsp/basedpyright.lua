@@ -1,5 +1,5 @@
 return {
-    cmd = { "basedpyright-langserver", "--stdio" },
+    -- cmd = { "basedpyright-langserver", "--stdio" },
     settings = {
         basedpyright = {
             analysis = {
