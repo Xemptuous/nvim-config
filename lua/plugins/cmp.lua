@@ -42,6 +42,17 @@ return {
                     winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
                 },
             },
+            cmdline = {
+                enabled = true,
+                keymap = {
+                    preset = "inherit",
+                },
+                completion = {
+                    menu = {
+                        auto_show = true,
+                    },
+                },
+            },
             appearance = {
                 use_nvim_cmp_as_default = false,
                 nerd_font_variant = "mono",
