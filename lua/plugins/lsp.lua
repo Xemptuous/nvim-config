@@ -40,6 +40,7 @@ return {
                 end
             end
 
+            vim.lsp.set_log_level("error")
             for _, lsp in pairs(lsps) do
                 -- for pmizio/typescript-tools.nvim
                 if lsp ~= "ts_ls" then vim.lsp.enable(lsp) end
