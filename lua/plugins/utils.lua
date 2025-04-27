@@ -17,9 +17,10 @@ return {
         config = function(_, opts) require("better_escape").setup(opts) end,
     },
     {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        opts = { check_ts = true },
+        "altermo/ultimate-autopair.nvim",
+        event = { "InsertEnter", "CmdlineEnter" },
+        branch = "v0.6",
+        opts = {}
     },
     {
         "kylechui/nvim-surround",
@@ -37,11 +38,11 @@ return {
     {
         "folke/flash.nvim",
         keys = {
-            { "<leader>s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash Jump" },
-            { "<leader>S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-            { "<leader>e", mode = "o", function() require("flash").remote() end, desc = "Flash Remote" },
-            { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Flash Treesitter Search" },
-            { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Flash Toggle" },
+            { "<leader>s", mode = { "n", "o", "x" }, function() require("flash").jump() end,              desc = "Flash Jump" },
+            { "<leader>S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+            { "<leader>e", mode = "o",               function() require("flash").remote() end,            desc = "Flash Remote" },
+            { "R",         mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Flash Treesitter Search" },
+            { "<c-s>",     mode = { "c" },           function() require("flash").toggle() end,            desc = "Flash Toggle" },
         },
         config = function()
             vim.api.nvim_set_hl(0, "FlashMatch", { fg = "#89b4fa" })
@@ -73,18 +74,18 @@ return {
         event = "VeryLazy",
         config = function()
             require("which-key").add({
-                { "<leader>t", group = "Telescope" },
-                { "<leader>d", group = "Debugger" },
-                { "<leader>g", group = "Git" },
-                { "<leader>n", group = "NeoGit" },
+                { "<leader>t",  group = "Telescope" },
+                { "<leader>d",  group = "Debugger" },
+                { "<leader>g",  group = "Git" },
+                { "<leader>n",  group = "NeoGit" },
                 { "<leader>gt", group = "Toggle" },
-                { "<leader>x", group = "Trouble" },
-                { "<leader>c", group = "Trouble" },
+                { "<leader>x",  group = "Trouble" },
+                { "<leader>c",  group = "Trouble" },
             })
         end,
     },
-    { "tpope/vim-abolish", keys = "cr" },
-    { "kevinhwang91/nvim-bqf", ft = { "qf" } },
+    { "tpope/vim-abolish",             keys = "cr" },
+    { "kevinhwang91/nvim-bqf",         ft = { "qf" } },
     {
         "famiu/bufdelete.nvim",
         event = "VeryLazy",
@@ -139,11 +140,11 @@ return {
         priority = 1000,
         lazy = false,
         keys = {
-            { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-            { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
-            { "\\z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-            { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-            { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+            { "<leader>.",  function() Snacks.scratch() end,                 desc = "Toggle Scratch Buffer" },
+            { "<leader>gB", function() Snacks.gitbrowse() end,               desc = "Git Browse" },
+            { "\\z",        function() Snacks.zen() end,                     desc = "Toggle Zen Mode" },
+            { "]]",         function() Snacks.words.jump(vim.v.count1) end,  desc = "Next Reference",       mode = { "n", "t" } },
+            { "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference",       mode = { "n", "t" } },
         },
         opts = {
             bigfile = { enabled = true },
