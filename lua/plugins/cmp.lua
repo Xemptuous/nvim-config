@@ -16,7 +16,8 @@ return {
 
         opts_extend = { "sources.default" },
         opts = {
-            sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline", "omni" } },
+            sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline" } },
+            -- sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline", "omni" } },
             keymap = {
                 preset = "super-tab",
                 ["<Tab>"] = {
@@ -68,7 +69,7 @@ return {
                     },
                 },
                 keyword = { range = "full" },
-                trigger = { show_in_snippet = true },
+                trigger = { show_in_snippet = false },
                 accept = { auto_brackets = { enabled = false } },
                 menu = {
                     border = "padded",
@@ -81,7 +82,7 @@ return {
                         -- combined together in label by colorful-menu.nvim.
                         columns = {
                             { "kind_icon" },
-                            { "label",    gap = 1 },
+                            { "label", gap = 1 },
                             -- { "label", "label_description", "kind", gap = 1 },
                         },
                         components = {
@@ -174,8 +175,8 @@ return {
                 { name = "friendly-snippets" },
                 { name = "nvim_lua" },
                 { name = "buffer" },
-                { name = "look",                    ft = { "markup", "html" } },
-                { name = "fish",                    ft = { "fish" } },
+                { name = "look", ft = { "markup", "html" } },
+                { name = "fish", ft = { "fish" } },
                 { name = "path" },
                 -- { name = "vim-dadbod-completion", ft = { "sql", "mysql", "psql" } },
                 -- { name = "sqlua", ft = { "sql", "mysql", "psql" } },

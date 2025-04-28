@@ -2,6 +2,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         lazy = true,
+        dependencies = "rafamadriz/friendly-snippets",
         init = function()
             -- use nvim-lspconfig configs for native lsp
             local lspConfigPath = require("lazy.core.config").options.root .. "/nvim-lspconfig"
@@ -29,21 +30,29 @@ return {
                 },
             })
 
-            local lsps = {}
+            -- vim.api.nvim_create_autocmd("LspAttach", {
+            --     callback = function(event)
+            --         local client = vim.lsp.get_client_by_id(event.data.client_id)
+            --
+            --         if client and client:supports_method("textDocument/completion") then
+            --             local chars = {}
+            --             for i = 32, 126 do
+            --                 table.insert(chars, string.char(i))
+            --             end
+            --             client.server_capabilities.completionProvider.triggerCharacters = chars
+            --             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
+            --         end
+            --     end,
+            -- })
+
+            vim.lsp.set_log_level("error")
             local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
             local fs_dir = vim.uv.fs_opendir(lsp_dir, nil, 100)
-
             if fs_dir then
                 local files = vim.uv.fs_readdir(fs_dir)
                 for _, file in pairs(files) do
-                    table.insert(lsps, file.name:match("(.+)%..+"))
+                    vim.lsp.enable(file.name:match("(.+)%..+"))
                 end
-            end
-
-            vim.lsp.set_log_level("error")
-            for _, lsp in pairs(lsps) do
-                -- for pmizio/typescript-tools.nvim
-                if lsp ~= "ts_ls" then vim.lsp.enable(lsp) end
             end
         end,
     },
