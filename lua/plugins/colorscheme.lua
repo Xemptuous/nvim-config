@@ -5,7 +5,7 @@ return {
         lazy = false,
         priority = 1000,
         opts = {
-            flavour = "mocha",
+            flavour = "latte",
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
@@ -111,6 +111,7 @@ return {
     -- Muted Light Themes
 
     -- Muted Dark Themes
+    -- { "metalelf0/black-metal-theme-neovim", event = "VeryLazy" }, -- new version of older black metal
     -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
     { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
     -- { "rjshkhr/shadow.nvim", event = "VeryLazy" },
