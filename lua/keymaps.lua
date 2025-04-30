@@ -12,6 +12,7 @@ map("x", "g/", "<esc>/\\%V", { silent = false, desc = "Search Inside Visual Sele
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, noremap = true, desc = "Better Movement (Down)" })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, noremap = true, desc = "Better Movement (Down)" })
 
+-- Normals
 map("n", "<C-h>", "<C-w>h", { noremap = true, desc = "Switch Window (Left)" })
 map("n", "<C-j>", "<C-w>j", { noremap = true, desc = "Switch Window (Down)" })
 map("n", "<C-k>", "<C-w>k", { noremap = true, desc = "Switch Window (Up)" })
@@ -20,6 +21,14 @@ map("n", "<Left>", "<C-w>h", { noremap = true, desc = "Switch Window (Left)" })
 map("n", "<Down>", "<C-w>j", { noremap = true, desc = "Switch Window (Down)" })
 map("n", "<Up>", "<C-w>k", { noremap = true, desc = "Switch Window (Up)" })
 map("n", "<Right>", "<C-w>l", { noremap = true, desc = "Switch Window (Right)" })
+
+-- Terminal
+map("n", "\\t", ":terminal<CR>", {})
+map("t", "<esc>", "<C-\\><C-N>", { silent = true })
+map("t", "<C-h>", "<C-\\><C-N><C-w>h", { noremap = true, silent = true })
+map("t", "<C-j>", "<C-\\><C-N><C-w>j", { noremap = true, silent = true })
+map("t", "<C-k>", "<C-\\><C-N><C-w>k", { noremap = true, silent = true })
+map("t", "<C-l>", "<C-\\><C-N><C-w>l", { noremap = true, silent = true })
 
 map("n", "<A-h>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
 map("n", "<A-j>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
