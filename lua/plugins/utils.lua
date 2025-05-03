@@ -210,4 +210,5 @@ return {
             })
         end,
     },
+    { "gktjmp/lush.nvim" },
 }

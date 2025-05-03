@@ -26,7 +26,7 @@ o.hlsearch = true -- highlights all found search items
 o.ignorecase = true -- ignore search case-sensitivity
 o.incsearch = true -- incremental serach as characters added
 o.infercase = true
-o.laststatus = 0 -- always show status line
+-- o.laststatus = 0 -- always show status line
 o.lazyredraw = false
 o.linebreak = true
 o.mouse = "a" -- enable mouse functionality
@@ -54,6 +54,7 @@ o.virtualedit = "block"
 o.winblend = 0
 o.wrap = true
 o.writebackup = false
+o.cmdheight = 0
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {
