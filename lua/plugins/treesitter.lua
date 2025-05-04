@@ -9,30 +9,26 @@ return {
             {
                 "HiPhish/rainbow-delimiters.nvim",
                 enabled = false,
+                submodules = false,
+                event = "VeryLazy",
                 disable = { "rust" },
-                config = function()
-                    local rainbow_delimiters = require("rainbow-delimiters")
-
-                    vim.g.rainbow_delimiters = {
-                        strategy = {
-                            [""] = rainbow_delimiters.strategy["global"],
-                            vim = rainbow_delimiters.strategy["local"],
-                        },
-                        query = {
-                            [""] = "rainbow-delimiters",
-                            lua = "rainbow-blocks",
-                        },
-                        highlight = {
-                            "RainbowDelimiterViolet",
-                            "RainbowDelimiterYellow",
-                            "RainbowDelimiterBlue",
-                            "RainbowDelimiterRed",
-                            "RainbowDelimiterGreen",
-                            "RainbowDelimiterOrange",
-                            "RainbowDelimiterCyan",
-                        },
-                    }
-                end,
+                main = "rainbow-delimiters.setup",
+                opts = {
+                    query = {
+                        [''] = 'rainbow-delimiters',
+                        lua = 'rainbow-blocks',
+                        elixir = 'rainbow-blocks',
+                    },
+                    highlight = {
+                        "RainbowDelimiterViolet",
+                        "RainbowDelimiterYellow",
+                        "RainbowDelimiterBlue",
+                        -- "RainbowDelimiterRed",
+                        "RainbowDelimiterGreen",
+                        "RainbowDelimiterOrange",
+                        "RainbowDelimiterCyan",
+                    },
+                },
             },
         },
         opts = {
