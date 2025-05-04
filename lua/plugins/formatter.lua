@@ -56,6 +56,7 @@ return {
                 json = { "fixjson" },
                 jsr = { "prettier" },
                 jsx = { "prettier" },
+                lisp = { "cljfmt" },
                 lua = { "stylua" },
                 mjs = { "prettier" },
                 php = { "pretty-php" },
@@ -70,9 +71,17 @@ return {
                 zsh = { "beautysh" },
             },
             formatters = {
+                black = {
+                    command = "black",
+                    prepend_args = {
+                        "--line-length",
+                        80,
+                        "-",
+                    }
+                },
                 clang_format = {
                     command = "clang-format",
-                    append_args = function() return { "-style=file:" .. config_dir .. "clangd/.clang-format" } end,
+                    append_args = { "-style=file:" .. config_dir .. "clangd/.clang-format" },
                 },
                 odin = {
                     command = "odinfmt",
@@ -90,18 +99,16 @@ return {
                 -- },
                 stylua = {
                     command = "stylua",
-                    append_args = function()
-                        return {
-                            "--collapse-simple-statement",
-                            "Always",
-                            "--column-width",
-                            "140",
-                            "--indent-type",
-                            "Spaces",
-                            "--indent-width",
-                            4,
-                        }
-                    end,
+                    append_args = {
+                        "--collapse-simple-statement",
+                        "Always",
+                        "--column-width",
+                        "140",
+                        "--indent-type",
+                        "Spaces",
+                        "--indent-width",
+                        4,
+                    },
                 },
             },
         },
