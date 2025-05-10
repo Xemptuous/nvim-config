@@ -2,7 +2,15 @@ return {
     {
         "neovim/nvim-lspconfig",
         lazy = true,
-        dependencies = "rafamadriz/friendly-snippets",
+        dependencies = {
+            "rafamadriz/friendly-snippets",
+            {
+                "mason-org/mason.nvim",
+                event = "VeryLazy",
+                opts = {},
+                main = "mason",
+            },
+        },
         init = function()
             -- use nvim-lspconfig configs for native lsp
             local lspConfigPath = require("lazy.core.config").options.root .. "/nvim-lspconfig"
@@ -30,21 +38,6 @@ return {
                 },
             })
 
-            -- vim.api.nvim_create_autocmd("LspAttach", {
-            --     callback = function(event)
-            --         local client = vim.lsp.get_client_by_id(event.data.client_id)
-            --
-            --         if client and client:supports_method("textDocument/completion") then
-            --             local chars = {}
-            --             for i = 32, 126 do
-            --                 table.insert(chars, string.char(i))
-            --             end
-            --             client.server_capabilities.completionProvider.triggerCharacters = chars
-            --             vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-            --         end
-            --     end,
-            -- })
-
             vim.lsp.set_log_level("error")
             local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
             local fs_dir = vim.uv.fs_opendir(lsp_dir, nil, 100)
@@ -55,12 +48,6 @@ return {
                 end
             end
         end,
-    },
-    {
-        "williamboman/mason.nvim",
-        event = "VeryLazy",
-        opts = {},
-        config = function(_, opts) require("mason").setup(opts) end,
     },
     {
         "pmizio/typescript-tools.nvim",
