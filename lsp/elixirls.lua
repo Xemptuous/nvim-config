@@ -1,4 +1,4 @@
 return {
-    cmd = { "elixirls" },
+    cmd = { "elixir-ls" },
     single_file_support = true,
 }
