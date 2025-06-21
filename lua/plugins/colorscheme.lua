@@ -1,7 +1,7 @@
 return {
     {
         "catppuccin/nvim",
-        enabled = true,
+        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
@@ -67,15 +67,27 @@ return {
         event = "VeryLazy",
     },
     {
-        "rebelot/kanagawa.nvim",
+        "loganswartz/selenized.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
         event = "VeryLazy",
-        opts = {
-            compile = true,
-            dimInactive = true,
-            colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
-        },
     },
-    { "sho-87/kanagawa-paper.nvim", event = "VeryLazy" }, -- slightly more color than kanagawabones
+    -- { "calind/selenized.nvim", event = "VeryLazy" },
+    -- { "jan-warchol/selenized", event = "VeryLazy" },
+    -- { "sainnhe/everforest", event = "VeryLazy" },
+    -- { "ellisonleao/gruvbox.nvim", event = "VeryLazy" },
+    -- { "sainnhe/gruvbox-material", event = "VeryLazy" },
+    -- {
+    --     "rebelot/kanagawa.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         compile = true,
+    --         dimInactive = true,
+    --         colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+    --     },
+    -- },
+    -- { "calind/selenized.nvim", event = "VeryLazy" },
+    -- { "loganswartz/selenized.nvim", event = "VeryLazy" },
+    -- { "sho-87/kanagawa-paper.nvim", event = "VeryLazy" }, -- slightly more color than kanagawabones
     -- { "rose-pine/neovim", event = "VeryLazy" },
     -- { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },
     -- { "maxmx03/solarized.nvim", event = "VeryLazy" },
@@ -107,7 +119,19 @@ return {
     -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
     -- { "NTBBloodbath/doom-one.nvim", event = "VeryLazy" },
-    -- { "tinted-theming/tinted-vim", event = "VeryLazy" }, -- lots of base16 and base24 themes
+
+    -- {
+    --     "tinted-theming/tinted-vim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
+    -- }, -- lots of base16 and base24 themes
+    {
+        "RRethy/base16-nvim",
+        lazy = false,
+        priority = 1000,
+        config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
+    },
 
     -- Light Themes
     -- { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },

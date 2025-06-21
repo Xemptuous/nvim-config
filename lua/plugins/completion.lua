@@ -4,9 +4,10 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             "rafamadriz/friendly-snippets",
-            "milanglacier/minuet-ai.nvim",
+            -- "milanglacier/minuet-ai.nvim",
+            "MeanderingProgrammer/render-markdown.nvim",
             "onsails/lspkind.nvim",
-            "Kaiser-Yang/blink-cmp-avante",
+            -- "Kaiser-Yang/blink-cmp-avante",
             { "xzbdmw/colorful-menu.nvim", opts = {} },
         },
         version = "1.*",
@@ -14,7 +15,7 @@ return {
 
         opts_extend = { "sources.default" },
         opts = function()
-            local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
+            -- local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
             return {
                 keymap = {
                     preset = "super-tab",
@@ -29,32 +30,32 @@ return {
                         "snippet_forward",
                         "fallback",
                     },
-                    ["<C-y>"] = {
-                        function(cmp) cmp.show({ providers = { "minuet" } }) end,
-                    },
+                    -- ["<C-y>"] = {
+                    --     function(cmp) cmp.show({ providers = { "minuet" } }) end,
+                    -- },
                     -- ["<CR>"] = { "accept", "fallback" },
                 },
                 sources = {
                     providers = {
-                        avante = {
-                            module = "blink-cmp-avante",
-                            name = "Avante",
-                            opts = {},
-                        },
-                        minuet = {
-                            name = "minuet",
-                            module = "minuet.blink",
-                            async = true,
-                            -- Should match minuet.config.request_timeout * 1000,
-                            -- since minuet.config.request_timeout is in seconds
-                            timeout_ms = 3000,
-                            score_offset = 50, -- Gives minuet higher priority among suggestions
-                        },
+                        -- avante = {
+                        --     module = "blink-cmp-avante",
+                        --     name = "Avante",
+                        --     opts = {},
+                        -- },
+                        -- minuet = {
+                        --     name = "minuet",
+                        --     module = "minuet.blink",
+                        --     async = true,
+                        --     -- Should match minuet.config.request_timeout * 1000,
+                        --     -- since minuet.config.request_timeout is in seconds
+                        --     timeout_ms = 3000,
+                        --     score_offset = 50, -- Gives minuet higher priority among suggestions
+                        -- },
                     },
-                    default = { "avante", "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
+                    -- default = { "avante", "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
                     -- default = { "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
                 },
-                -- sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline" } },
+                sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline" } },
                 signature = {
                     enabled = true,
                     trigger = {
@@ -99,7 +100,8 @@ return {
                     menu = {
                         border = "padded",
                         winblend = 0,
-                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+                        -- winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+                        winhighlight = "CursorLine:Visual,Search:None",
                         scrolloff = 2,
                         auto_show = true,
                         draw = {

@@ -41,9 +41,12 @@ return {
     {
         "folke/flash.nvim",
         keys = {
-            { "<leader>s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash Jump" },
-            { "<leader>S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-            { "<leader>e", mode = "o", function() require("flash").remote() end, desc = "Flash Remote" },
+            { "ss", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash Jump" },
+            { "sS", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            { "se", mode = "o", function() require("flash").remote() end, desc = "Flash Remote" },
+            -- { "<leader>s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash Jump" },
+            -- { "<leader>S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+            -- { "<leader>e", mode = "o", function() require("flash").remote() end, desc = "Flash Remote" },
             {
                 "R",
                 mode = { "o", "x" },
@@ -69,12 +72,6 @@ return {
         enabled = false,
         cmd = { "BaleiaColorize" },
         config = function() require("baleia").setup({}) end,
-    },
-    {
-        "iamcco/markdown-preview.nvim",
-        cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-        ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
     },
     {
         "folke/which-key.nvim",
@@ -124,7 +121,7 @@ return {
             vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
         end,
     },
-    { "jidn/vim-dbml", ft = { "dbml" }, event = "VeryLazy" },
+    -- { "jidn/vim-dbml", ft = { "dbml" } },
     -- { "chrisbra/unicode.vim", event = "VeryLazy" },
     {
         "MagicDuck/grug-far.nvim",
@@ -210,5 +207,4 @@ return {
             })
         end,
     },
-    { "gktjmp/lush.nvim" },
 }

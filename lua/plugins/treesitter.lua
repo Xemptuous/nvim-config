@@ -15,9 +15,9 @@ return {
                 main = "rainbow-delimiters.setup",
                 opts = {
                     query = {
-                        [''] = 'rainbow-delimiters',
-                        lua = 'rainbow-blocks',
-                        elixir = 'rainbow-blocks',
+                        [""] = "rainbow-delimiters",
+                        lua = "rainbow-blocks",
+                        elixir = "rainbow-blocks",
                     },
                     highlight = {
                         "RainbowDelimiterViolet",

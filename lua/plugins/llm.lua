@@ -1,18 +1,19 @@
 -- You are a highly capable and concise code assistant designed to seamlessly complete code based on a developer’s current editing context. Your suggestions should be syntactically correct, contextually relevant, and follow best coding practices. Always aim to complete the user’s thought, infer intent when reasonable, and do not repeat what is already written unless needed. Prioritize code over commentary unless clarification is essential.
-local prompt = [[
-You are the backend of an AI-powered code completion engine. Your task is to
-provide code suggestions based on the user's input. Avoid writing comments
-in completions. The user's code will be enclosed in markers:
-
-- `<contextAfterCursor>`: Code context after the cursor
-- `<cursorPosition>`: Current cursor location
-- `<contextBeforeCursor>`: Code context before the cursor
-]]
+-- local prompt = [[
+-- You are the backend of an AI-powered code completion engine. Your task is to
+-- provide code suggestions based on the user's input. Avoid writing comments
+-- in completions. The user's code will be enclosed in markers:
+--
+-- - `<contextAfterCursor>`: Code context after the cursor
+-- - `<cursorPosition>`: Current cursor location
+-- - `<contextBeforeCursor>`: Code context before the cursor
+-- ]]
 return {
     {
         "milanglacier/minuet-ai.nvim",
-        enabled = true,
-        event = "VeryLazy",
+        enabled = false,
+        lazy = false,
+        -- event = "VeryLazy",
         -- event = { "InsertEnter", "CmdlineEnter" },
         opts = {
             provider = "openai_fim_compatible",
@@ -21,17 +22,17 @@ return {
             request_timeout = 5,
             provider_options = {
                 openai_fim_compatible = {
-                    system = {
-                        prompt = prompt,
-                    },
+                    -- system = {
+                    --     prompt = prompt,
+                    -- },
                     stream = true,
                     api_key = "TERM",
                     name = "Ollama",
                     end_point = "http://localhost:11434/v1/completions",
-                    model = "deepseek-coder-v2:16b-lite-base-q6_K",
+                    -- model = "deepseek-coder-v2:16b-lite-base-q8_0",
                     optional = {
                         max_tokens = 1000,
-                        top_p = 0.95,
+                        top_p = 0.9,
                     },
                 },
             },
@@ -70,7 +71,7 @@ return {
                         },
                     },
                 },
-                ["deepseek-coder-v2:16b-q8_0"] = {
+                ["deepseek-coder-v2:16b"] = {
                     context_window = 32768,
                     provider = "openai_fim_compatible",
                     provider_options = {
@@ -86,23 +87,6 @@ return {
                         },
                     },
                 },
-                ["deepseek-coder-v2:16b-q6_K"] = {
-                    context_window = 32768,
-                    provider = "openai_fim_compatible",
-                    provider_options = {
-                        openai_fim_compatible = {
-                            api_key = "TERM",
-                            name = "Ollama",
-                            end_point = "http://localhost:11434/v1/completions",
-                            model = "deepseek-coder-v2:16b-lite-base-q6_K",
-                            -- model = "deepseek-coder-v2:16b-lite-base-q8_0", -- fits 95% in GPU
-                            optional = {
-                                max_tokens = 1000,
-                                top_p = 0.9,
-                            },
-                        },
-                    },
-                },
             },
         },
         config = function(_, opts) require("minuet").setup(opts) end,
@@ -110,14 +94,16 @@ return {
     {
         "yetone/avante.nvim",
         enabled = false,
-        event = "VeryLazy",
+        event = "InsertEnter",
+        -- event = "VeryLazy",
         version = false, -- Never set this value to "*"! Never!
         opts = {
             provider = "ollama",
             ollama = {
                 -- model = "qwen2.5-coder:32b-base-q4_K_M",
                 -- model = "qwen3:14b",
-                model = "deepseek-coder-v2:16b-lite-base-q6_K",
+                model = "deepseek-coder-v2:16b-lite-base-q8_0",
+                -- model = "deepseek-coder-v2:16b-lite-base-q6_K",
             },
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

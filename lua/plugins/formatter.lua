@@ -77,7 +77,7 @@ return {
                         "--line-length",
                         80,
                         "-",
-                    }
+                    },
                 },
                 clang_format = {
                     command = "clang-format",

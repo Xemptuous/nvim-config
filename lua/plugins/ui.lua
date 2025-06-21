@@ -210,7 +210,9 @@ return {
         end,
         opts = {
             win_options = { signcolumn = "yes:2" },
-            view_options = { show_hidden = true },
+            view_options = {
+                show_hidden = true,
+            },
             keymaps = {
                 ["<C-t>"] = {},
                 ["g?"] = { "actions.show_help", mode = "n" },
@@ -261,11 +263,24 @@ return {
     },
     {
         "stevearc/overseer.nvim",
+        enabled = false,
         event = "VeryLazy",
         keys = {
             { "<leader>R", "<cmd>OverseerRun<cr>", desc = "Toggle Overseer Run" },
             { "<leader>O", "<cmd>OverseerToggle<cr>", desc = "Toggle Overseer Task List" },
         },
+        opts = {},
+    },
+    {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        opts = {},
+    },
+    {
+        "m4xshen/hardtime.nvim",
+        enabled = false,
+        lazy = false,
+        dependencies = { "MunifTanjim/nui.nvim" },
         opts = {},
     },
 }
