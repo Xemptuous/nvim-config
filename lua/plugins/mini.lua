@@ -212,19 +212,6 @@ return {
         "echasnovski/mini.tabline",
         enabled = false,
         event = { "BufReadPre" },
-        -- opts = {},
-        config = function()
-            local bufferline = require("bufferline")
-            bufferline.setup({
-                options = {
-                    -- style_preset = bufferline.style_preset.minimal,
-                    offsets = { { separator = false } },
-                    color_icons = true,
-                    separator_style = "thin",
-                    diagnostics = "nvim_lsp",
-                    hover = { enabled = false },
-                },
-            })
-        end,
+        opts = {},
     },
 }

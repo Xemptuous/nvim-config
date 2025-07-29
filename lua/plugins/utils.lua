@@ -129,7 +129,7 @@ return {
         end,
     },
     -- { "jidn/vim-dbml", ft = { "dbml" } },
-    -- { "chrisbra/unicode.vim", event = "VeryLazy" },
+    { "chrisbra/unicode.vim", event = "VeryLazy" },
     {
         "MagicDuck/grug-far.nvim",
         cmd = "GrugFar",
@@ -137,6 +137,7 @@ return {
     },
     {
         -- should be implemented in 0.12+ according to roadmap
+        enabled = false,
         "jake-stewart/auto-cmdheight.nvim",
         lazy = false,
         opts = {
@@ -148,7 +149,7 @@ return {
     },
     {
         "folke/snacks.nvim",
-        enabled = true,
+        enabled = false,
         priority = 1000,
         lazy = false,
         opts = {

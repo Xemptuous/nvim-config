@@ -6,6 +6,8 @@ return {
         keys = "<leader>",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            -- "ghassan0/telescope-glyph.nvim",
+            "nvim-telescope/telescope-symbols.nvim",
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 -- build = "make",
@@ -15,6 +17,12 @@ return {
         },
         opts = {
             extensions = {
+                -- glyph = {
+                --     action = function(glyph)
+                --         vim.fn.setreg("*", glyph.value)
+                --         vim.api.nvim_put({ glyph.value }, "c", false, true)
+                --     end,
+                -- },
                 fzf = {
                     fuzzy = true,
                     override_generic_sorter = true,

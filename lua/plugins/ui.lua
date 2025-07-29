@@ -164,7 +164,7 @@ return {
         event = "VeryLazy",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            -- "rcarriga/nvim-notify",
+            "rcarriga/nvim-notify",
         },
         opts = {
             cmdline = {
@@ -183,7 +183,7 @@ return {
                 signature = { enabled = true },
             },
             presets = {
-                bottom_search = true, -- use a classic bottom cmdline for search
+                bottom_search = false,
                 command_palette = true, -- position the cmdline and popupmenu together
                 long_message_to_split = false,
                 inc_rename = false, -- enables an input dialog for inc-rename.nvim
@@ -292,6 +292,7 @@ return {
     },
     {
         "akinsho/bufferline.nvim",
+        enabled = true,
         event = { "BufReadPre" },
         version = "*",
         dependencies = "nvim-tree/nvim-web-devicons",
@@ -301,26 +302,28 @@ return {
             bufferline.setup({
                 options = {
                     always_show_bufferline = false,
-                    show_buffer_close_icons = false,
-                    show_close_icon = false,
-                    separator_style = "thin",
-                    -- separator_style = { "", "" },
-                    hover = { enabled = false },
                     diagnostics = "nvim_lsp",
-                    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-                        local icon = " "
+                    diagnostics_indicator = function(count, level, _, _)
+                        local icon = "󰌶 "
                         if level == "error" then
-                            icon = " "
+                            icon = "󰅚 "
                         elseif level == "warning" then
-                            icon = " "
+                            icon = "󰀪 "
                         elseif level == "info" then
                             icon = " "
                         end
                         return " " .. icon .. count
                     end,
+                    hover = { enabled = false },
                     indicator = {
                         style = "none",
                     },
+                    separator_style = "thin",
+                    separator_style = { "", "" },
+                    show_buffer_close_icons = false,
+                    show_buffer_icons = false,
+                    show_close_icon = false,
+                    tab_size = 0,
                 },
             })
         end,
