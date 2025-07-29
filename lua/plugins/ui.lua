@@ -104,11 +104,12 @@ return {
     {
         "2kabhishek/nerdy.nvim",
         cmd = "Nerdy",
-        dependencies = {
-            "stevearc/dressing.nvim",
-            "nvim-telescope/telescope.nvim",
+        dependencies = { "stevearc/dressing.nvim" },
+        opts = {
+            max_recents = 30,
+            add_default_keybinding = false,
+            use_new_command = true,
         },
-        config = function() require("telescope").load_extension("nerdy") end,
     },
     -- { "glench/vim-jinja2-syntax", ft = { "html", "sql" } },
     {
