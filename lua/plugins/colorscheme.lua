@@ -130,7 +130,40 @@ return {
         "RRethy/base16-nvim",
         lazy = false,
         priority = 1000,
-        config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
+        config = function()
+            vim.cmd.colorscheme("base16-selenized-dark")
+            local colors = require("base16-colorscheme").colors
+            vim.api.nvim_set_hl(0, "Identifier", {
+                fg = colors.base08,
+                ctermfg = colors.cterm08,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "Statement", {
+                fg = colors.base08,
+                ctermfg = colors.cterm08,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "TSInclude", {
+                fg = colors.base0D,
+                ctermfg = colors.cterm0D,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "TSNamespace", {
+                fg = colors.base08,
+                ctermfg = colors.cterm08,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "TSVariable", {
+                fg = colors.base08,
+                ctermfg = colors.cterm08,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "TSVariableBuiltin", {
+                fg = colors.base08,
+                ctermfg = colors.cterm08,
+                force = true,
+            })
+        end,
     },
 
     -- Light Themes

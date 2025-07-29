@@ -98,7 +98,6 @@ return {
             vim.api.nvim_create_autocmd({ "BufWrite" }, {
                 pattern = { "javascriptreact", "typescriptreact" },
                 callback = function(data)
-                    print(vim.inspect(data))
                     vim.cmd(":TSToolsOrganizeImports")
                     vim.cmd(":TSToolsAddMissingImports")
                     vim.cmd(":TSToolsFixAll")

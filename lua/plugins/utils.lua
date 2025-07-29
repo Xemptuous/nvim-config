@@ -17,7 +17,14 @@ return {
         config = function(_, opts) require("better_escape").setup(opts) end,
     },
     {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = true,
+        opts = {},
+    },
+    {
         "altermo/ultimate-autopair.nvim",
+        enabled = false,
         event = { "InsertEnter", "CmdlineEnter" },
         branch = "v0.6",
         opts = {
