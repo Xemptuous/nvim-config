@@ -148,16 +148,9 @@ return {
     },
     {
         "folke/snacks.nvim",
-        enabled = false,
+        enabled = true,
         priority = 1000,
         lazy = false,
-        keys = {
-            { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-            { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse" },
-            { "\\z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-            { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
-            { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-        },
         opts = {
             bigfile = { enabled = true },
             dashboard = {
@@ -170,20 +163,40 @@ return {
                     { section = "startup" },
                 },
             },
-            dim = { enabled = true, animate = { enabled = false } },
-            gitbrowse = { enabled = true },
-            indent = { enabled = false, scope = { only_current = true, animate = { enabled = false } } },
+            dim = { enabled = false, animate = { enabled = false } },
+            gitbrowse = { enabled = false },
+            indent = {
+                enabled = false,
+                scope = {
+                    only_current = true,
+                    animate = { enabled = false },
+                },
+            },
             input = {
-                enabled = true,
+                enabled = false,
                 backdrop = false,
                 relative = "cursor",
                 row = -3,
                 col = 0,
             },
+            picker = { enabled = false },
             quickfile = { enabled = false },
-            scroll = { enabled = false, animate = { duration = { step = 15, total = 250 }, easing = "linear" } },
-            statuscolumn = { enabled = false },
+            scroll = {
+                enabled = false,
+                animate = {
+                    duration = { step = 15, total = 250 },
+                    easing = "linear",
+                },
+            },
+            statuscolumn = { enabled = true },
+            terminal = {
+                enabled = false,
+                win = { style = "terminal" },
+            },
             words = { enabled = false },
+        },
+        keys = {
+            { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
         },
         init = function()
             vim.api.nvim_create_autocmd("User", {

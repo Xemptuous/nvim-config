@@ -168,7 +168,7 @@ return {
     { "echasnovski/mini.splitjoin", keys = "gS", opts = {} },
     {
         "echasnovski/mini.statusline",
-        -- event = "VeryLazy",
+        enabled = true,
         event = { "VeryLazy" },
         version = false,
         config = function()
@@ -208,5 +208,23 @@ return {
         event = "VeryLazy",
         opts = {},
     },
-    { "echasnovski/mini.tabline", event = { "BufReadPre" }, opts = {} },
+    {
+        "echasnovski/mini.tabline",
+        enabled = false,
+        event = { "BufReadPre" },
+        -- opts = {},
+        config = function()
+            local bufferline = require("bufferline")
+            bufferline.setup({
+                options = {
+                    -- style_preset = bufferline.style_preset.minimal,
+                    offsets = { { separator = false } },
+                    color_icons = true,
+                    separator_style = "thin",
+                    diagnostics = "nvim_lsp",
+                    hover = { enabled = false },
+                },
+            })
+        end,
+    },
 }
