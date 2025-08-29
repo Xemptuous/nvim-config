@@ -114,7 +114,7 @@ return {
     },
     {
         "echasnovski/mini.notify",
-        enabled = true,
+        enabled = false,
         event = "VeryLazy",
         opts = {
             lsp_progress = {

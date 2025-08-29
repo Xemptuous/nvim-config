@@ -83,3 +83,6 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 require("options")
+
+-- experimental ui for errors
+require("vim._extui").enable({})

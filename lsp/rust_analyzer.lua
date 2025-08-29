@@ -13,5 +13,5 @@ return {
             },
         },
     },
-    -- root_markers = { "Cargo.toml" },
+    root_markers = { "Cargo.toml" },
 }
