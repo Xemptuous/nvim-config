@@ -1,10 +1,10 @@
 local o = vim.opt
 local g = vim.g
 
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-vim.g.db_ui_use_nerd_fonts = 1
-vim.g.omni_sql_default_compl_type = "syntax"
+-- g.loaded_netrw = 1
+-- g.loaded_netrwPlugin = 1
+g.db_ui_use_nerd_fonts = 1
+g.omni_sql_default_compl_type = "syntax"
 
 o.autoindent = true -- autoindent new lines
 o.autoread = true
