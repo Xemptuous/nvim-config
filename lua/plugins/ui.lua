@@ -378,4 +378,10 @@ return {
             -- require("incline").setup()
         end,
     },
+    {
+        "norcalli/nvim-colorizer.lua",
+        event = "VeryLazy",
+        opts = {},
+        config = function() require("colorizer").setup() end,
+    },
 }

@@ -54,7 +54,7 @@ o.virtualedit = "block"
 o.winblend = 0
 o.wrap = true
 o.writebackup = false
-o.cmdheight = 1
+o.cmdheight = 0
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {

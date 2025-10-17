@@ -163,6 +163,16 @@ return {
                 ctermfg = colors.cterm08,
                 force = true,
             })
+            vim.api.nvim_set_hl(0, "TSCharacter", {
+                fg = colors.base0B,
+                ctermfg = colors.cterm0B,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.public.rust", {
+                fg = colors.base0C,
+                ctermfg = colors.cterm0C,
+                force = true,
+            })
         end,
     },
 
