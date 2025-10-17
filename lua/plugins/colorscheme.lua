@@ -1,7 +1,7 @@
 return {
     {
         "catppuccin/nvim",
-        enabled = false,
+        enabled = true,
         lazy = false,
         priority = 1000,
         opts = {
@@ -128,6 +128,7 @@ return {
     -- }, -- lots of base16 and base24 themes
     {
         "RRethy/base16-nvim",
+        enabled = false,
         lazy = false,
         priority = 1000,
         config = function()

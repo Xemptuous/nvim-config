@@ -43,10 +43,10 @@ require("lazy").setup("plugins", {
                 "logipat",
                 "man",
                 "matchit",
-                "netrw",
-                "netrwFileHandlers",
-                "netrwPlugin",
-                "netrwSettings",
+                -- "netrw",
+                -- "netrwFileHandlers",
+                -- "netrwPlugin",
+                -- "netrwSettings",
                 "nvim-treesitter-textobjects",
                 "node",
                 "optwin",
@@ -83,3 +83,12 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 require("options")
+
+-- experimental ui for errors
+require("vim._extui").enable({})
+
+-- vim.api.nvim_create_user_command("Explore", "Oil <args>", { nargs = "?", complete = "dir" })
+-- vim.api.nvim_create_user_command("E", "Explore <args>", { nargs = "?", complete = "dir" })
+-- vim.api.nvim_create_user_command("Sexplore", "belowright split | Oil <args>", { nargs = "?", complete = "dir" })
+-- vim.api.nvim_create_user_command("Vexplore", "rightbelow vsplit | Oil <args>", { nargs = "?", complete = "dir" })
+-- vim.api.nvim_create_user_command("Texplore", "tabedit % | Oil <args>", { nargs = "?", complete = "dir" })

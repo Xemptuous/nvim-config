@@ -203,18 +203,19 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        init = function(_, opts)
-            vim.api.nvim_create_autocmd({ "VimEnter" }, {
-                callback = function(data)
-                    if vim.fn.isdirectory(data.file) ~= 1 then return end
-                    require("oil").setup({
-                        keymaps = { ["<C-t>"] = {} },
-                        win_options = { signcolumn = "yes:2" },
-                        view_options = { show_hidden = true },
-                    })
-                end,
-            })
-        end,
+        -- init = function(_, _)
+        --     vim.api.nvim_create_autocmd({ "VimEnter" }, {
+        --         callback = function(data)
+        --             local isDir = vim.fn.isdirectory(data.file) == 1
+        --             if not isDir then return end
+        --             require("oil").setup({
+        --                 keymaps = { ["<C-t>"] = {} },
+        --                 win_options = { signcolumn = "yes:2" },
+        --                 view_options = { show_hidden = true },
+        --             })
+        --         end,
+        --     })
+        -- end,
         opts = {
             win_options = { signcolumn = "yes:2" },
             view_options = {
@@ -248,6 +249,7 @@ return {
     },
     {
         "refractalize/oil-git-status.nvim",
+        enabled = false,
         event = "VeryLazy",
         dependencies = { "stevearc/oil.nvim" },
         config = true,
