@@ -58,7 +58,7 @@ return {
         enabled = false,
         event = "VeryLazy",
         keys = "<C-t>",
-        dependencies = "echasnovski/mini.icons",
+        dependencies = "nvim-mini/mini.icons",
         init = function()
             vim.api.nvim_create_autocmd({ "VimEnter" }, {
                 callback = function(data)
@@ -99,7 +99,7 @@ return {
         event = "CmdlineEnter",
         config = function() require("mini.git").setup() end,
     },
-    { "echasnovski/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
+    -- { "nvim-mini/mini.icons", enabled = false, event = "VeryLazy", opts = {} },
     {
         "echasnovski/mini.indentscope",
         enabled = false,

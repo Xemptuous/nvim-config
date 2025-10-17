@@ -59,6 +59,7 @@ return {
                 lisp = { "cljfmt" },
                 lua = { "stylua" },
                 mjs = { "prettier" },
+                ocaml = { "ocamlformat" },
                 php = { "pretty-php" },
                 python = { "isort", "black" },
                 rust = { "rustfmt", lsp_format = "fallback" },

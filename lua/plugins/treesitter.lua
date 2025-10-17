@@ -3,6 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         enabled = true,
         build = ":TSUpdate",
+        branch = "master",
         -- lazy = false,
         event = "VeryLazy",
         dependencies = {
@@ -32,43 +33,43 @@ return {
             },
         },
         opts = {
-            ensure_installed = {
-                "bash",
-                "c",
-                "c_sharp",
-                "cpp",
-                "csv",
-                "d",
-                "dart",
-                "elixir",
-                "erlang",
-                "fish",
-                "gitignore",
-                "go",
-                "haskell",
-                "html",
-                "htmldjango",
-                "java",
-                "javascript",
-                "json",
-                "json5",
-                "lua",
-                "luadoc",
-                "markdown",
-                "markdown_inline",
-                "nim",
-                "odin",
-                "python",
-                "query",
-                "rust",
-                "sql",
-                "tsx",
-                "typescript",
-                "vim",
-                "vimdoc",
-                "zig",
-            },
-            auto_install = true,
+            -- ensure_installed = {
+            --     "bash",
+            --     "c",
+            --     "c_sharp",
+            --     "cpp",
+            --     "csv",
+            --     "d",
+            --     "dart",
+            --     "elixir",
+            --     "erlang",
+            --     "fish",
+            --     "gitignore",
+            --     "go",
+            --     "haskell",
+            --     "html",
+            --     "htmldjango",
+            --     "java",
+            --     "javascript",
+            --     "json",
+            --     "json5",
+            --     "lua",
+            --     "luadoc",
+            --     "markdown",
+            --     "markdown_inline",
+            --     "nim",
+            --     "odin",
+            --     "python",
+            --     "query",
+            --     "rust",
+            --     "sql",
+            --     "tsx",
+            --     "typescript",
+            --     "vim",
+            --     "vimdoc",
+            --     "zig",
+            -- },
+            auto_install = false,
 
             highlight = {
                 enable = true,
@@ -85,21 +86,20 @@ return {
             },
         },
         config = function(_, opts)
-            -- require("nvim-treesitter.configs").setup(opts)
-            if load_textobjects then
-                -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-                if opts.textobjects then
-                    for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-                        if opts.textobjects[mod] and opts.textobjects[mod].enable then
-                            local Loader = require("lazy.core.loader")
-                            Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-                            local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-                            require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-                            break
-                        end
-                    end
-                end
-            end
+            -- if load_textobjects then
+            --     -- PERF: no need to load the plugin, if we only need its queries for mini.ai
+            --     if opts.textobjects then
+            --         for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+            --             if opts.textobjects[mod] and opts.textobjects[mod].enable then
+            --                 local Loader = require("lazy.core.loader")
+            --                 Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+            --                 local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+            --                 require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+            --                 break
+            --             end
+            --         end
+            --     end
+            -- end
             require("nvim-treesitter.configs").setup(opts)
         end,
     },

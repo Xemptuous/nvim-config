@@ -6,12 +6,6 @@ return {
             "rafamadriz/friendly-snippets",
             "MeanderingProgrammer/render-markdown.nvim",
             "saghen/blink.cmp",
-            {
-                "mason-org/mason.nvim",
-                event = "VeryLazy",
-                opts = {},
-                main = "mason",
-            },
         },
         init = function()
             -- use nvim-lspconfig configs for native lsp
@@ -50,6 +44,12 @@ return {
                 end
             end
         end,
+    },
+    {
+        "mason-org/mason.nvim",
+        cmd = "Mason",
+        opts = {},
+        main = "mason",
     },
     {
         "pmizio/typescript-tools.nvim",

@@ -149,6 +149,11 @@ return {
                 ctermfg = colors.cterm0D,
                 force = true,
             })
+            vim.api.nvim_set_hl(0, "TSCharacter", {
+                fg = colors.base0C,
+                ctermfg = colors.cterm0C,
+                force = true,
+            })
             vim.api.nvim_set_hl(0, "TSNamespace", {
                 fg = colors.base08,
                 ctermfg = colors.cterm08,
@@ -162,6 +167,16 @@ return {
             vim.api.nvim_set_hl(0, "TSVariableBuiltin", {
                 fg = colors.base08,
                 ctermfg = colors.cterm08,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "@lsp.type.enumMember.rust", {
+                fg = colors.base0C,
+                ctermfg = colors.cterm0C,
+                force = true,
+            })
+            vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.library.rust", {
+                fg = colors.base09,
+                ctermfg = colors.cterm09,
                 force = true,
             })
         end,
