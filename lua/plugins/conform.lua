@@ -49,6 +49,7 @@ return {
                 cpp = { "clang_format" },
                 cs = { "clang_format" },
                 fish = { "fish_indent" },
+                fsharp = { "fantomas " },
                 go = { "gofmt" },
                 java = { "google-java-format" },
                 -- java = { "clang_format" },

@@ -20,7 +20,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+-- require("lazy").setup("plugins", {
+require("lazy").setup({
+    spec = {
+        { import = "plugins" },
+        { import = "plugins.lsp" },
+        { import = "plugins.mini" },
+        { import = "plugins.ui" },
+        { import = "plugins.utils" },
+    },
     install = { colorscheme = { "catppuccin" } },
     defaults = { lazy = true },
     ui = { border = "single" },
@@ -43,10 +51,10 @@ require("lazy").setup("plugins", {
                 "logipat",
                 "man",
                 "matchit",
-                -- "netrw",
-                -- "netrwFileHandlers",
-                -- "netrwPlugin",
-                -- "netrwSettings",
+                "netrw",
+                "netrwFileHandlers",
+                "netrwPlugin",
+                "netrwSettings",
                 "nvim-treesitter-textobjects",
                 "node",
                 "optwin",

@@ -77,7 +77,7 @@ return {
             },
             indent = {
                 enable = true,
-                disable = { "python" },
+                -- disable = { "python" },
             },
             context_commentstring = {
                 enable = true,
