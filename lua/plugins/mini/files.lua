@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.files",
-    enabled = true,
+    enabled = false,
     event = "VeryLazy",
     keys = "<C-t>",
     dependencies = "echasnovski/mini.icons",

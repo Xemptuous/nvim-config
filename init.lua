@@ -64,8 +64,8 @@ require("lazy").setup({
                 "rplugin",
                 "rrhelper",
                 "ruby",
-                "spellfile",
-                "spellfile_plugin",
+                -- "spellfile",
+                -- "spellfile_plugin",
                 "synmenu",
                 "syntax",
                 "tar",
@@ -86,6 +86,12 @@ require("lazy").setup({
 vim.api.nvim_create_autocmd({ "VimResized" }, {
     pattern = { "*" },
     command = "wincmd =",
+})
+
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = "*",
 })
 
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path

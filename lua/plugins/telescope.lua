@@ -16,6 +16,11 @@ return {
             },
         },
         opts = {
+            defaults = {
+                file_ignore_patterns = {
+                    "^v1/",
+                },
+            },
             extensions = {
                 -- glyph = {
                 --     action = function(glyph)

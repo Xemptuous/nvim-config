@@ -2,6 +2,14 @@ return {
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
+        {
+            "L3MON4D3/LuaSnip",
+            dependencies = "rafamadriz/friendly-snippets",
+            opts = {
+                history = true,
+                delete_check_events = "TextChanged",
+            },
+        },
         "rafamadriz/friendly-snippets",
         -- "milanglacier/minuet-ai.nvim",
         "MeanderingProgrammer/render-markdown.nvim",
@@ -16,6 +24,9 @@ return {
     opts = function()
         -- local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
         return {
+            snippets = {
+                present = "luasnip",
+            },
             keymap = {
                 preset = "super-tab",
                 ["<Tab>"] = {
@@ -92,8 +103,10 @@ return {
                 },
                 keyword = { range = "full" },
                 trigger = {
-                    show_in_snippet = false,
-                    prefetch_on_insert = false,
+                    show_in_snippet = true,
+                    prefetch_on_insert = true,
+                    -- show_on_backspace = true,
+                    -- show_on_backspace_in_keyword = true,
                 },
                 accept = { auto_brackets = { enabled = false } },
                 menu = {

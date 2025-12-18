@@ -5,7 +5,7 @@ return {
         lazy = false,
         priority = 1000,
         opts = {
-            flavour = "frappe",
+            flavour = "mocha",
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
@@ -61,18 +61,26 @@ return {
             vim.cmd.colorscheme("catppuccin")
         end,
     },
-    {
-        "zenbones-theme/zenbones.nvim",
-        dependencies = { "rktjmp/lush.nvim" },
-        event = "VeryLazy",
-    },
-    {
-        "loganswartz/selenized.nvim",
-        dependencies = { "rktjmp/lush.nvim" },
-        event = "VeryLazy",
-    },
-    -- { "calind/selenized.nvim", event = "VeryLazy" },
-    -- { "jan-warchol/selenized", event = "VeryLazy" },
+    -- {
+    --     "zenbones-theme/zenbones.nvim",
+    --     dependencies = { "rktjmp/lush.nvim" },
+    --     event = "VeryLazy",
+    -- },
+    -- {
+    --     "loganswartz/selenized.nvim",
+    --     dependencies = { "rktjmp/lush.nvim" },
+    --     event = "VeryLazy",
+    -- },
+    -- {
+    --     "bluz71/vim-moonfly-colors",
+    --     lazy = false,
+    --     priority = 100,
+    --     config = function() vim.cmd.colorscheme("moonfly") end,
+    -- },
+    -- {
+    --     "miikanissi/modus-themes.nvim",
+    --     priority = 1000,
+    -- },
     -- { "sainnhe/everforest", event = "VeryLazy" },
     -- { "ellisonleao/gruvbox.nvim", event = "VeryLazy" },
     -- { "sainnhe/gruvbox-material", event = "VeryLazy" },
@@ -86,22 +94,34 @@ return {
     --     },
     -- },
     -- { "calind/selenized.nvim", event = "VeryLazy" },
-    -- { "loganswartz/selenized.nvim", event = "VeryLazy" },
     -- { "sho-87/kanagawa-paper.nvim", event = "VeryLazy" }, -- slightly more color than kanagawabones
     -- { "rose-pine/neovim", event = "VeryLazy" },
     -- { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },
-    -- { "maxmx03/solarized.nvim", event = "VeryLazy" },
-    -- { "edeneast/nightfox.nvim", event = "VeryLazy" },
     -- { "sainnhe/edge", event = "VeryLazy" },
-    -- { "alexvZyl/nordic.nvim", event = "VeryLazy" },
-    -- { "shaunsingh/nord.nvim", event = "VeryLazy" },
-    -- { "folke/tokyonight.nvim", enabled = true, lazy = false, priority = 1000, opts = {} },
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     enabled = true,
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    --     config = function() vim.cmd.colorscheme("tokyonight-night") end,
+    -- },
     -- {
     --     "EdenEast/nightfox.nvim",
     --     enabled = true,
     --     event = "VeryLazy",
     --     opts = { options = { dim_inactive = true } },
     --     config = function(_, opts) require("nightfox").setup(opts) end,
+    -- },
+    -- {
+    --     "oxfist/night-owl.nvim",
+    --     lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    --     priority = 1000, -- make sure to load this before all the other start plugins
+    --     config = function()
+    --         -- load the colorscheme here
+    --         require("night-owl").setup()
+    --         vim.cmd.colorscheme("night-owl")
+    --     end,
     -- },
     -- {
     --     "olivercederborg/poimandres.nvim",
@@ -119,6 +139,7 @@ return {
     -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
     -- { "NTBBloodbath/doom-one.nvim", event = "VeryLazy" },
+    -- { "ramojus/mellifluous.nvim", event = "VeryLazy" },
 
     -- {
     --     "tinted-theming/tinted-vim",
@@ -126,6 +147,7 @@ return {
     --     priority = 1000,
     --     config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
     -- }, -- lots of base16 and base24 themes
+
     {
         "RRethy/base16-nvim",
         enabled = true,
@@ -155,7 +177,7 @@ return {
                 force = true,
             })
             vim.api.nvim_set_hl(0, "TSVariable", {
-                fg = colors.base08,
+                fg = colors.base05,
                 ctermfg = colors.cterm08,
                 force = true,
             })
@@ -186,7 +208,7 @@ return {
     -- Muted Light && Dark
     -- { "alexxGmZ/e-ink.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
     -- { "ronisbr/nano-theme.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
-    -- { "eihigh/vim-aomi-grayscale", event = "VeryLazy" }, -- mostly monochrome with colored functions
+    -- { "eihigh/vim-aomi-grayscale", jlkkkkkkkkkkkevent = "VeryLazy" }, -- mostly monochrome with colored functions
     -- { "jaredgorski/Mies.vim", event = "VeryLazy" }, -- grayscale font
     -- { "ntk148v/komau.vim", event = "VeryLazy" }, -- muted monochrome
     -- { "jackplus-xyz/binary.nvim", event = "VeryLazy", opts = {} }, -- pure white or black with no formats (bold, italic, etc.)
@@ -202,7 +224,7 @@ return {
     -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
     -- { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
     -- { "rjshkhr/shadow.nvim", event = "VeryLazy" },
-    -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
+    -- -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
     -- { "dzfrias/noir.nvim", event = "VeryLazy" }, -- extremely dark muted colors
     -- { "igemnace/highlight.vim", event = "VeryLazy" }, -- monochrome with some colors only where "important"
     -- { "kar9222/minimalist.nvim", event = "VeryLazy" }, -- mostly desaturated, some colors on significant keywords

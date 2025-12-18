@@ -6,7 +6,9 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- or if using mini.icons/mini.nvim
     -- dependencies = { "nvim-mini/mini.icons" },
-    opts = {},
+    opts = {
+        cmd = { "skim" },
+    },
     config = function()
         local f = require("fzf-lua")
         local k = vim.keymap.set

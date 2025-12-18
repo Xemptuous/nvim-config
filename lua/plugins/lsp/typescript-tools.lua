@@ -1,6 +1,6 @@
 return {
     "pmizio/typescript-tools.nvim",
-    ft = { "javascriptreact", "typescriptreact" },
+    ft = { "javascriptreact", "typescriptreact", "typescript" },
     dependencies = {
         "neovim/nvim-lspconfig",
         "nvim-lua/plenary.nvim",

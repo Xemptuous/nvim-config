@@ -1,6 +1,6 @@
 return {
     "stevearc/oil.nvim",
-    enabled = false,
+    enabled = true,
     keys = { "<C-t>", "<leader>o" },
     cmd = "Oil",
     dependencies = {
@@ -13,6 +13,7 @@ return {
                 if not isDir then return end
                 require("oil").setup({
                     keymaps = { ["<C-t>"] = {} },
+                    float = { border = "single" },
                     win_options = { signcolumn = "yes:2" },
                     view_options = { show_hidden = true },
                 })
@@ -22,12 +23,17 @@ return {
     opts = {
         win_options = { signcolumn = "yes:2" },
         float = {
-            max_width = 150,
-            max_height = 40,
+            -- max_width = 150,
+            -- max_height = 40,
             border = "single",
         },
         view_options = {
-            show_hidden = true,
+            show_hidden = false,
+            is_hidden_file = function(name, bufnr)
+                if name == "__pycache__" then return true end
+                local m = name:match("^%.")
+                return m ~= nil
+            end,
         },
         keymaps = {
             ["<C-t>"] = {},
@@ -52,6 +58,6 @@ return {
     config = function(_, opts)
         require("oil").setup(opts)
         vim.keymap.set("n", "<leader>o", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil") end)
-        vim.keymap.set("n", "<C-t>", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil --float") end)
+        vim.keymap.set("n", "<C-t>", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil --float --preview") end)
     end,
 }
