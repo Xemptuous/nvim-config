@@ -16,6 +16,11 @@ return {
             },
         },
         opts = {
+            defaults = {
+                file_ignore_patterns = {
+                    "^v1/",
+                },
+            },
             extensions = {
                 -- glyph = {
                 --     action = function(glyph)
@@ -80,6 +85,7 @@ return {
             k("n", "<leader>tf", builtin.find_files, { desc = "Find File" })
             k("n", "<leader>f", builtin.find_files, { desc = "Find File" })
             k("n", "<leader>tg", builtin.live_grep, { desc = "Grep" })
+            k("n", "<leader>s", builtin.live_grep, { desc = "Grep" })
             k("n", "<leader>G", builtin.live_grep, { desc = "Grep" })
             k("n", "<leader>tb", builtin.buffers, { desc = "Buffers" })
             k("n", "<leader>b", builtin.buffers, { desc = "Buffers" })

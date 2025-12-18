@@ -20,7 +20,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
+-- require("lazy").setup("plugins", {
+require("lazy").setup({
+    spec = {
+        { import = "plugins" },
+        { import = "plugins.lsp" },
+        { import = "plugins.mini" },
+        { import = "plugins.ui" },
+        { import = "plugins.utils" },
+    },
     install = { colorscheme = { "catppuccin" } },
     defaults = { lazy = true },
     ui = { border = "single" },
@@ -43,10 +51,10 @@ require("lazy").setup("plugins", {
                 "logipat",
                 "man",
                 "matchit",
-                -- "netrw",
-                -- "netrwFileHandlers",
-                -- "netrwPlugin",
-                -- "netrwSettings",
+                "netrw",
+                "netrwFileHandlers",
+                "netrwPlugin",
+                "netrwSettings",
                 "nvim-treesitter-textobjects",
                 "node",
                 "optwin",
@@ -56,8 +64,8 @@ require("lazy").setup("plugins", {
                 "rplugin",
                 "rrhelper",
                 "ruby",
-                "spellfile",
-                "spellfile_plugin",
+                -- "spellfile",
+                -- "spellfile_plugin",
                 "synmenu",
                 "syntax",
                 "tar",
@@ -78,6 +86,12 @@ require("lazy").setup("plugins", {
 vim.api.nvim_create_autocmd({ "VimResized" }, {
     pattern = { "*" },
     command = "wincmd =",
+})
+
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    command = "if mode() != 'c' | checktime | endif",
+    pattern = "*",
 })
 
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path

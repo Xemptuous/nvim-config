@@ -55,6 +55,7 @@ o.winblend = 0
 o.wrap = true
 o.writebackup = false
 o.cmdheight = 0
+g.pyindent_open_paren = vim.opt.shiftwidth
 
 -- Disable Newline Comment Continuation
 vim.api.nvim_create_autocmd("FileType", {
