@@ -71,6 +71,7 @@ return {
                 ts = { "prettier" },
                 tsr = { "prettier" },
                 tsx = { "prettier" },
+                xml = { "xmlformatter" },
                 zsh = { "beautysh" },
             },
             formatters = {

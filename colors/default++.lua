@@ -19,3 +19,4 @@ vim.api.nvim_set_hl(0, "Function", { fg = "NvimLightBlue" })
 vim.api.nvim_set_hl(0, "Special", { fg = "NvimLightRed" })
 
 vim.api.nvim_set_hl(0, "@module.rust", { fg = "NvimLightRed" })
+vim.api.nvim_set_hl(0, "@attribute.python", { fg = "NvimLightMagenta" })

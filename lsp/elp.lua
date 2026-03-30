@@ -1,4 +1,0 @@
--- return {
---     cmd = { "elp" },
---     single_file_support = true
--- }

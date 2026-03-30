@@ -88,21 +88,22 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     command = "wincmd =",
 })
 
+-- Reload buffers when external file changes occur
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
     command = "if mode() != 'c' | checktime | endif",
     pattern = "*",
 })
 
+-- disable semantic highlighting (fallback to theme)
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--     callback = function(args) vim.lsp.buf_get_clients(args.buf)[1].server_capabilities.semanticTokensProvider = nil end,
+-- })
+
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 require("options")
 
 -- experimental ui for errors
-require("vim._extui").enable({})
-
--- vim.api.nvim_create_user_command("Explore", "Oil <args>", { nargs = "?", complete = "dir" })
--- vim.api.nvim_create_user_command("E", "Explore <args>", { nargs = "?", complete = "dir" })
--- vim.api.nvim_create_user_command("Sexplore", "belowright split | Oil <args>", { nargs = "?", complete = "dir" })
--- vim.api.nvim_create_user_command("Vexplore", "rightbelow vsplit | Oil <args>", { nargs = "?", complete = "dir" })
--- vim.api.nvim_create_user_command("Texplore", "tabedit % | Oil <args>", { nargs = "?", complete = "dir" })
+-- require("vim._extui").enable({})
+-- vim.cmd.colorscheme("default++")

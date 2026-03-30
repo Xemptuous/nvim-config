@@ -4,13 +4,16 @@ return {
     dependencies = {
         {
             "L3MON4D3/LuaSnip",
-            dependencies = "rafamadriz/friendly-snippets",
+            lazy = true,
+            dependencies = {
+                "rafamadriz/friendly-snippets",
+            },
             opts = {
                 history = true,
                 delete_check_events = "TextChanged",
             },
+            config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
         },
-        "rafamadriz/friendly-snippets",
         -- "milanglacier/minuet-ai.nvim",
         "MeanderingProgrammer/render-markdown.nvim",
         "onsails/lspkind.nvim",
@@ -24,9 +27,6 @@ return {
     opts = function()
         -- local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
         return {
-            snippets = {
-                present = "luasnip",
-            },
             keymap = {
                 preset = "super-tab",
                 ["<Tab>"] = {
@@ -45,27 +45,26 @@ return {
                 -- },
                 -- ["<CR>"] = { "accept", "fallback" },
             },
+            snippets = { preset = "luasnip" },
             sources = {
-                providers = {
-                    -- avante = {
-                    --     module = "blink-cmp-avante",
-                    --     name = "Avante",
-                    --     opts = {},
-                    -- },
-                    -- minuet = {
-                    --     name = "minuet",
-                    --     module = "minuet.blink",
-                    --     async = true,
-                    --     -- Should match minuet.config.request_timeout * 1000,
-                    --     -- since minuet.config.request_timeout is in seconds
-                    --     timeout_ms = 3000,
-                    --     score_offset = 50, -- Gives minuet higher priority among suggestions
-                    -- },
-                },
+                default = { "lsp", "path", "snippets", "buffer", "cmdline" },
+                -- avante = {
+                --     module = "blink-cmp-avante",
+                --     name = "Avante",
+                --     opts = {},
+                -- },
+                -- minuet = {
+                --     name = "minuet",
+                --     module = "minuet.blink",
+                --     async = true,
+                --     -- Should match minuet.config.request_timeout * 1000,
+                --     -- since minuet.config.request_timeout is in seconds
+                --     timeout_ms = 3000,
+                --     score_offset = 50, -- Gives minuet higher priority among suggestions
+                -- },
                 -- default = { "avante", "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
                 -- default = { "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
             },
-            sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline" } },
             signature = {
                 enabled = true,
                 trigger = {

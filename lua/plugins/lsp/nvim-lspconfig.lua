@@ -1,6 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
     lazy = true,
+    event = "VeryLazy",
     dependencies = {
         "rafamadriz/friendly-snippets",
         "MeanderingProgrammer/render-markdown.nvim",
@@ -39,7 +40,6 @@ return {
             },
         })
 
-        vim.lsp.set_log_level("error")
         local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
         local fs_dir = vim.uv.fs_opendir(lsp_dir, nil, 100)
         if fs_dir then

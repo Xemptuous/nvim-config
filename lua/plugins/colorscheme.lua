@@ -1,54 +1,57 @@
 return {
     {
         "catppuccin/nvim",
-        enabled = false,
+        enabled = true,
         lazy = false,
         priority = 1000,
         opts = {
-            flavour = "mocha",
+            flavour = "latte",
+            auto_integrations = true,
             dim_inactive = {
                 enabled = true,
                 shade = "dark",
                 percentage = 0.01,
             },
-            integrations = {
-                aerial = true,
-                cmp = true,
-                blink_cmp = true,
-                dadbod_ui = true,
-                flash = true,
-                gitsigns = true,
-                indent_blankline = { enabled = true },
-                lsp_saga = true,
-                mason = true,
-                mini = { enabled = true, indentscope_color = "blue" },
-                notify = true,
-                nvim_surround = true,
-                nvimtree = true,
-                render_markdown = true,
-                markdown = true,
-                native_lsp = {
-                    enabled = true,
-                    virtual_text = {
-                        errors = { "italic" },
-                        hints = { "italic" },
-                        warnings = { "italic" },
-                        information = { "italic" },
-                    },
-                    underlines = {
-                        errors = { "undercurl" },
-                        hints = { "undercurl" },
-                        warnings = { "undercurl" },
-                        information = { "undercurl" },
-                    },
-                    inlay_hints = { background = true },
-                },
-                rainbow_delimiters = true,
-                semantic_tokens = true,
-                telescope = { enabled = true },
-                treesitter = true,
-            },
-            color_overrides = {},
+            -- integrations = {
+            --     aerial = true,
+            --     blink_cmp = true,
+            --     cmp = true,
+            --     dadbod_ui = true,
+            --     flash = true,
+            --     gitsigns = true,
+            --     indent_blankline = { enabled = true },
+            --     lsp_saga = true,
+            --     markdown = true,
+            --     mason = true,
+            --     mini = { enabled = true, indentscope_color = "blue" },
+            --     native_lsp = {
+            --         enabled = true,
+            --         virtual_text = {
+            --             errors = { "italic" },
+            --             hints = { "italic" },
+            --             warnings = { "italic" },
+            --             information = { "italic" },
+            --         },
+            --         underlines = {
+            --             errors = { "undercurl" },
+            --             hints = { "undercurl" },
+            --             warnings = { "undercurl" },
+            --             information = { "undercurl" },
+            --         },
+            --         inlay_hints = { background = true },
+            --     },
+            --     neogit = true,
+            --     notify = true,
+            --     nvim_surround = true,
+            --     nvimtree = true,
+            --     rainbow_delimiters = true,
+            --     render_markdown = true,
+            --     semantic_tokens = true,
+            --     telescope = { enabled = true },
+            --     treesitter = true,
+            --     treesitter_context = true,
+            --     which_key = true,
+            -- },
             custom_highlights = function(C)
                 return {
                     NormalFloat = { fg = C.text, bg = C.base },
@@ -63,6 +66,7 @@ return {
     },
     -- {
     --     "zenbones-theme/zenbones.nvim",
+    --     enabled = true,
     --     dependencies = { "rktjmp/lush.nvim" },
     --     event = "VeryLazy",
     -- },
@@ -73,9 +77,20 @@ return {
     -- },
     -- {
     --     "bluz71/vim-moonfly-colors",
+    --     lazy = true,
+    --     priority = 1000,
+    --     config = function()
+    --         vim.g.moonflyNormalFloat = true
+    --         -- vim.cmd.colorscheme("moonfly")
+    --     end,
+    -- },
+    -- {
+    --     "bluz71/vim-nightfly-colors",
+    --     enabled = false,
+    --     event = "VeryLazy",
     --     lazy = false,
-    --     priority = 100,
-    --     config = function() vim.cmd.colorscheme("moonfly") end,
+    --     -- priority = 1000,
+    --     -- config = function() vim.cmd.colorscheme("moonfly") end,
     -- },
     -- {
     --     "miikanissi/modus-themes.nvim",
@@ -98,6 +113,7 @@ return {
     -- { "rose-pine/neovim", event = "VeryLazy" },
     -- { "loctvl842/monokai-pro.nvim", event = "VeryLazy" },
     -- { "sainnhe/edge", event = "VeryLazy" },
+    -- { "yorik1984/newpaper.nvim", event = "VeryLazy" },
     -- {
     --     "folke/tokyonight.nvim",
     --     enabled = true,
@@ -108,10 +124,19 @@ return {
     -- },
     -- {
     --     "EdenEast/nightfox.nvim",
-    --     enabled = true,
     --     event = "VeryLazy",
     --     opts = { options = { dim_inactive = true } },
     --     config = function(_, opts) require("nightfox").setup(opts) end,
+    -- },
+    -- {
+    --     "ramojus/mellifluous.nvim",
+    --     opts = {},
+    --     event = "VeryLazy",
+    -- },
+    -- {
+    --     "marko-cerovac/material.nvim",
+    --     opts = {},
+    --     event = "VeryLazy",
     -- },
     -- {
     --     "oxfist/night-owl.nvim",
@@ -129,7 +154,20 @@ return {
     --     event = "VeryLazy",
     --     config = function() require("poimandres").setup({}) end,
     -- },
-    -- { "Shatur/neovim-ayu", event = "VeryLazy" },
+    -- { "datsfilipe/vesper.nvim", event = "VeryLazy" },
+    -- { "mellow-theme/mellow.nvim", event = "VeryLazy" },
+    -- { "dgox16/oldworld.nvim", event = "VeryLazy" },
+    -- {
+    --     "craftzdog/solarized-osaka.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     opts = {},
+    -- },
+    -- {
+    --     "Shatur/neovim-ayu",
+    --     event = "VeryLazy",
+    --     -- config = function() vim.cmd.colorscheme("ayu-mirage") end,
+    -- },
     -- { "alexvzyl/nordic.nvim", event = "VeryLazy" }, -- nord but different
     -- { "marko-cerovac/material.nvim", event = "VeryLazy" },
     -- { "maxmx03/solarized.nvim", event = "VeryLazy" },
@@ -137,6 +175,14 @@ return {
     -- { "shaunsingh/nord.nvim", event = "VeryLazy" },
     -- { "navarasu/onedark.nvim", event = "VeryLazy" },
     -- { "projekt0n/github-nvim-theme", event = "VeryLazy" },
+    -- { "oskarnurm/koda.nvim", event = "VeryLazy" },
+    -- { "google/vim-colorscheme-primary", event = "VeryLazy" },
+    -- { "noahfrederick/vim-hemisu", event = "VeryLazy" },
+    -- { "hzchirs/vim-material", event = "VeryLazy" },
+    -- { "rmehri01/onenord.nvim", event = "VeryLazy" },
+    -- { "craftzdog/solarized-osaka.nvim", event = "VeryLazy" },
+    -- { "rakr/vim-one", event = "VeryLazy" },
+    -- { "nyoom-engineering/oxocarbon.nvim", event = "VeryLazy" },
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
     -- { "NTBBloodbath/doom-one.nvim", event = "VeryLazy" },
     -- { "ramojus/mellifluous.nvim", event = "VeryLazy" },
@@ -148,68 +194,69 @@ return {
     --     config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
     -- }, -- lots of base16 and base24 themes
 
-    {
-        "RRethy/base16-nvim",
-        enabled = true,
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd.colorscheme("base16-selenized-dark")
-            local colors = require("base16-colorscheme").colors
-            vim.api.nvim_set_hl(0, "Identifier", {
-                fg = colors.base08,
-                ctermfg = colors.cterm08,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "Statement", {
-                fg = colors.base08,
-                ctermfg = colors.cterm08,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSInclude", {
-                fg = colors.base0D,
-                ctermfg = colors.cterm0D,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSCharacter", {
-                fg = colors.base0B,
-                ctermfg = colors.cterm0B,
-                -- fg = colors.base0C,
-                -- ctermfg = colors.cterm0C,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSNamespace", {
-                fg = colors.base08,
-                ctermfg = colors.cterm08,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSVariable", {
-                fg = colors.base05,
-                ctermfg = colors.cterm08,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSVariableBuiltin", {
-                fg = colors.base08,
-                ctermfg = colors.cterm08,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "TSCharacter", {
-                fg = colors.base0B,
-                ctermfg = colors.cterm0B,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.public.rust", {
-                fg = colors.base0C,
-                ctermfg = colors.cterm0C,
-                force = true,
-            })
-            vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.library.rust", {
-                fg = colors.base09,
-                ctermfg = colors.cterm09,
-                force = true,
-            })
-        end,
-    },
+    -- {
+    --     "RRethy/base16-nvim",
+    --     enabled = true,
+    --     event = "VeryLazy",
+    --     main = true,
+    --     opts = {},
+    --     config = function()
+    --         vim.cmd.colorscheme("base16-selenized-white")
+    --         local colors = require("base16-colorscheme").colors
+    --         vim.api.nvim_set_hl(0, "Identifier", {
+    --             fg = colors.base08,
+    --             ctermfg = colors.cterm08,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "Statement", {
+    --             fg = colors.base08,
+    --             ctermfg = colors.cterm08,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSInclude", {
+    --             fg = colors.base0D,
+    --             ctermfg = colors.cterm0D,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSCharacter", {
+    --             fg = colors.base0B,
+    --             ctermfg = colors.cterm0B,
+    --             -- fg = colors.base0C,
+    --             -- ctermfg = colors.cterm0C,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSNamespace", {
+    --             fg = colors.base08,
+    --             ctermfg = colors.cterm08,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSVariable", {
+    --             fg = colors.base05,
+    --             ctermfg = colors.cterm08,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSVariableBuiltin", {
+    --             fg = colors.base08,
+    --             ctermfg = colors.cterm08,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "TSCharacter", {
+    --             fg = colors.base0B,
+    --             ctermfg = colors.cterm0B,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.public.rust", {
+    --             fg = colors.base0C,
+    --             ctermfg = colors.cterm0C,
+    --             force = true,
+    --         })
+    --         vim.api.nvim_set_hl(0, "@lsp.typemod.enumMember.library.rust", {
+    --             fg = colors.base09,
+    --             ctermfg = colors.cterm09,
+    --             force = true,
+    --         })
+    --     end,
+    -- },
 
     -- Light Themes
     -- { "MetriC-DT/balance-theme.nvim", event = "VeryLazy" },
@@ -220,7 +267,7 @@ return {
     -- Muted Light && Dark
     -- { "alexxGmZ/e-ink.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
     -- { "ronisbr/nano-theme.nvim", event = "VeryLazy" }, -- bluish muted, similar to nord
-    -- { "eihigh/vim-aomi-grayscale", jlkkkkkkkkkkkevent = "VeryLazy" }, -- mostly monochrome with colored functions
+    -- { "eihigh/vim-aomi-grayscale", event = "VeryLazy" }, -- mostly monochrome with colored functions
     -- { "jaredgorski/Mies.vim", event = "VeryLazy" }, -- grayscale font
     -- { "ntk148v/komau.vim", event = "VeryLazy" }, -- muted monochrome
     -- { "jackplus-xyz/binary.nvim", event = "VeryLazy", opts = {} }, -- pure white or black with no formats (bold, italic, etc.)
@@ -236,18 +283,18 @@ return {
     -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
     -- { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
     -- { "rjshkhr/shadow.nvim", event = "VeryLazy" },
-    -- -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
+    -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
     -- { "dzfrias/noir.nvim", event = "VeryLazy" }, -- extremely dark muted colors
     -- { "igemnace/highlight.vim", event = "VeryLazy" }, -- monochrome with some colors only where "important"
     -- { "kar9222/minimalist.nvim", event = "VeryLazy" }, -- mostly desaturated, some colors on significant keywords
     -- { "teloe/bland.vim", event = "VeryLazy" }, -- muted with slight color
     -- { "davidosomething/vim-colors-meh", event = "VeryLazy" }, -- mostly grayscale with some important colors; reds and pale blues
+    -- { "karoliskoncevicius/distilled-vim", event = "VeryLazy" }, -- mostly grayscale with some important colors; reds and pale blues
     -- { "Lokaltog/vim-monotone", event = "VeryLazy" }, -- very grayscale/monochrome
     -- { "axvr/photon.vim", event = "VeryLazy" }, -- monochrome with purple accent
     -- { "darkvoid-theme/darkvoid.nvim", event = "VeryLazy" }, -- all monochrome with ops/signs colored bright
     -- { "killitar/obscure.nvim", event = "VeryLazy" }, -- muted with many colors
     -- { "kvrohit/rasmus.nvim", event = "VeryLazy" }, -- vscode-y muted
-    -- { "mellow-theme/mellow.nvim", event = "VeryLazy" }, -- pale colored muted with pinks and purples
     -- { "vague2k/vague.nvim", event = "VeryLazy", opts = {} }, -- muted similar to kanagawa colors
     -- { "widatama/vim-phoenix", event = "VeryLazy" }, -- mostly monochrome with lots of blues
     -- { "ficcdaf/ashen.nvim", event = "VeryLazy" }, -- red and orange, like autumn

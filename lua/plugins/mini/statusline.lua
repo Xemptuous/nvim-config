@@ -1,6 +1,6 @@
 return {
     "echasnovski/mini.statusline",
-    enabled = true,
+    enabled = false,
     event = { "VeryLazy" },
     version = false,
     config = function()

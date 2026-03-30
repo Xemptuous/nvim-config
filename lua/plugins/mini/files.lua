@@ -19,7 +19,7 @@ return {
     end,
     opts = {
         options = {
-            use_as_default_explorer = false,
+            use_as_default_explorer = true,
         },
         windows = {
             preview = true,
@@ -35,5 +35,12 @@ return {
         vim.keymap.set("n", "<C-t>", function()
             if not m.close() then m.open() end
         end)
+        vim.keymap.set("n", "-", function() MiniFiles.go_out() end)
+        -- vim.keymap.set("n", "<C-t>", function()
+        --     local buf_name = vim.api.nvim_buf_get_name(0)
+        --     local path = vim.fn.filereadable(buf_name) == 1 and buf_name or vim.fn.getcwd()
+        --     if not m.close() then m.open(path) end
+        --     MiniFiles.reveal_cwd()
+        -- end, { desc = "Open Mini Files" })
     end,
 }

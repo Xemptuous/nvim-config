@@ -3,34 +3,35 @@ return {
         "nvim-treesitter/nvim-treesitter",
         enabled = true,
         build = ":TSUpdate",
-        branch = "master",
+        branch = "main",
+        -- branch = "master",
         -- lazy = false,
         event = "VeryLazy",
         dependencies = {
-            {
-                "HiPhish/rainbow-delimiters.nvim",
-                enabled = false,
-                submodules = false,
-                event = "VeryLazy",
-                disable = { "rust" },
-                main = "rainbow-delimiters.setup",
-                opts = {
-                    query = {
-                        [""] = "rainbow-delimiters",
-                        lua = "rainbow-blocks",
-                        elixir = "rainbow-blocks",
-                    },
-                    highlight = {
-                        "RainbowDelimiterViolet",
-                        "RainbowDelimiterYellow",
-                        "RainbowDelimiterBlue",
-                        -- "RainbowDelimiterRed",
-                        "RainbowDelimiterGreen",
-                        "RainbowDelimiterOrange",
-                        "RainbowDelimiterCyan",
-                    },
-                },
-            },
+            -- {
+            --     "HiPhish/rainbow-delimiters.nvim",
+            --     enabled = false,
+            --     submodules = false,
+            --     event = "VeryLazy",
+            --     disable = { "rust" },
+            --     main = "rainbow-delimiters.setup",
+            --     opts = {
+            --         query = {
+            --             [""] = "rainbow-delimiters",
+            --             lua = "rainbow-blocks",
+            --             elixir = "rainbow-blocks",
+            --         },
+            --         highlight = {
+            --             "RainbowDelimiterViolet",
+            --             "RainbowDelimiterYellow",
+            --             "RainbowDelimiterBlue",
+            --             -- "RainbowDelimiterRed",
+            --             "RainbowDelimiterGreen",
+            --             "RainbowDelimiterOrange",
+            --             "RainbowDelimiterCyan",
+            --         },
+            --     },
+            -- },
         },
         opts = {
             -- ensure_installed = {
@@ -85,23 +86,23 @@ return {
                 enable_autocmd = false,
             },
         },
-        config = function(_, opts)
-            -- if load_textobjects then
-            --     -- PERF: no need to load the plugin, if we only need its queries for mini.ai
-            --     if opts.textobjects then
-            --         for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-            --             if opts.textobjects[mod] and opts.textobjects[mod].enable then
-            --                 local Loader = require("lazy.core.loader")
-            --                 Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
-            --                 local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
-            --                 require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
-            --                 break
-            --             end
-            --         end
-            --     end
-            -- end
-            require("nvim-treesitter.configs").setup(opts)
-        end,
+        -- config = function(_, opts)
+        -- if load_textobjects then
+        --     -- PERF: no need to load the plugin, if we only need its queries for mini.ai
+        --     if opts.textobjects then
+        --         for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
+        --             if opts.textobjects[mod] and opts.textobjects[mod].enable then
+        --                 local Loader = require("lazy.core.loader")
+        --                 Loader.disabled_rtp_plugins["nvim-treesitter-textobjects"] = nil
+        --                 local plugin = require("lazy.core.config").plugins["nvim-treesitter-textobjects"]
+        --                 require("lazy.core.loader").source_runtime(plugin.dir, "plugin")
+        --                 break
+        --             end
+        --         end
+        --     end
+        -- end
+        -- require("nvim-treesitter.configs").setup(opts)
+        -- end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
@@ -161,5 +162,13 @@ return {
                 pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
             })
         end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        enabled = false,
+        event = "VeryLazy",
+        opts = {
+            multiwindow = true,
+        },
     },
 }
