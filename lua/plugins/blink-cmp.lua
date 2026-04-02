@@ -22,11 +22,7 @@ return {
 
     opts_extend = { "sources.default" },
     opts = function()
-        -- local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
         return {
-            snippets = {
-                present = "luasnip",
-            },
             keymap = {
                 preset = "super-tab",
                 ["<Tab>"] = {
@@ -40,30 +36,9 @@ return {
                     "snippet_forward",
                     "fallback",
                 },
-                -- ["<C-y>"] = {
-                --     function(cmp) cmp.show({ providers = { "minuet" } }) end,
-                -- },
-                -- ["<CR>"] = { "accept", "fallback" },
             },
             sources = {
-                providers = {
-                    -- avante = {
-                    --     module = "blink-cmp-avante",
-                    --     name = "Avante",
-                    --     opts = {},
-                    -- },
-                    -- minuet = {
-                    --     name = "minuet",
-                    --     module = "minuet.blink",
-                    --     async = true,
-                    --     -- Should match minuet.config.request_timeout * 1000,
-                    --     -- since minuet.config.request_timeout is in seconds
-                    --     timeout_ms = 3000,
-                    --     score_offset = 50, -- Gives minuet higher priority among suggestions
-                    -- },
-                },
-                -- default = { "avante", "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
-                -- default = { "lsp", "path", "snippets", "buffer", "minuet", "cmdline" },
+                providers = {},
             },
             sources = { default = { "lsp", "path", "snippets", "buffer", "cmdline" } },
             signature = {

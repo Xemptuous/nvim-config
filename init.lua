@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.python3_host_prog = "/bin/python3"
 
+-- vim.cmd.colorscheme("default++")
+
 -- install lazy.nvim if dir doesn't exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -49,7 +51,7 @@ require("lazy").setup({
                 "getscriptPlugin",
                 "gzip",
                 "logipat",
-                "man",
+                -- "man",
                 "matchit",
                 "netrw",
                 "netrwFileHandlers",
@@ -99,7 +101,7 @@ require("keymaps")
 require("options")
 
 -- experimental ui for errors
-require("vim._extui").enable({})
+-- require("vim._extui").enable({})
 
 -- vim.api.nvim_create_user_command("Explore", "Oil <args>", { nargs = "?", complete = "dir" })
 -- vim.api.nvim_create_user_command("E", "Explore <args>", { nargs = "?", complete = "dir" })
