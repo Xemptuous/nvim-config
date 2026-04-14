@@ -1,7 +1,7 @@
 return {
     cmd = { "fsautocomplete", "--adaptive-lsp-server-enabled" },
     root_dir = { "*.sln", "*.fsproj", ".git" },
-    filetypes = { "fsharp" },
+    filetypes = { "fs" },
     init_options = {
         AutomaticWorkspaceInit = true,
     },

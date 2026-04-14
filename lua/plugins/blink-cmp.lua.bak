@@ -25,6 +25,7 @@ return {
 
     opts_extend = { "sources.default" },
     opts = function()
+        -- local b = require("blink.cmp").add_source_provider("minuet", { name = "minuet", module = "minuet.blink" })
         return {
             keymap = {
                 preset = "super-tab",
@@ -43,7 +44,6 @@ return {
             snippets = { preset = "luasnip" },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer", "cmdline" },
-                providers = {},
             },
             signature = {
                 enabled = true,

@@ -64,12 +64,11 @@ return {
             vim.cmd.colorscheme("catppuccin")
         end,
     },
-    -- {
-    --     "zenbones-theme/zenbones.nvim",
-    --     enabled = true,
-    --     dependencies = { "rktjmp/lush.nvim" },
-    --     event = "VeryLazy",
-    -- },
+    {
+        "zenbones-theme/zenbones.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
+        event = "VeryLazy",
+    },
     -- {
     --     "loganswartz/selenized.nvim",
     --     dependencies = { "rktjmp/lush.nvim" },
@@ -272,7 +271,7 @@ return {
     -- { "ntk148v/komau.vim", event = "VeryLazy" }, -- muted monochrome
     -- { "jackplus-xyz/binary.nvim", event = "VeryLazy", opts = {} }, -- pure white or black with no formats (bold, italic, etc.)
     -- { "cocopon/iceberg.vim", event = "VeryLazy" }, -- muted with blue tones
-    -- { "kdheepak/monochrome.nvim", event = "VeryLazy" }, -- grayscale with high contrast diff between dark and light
+    { "kdheepak/monochrome.nvim", event = "VeryLazy" }, -- grayscale with high contrast diff between dark and light
     -- { "owickstrom/vim-colors-paramount", event = "VeryLazy" }, -- grayscale/monochrome with purple accents
     -- { "anAcc22/sakura.nvim", event = "VeryLazy" },
 
@@ -281,7 +280,7 @@ return {
     -- Muted Dark Themes
     -- { "metalelf0/black-metal-theme-neovim", event = "VeryLazy" }, -- new version of older black metal
     -- { "kvrohit/substrata.nvim", event = "VeryLazy" }, -- bluish muted colors
-    -- { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
+    { "slugbyte/lackluster.nvim", event = "VeryLazy" }, -- multiple variants; muted and grayscale with some colorization
     -- { "rjshkhr/shadow.nvim", event = "VeryLazy" },
     -- { "masar3141/mono-jade", event = "VeryLazy" }, -- very dark muted with slight green tinge
     -- { "dzfrias/noir.nvim", event = "VeryLazy" }, -- extremely dark muted colors

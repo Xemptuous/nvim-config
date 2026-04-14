@@ -3,9 +3,9 @@ return {
     lazy = true,
     event = "VeryLazy",
     dependencies = {
-        "rafamadriz/friendly-snippets",
-        "MeanderingProgrammer/render-markdown.nvim",
-        "saghen/blink.cmp",
+        -- "rafamadriz/friendly-snippets",
+        -- "MeanderingProgrammer/render-markdown.nvim",
+        -- "saghen/blink.cmp",
         {
             "mason-org/mason.nvim",
             event = "VeryLazy",

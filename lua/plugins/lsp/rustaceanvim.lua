@@ -1,7 +1,7 @@
 return {
     "mrcjkb/rustaceanvim",
-    enabled = false,
-    version = "^8",
+    enabled = true,
+    version = "^9",
     eventg = "VeryLazy",
     ft = { "rust", "toml" },
     config = function()
