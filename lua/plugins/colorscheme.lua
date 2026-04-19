@@ -1,7 +1,7 @@
 return {
     {
         "catppuccin/nvim",
-        enabled = true,
+        enabled = false,
         lazy = false,
         priority = 1000,
         opts = {
@@ -186,12 +186,12 @@ return {
     -- { "NTBBloodbath/doom-one.nvim", event = "VeryLazy" },
     -- { "ramojus/mellifluous.nvim", event = "VeryLazy" },
 
-    -- {
-    --     "tinted-theming/tinted-vim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
-    -- }, -- lots of base16 and base24 themes
+    {
+        "tinted-theming/tinted-vim",
+        lazy = false,
+        priority = 1000,
+        config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
+    }, -- lots of base16 and base24 themes
 
     -- {
     --     "RRethy/base16-nvim",
@@ -200,7 +200,7 @@ return {
     --     main = true,
     --     opts = {},
     --     config = function()
-    --         vim.cmd.colorscheme("base16-selenized-white")
+    --         vim.cmd.colorscheme("base16-selenized-dark")
     --         local colors = require("base16-colorscheme").colors
     --         vim.api.nvim_set_hl(0, "Identifier", {
     --             fg = colors.base08,

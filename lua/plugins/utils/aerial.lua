@@ -1,4 +1,5 @@
 return {
+    enabled = false,
     "stevearc/aerial.nvim",
     keys = "<leader>A",
     dependencies = {

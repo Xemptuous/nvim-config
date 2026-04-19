@@ -2,23 +2,67 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         enabled = true,
+        lazy = false,
         build = ":TSUpdate",
-        branch = "main",
-        event = "VeryLazy",
-        opts = {
-            auto_install = false,
-            highlight = {
-                enable = true,
-                use_languagetree = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-            context_commentstring = {
-                enable = true,
-                enable_autocmd = false,
-            },
-        },
-        -- config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+        -- branch = "main",
+        -- event = "VeryLazy",
+        config = function(_, opts)
+            local ts = require("nvim-treesitter")
+            ts.setup(opts)
+            local langs = {
+                "bash",
+                "c",
+                "c_sharp",
+                "cpp",
+                "csv",
+                "d",
+                "dart",
+                "elixir",
+                "erlang",
+                "fish",
+                "fsharp",
+                "gitignore",
+                "go",
+                "haskell",
+                "html",
+                "htmldjango",
+                "java",
+                "javascript",
+                "json",
+                "json5",
+                "lua",
+                "luadoc",
+                "markdown",
+                "markdown_inline",
+                "nim",
+                "odin",
+                "python",
+                "query",
+                "regex",
+                "rust",
+                "sql",
+                "tsx",
+                "typescript",
+                "vim",
+                "vimdoc",
+                "zig",
+            }
+
+            ts.install(langs)
+
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = langs,
+                callback = function()
+                    -- syntax highlighting, provided by Neovim
+                    vim.treesitter.start()
+                    -- folds, provided by Neovim
+                    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+                    vim.wo.foldmethod = "expr"
+                    -- indentation, provided by nvim-treesitter
+                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
+            })
+        end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
