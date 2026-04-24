@@ -8,7 +8,6 @@ return {
         -- event = "VeryLazy",
         config = function(_, opts)
             local ts = require("nvim-treesitter")
-            ts.setup(opts)
             local langs = {
                 "bash",
                 "c",
@@ -48,6 +47,7 @@ return {
                 "zig",
             }
 
+            ts.setup(opts)
             ts.install(langs)
 
             vim.api.nvim_create_autocmd("FileType", {
@@ -58,6 +58,7 @@ return {
                     -- folds, provided by Neovim
                     vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
                     vim.wo.foldmethod = "expr"
+                    vim.wo.foldtext = ""
                     -- indentation, provided by nvim-treesitter
                     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                 end,

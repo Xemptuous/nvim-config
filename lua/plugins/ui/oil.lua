@@ -14,14 +14,20 @@ return {
                 require("oil").setup({
                     keymaps = { ["<C-t>"] = {} },
                     float = { border = "single" },
-                    win_options = { signcolumn = "yes:2" },
+                    win_options = {
+                        signcolumn = "yes:2",
+                        winhighlight = "NormalFloat:Normal,FloatBorder:FloatBorder",
+                    },
                     view_options = { show_hidden = true },
                 })
             end,
         })
     end,
     opts = {
-        win_options = { signcolumn = "yes:2" },
+        win_options = {
+            signcolumn = "yes:2",
+            winhighlight = "NormalFloat:Normal,FloatBorder:FloatBorder",
+        },
         float = {
             -- max_width = 150,
             -- max_height = 40,
@@ -59,5 +65,7 @@ return {
         require("oil").setup(opts)
         vim.keymap.set("n", "<leader>o", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil") end)
         vim.keymap.set("n", "<C-t>", function() vim.cmd((vim.bo.filetype == "oil") and "bd" or "Oil --float --preview") end)
+        local id = vim.api.nvim_get_hl_id_by_name("Oil")
+        print(vim.api.nvim_get_hl(0, { name = "OilFile" }))
     end,
 }
