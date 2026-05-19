@@ -63,8 +63,8 @@ return {
                 ocaml = { "ocamlformat" },
                 php = { "pretty-php" },
                 python = { "ruff_format", "ruff_organize_imports" },
+                rust = { "rustfmt" },
                 -- python = { "isort", "black" },
-                -- rust = { "clippy", lsp_format = "fallback" },
                 sh = { "beautysh" },
                 -- sql = { "sqlfluff" },
                 svelte = { "prettier" },
@@ -90,6 +90,16 @@ return {
                 odin = {
                     command = "odinfmt",
                     -- append_args = function()  return end,
+                },
+                rustfmt = {
+                    command = "rustfmt",
+                    append_args = {
+                        "--unstable-features",
+                    },
+                    options = {
+                        default_edition = "2024",
+                        nightly = true,
+                    },
                 },
                 -- sql = {
                 --     command = "sqlfluff",

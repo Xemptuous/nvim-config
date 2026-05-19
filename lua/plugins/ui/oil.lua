@@ -13,7 +13,12 @@ return {
                 if not isDir then return end
                 require("oil").setup({
                     keymaps = { ["<C-t>"] = {} },
-                    float = { border = "single" },
+                    -- float = { border = "single" },
+                    float = {
+                        max_width = 180,
+                        max_height = 60,
+                        border = "single",
+                    },
                     win_options = {
                         signcolumn = "yes:2",
                         winhighlight = "NormalFloat:Normal,FloatBorder:FloatBorder",
@@ -29,8 +34,8 @@ return {
             winhighlight = "NormalFloat:Normal,FloatBorder:FloatBorder",
         },
         float = {
-            -- max_width = 150,
-            -- max_height = 40,
+            max_width = 150,
+            max_height = 40,
             border = "single",
         },
         view_options = {

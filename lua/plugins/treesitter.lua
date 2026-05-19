@@ -8,7 +8,7 @@ return {
         -- event = "VeryLazy",
         config = function(_, opts)
             local ts = require("nvim-treesitter")
-            local langs = {
+            local parsers = {
                 "bash",
                 "c",
                 "c_sharp",
@@ -39,16 +39,59 @@ return {
                 "query",
                 "regex",
                 "rust",
+                "ron",
                 "sql",
                 "tsx",
                 "typescript",
+                "v",
+                "vim",
+                "vimdoc",
+                "zig",
+            }
+
+            local langs = {
+                "bash",
+                "c",
+                "cs",
+                "cpp",
+                "csv",
+                "d",
+                "dart",
+                "elixir",
+                "erlang",
+                "fish",
+                "fsharp",
+                "gitignore",
+                "go",
+                "haskell",
+                "html",
+                "htmldjango",
+                "java",
+                "javascript",
+                "json",
+                "json5",
+                "lua",
+                "luadoc",
+                "markdown",
+                "markdown_inline",
+                "nim",
+                "odin",
+                "python",
+                "query",
+                "regex",
+                "rust",
+                "ron",
+                "sql",
+                "tsx",
+                "typescript",
+                "v",
                 "vim",
                 "vimdoc",
                 "zig",
             }
 
             ts.setup(opts)
-            ts.install(langs)
+            ts.install(parsers)
 
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = langs,
@@ -60,7 +103,7 @@ return {
                     vim.wo.foldmethod = "expr"
                     vim.wo.foldtext = ""
                     -- indentation, provided by nvim-treesitter
-                    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    -- vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
                 end,
             })
         end,

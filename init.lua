@@ -106,6 +106,8 @@ package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 require("options")
 
+vim.filetype.add({ extension = { ron = "ron" } })
+
 -- experimental ui for errors
--- require("vim._extui").enable({})
+require("vim._core.ui2").enable()
 -- vim.cmd.colorscheme("default++")

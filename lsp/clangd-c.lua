@@ -6,9 +6,6 @@ return {
         "--background-index",
         "--offset-encoding=utf-8",
     },
-    filetypes = { "c", "cpp" },
-    init_options = {
-        fallbackFlags = { "-std=c++20" },
-    },
+    filetypes = { "c" },
     single_file_support = true,
 }
