@@ -1,0 +1,116 @@
+{
+  "dynamic": {
+    "prefix": "dyn",
+    "body": [
+      "[dynamic]$0"
+    ]
+  },
+  "print": {
+    "prefix": "print",
+    "body": [
+      "fmt.println(\"${text}\")"
+    ]
+  },
+  "proc": {
+    "prefix": "proc",
+    "body": [
+      "${1:fn} :: proc(${2:args}) -> ${3:ret} {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "struct": {
+    "prefix": "struct",
+    "body": [
+      "${1:struct} :: struct {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "enum": {
+    "prefix": "enum",
+    "body": [
+      "${1:enum} :: enum {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "union": {
+    "prefix": "union",
+    "body": [
+      "${1:struct} :: union {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "forrange": {
+    "prefix": "forrange",
+    "body": [
+      "for $1 := range $2 {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "fori": {
+    "prefix": "fori",
+    "body": [
+      "for i := $1; i < $2; i += 1 {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "ford": {
+    "prefix": "ford",
+    "body": [
+      "for i := $1; i < $2; i -= 1 {",
+      "\t$0",
+      "}"
+    ]
+  },
+  "track": {
+    "prefix": "track",
+    "body": [
+      "track: mem.Tracking_Allocator",
+      "mem.tracking_allocator_init(&track, context.allocator)",
+      "context.allocator = mem.tracking_allocator(&track)",
+      "defer mem.tracking_allocator_destroy(&track)",
+      "",
+      "fmt.print(\"\\n-----------------------\\n\")",
+      "fmt.printf(\"# Alloc: %v\\n\", track.total_allocation_count)",
+      "fmt.printf(\"# Frees: %v\\n\", track.total_free_count)",
+      "fmt.printf(\"Alloc: %v\\n\", track.total_memory_allocated)",
+      "fmt.printf(\"Freed: %v\\n\", track.total_memory_allocated)"
+    ]
+  },
+  "runtrack": {
+    "prefix": "runtrack",
+    "body": [
+      "main :: proc() {",
+      "\ttrack(run)",
+      "}",
+      "",
+      "run :: proc() {",
+      "$0",
+      "}",
+      "",
+      "track :: proc(fn: proc()) {",
+      "\ttrack: mem.Tracking_Allocator",
+      "\tmem.tracking_allocator_init(&track, context.allocator)",
+      "\tcontext.allocator = mem.tracking_allocator(&track)",
+      "\tdefer mem.tracking_allocator_destroy(&track)",
+      "",
+      "\tfn()",
+      "",
+      "\tfmt.print(\"\\n-----------------------\\n\")",
+      "\tfmt.printf(\"# Alloc: %v\\n\", track.total_allocation_count)",
+      "\tfmt.printf(\"# Frees: %v\\n\", track.total_free_count)",
+      "\tfmt.printf(\"Alloc: %v\\n\", track.total_memory_allocated)",
+      "\tfmt.printf(\"Freed: %v\\n\", track.total_memory_freed)",
+      "\tfmt.print(\"-----------------------\\n\")",
+      "\tfor _, entry in track.allocation_map {",
+      "\t\tfmt.println(entry)",
+      "\t}",
+      "}"
+    ]
+  }
+}

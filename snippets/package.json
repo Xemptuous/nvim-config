@@ -1,0 +1,19 @@
+{
+	"name": "my-snippets",
+	"contributes": {
+		"snippets": [
+			{
+				"language": [
+					"all"
+				],
+				"path": "./snippets/all.json"
+			},
+			{
+				"language": [
+					"odin"
+				],
+				"path": "./odin.json"
+			}
+		]
+	}
+}
