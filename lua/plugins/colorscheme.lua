@@ -1,9 +1,7 @@
 return {
     {
         "catppuccin/nvim",
-        enabled = false,
         lazy = false,
-        priority = 1000,
         opts = {
             flavour = "latte",
             auto_integrations = true,
@@ -12,46 +10,6 @@ return {
                 shade = "dark",
                 percentage = 0.01,
             },
-            -- integrations = {
-            --     aerial = true,
-            --     blink_cmp = true,
-            --     cmp = true,
-            --     dadbod_ui = true,
-            --     flash = true,
-            --     gitsigns = true,
-            --     indent_blankline = { enabled = true },
-            --     lsp_saga = true,
-            --     markdown = true,
-            --     mason = true,
-            --     mini = { enabled = true, indentscope_color = "blue" },
-            --     native_lsp = {
-            --         enabled = true,
-            --         virtual_text = {
-            --             errors = { "italic" },
-            --             hints = { "italic" },
-            --             warnings = { "italic" },
-            --             information = { "italic" },
-            --         },
-            --         underlines = {
-            --             errors = { "undercurl" },
-            --             hints = { "undercurl" },
-            --             warnings = { "undercurl" },
-            --             information = { "undercurl" },
-            --         },
-            --         inlay_hints = { background = true },
-            --     },
-            --     neogit = true,
-            --     notify = true,
-            --     nvim_surround = true,
-            --     nvimtree = true,
-            --     rainbow_delimiters = true,
-            --     render_markdown = true,
-            --     semantic_tokens = true,
-            --     telescope = { enabled = true },
-            --     treesitter = true,
-            --     treesitter_context = true,
-            --     which_key = true,
-            -- },
             custom_highlights = function(C)
                 return {
                     NormalFloat = { fg = C.text, bg = C.base },
@@ -59,16 +17,31 @@ return {
                 }
             end,
         },
-        config = function(_, opts)
-            require("catppuccin").setup(opts)
-            vim.cmd.colorscheme("catppuccin")
-        end,
+        config = function(_, opts) require("catppuccin").setup(opts) end,
     },
     {
-        "zenbones-theme/zenbones.nvim",
-        dependencies = { "rktjmp/lush.nvim" },
+        "EdenEast/nightfox.nvim",
+        lazy = false,
         event = "VeryLazy",
+        opts = { options = { dim_inactive = true } },
+        config = function(_, opts) require("nightfox").setup(opts) end,
     },
+    {
+        "tinted-theming/tinted-vim",
+        lazy = false,
+        event = "VeryLazy",
+        config = function()
+            vim.api.nvim_set_hl(0, "@variable.parameter.python", {
+                fg = "#fa5750",
+                force = true,
+            })
+        end,
+    }, -- lots of base16 and base24 themes
+    -- {
+    --     "zenbones-theme/zenbones.nvim",
+    --     dependencies = { "rktjmp/lush.nvim" },
+    --     event = "VeryLazy",
+    -- },
     -- {
     --     "loganswartz/selenized.nvim",
     --     dependencies = { "rktjmp/lush.nvim" },
@@ -120,12 +93,6 @@ return {
     --     priority = 1000,
     --     opts = {},
     --     config = function() vim.cmd.colorscheme("tokyonight-night") end,
-    -- },
-    -- {
-    --     "EdenEast/nightfox.nvim",
-    --     event = "VeryLazy",
-    --     opts = { options = { dim_inactive = true } },
-    --     config = function(_, opts) require("nightfox").setup(opts) end,
     -- },
     -- {
     --     "ramojus/mellifluous.nvim",
@@ -185,13 +152,6 @@ return {
     -- { "neanias/everforest-nvim", event = "VeryLazy" },
     -- { "NTBBloodbath/doom-one.nvim", event = "VeryLazy" },
     -- { "ramojus/mellifluous.nvim", event = "VeryLazy" },
-
-    {
-        "tinted-theming/tinted-vim",
-        lazy = false,
-        priority = 1000,
-        config = function() vim.cmd.colorscheme("base16-selenized-dark") end,
-    }, -- lots of base16 and base24 themes
 
     -- {
     --     "RRethy/base16-nvim",

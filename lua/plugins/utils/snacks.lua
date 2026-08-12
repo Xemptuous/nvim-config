@@ -1,12 +1,16 @@
 return {
     "folke/snacks.nvim",
-    enabled = false,
+    enabled = true,
     priority = 1000,
     lazy = false,
     opts = {
-        bigfile = { enabled = true },
-        dashboard = {
+        bigfile = {
             enabled = true,
+            notify = false,
+            size = 1 * 1024 * 1024,
+        },
+        dashboard = {
+            enabled = false,
             sections = {
                 { section = "header" },
                 { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
@@ -19,9 +23,11 @@ return {
         gitbrowse = { enabled = false },
         indent = {
             enabled = false,
+            animate = { enabled = false },
+            only_current = false,
+            only_scope = false,
             scope = {
-                only_current = true,
-                animate = { enabled = false },
+                only_current = false,
             },
         },
         input = {
@@ -31,8 +37,8 @@ return {
             row = -3,
             col = 0,
         },
-        picker = { enabled = false },
-        quickfile = { enabled = false },
+        picker = { enabled = true },
+        quickfile = { enabled = true },
         scroll = {
             enabled = false,
             animate = {
@@ -40,15 +46,26 @@ return {
                 easing = "linear",
             },
         },
-        statuscolumn = { enabled = true },
+        statuscolumn = { enabled = false },
         terminal = {
             enabled = false,
-            win = { style = "terminal" },
+            win = {
+                style = "terminal",
+                input = { -- list, preview
+                    keys = {
+                        ["<C-h>"] = { "<C-w>h", expr = true, mode = { "i", "n" } },
+                        ["<C-j>"] = { "<C-w>j", expr = true, mode = { "i", "n" } },
+                        ["<C-k>"] = { "<C-w>k", expr = true, mode = { "i", "n" } },
+                        ["<C-l>"] = { "<C-w>l", expr = true, mode = { "i", "n" } },
+                    },
+                },
+            },
         },
         words = { enabled = false },
     },
     keys = {
         { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+        { "<leader>p", function() Snacks.picker() end, desc = "Snacks Picker" },
     },
     init = function()
         vim.api.nvim_create_autocmd("User", {

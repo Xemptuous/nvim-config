@@ -9,11 +9,12 @@ return {
         config = function(_, opts)
             local ts = require("nvim-treesitter")
             local parsers = {
+                "angular",
                 "bash",
                 "c",
                 "c_sharp",
                 "cpp",
-                "csv",
+                -- "csv",
                 "d",
                 "dart",
                 "elixir",
@@ -50,11 +51,12 @@ return {
             }
 
             local langs = {
+                "angular",
                 "bash",
                 "c",
                 "cs",
                 "cpp",
-                "csv",
+                -- "csv",
                 "d",
                 "dart",
                 "elixir",

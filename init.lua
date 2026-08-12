@@ -1,9 +1,8 @@
 vim.loader.enable()
+vim.deprecate = function() end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.python3_host_prog = "/bin/python3"
-
--- vim.cmd.colorscheme("default++")
 
 -- install lazy.nvim if dir doesn't exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -65,7 +64,7 @@ require("lazy").setup({
                 "python3",
                 "rplugin",
                 "rrhelper",
-                "ruby",
+                -- "ruby",
                 -- "spellfile",
                 -- "spellfile_plugin",
                 "synmenu",
@@ -105,9 +104,10 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
 package.path = "./lua/?.lua;./lua/?.vim;" .. package.path
 require("keymaps")
 require("options")
+require("current_theme")
 
 vim.filetype.add({ extension = { ron = "ron" } })
+vim.filetype.add({ extension = { ink = "ink" } })
 
 -- experimental ui for errors
 require("vim._core.ui2").enable()
--- vim.cmd.colorscheme("default++")

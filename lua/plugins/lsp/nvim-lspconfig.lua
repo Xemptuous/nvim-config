@@ -51,5 +51,12 @@ return {
                 end
             end
         end
+        vim.api.nvim_create_autocmd("LspAttach", {
+            callback = function(args)
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                -- Target a specific LSP by its name
+                if client and client.name == "pyrefly" then client.server_capabilities.semanticTokensProvider = nil end
+            end,
+        })
     end,
 }
