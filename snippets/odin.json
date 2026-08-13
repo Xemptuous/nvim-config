@@ -85,6 +85,9 @@
   "runtrack": {
     "prefix": "runtrack",
     "body": [
+      "import \"core:fmt\"",
+      "import \"core:mem\"",
+      "",
       "main :: proc() {",
       "\ttrack(run)",
       "}",
