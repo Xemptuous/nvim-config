@@ -53,6 +53,8 @@ return {
                 fish = { "fish_indent" },
                 fsharp = { "fantomas " },
                 go = { "gofmt" },
+                html = { "prettier" },
+                htmlangular = { "prettier" },
                 java = { "google-java-format" },
                 -- java = { "clang_format" },
                 js = { "prettier" },

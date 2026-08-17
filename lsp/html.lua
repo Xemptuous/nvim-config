@@ -1,6 +1,6 @@
 return {
     cmd = { "vscode-html-language-server", "--stdio" },
-    filetypes = { "html", "htmldjango", "templ" },
+    filetypes = { "html", "htmlangular", "htmldjango", "templ" },
     init_options = {
         provideFormatter = true,
         embeddedLanguages = { css = true, javascript = true },

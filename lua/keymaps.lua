@@ -34,6 +34,8 @@ map("n", "<A-h>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Pre
 map("n", "<A-j>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
 map("n", "<A-l>", "<cmd>bnext<cr>", { noremap = true, desc = "Switch Tab Next" })
 map("n", "<A-k>", "<cmd>bnext<cr>", { noremap = true, desc = "Switch Tab Next" })
+map("n", "<Tab>", "<cmd>bnext<cr>", { noremap = true, desc = "Switch Tab Next" })
+map("n", "<S-Tab>", "<cmd>bprevious<cr>", { noremap = true, desc = "Switch Tab Prev" })
 
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })

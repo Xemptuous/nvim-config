@@ -1,5 +1,6 @@
 return {
     "NeogitOrg/neogit",
+    enabled = true,
     keys = { "<leader>ng" },
     cmd = { "Neogit" },
     dependencies = {
